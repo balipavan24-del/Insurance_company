@@ -1,0 +1,153 @@
+.main-wrapper {
+  min-height: 100vh;
+}
+
+.hero-page {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 28px 20px 42px;
+}
+
+.hero-section {
+  text-align: center;
+}
+
+.hero-badge {
+  display: inline-block;
+  border: 1px solid #e3ebf8;
+  background-color: #f7fbff;
+  color: #0f5ecc;
+  border-radius: 999px;
+  padding: 8px 16px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.hero-title {
+  margin: 20px 0 8px;
+  font-size: 64px;
+  line-height: 1.05;
+  font-weight: 800;
+  color: #0f172a;
+}
+
+.hero-title span {
+  color: #00a4d6;
+}
+
+.hero-subtitle {
+  color: #4b5563;
+  font-size: 22px;
+  margin-bottom: 24px;
+}
+
+.hero-actions {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  margin-bottom: 20px;
+}
+
+.hero-actions button {
+  border: 0;
+  border-radius: 999px;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 14px 30px;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background: #0d67d8;
+  color: #fff;
+}
+
+.btn-secondary {
+  background: #ffffff;
+  color: #1f2937;
+  border: 1px solid #e5e7eb;
+}
+
+.hero-stats {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  color: #6b7280;
+  font-size: 14px;
+}
+
+.insurance-panel {
+  margin-top: 30px;
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 24px;
+  box-shadow: 0 12px 30px rgba(0, 28, 83, 0.07);
+}
+
+.insurance-panel h2 {
+  font-size: 28px;
+  color: #111827;
+  margin-bottom: 20px;
+}
+
+.insurance-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.insurance-card {
+  background: #f8fbff;
+  border-radius: 14px;
+  padding: 20px 14px 16px;
+  min-height: 128px;
+  border: 1px solid transparent;
+}
+
+.insurance-card.popular {
+  background: #f4f8ff;
+  border-color: #d8e7ff;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.05);
+}
+
+.popular-pill {
+  display: inline-block;
+  background: #1d65d8;
+  color: #fff;
+  font-size: 11px;
+  border-radius: 999px;
+  text-transform: uppercase;
+  font-weight: 700;
+  padding: 5px 10px;
+  margin-bottom: 12px;
+}
+
+.insurance-card h3 {
+  font-size: 17px;
+  color: #111827;
+  margin: 4px 0 8px;
+}
+
+.insurance-card p {
+  color: #6b7280;
+  font-size: 14px;
+}
+
+@media (max-width: 1024px) {
+  .hero-title {
+    font-size: 44px;
+  }
+
+  .hero-subtitle {
+    font-size: 18px;
+  }
+
+  .insurance-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .hero-stats {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+}
