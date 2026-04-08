@@ -1,45 +1,46 @@
 import { useState } from 'react';
-import './Navbar.css'; // This links specifically to your Navbar.css
+import './Navbar.css'; 
 
 function Navbar() {
-  const [openIndex, setOpenIndex] = useState(null);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const menu = [
-    { name: 'Health Insurance', sub: ['Family', 'Parents', 'Senior Citizen'] },
-    { name: 'Motor Insurance', sub: ['Car', 'Bike', 'Commercial Vehicle'] },
-    { name: 'Cargo', sub: ['Marine', 'Air', 'Inland (Road/Rail)'] },
-    { name: 'Business', sub: ['Fire', 'Theft', 'Property'] },
-    { name: 'Term', sub: ['Basic Term', 'Term + Rider', 'Premium Term'] },
-    { name: 'Renewal Policy', sub: null },
-    { name: 'Support', sub: null }
+    'Health Insurance',
+    'Motor Insurance',
+    'Cargo',
+    'Business',
+    'Term',
+    'Renewal Policy',
+    'Support'
   ];
 
   return (
     <nav className="navbar-container">
       <div className="brand">InsureEase</div>
-      <ul className="nav-menu">
-        {menu.map((item, index) => (
-          <li 
-            key={index} 
-            className="nav-link-item"
-            onMouseEnter={() => item.sub && setOpenIndex(index)}
-            onMouseLeave={() => setOpenIndex(null)}
-          >
-            <div className="nav-label">
-              {item.name} {item.sub && <span className="chevron">▾</span>}
-            </div>
-            
-            {item.sub && openIndex === index && (
-              <ul className="nav-dropdown">
-                {item.sub.map((subItem, i) => (
-                  <li key={i} className="dropdown-link">{subItem}</li>
-                ))}
-              </ul>
-            )}
+      <div className="nav-right desktop-only">
+        <button className="nav-login-btn">Login</button>
+      </div>
+      <button
+        className="mobile-more-btn"
+        type="button"
+        aria-label="Open navigation menu"
+        aria-expanded={mobileMenuOpen}
+        onClick={() => setMobileMenuOpen((prev) => !prev)}
+      >
+        ⋯
+      </button>
+      <ul className={`nav-menu ${mobileMenuOpen ? 'is-open' : ''}`}>
+        {menu.map((item) => (
+          <li key={item} className="nav-link-item">
+            <button className="nav-label" type="button">
+              {item}
+            </button>
           </li>
         ))}
+        <li className="nav-link-item login-item mobile-only">
+          <button className="nav-login-btn">Login</button>
+        </li>
       </ul>
-      <button className="nav-login-btn">Login</button>
     </nav>
   );
 }
