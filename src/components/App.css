@@ -2,9 +2,56 @@
   min-height: 100vh;
 }
 
+.route-fallback {
+  min-height: 100vh;
+  width: 100%;
+  background: #eceff3;
+}
+
+.home-snackbar {
+  align-self: flex-start;
+  margin-top: 10px;
+  margin-left: max(0px, calc((100% - min(1120px, 100%)) / 2));
+  background: #129c57;
+  color: #ffffff;
+  padding: 12px 18px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.1px;
+  box-shadow: 0 12px 28px rgba(18, 156, 87, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  animation: toast-in 0.25s ease forwards;
+}
+
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-snackbar {
+    animation: none;
+  }
+
+  .insurance-card {
+    transition: none;
+  }
+
+  .insurance-card:hover {
+    transform: none;
+  }
+}
+
 .hero-page {
   width: 100%;
-  padding: 28px 24px 40px;
+  padding: clamp(20px, 3.2vw, 32px) clamp(16px, 4vw, 40px) clamp(30px, 5vw, 46px);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -16,6 +63,7 @@
   flex-direction: column;
   align-items: center;
   gap: 14px;
+  width: min(980px, 100%);
 }
 
 .hero-chip {
@@ -30,7 +78,7 @@
 
 .hero-title {
   margin: 0;
-  font-size: 64px;
+  font-size: clamp(34px, 6vw, 64px);
   font-weight: 800;
   line-height: 1.08;
   color: #0f172a;
@@ -43,8 +91,8 @@
 .hero-subtitle {
   margin: 0;
   color: #64748b;
-  font-size: 22px;
-  max-width: 760px;
+  font-size: clamp(16px, 2.2vw, 22px);
+  max-width: min(760px, 92vw);
 }
 
 .hero-points {
@@ -64,17 +112,17 @@
 }
 
 .insurance-panel {
-  width: min(1120px, 95%);
+  width: min(1120px, 100%);
   background: #ffffff;
-  border-radius: 18px;
-  padding: 26px 24px 30px;
-  box-shadow: 0 14px 34px rgba(15, 23, 42, 0.08);
+  border-radius: 14px;
+  padding: clamp(14px, 2.2vw, 20px) clamp(12px, 2vw, 18px) clamp(16px, 2.6vw, 22px);
+  box-shadow: 0 10px 28px rgba(15, 23, 42, 0.07);
 }
 
 .insurance-panel h2 {
-  margin: 0 0 22px;
+  margin: 0 0 14px;
   color: #0f172a;
-  font-size: 30px;
+  font-size: clamp(18px, 2.6vw, 26px);
   font-weight: 700;
   text-align: center;
 }
@@ -82,78 +130,79 @@
 .insurance-grid {
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 14px;
+  gap: clamp(8px, 1.2vw, 12px);
 }
 
 .insurance-card {
   background: #f8fafc;
   border: 1px solid #e2e8f0;
-  border-radius: 16px;
-  padding: 18px 14px;
+  border-radius: 12px;
+  padding: clamp(10px, 1.2vw, 14px) clamp(8px, 1vw, 12px);
   text-align: center;
-  min-height: 150px;
+  min-height: 118px;
   position: relative;
+  transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+}
+
+.insurance-card:hover {
+  transform: translateY(-3px);
+  border-color: #c7daff;
+  box-shadow: 0 10px 22px rgba(15, 23, 42, 0.12);
 }
 
 .insurance-card.is-popular {
   background: #f4f8ff;
   border-color: #bcd5ff;
-  box-shadow: 0 8px 22px rgba(0, 102, 255, 0.12);
-  padding-top: 44px;
+  box-shadow: 0 6px 16px rgba(0, 102, 255, 0.1);
+  padding-top: 34px;
 }
 
 .popular-badge {
   position: absolute;
-  top: 8px;
+  top: 6px;
   left: 50%;
   transform: translateX(-50%);
-  font-size: 11px;
+  font-size: 9px;
   font-weight: 700;
-  letter-spacing: 0.4px;
+  letter-spacing: 0.35px;
   text-transform: uppercase;
   color: #ffffff;
   background: #2f80ed;
   border-radius: 999px;
-  padding: 4px 10px;
+  padding: 3px 8px;
 }
 
 .insurance-card.is-popular .card-icon {
-  margin-top: 18px;
+  margin-top: 10px;
 }
 
 .card-icon {
-  width: 44px;
-  height: 44px;
-  margin: 8px auto 14px;
-  border-radius: 12px;
+  width: 36px;
+  height: 36px;
+  margin: 4px auto 8px;
+  border-radius: 10px;
   background: #eef2ff;
   display: grid;
   place-items: center;
-  font-size: 22px;
+  font-size: 18px;
 }
 
 .insurance-card h3 {
   margin: 0;
   color: #1f2937;
-  font-size: 17px;
+  font-size: clamp(13px, 0.95vw, 15px);
   font-weight: 700;
+  line-height: 1.25;
 }
 
 .insurance-card p {
-  margin-top: 8px;
+  margin-top: 4px;
   color: #64748b;
-  font-size: 14px;
+  font-size: clamp(11px, 0.85vw, 13px);
+  line-height: 1.35;
 }
 
 @media (max-width: 1080px) {
-  .hero-title {
-    font-size: 52px;
-  }
-
-  .hero-subtitle {
-    font-size: 20px;
-  }
-
   .insurance-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
@@ -161,7 +210,6 @@
 
 @media (max-width: 768px) {
   .hero-page {
-    padding: 20px 14px 28px;
     gap: 18px;
   }
 
@@ -169,14 +217,7 @@
     gap: 10px;
   }
 
-  .hero-title {
-    font-size: 42px;
-  }
-
-  .hero-subtitle {
-    font-size: 18px;
-    max-width: 100%;
-  }
+  .hero-subtitle { max-width: 100%; }
 
   .hero-points {
     flex-direction: column;
@@ -184,16 +225,54 @@
     margin-top: 10px;
   }
 
-  .insurance-panel {
-    width: 100%;
-    padding: 18px 14px 22px;
-  }
-
-  .insurance-panel h2 {
-    font-size: 24px;
-  }
+  .insurance-panel { width: 100%; }
 
   .insurance-grid {
     grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-page {
+    gap: 14px;
+  }
+
+  .hero-chip {
+    font-size: 12px;
+    padding: 7px 12px;
+  }
+
+  .hero-points {
+    font-size: 14px;
+    gap: 6px;
+  }
+
+  .insurance-panel {
+    border-radius: 14px;
+  }
+
+  .insurance-panel h2 {
+    margin-bottom: 12px;
+  }
+
+  .insurance-card {
+    min-height: 108px;
+  }
+
+  .home-snackbar {
+    width: 100%;
+    margin-left: 0;
+    text-align: left;
+  }
+}
+
+@media (min-width: 1280px) {
+  .hero-page {
+    max-width: 1320px;
+    margin: 0 auto;
+  }
+
+  .insurance-panel {
+    border-radius: 16px;
   }
 }

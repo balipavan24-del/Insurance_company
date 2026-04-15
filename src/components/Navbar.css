@@ -1,4 +1,5 @@
 .navbar-container {
+  --nav-inline-padding: clamp(20px, 5vw, 72px);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -10,17 +11,19 @@
   top: 0;
   z-index: 1000;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-  padding: 0 24px;
+  padding: 0 var(--nav-inline-padding);
   gap: 20px;
   overflow: visible;
 }
 
 .brand {
   position: absolute;
-  left: 24px;
+  left: var(--nav-inline-padding);
   font-size: 22px;
   font-weight: 700;
   color: #1f2937;
+  padding: 8px 12px;
+  border-radius: 10px;
 }
 
 .mobile-more-btn {
@@ -29,7 +32,7 @@
 
 .nav-right {
   position: absolute;
-  right: 24px;
+  right: var(--nav-inline-padding);
 }
 
 .nav-menu {
@@ -85,7 +88,7 @@
 .dropdown-menu {
   position: absolute;
   left: 0;
-  top: calc(100% + 10px);
+  top: 100%;
   min-width: 220px;
   list-style: none;
   margin: 0;
@@ -99,6 +102,10 @@
   pointer-events: none;
   transition: opacity 0.18s ease, transform 0.18s ease;
   z-index: 1500;
+}
+
+.dropdown-menu > li + li {
+  margin-top: 4px;
 }
 
 .dropdown-menu.is-open,
@@ -127,15 +134,53 @@
   color: #0066ff;
 }
 
+.dropdown-group {
+  list-style: none;
+}
+
+.dropdown-item-group {
+  display: block;
+  color: #475569;
+  font-weight: 600;
+  cursor: default;
+}
+
+.dropdown-submenu {
+  list-style: none;
+  margin: 0;
+  padding: 0 0 0 12px;
+}
+
+.dropdown-submenu > li + li {
+  margin-top: 4px;
+}
+
+.dropdown-subitem {
+  padding-left: 18px;
+}
+
 .nav-login-btn {
   flex: 0 0 auto;
-  padding: 10px 24px;
+  padding: 11px 28px;
   background-color: #f5f8fb;
   color: #0066ff;
   border: none;
   border-radius: 50px;
   font-weight: 600;
   cursor: pointer;
+  transition: background-color 0.22s ease, color 0.22s ease, transform 0.22s ease, box-shadow 0.22s ease;
+}
+
+.nav-login-btn:hover {
+  background-color: #0066ff;
+  color: #ffffff;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 18px rgba(0, 102, 255, 0.28);
+}
+
+.nav-login-btn:focus-visible {
+  outline: 2px solid #93c5fd;
+  outline-offset: 2px;
 }
 
 .login-item {
@@ -149,13 +194,14 @@
 @media (max-width: 980px) {
   .navbar-container {
     justify-content: space-between;
-    padding: 10px 12px;
+    padding: 10px clamp(14px, 4.5vw, 26px);
     min-height: 70px;
   }
 
   .brand {
     position: static;
     font-size: 20px;
+    padding: 6px 10px;
   }
 
   .desktop-only {
@@ -241,6 +287,6 @@
   .nav-login-btn {
     width: 100%;
     text-align: center;
-    padding: 10px 16px;
+    padding: 11px 16px;
   }
 }

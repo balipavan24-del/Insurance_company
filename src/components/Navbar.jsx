@@ -1,46 +1,74 @@
 import { useState } from 'react';
 import './Navbar.css'; 
 
-function Navbar() {
+function Navbar({ onLoginClick }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(null);
   const isMobileView = () => window.matchMedia('(max-width: 980px)').matches;
 
   const menu = [
     {
-      label: 'Health',
-      dropdown: ['Family', 'Parents', 'Senior Citizen']
+      id: 'health-insurance',
+      label: 'Health Insurance',
+      dropdown: [
+        { id: 'health-family', label: 'Health Insurance for family' },
+        { id: 'health-parents', label: 'Health insurance for parents' },
+        { id: 'health-senior-citizens', label: 'Health Insurance for senior citizens' }
+      ]
     },
     {
+      id: 'motor-insurance',
       label: 'Motor Insurance',
-      dropdown: ['Car', 'Bike', 'Three Wheeler', '4 Wheeler', 'Commercial Vehicle']
+      dropdown: [
+        { id: 'motor-car', label: 'Car' },
+        { id: 'motor-bike', label: 'Bike' },
+        { id: 'motor-three-wheeler', label: 'Three Wheeler' },
+        { id: 'motor-four-wheeler', label: '4 Wheeler' },
+        { id: 'motor-commercial-vehicle', label: 'Commercial Vehicle' }
+      ]
     },
     {
-      label: 'Cargo',
-      dropdown: ['Marine', 'Air', 'Inland (Road/Rail)']
+      id: 'cargo-insurance',
+      label: 'Cargo Insurance',
+      dropdown: [
+        { id: 'cargo-marine', label: 'Marine' },
+        { id: 'cargo-air', label: 'Air' },
+        {
+          id: 'cargo-inland',
+          label: 'Inland',
+          children: [
+            { id: 'cargo-inland-road', label: 'Road' },
+            { id: 'cargo-inland-rail', label: 'Rail' }
+          ]
+        }
+      ]
     },
     {
-      label: 'Business',
-      dropdown: ['Personal Insurance']
+      id: 'property-insurance',
+      label: 'Property Insurance',
+      dropdown: [{ id: 'property-personal', label: 'Personal' }]
     },
     {
-      label: 'Term'
+      id: 'term-insurance',
+      label: 'Term Insurance'
     },
     {
+      id: 'renewal-policy',
       label: 'Renewal Policy'
     },
     {
+      id: 'support',
       label: 'Support'
     }
   ];
 
-  const toggleDropdown = (itemLabel) => {
-    setOpenDropdown((current) => (current === itemLabel ? null : itemLabel));
+  const toggleDropdown = (itemId) => {
+    setOpenDropdown((current) => (current === itemId ? null : itemId));
   };
 
-  const handleDropdownClick = (itemLabel) => {
+  const handleDropdownClick = (itemId) => {
     if (isMobileView()) {
-      toggleDropdown(itemLabel);
+      toggleDropdown(itemId);
     }
   };
 
@@ -48,7 +76,7 @@ function Navbar() {
     <nav className="navbar-container">
       <div className="brand">InsureEase</div>
       <div className="nav-right desktop-only">
-        <button className="nav-login-btn">Login</button>
+        <button className="nav-login-btn" type="button" onClick={onLoginClick}>Login</button>
       </div>
       <button
         className="mobile-more-btn"
@@ -65,9 +93,9 @@ function Navbar() {
       <ul className={`nav-menu ${mobileMenuOpen ? 'is-open' : ''}`}>
         {menu.map((item) => (
           <li
-            key={item.label}
+            key={item.id}
             className="nav-link-item"
-            onMouseEnter={() => !isMobileView() && item.dropdown && setOpenDropdown(item.label)}
+            onMouseEnter={() => !isMobileView() && item.dropdown && setOpenDropdown(item.id)}
             onMouseLeave={() => !isMobileView() && setOpenDropdown(null)}
           >
             {item.dropdown ? (
@@ -76,20 +104,39 @@ function Navbar() {
                   className="nav-label nav-dropdown-trigger"
                   type="button"
                   aria-haspopup="menu"
-                  aria-expanded={openDropdown === item.label}
-                  onClick={() => handleDropdownClick(item.label)}
+                  aria-expanded={openDropdown === item.id}
+                  onClick={() => handleDropdownClick(item.id)}
                 >
                   {item.label}
-                  <span className={`dropdown-caret ${openDropdown === item.label ? 'is-open' : ''}`}>▾</span>
+                  <span className={`dropdown-caret ${openDropdown === item.id ? 'is-open' : ''}`}>▾</span>
                 </button>
-                <ul className={`dropdown-menu ${openDropdown === item.label ? 'is-open' : ''}`}>
-                  {item.dropdown.map((option) => (
-                    <li key={option}>
-                      <button className="dropdown-item" type="button">
-                        {option}
-                      </button>
-                    </li>
-                  ))}
+                <ul className={`dropdown-menu ${openDropdown === item.id ? 'is-open' : ''}`}>
+                  {item.dropdown.map((option) => {
+                    if (!option.children) {
+                      return (
+                        <li key={option.id}>
+                          <button className="dropdown-item" type="button" data-option-id={option.id}>
+                            {option.label}
+                          </button>
+                        </li>
+                      );
+                    }
+
+                    return (
+                      <li key={option.id} className="dropdown-group">
+                        <span className="dropdown-item dropdown-item-group">{option.label}</span>
+                        <ul className="dropdown-submenu">
+                          {option.children.map((child) => (
+                            <li key={child.id}>
+                              <button className="dropdown-item dropdown-subitem" type="button" data-option-id={child.id}>
+                                {child.label}
+                              </button>
+                            </li>
+                          ))}
+                        </ul>
+                      </li>
+                    );
+                  })}
                 </ul>
               </>
             ) : (
@@ -100,7 +147,7 @@ function Navbar() {
           </li>
         ))}
         <li className="nav-link-item login-item mobile-only">
-          <button className="nav-login-btn">Login</button>
+          <button className="nav-login-btn" type="button" onClick={onLoginClick}>Login</button>
         </li>
       </ul>
     </nav>
