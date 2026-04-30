@@ -228,8 +228,6 @@ function MotorInsurance({ onBackHome, selectedCategory = 'motor-car' }) {
   const [variantSearchQuery, setVariantSearchQuery] = useState('');
   const [selectedBrand, setSelectedBrand] = useState('');
   const [selectedModel, setSelectedModel] = useState('');
-  const [selectedVariant, setSelectedVariant] = useState('');
-  const [selectedBrandModelDetails, setSelectedBrandModelDetails] = useState(null);
   const [rcScanRecords, setRcScanRecords] = useState([]);
   const [isRcScanning, setIsRcScanning] = useState(false);
   const [rcScanError, setRcScanError] = useState('');
@@ -281,8 +279,6 @@ function MotorInsurance({ onBackHome, selectedCategory = 'motor-car' }) {
     setVariantSearchQuery('');
     setSelectedBrand('');
     setSelectedModel('');
-    setSelectedVariant('');
-    setSelectedBrandModelDetails(null);
     setRcScanRecords([]);
     setIsRcScanning(false);
     setRcScanError('');
@@ -421,8 +417,7 @@ function MotorInsurance({ onBackHome, selectedCategory = 'motor-car' }) {
             <Newcar
               vehicleType={newVehicleType}
               onBackToVehicleCheck={() => setIsNewCarFlow(false)}
-              onContinue={(payload) => {
-                setSelectedBrandModelDetails(payload);
+              onContinue={() => {
                 setIsNewCarFlow(false);
               }}
             />
@@ -616,7 +611,6 @@ function MotorInsurance({ onBackHome, selectedCategory = 'motor-car' }) {
                         onClick={() => {
                           setSelectedBrand(brandName);
                           setSelectedModel('');
-                          setSelectedVariant('');
                           setModelSearchQuery('');
                           setVariantSearchQuery('');
                           setIsBrandSelectionOpen(false);
@@ -695,7 +689,6 @@ function MotorInsurance({ onBackHome, selectedCategory = 'motor-car' }) {
                         className="brand-select-list-item"
                         onClick={() => {
                           setSelectedModel(modelOption.model);
-                          setSelectedVariant('');
                           setVariantSearchQuery('');
                           setIsModelSelectionOpen(false);
                           setIsVariantSelectionOpen(true);
@@ -771,12 +764,6 @@ function MotorInsurance({ onBackHome, selectedCategory = 'motor-car' }) {
                         type="button"
                         className="brand-select-list-item"
                         onClick={() => {
-                          setSelectedVariant(variantName);
-                          setSelectedBrandModelDetails({
-                            brand: selectedBrand,
-                            model: selectedModel,
-                            variant: variantName
-                          });
                           setIsVariantSelectionOpen(false);
                           setBrandSearchQuery('');
                           setModelSearchQuery('');

@@ -201,11 +201,6 @@ function Newcar({ onBackToVehicleCheck, onContinue, vehicleType = 'car' }) {
     };
   }, []);
 
-  useEffect(() => {
-    setSearchText('');
-    setErrorMessage('');
-  }, [currentStepIndex]);
-
   const modelOptions = useMemo(
     () => (brandModelVariantData[carFormData.brand] || []).map((option) => option.model),
     [brandModelVariantData, carFormData.brand]
@@ -256,7 +251,7 @@ function Newcar({ onBackToVehicleCheck, onContinue, vehicleType = 'car' }) {
       }
       return option.toLowerCase().includes(searchText.trim().toLowerCase());
     });
-  }, [optionValues, searchText]);
+  }, [optionValues, searchText, currentField]);
 
   const summaryPanelData = useMemo(
     () => SUMMARY_PANEL_FIELDS
@@ -311,6 +306,7 @@ function Newcar({ onBackToVehicleCheck, onContinue, vehicleType = 'car' }) {
       onContinue?.(carFormData);
       return;
     }
+    setSearchText('');
     setCurrentStepIndex((previous) => previous + 1);
   };
 
@@ -319,6 +315,8 @@ function Newcar({ onBackToVehicleCheck, onContinue, vehicleType = 'car' }) {
       onBackToVehicleCheck?.();
       return;
     }
+    setSearchText('');
+    setErrorMessage('');
     setCurrentStepIndex((previous) => previous - 1);
   };
 
@@ -330,6 +328,7 @@ function Newcar({ onBackToVehicleCheck, onContinue, vehicleType = 'car' }) {
     }
     setErrorMessage('');
     setSuppressAutoNextAfterSummaryEdit(false);
+    setSearchText('');
     setCurrentStepIndex(contactDetailsStepIndex);
   };
 
@@ -353,6 +352,7 @@ function Newcar({ onBackToVehicleCheck, onContinue, vehicleType = 'car' }) {
       return;
     }
 
+    setSearchText('');
     setCurrentStepIndex((previous) => previous + 1);
   };
 
@@ -561,6 +561,8 @@ function Newcar({ onBackToVehicleCheck, onContinue, vehicleType = 'car' }) {
                     aria-label={`Edit ${item.label}`}
                     onClick={() => {
                       setSuppressAutoNextAfterSummaryEdit(true);
+                      setSearchText('');
+                      setErrorMessage('');
                       setCurrentStepIndex(item.stepIndex);
                     }}
                   >
