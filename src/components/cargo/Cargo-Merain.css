@@ -1,0 +1,615 @@
+.cargo-merain-page {
+  min-height: calc(130svh - 80px);
+  background: #edf3fb;
+  padding: 22px clamp(20px, 5vw, 46px) 34px;
+  box-sizing: border-box;
+}
+
+.cargo-merain-wrap {
+  width: min(1220px, 100%);
+  margin: 0 auto;
+}
+
+.Hero {
+  width: 100%;
+  padding-top: 50px;
+}
+
+.cargo-merain-back-link {
+  display: block;
+  text-align: left;
+  width: fit-content;
+  border: none;
+  background: transparent;
+  color: #73859a;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 6px 0;
+}
+
+.cargo-merain-layout {
+  margin-top: 18px;
+  display: grid;
+  grid-template-columns: 1fr minmax(360px, 490px);
+  gap: clamp(22px, 4vw, 70px);
+  align-items: start;
+}
+
+.cargo-merain-info-panel {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.cargo-merain-hero-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.cargo-merain-info h1 {
+  margin: 18px 0 8px;
+  color: #192737;
+  font-size: clamp(34px, 3.35vw, 52px);
+  line-height: 1.08;
+  letter-spacing: -0.3px;
+}
+
+.cargo-merain-info p {
+  margin: 0;
+  max-width: 545px;
+  color: #667a92;
+  font-size: 17px;
+  line-height: 1.43;
+}
+
+.cargo-merain-badge {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: #e8f1ff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cargo-merain-badge img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
+.cargo-merain-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin-top: 18px;
+}
+
+.cargo-merain-tags span {
+  border: 1px solid #d8e1ee;
+  border-radius: 999px;
+  padding: 5px 11px 5px 9px;
+  color: #3f546d;
+  font-size: 11px;
+  font-weight: 600;
+  background: #fefefe;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.cargo-merain-tags i {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1.5px solid var(--accent);
+  display: inline-block;
+  box-sizing: border-box;
+  position: relative;
+  background: #f4fbff;
+}
+
+.cargo-merain-tags i::after {
+  content: '';
+  position: absolute;
+  left: 2.6px;
+  top: 0.8px;
+  width: 2.4px;
+  height: 4.6px;
+  border-right: 1.4px solid var(--accent);
+  border-bottom: 1.4px solid var(--accent);
+  transform: rotate(45deg);
+}
+
+.cargo-merain-form-card {
+  background: #fff;
+  border: 1px solid #dbe2ec;
+  border-radius: 16px;
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.1);
+  padding: 24px;
+}
+
+.cargo-merain-form-card h2 {
+  margin: 0;
+  font-size: 18px;
+  color: #1f2d3d;
+  line-height: 1.25;
+}
+
+.cargo-merain-form-card > p {
+  margin: 6px 0 14px;
+  color: #6d7f95;
+  font-size: 13px;
+}
+
+.cargo-merain-form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px 10px;
+}
+
+.cargo-merain-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  color: #1f2937;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.cargo-merain-label-text {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.cargo-merain-form em {
+  color: #ea5b5b;
+  font-style: normal;
+}
+
+.cargo-merain-form small {
+  color: #8fa0b8;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.cargo-merain-form input,
+.cargo-merain-form select {
+  height: 40px;
+  border: 1px solid #d2dae6;
+  border-radius: 10px;
+  padding: 0 12px;
+  font-size: 13px;
+  color: #2c3b4f;
+  background: #f5f8fd;
+}
+
+.cargo-merain-form input[readonly] {
+  color: #445a74;
+}
+
+.cargo-merain-form select:disabled {
+  color: #8b9fb7;
+  background: #edf2f8;
+  cursor: not-allowed;
+}
+
+.cargo-merain-input-wrap {
+  position: relative;
+}
+
+.cargo-merain-input-wrap input {
+  width: 100%;
+  padding-left: 36px;
+}
+
+.cargo-merain-input-icon {
+  position: absolute;
+  left: 11px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  color: #8196af;
+  pointer-events: none;
+}
+
+.cargo-merain-input-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.cargo-merain-input-icon svg path,
+.cargo-merain-input-icon svg circle,
+.cargo-merain-input-icon svg rect {
+  stroke: currentColor;
+  stroke-width: 1.6;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.cargo-merain-form input::placeholder {
+  color: #94a6bc;
+}
+
+.cargo-merain-whatsapp-btn {
+  margin-top: 14px;
+  width: 100%;
+  border: none;
+  border-radius: 9px;
+  height: 40px;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  background: linear-gradient(90deg, #177a9e 0%, #4f46e5 100%);
+}
+
+.cargo-merain-note {
+  margin: 8px 4px 0;
+  color: #95a5bc;
+  font-size: 10px;
+  text-align: center;
+}
+
+.cargo-merain-about {
+  margin-top: 150px;
+  max-width: 840px;
+}
+
+.cargo-merain-about-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.cargo-merain-about h2,
+.cargo-merain-importance h2 {
+  margin: 0;
+  color: #1c2531;
+  font-size: 42px;
+  line-height: 1.2;
+  font-weight: 700;
+}
+
+.cargo-merain-about p {
+  margin: 12px 0 0;
+  color: #6f8197;
+  font-size: 13px;
+  line-height: 1.6;
+  max-width: 620px;
+}
+
+.cargo-merain-importance {
+  margin-top: 140px;
+}
+
+.cargo-merain-importance-grid {
+  margin-top: 18px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px 16px;
+}
+
+.cargo-merain-importance-card {
+  border: 1px solid #d7dfea;
+  border-radius: 12px;
+  background: #fdfefe;
+  padding: 16px 18px;
+  min-height: 64px;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.cargo-merain-importance-card i {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  border: 1.5px solid var(--accent);
+  box-sizing: border-box;
+  display: inline-block;
+  margin-top: 3px;
+  flex: 0 0 auto;
+  position: relative;
+  background: #f4fbff;
+}
+
+.cargo-merain-importance-card i::after {
+  content: '';
+  position: absolute;
+  left: 4px;
+  top: 2.5px;
+  width: 4px;
+  height: 7px;
+  border-right: 1.8px solid var(--accent);
+  border-bottom: 1.8px solid var(--accent);
+  transform: rotate(45deg);
+}
+
+.cargo-merain-importance-card p {
+  margin: 0;
+  color: #384d66;
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.cargo-merain-covered {
+  margin-top: 120px;
+}
+
+.cargo-merain-covered h2,
+.cargo-merain-covered h3 {
+  margin: 0;
+  color: #1c2531;
+  font-size: 40px;
+  line-height: 1.2;
+  font-weight: 700;
+}
+
+.cargo-merain-covered-grid,
+.cargo-merain-benefits-grid {
+  margin-top: 18px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.cargo-merain-covered-card {
+  border: 1px solid #d7dfea;
+  border-radius: 12px;
+  background: #fdfefe;
+  padding: 18px 16px;
+  min-height: 108px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  text-align: center;
+}
+
+.cargo-merain-covered-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 11px;
+  background: #eaf1fb;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+}
+
+.cargo-merain-covered-icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.cargo-merain-covered-icon svg path,
+.cargo-merain-covered-icon svg circle,
+.cargo-merain-covered-icon svg rect {
+  stroke: currentColor;
+  stroke-width: 1.8;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.cargo-merain-covered-card p {
+  margin: 0;
+  color: #2f3d4f;
+  font-size: 14px;
+  line-height: 1.35;
+  font-weight: 600;
+}
+
+.cargo-merain-covered h3 {
+  margin-top: 88px;
+}
+
+.cargo-merain-benefit-card {
+  min-height: 92px;
+}
+
+.cargo-inland-theme .cargo-merain-badge {
+  background: #fff3e5;
+}
+
+.cargo-inland-theme .cargo-merain-tags i {
+  border-color: #e08a2e;
+}
+
+.cargo-inland-theme .cargo-merain-tags i::after {
+  border-right-color: #e08a2e;
+  border-bottom-color: #e08a2e;
+}
+
+.cargo-inland-theme .cargo-merain-importance-card i {
+  border-color: #e08a2e;
+}
+
+.cargo-inland-theme .cargo-merain-importance-card i::after {
+  border-right-color: #e08a2e;
+  border-bottom-color: #e08a2e;
+}
+
+.cargo-inland-theme .cargo-merain-covered-icon {
+  background: #fff3e5;
+  color: #e08a2e;
+}
+
+@media (max-width: 1024px) {
+  .cargo-merain-layout {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .cargo-merain-info p {
+    font-size: 20px;
+  }
+
+  .cargo-merain-form-card h2 {
+    font-size: 15px;
+  }
+
+  .cargo-merain-about {
+    margin-top: 52px;
+  }
+
+  .cargo-merain-about h2,
+  .cargo-merain-importance h2 {
+    font-size: 32px;
+  }
+
+  .cargo-merain-about p {
+    font-size: 13px;
+  }
+
+  .cargo-merain-importance {
+    margin-top: 90px;
+  }
+
+  .cargo-merain-importance-card p {
+    font-size: 13px;
+  }
+
+  .cargo-merain-covered {
+    margin-top: 84px;
+  }
+
+  .cargo-merain-covered h2,
+  .cargo-merain-covered h3 {
+    font-size: 32px;
+  }
+
+  .cargo-merain-covered-grid,
+  .cargo-merain-benefits-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .cargo-merain-covered h3 {
+    margin-top: 56px;
+  }
+}
+
+@media (max-width: 640px) {
+  .cargo-merain-page {
+    padding: 18px 14px 28px;
+  }
+
+  .Hero {
+    padding-top: 24px;
+  }
+
+  .cargo-merain-back-link {
+    margin: 0 auto;
+  }
+
+  .cargo-merain-layout {
+    justify-items: center;
+    text-align: center;
+  }
+
+  .cargo-merain-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .cargo-merain-info-panel {
+    width: 100%;
+  }
+
+  .cargo-merain-hero-group {
+    width: 100%;
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .cargo-merain-info h1 {
+    font-size: 30px;
+  }
+
+  .cargo-merain-info p {
+    font-size: 16px;
+    text-align: center;
+  }
+
+  .cargo-merain-tags {
+    justify-content: center;
+  }
+
+  .cargo-merain-form-card {
+    width: min(100%, 520px);
+  }
+
+  .cargo-merain-form-card h2,
+  .cargo-merain-form-card > p {
+    text-align: center;
+  }
+
+  .cargo-merain-form {
+    grid-template-columns: 1fr;
+  }
+
+  .cargo-merain-about {
+    margin-top: 72px;
+    max-width: 100%;
+  }
+
+  .cargo-merain-about-content {
+    align-items: center;
+    text-align: center;
+  }
+
+  .cargo-merain-about h2,
+  .cargo-merain-importance h2 {
+    font-size: 26px;
+    text-align: center;
+  }
+
+  .cargo-merain-about p {
+    font-size: 13px;
+  }
+
+  .cargo-merain-importance {
+    margin-top: 86px;
+    text-align: center;
+  }
+
+  .cargo-merain-importance-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .cargo-merain-importance-card {
+    justify-content: center;
+  }
+
+  .cargo-merain-covered {
+    margin-top: 70px;
+  }
+
+  .cargo-merain-covered h2,
+  .cargo-merain-covered h3 {
+    font-size: 26px;
+    text-align: center;
+  }
+
+  .cargo-merain-covered-grid,
+  .cargo-merain-benefits-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .cargo-merain-covered h3 {
+    margin-top: 46px;
+  }
+
+  .cargo-merain-covered-card {
+    min-height: 96px;
+  }
+}

@@ -1,0 +1,177 @@
+.choose-section {
+  --choose-pad-x: clamp(16px, 4vw, 40px);
+  width: calc(100% + 2 * var(--choose-pad-x));
+  max-width: none;
+  margin-top: clamp(56px, 7vw, 92px);
+  margin-left: calc(-1 * var(--choose-pad-x));
+  margin-right: calc(-1 * var(--choose-pad-x));
+  box-sizing: border-box;
+  padding: clamp(24px, 3.4vw, 38px) var(--choose-pad-x) clamp(28px, 4vw, 44px);
+  background: #f8fafc;
+  border-radius: 0;
+  text-align: center;
+}
+
+.choose-title {
+  margin: 0;
+  font-size: clamp(26px, 4vw, 36px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #1e293b;
+}
+
+.choose-title-accent {
+  color: #38bdf8;
+}
+
+.choose-subtitle {
+  margin: 12px auto 0;
+  max-width: 520px;
+  color: #64748b;
+  font-size: clamp(15px, 1.9vw, 17px);
+  line-height: 1.5;
+}
+
+.choose-grid {
+  margin-top: clamp(28px, 4vw, 40px);
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
+  gap: clamp(14px, 2vw, 22px);
+  text-align: center;
+}
+
+.choose-card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: clamp(22px, 2.8vw, 28px) clamp(16px, 2vw, 20px);
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06);
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.choose-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 36px rgba(15, 23, 42, 0.1);
+}
+
+.choose-card-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  display: grid;
+  place-items: center;
+  color: #ffffff;
+  flex-shrink: 0;
+}
+
+.choose-card-icon svg {
+  width: 26px;
+  height: 26px;
+  flex-shrink: 0;
+}
+
+.choose-card-title {
+  margin: 0;
+  font-size: clamp(15px, 1.6vw, 17px);
+  font-weight: 700;
+  color: #1e293b;
+  line-height: 1.3;
+}
+
+.choose-card-text {
+  margin: 0;
+  font-size: clamp(13px, 1.35vw, 14px);
+  line-height: 1.55;
+  color: #64748b;
+}
+
+/* Mobile / narrow: always 2 cards per row — tighten layout instead of stacking */
+@media (max-width: 640px) {
+  .choose-section {
+    --choose-pad-x: clamp(10px, 3.2vw, 16px);
+    margin-top: 18px;
+    padding-top: clamp(18px, 4vw, 24px);
+    padding-bottom: clamp(22px, 5vw, 30px);
+  }
+
+  .choose-title {
+    font-size: clamp(22px, 5.4vw, 28px);
+  }
+
+  .choose-subtitle {
+    font-size: clamp(13px, 3.2vw, 15px);
+    margin-top: 10px;
+  }
+
+  .choose-grid {
+    margin-top: clamp(20px, 4vw, 28px);
+    gap: 8px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .choose-card {
+    padding: 12px 8px;
+    gap: 8px;
+    border-radius: 12px;
+    min-width: 0;
+  }
+
+  .choose-card-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 11px;
+  }
+
+  .choose-card-icon svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  .choose-card-title {
+    font-size: clamp(12px, 3.1vw, 14px);
+    line-height: 1.25;
+  }
+
+  .choose-card-text {
+    font-size: clamp(10.5px, 2.65vw, 12px);
+    line-height: 1.4;
+  }
+
+  .choose-card:hover {
+    transform: none;
+  }
+}
+
+@media (max-width: 380px) {
+  .choose-grid {
+    gap: 6px;
+  }
+
+  .choose-card {
+    padding: 10px 6px;
+  }
+
+  .choose-card-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .choose-card-icon svg {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .choose-card {
+    transition: none;
+  }
+
+  .choose-card:hover {
+    transform: none;
+  }
+}

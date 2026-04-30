@@ -4,8 +4,8 @@
   --bg: #f5f8fb;
   --border: transparent; /* Set to transparent to remove lines */
   --code-bg: #f4f3ec;
-  --accent: #0066ff;      /* Keeping your premium blue */
-  --accent-bg: rgba(0, 102, 255, 0.1);
+  --accent: #177A9E;
+  --accent-bg: rgba(23, 122, 158, 0.1);
   --accent-border: transparent;
   --social-bg: rgba(244, 243, 236, 0.5);
   --shadow: rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
@@ -14,7 +14,10 @@
   --heading: 'Inter', system-ui, sans-serif;
   --mono: ui-monospace, Consolas, monospace;
 
-  font: 18px/145% var(--sans);
+  /* Scales smoothly across laptop widths instead of jumping at one breakpoint */
+  font-size: clamp(15px, 0.28vw + 13.6px, 18px);
+  font-family: var(--sans);
+  line-height: 145%;
   letter-spacing: 0.18px;
   color-scheme: light dark;
   color: var(--text);
@@ -31,10 +34,39 @@
   box-sizing: border-box;
 }
 
-@media (max-width: 1024px) {
-  :root {
-    font-size: 16px;
-  }
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  scroll-behavior: smooth;
+}
+
+/* Global micro-interactions for interactive controls across the site */
+a,
+button,
+[role='button'],
+input,
+textarea,
+select {
+  transition: background-color 220ms ease, color 220ms ease, border-color 220ms ease,
+    box-shadow 220ms ease, transform 220ms ease, opacity 220ms ease;
+}
+
+a:hover,
+button:hover,
+[role='button']:hover {
+  transform: translateY(-1px);
+}
+
+a:focus-visible,
+button:focus-visible,
+[role='button']:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid rgba(23, 122, 158, 0.75);
+  outline-offset: 2px;
 }
 
 /* Dark Mode support */
@@ -45,10 +77,29 @@
     --bg: #16171d;
     --border: transparent;
     --code-bg: #1f2028;
-    --accent: #60a5fa;
-    --accent-bg: rgba(96, 165, 250, 0.15);
+    --accent: #2b8fb4;
+    --accent-bg: rgba(43, 143, 180, 0.18);
     --social-bg: rgba(47, 48, 58, 0.5);
     --shadow: rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  body {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
 
@@ -78,20 +129,13 @@ h1, h2 {
 }
 
 h1 {
-  font-size: 56px;
+  font-size: clamp(2rem, 1.35vw + 1.35rem, 3.5rem);
   letter-spacing: -0.03em;
-  margin: 32px 0;
-}
-
-@media (max-width: 1024px) {
-  h1 {
-    font-size: 36px;
-    margin: 20px 0;
-  }
+  margin: clamp(1.1rem, 2.2vw, 2rem) 0;
 }
 
 h2 {
-  font-size: 24px;
+  font-size: clamp(1.15rem, 0.55vw + 0.95rem, 1.5rem);
   line-height: 118%;
   letter-spacing: -0.01em;
   margin: 0 0 8px;

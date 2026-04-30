@@ -1,0 +1,238 @@
+.cargo-air-info-panel {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.cargo-air-hero-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.cargo-air-tags-row {
+  justify-content: flex-start;
+}
+
+@media (max-width: 640px) {
+  .cargo-air-info-panel {
+    width: 100%;
+  }
+
+  .cargo-air-hero-group {
+    width: 100%;
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .cargo-air-tags-row {
+    justify-content: flex-start;
+  }
+}
+.cargo-air-page {
+  min-height: calc(100svh - 80px);
+  background: #edf3fb;
+  padding: 22px clamp(20px, 5vw, 46px) 34px;
+  box-sizing: border-box;
+}
+
+.cargo-air-wrap {
+  width: min(1220px, 100%);
+  margin: 0 auto;
+}
+
+.cargo-air-back-link {
+  border: none;
+  background: transparent;
+  color: #73859a;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 6px 0;
+}
+
+.cargo-air-layout {
+  margin-top: 18px;
+  display: grid;
+  grid-template-columns: 1fr minmax(360px, 490px);
+  gap: clamp(22px, 4vw, 70px);
+  align-items: start;
+}
+
+.cargo-air-badge {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: #e7f8fc;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cargo-air-badge img {
+  width: 20px;
+  height: 20px;
+}
+
+.cargo-air-info h1 {
+  margin: 18px 0 8px;
+  color: #192737;
+  font-size: clamp(34px, 3.35vw, 52px);
+  line-height: 1.08;
+}
+
+.cargo-air-info p {
+  margin: 0;
+  max-width: 545px;
+  color: #667a92;
+  font-size: 17px;
+  line-height: 1.43;
+}
+
+.cargo-air-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin-top: 18px;
+}
+
+.cargo-air-tags span {
+  border: 1px solid #d8e1ee;
+  border-radius: 999px;
+  padding: 5px 11px;
+  color: #3f546d;
+  font-size: 11px;
+  font-weight: 600;
+  background: #fefefe;
+}
+
+.cargo-air-form-card {
+  background: #fff;
+  border: 1px solid #dbe2ec;
+  border-radius: 16px;
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.1);
+  padding: 24px;
+}
+
+.cargo-air-form-card h2 {
+  margin: 0;
+}
+
+.cargo-air-form-card > p {
+  margin: 6px 0 14px;
+  color: #6d7f95;
+  font-size: 13px;
+}
+
+.cargo-air-form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.cargo-air-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.cargo-air-form input,
+.cargo-air-form select {
+  height: 40px;
+  border: 1px solid #d2dae6;
+  border-radius: 10px;
+  padding: 0 12px;
+  font-size: 13px;
+  color: #2c3b4f;
+  background: #f5f8fd;
+}
+
+.cargo-air-whatsapp-btn {
+  margin-top: 14px;
+  width: 100%;
+  border: none;
+  border-radius: 9px;
+  height: 40px;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  background: linear-gradient(90deg, #177a9e 0%, #4f46e5 100%);
+}
+
+.cargo-air-about,
+.cargo-air-covered {
+  margin-top: 72px;
+}
+
+.cargo-air-about h2,
+.cargo-air-covered h2 {
+  margin: 0;
+  color: #1c2531;
+  font-size: 36px;
+}
+
+.cargo-air-about p {
+  margin: 12px 0 0;
+  color: #6f8197;
+  font-size: 14px;
+  max-width: 700px;
+  line-height: 1.6;
+}
+
+.cargo-air-covered-grid {
+  margin-top: 18px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.cargo-air-covered-card {
+  border: 1px solid #d7dfea;
+  border-radius: 12px;
+  background: #fdfefe;
+  padding: 16px;
+  text-align: center;
+}
+
+.cargo-air-covered-card p {
+  margin: 0;
+  color: #2f3d4f;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+@media (max-width: 1024px) {
+  .cargo-air-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .cargo-air-covered-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .cargo-air-page {
+    padding: 18px 14px 28px;
+  }
+
+  .cargo-air-layout,
+  .cargo-air-info {
+    text-align: center;
+  }
+
+  .cargo-air-tags {
+    justify-content: center;
+  }
+
+  .cargo-air-form {
+    grid-template-columns: 1fr;
+  }
+
+  .cargo-air-covered-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

@@ -1,0 +1,48 @@
+.business-coverage-page {
+  min-height: calc(100vh - 80px);
+  background: #f6f8fc;
+  padding: 28px 150px 36px;
+}
+
+@media (max-width: 1024px) {
+  .business-coverage-page {
+    padding: 28px clamp(18px, 4vw, 28px) 36px;
+  }
+}
+
+.business-coverage-wrap {
+  max-width: 980px;
+  margin: 0 auto;
+}
+
+.business-coverage-back-link {
+  border: 0;
+  background: transparent;
+  color: #64748b;
+  font-size: 0.98rem;
+  cursor: pointer;
+  margin-bottom: 18px;
+}
+
+.business-coverage-back-link:hover {
+  text-decoration: underline;
+}
+
+.business-coverage-card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 26px;
+  box-shadow: 0 12px 34px rgba(15, 23, 42, 0.08);
+}
+
+.business-coverage-card h1 {
+  margin: 0 0 10px;
+  color: #0f172a;
+  font-size: clamp(1.5rem, 2.4vw, 2rem);
+}
+
+.business-coverage-card p {
+  margin: 0;
+  color: #64748b;
+  line-height: 1.7;
+}

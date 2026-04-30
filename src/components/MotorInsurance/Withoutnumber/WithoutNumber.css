@@ -1,0 +1,386 @@
+.motor-plans-view {
+  width: min(520px, 100%);
+}
+
+.motor-plans-back-link {
+  border: none;
+  background: transparent;
+  padding: 0;
+  color: #2f80ed;
+  font-size: 13px;
+  cursor: pointer;
+  margin-bottom: 8px;
+}
+
+.motor-plans-back-link:focus-visible,
+.motor-edit-vehicle-btn:focus-visible,
+.motor-back-step-btn:focus-visible,
+.motor-plan-continue-btn:focus-visible,
+.motor-yes-no-btn:focus-visible {
+  outline: 2px solid #93c5fd;
+  outline-offset: 2px;
+}
+
+.motor-plans-header h1 {
+  margin: 0;
+  color: #0f172a;
+  font-size: clamp(22px, 3vw, 30px);
+  line-height: 1.1;
+}
+
+.motor-plans-header p {
+  margin: 4px 0 0;
+  color: #5f7590;
+  font-size: 14px;
+}
+
+.motor-steps {
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.motor-step-wrap {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.motor-step-wrap.has-line {
+  flex: 1;
+}
+
+.motor-step {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.motor-step span {
+  width: 24px;
+  height: 24px;
+  border-radius: 999px;
+  border: 1px solid #cbd5e1;
+  color: #64748b;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 700;
+  background: #ffffff;
+}
+
+.motor-step p {
+  margin: 0;
+  color: #64748b;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.motor-step.is-active span {
+  border-color: #2f80ed;
+  background: #2f80ed;
+  color: #ffffff;
+}
+
+.motor-step.is-active p {
+  color: #0f172a;
+}
+
+.motor-step.is-done span {
+  border-color: #2f80ed;
+  color: #2f80ed;
+  background: #e9f2ff;
+}
+
+.motor-step.is-done p {
+  color: #0f172a;
+}
+
+.motor-step-line {
+  flex: 1;
+  height: 1px;
+  background: #d5dde8;
+  min-width: 30px;
+}
+
+.motor-step-line.is-active {
+  background: #2f80ed;
+}
+
+.motor-plan-card {
+  margin-top: 10px;
+  border: 1px solid #dce3ec;
+  border-radius: 14px;
+  background: #ffffff;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.06);
+  padding: 12px;
+}
+
+.guest-screen {
+  width: 100%;
+}
+
+.motor-plan-card h2 {
+  margin: 0 0 8px;
+  color: #0f172a;
+  font-size: 20px;
+  line-height: 1.1;
+}
+
+.motor-plan-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.motor-plan-card-header h2 {
+  margin: 0;
+}
+
+.motor-edit-vehicle-btn {
+  border: none;
+  background: transparent;
+  color: #2f80ed;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+}
+
+.motor-vehicle-summary {
+  border-radius: 10px;
+  background: #f1f5f9;
+  color: #475569;
+  font-size: 13px;
+  padding: 9px 12px;
+  margin-bottom: 8px;
+}
+
+.motor-plan-form {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.motor-form-error {
+  margin: 4px 0 0;
+  color: #dc2626;
+  font-size: 12px;
+  font-weight: 600;
+  text-align: left;
+  width: 100%;
+  padding-left: 4px;
+}
+
+.motor-insurance-form {
+  gap: 8px;
+}
+
+.motor-plan-label {
+  margin-top: 0;
+  color: #0f172a;
+  font-size: 13px;
+  font-weight: 600;
+  text-align: left;
+  width: 100%;
+  padding-left: 4px;
+}
+
+.motor-plan-form select {
+  border: 1px solid #d4deea;
+  border-radius: 10px;
+  background: #f8fafc;
+  color: #334155;
+  height: 36px;
+  padding: 0 42px 0 16px;
+  font-size: 13px;
+  outline: none;
+  width: 100%;
+  text-align: left;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%2364758b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  background-size: 14px;
+}
+
+.motor-plan-form select:focus {
+  border-color: #2f80ed;
+  box-shadow: 0 0 0 3px rgba(47, 128, 237, 0.12);
+}
+
+.motor-plan-form select.motor-form-field-error {
+  border-color: #dc2626;
+  box-shadow: 0 0 0 1px rgba(220, 38, 38, 0.12);
+}
+
+.motor-date-input {
+  border: 1px solid #d4deea;
+  border-radius: 10px;
+  background: #f8fafc;
+  color: #334155;
+  height: 36px;
+  padding: 0 12px 0 38px;
+  font-size: 13px;
+  outline: none;
+  width: 100%;
+  box-sizing: border-box;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2364758b' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='4' width='18' height='18' rx='2' ry='2'%3E%3C/rect%3E%3Cline x1='16' y1='2' x2='16' y2='6'%3E%3C/line%3E%3Cline x1='8' y1='2' x2='8' y2='6'%3E%3C/line%3E%3Cline x1='3' y1='10' x2='21' y2='10'%3E%3C/line%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: 12px center;
+  background-size: 15px;
+}
+
+.motor-date-input:focus {
+  border-color: #2f80ed;
+  box-shadow: 0 0 0 3px rgba(47, 128, 237, 0.12);
+}
+
+.motor-date-input::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  opacity: 0.85;
+}
+
+.motor-optional-text {
+  color: #64748b;
+  font-weight: 500;
+}
+
+.motor-yes-no-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.motor-yes-no-btn {
+  border: 1px solid #d4deea;
+  border-radius: 10px;
+  background: #f8fafc;
+  color: #64748b;
+  height: 34px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.motor-yes-no-btn.is-active {
+  border-color: #2f80ed;
+  color: #2f80ed;
+  background: #ecf4ff;
+}
+
+.motor-insurance-action-row {
+  margin-top: 4px;
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  gap: 8px;
+}
+
+.motor-back-step-btn {
+  border: 1px solid #d4deea;
+  border-radius: 10px;
+  background: #f8fafc;
+  color: #334155;
+  height: 36px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.motor-plan-continue-btn {
+  margin-top: 6px;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(90deg, #177a9e 0%, #4f46e5 100%);
+  color: #ffffff;
+  height: 36px;
+  font-size: 14px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .motor-plans-view {
+    width: min(100%, 460px);
+  }
+
+  .motor-plans-header h1 {
+    font-size: clamp(20px, 6vw, 26px);
+  }
+
+  .motor-plans-header p {
+    font-size: 13px;
+  }
+
+  .motor-step-wrap {
+    gap: 6px;
+  }
+
+  .motor-step p {
+    font-size: 12px;
+  }
+
+  .motor-plan-card {
+    padding: 10px;
+  }
+
+  .motor-plan-card h2 {
+    font-size: 18px;
+  }
+
+  .motor-plan-form select,
+  .motor-date-input,
+  .motor-back-step-btn,
+  .motor-plan-continue-btn {
+    height: 34px;
+    font-size: 12px;
+  }
+
+  .motor-insurance-action-row {
+    grid-template-columns: 96px 1fr;
+  }
+}
+
+@media (max-width: 520px) {
+  .motor-steps {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 6px;
+  }
+
+  .motor-step-wrap,
+  .motor-step-wrap.has-line {
+    width: 100%;
+    flex: none;
+  }
+
+  .motor-step-line {
+    display: none;
+  }
+
+  .motor-step {
+    justify-content: flex-start;
+  }
+
+  .motor-insurance-action-row {
+    grid-template-columns: 1fr;
+  }
+
+  .motor-back-step-btn,
+  .motor-plan-continue-btn {
+    width: 100%;
+  }
+
+  .motor-yes-no-row {
+    grid-template-columns: 1fr;
+  }
+}

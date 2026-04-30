@@ -1,0 +1,638 @@
+.business-equipment-page {
+  min-height: calc(100svh - 80px);
+  background: #ffffff;
+  padding: 0 0 34px;
+  box-sizing: border-box;
+  --business-equipment-control-height: 42px;
+}
+
+.business-equipment-wrap {
+  width: 100%;
+  margin: 0 auto;
+  padding-left: 0;
+  padding-right: 0;
+  box-sizing: border-box;
+}
+
+.business-equipment-hero {
+  width: 100%;
+  background: #f3f4f6;
+  padding: 56px 150px 30px;
+  box-sizing: border-box;
+}
+
+.business-equipment-shell {
+  max-width: 1320px;
+  margin: 0 auto;
+}
+
+.business-equipment-back-link {
+  display: block;
+  text-align: left;
+  width: fit-content;
+  border: none;
+  background: transparent;
+  color: #6e788f;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 6px 0;
+}
+
+.business-equipment-layout {
+  margin-top: 18px;
+  display: grid;
+  grid-template-columns: minmax(420px, 1fr) minmax(360px, 490px);
+  gap: clamp(20px, 2.8vw, 48px);
+  align-items: start;
+}
+
+.business-equipment-info-panel {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.business-equipment-hero-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  max-width: 640px;
+}
+
+.business-equipment-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: #dfcdf7;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #9ca3af;
+}
+
+.business-equipment-icon svg,
+.business-equipment-input-icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+.business-equipment-icon svg path,
+.business-equipment-icon svg circle,
+.business-equipment-icon svg rect,
+.business-equipment-input-icon svg path,
+.business-equipment-input-icon svg circle,
+.business-equipment-input-icon svg rect {
+  stroke: currentColor;
+  stroke-width: 1.7;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.business-equipment-content h1 {
+  margin: 20px 0 10px;
+  color: #1a2433;
+  font-size: clamp(34px, 3.35vw, 52px);
+  line-height: 1.08;
+  letter-spacing: -0.3px;
+  max-width: 560px;
+}
+
+.business-equipment-content p {
+  margin: 0;
+  max-width: 560px;
+  color: #667993;
+  font-size: 17px;
+  line-height: 1.43;
+}
+
+.business-equipment-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin-top: 18px;
+}
+
+.business-equipment-tags span {
+  border: 1px solid #d8deea;
+  border-radius: 999px;
+  padding: 5px 11px 5px 9px;
+  color: #3f536e;
+  font-size: 11px;
+  font-weight: 600;
+  background: #fff;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.business-equipment-tags i {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1.5px solid #8c5be2;
+  display: inline-block;
+  box-sizing: border-box;
+  position: relative;
+  background: #f4eefe;
+}
+
+.business-equipment-tags i::after {
+  content: '';
+  position: absolute;
+  left: 2.6px;
+  top: 0.8px;
+  width: 2.4px;
+  height: 4.6px;
+  border-right: 1.4px solid #8c5be2;
+  border-bottom: 1.4px solid #8c5be2;
+  transform: rotate(45deg);
+}
+
+.business-equipment-form-card {
+  background: #fdfefe;
+  border: 1px solid #dbe2ec;
+  border-radius: 16px;
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.1);
+  padding: 24px;
+  min-width: 0;
+}
+
+.business-equipment-form-card h2 {
+  margin: 0;
+  font-size: 18px;
+  color: #1f2d3d;
+  line-height: 1.25;
+}
+
+.business-equipment-form-subtitle {
+  margin: 6px 0 14px;
+  color: #6d7f95;
+  font-size: 13px;
+}
+
+.business-equipment-form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.business-equipment-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  color: #1f2937;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.business-equipment-form label:nth-child(1),
+.business-equipment-form label:nth-child(2),
+.business-equipment-form label:nth-child(5),
+.business-equipment-form label:nth-child(6) {
+  grid-column: 1 / -1;
+}
+
+.business-equipment-label-text {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.business-equipment-form em {
+  color: #ea5b5b;
+  font-style: normal;
+}
+
+.business-equipment-form input,
+.business-equipment-form select {
+  width: 100%;
+  height: var(--business-equipment-control-height);
+  border: 1px solid #d2dae6;
+  border-radius: 10px;
+  padding: 0 12px;
+  font-size: 13px;
+  color: #2c3b4f;
+  background: #f5f8fd;
+  box-sizing: border-box;
+}
+
+.business-equipment-form select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  padding-right: 38px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 20 20'%3E%3Cpath d='M5.5 7.5L10 12l4.5-4.5' fill='none' stroke='%23697f99' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 14px 14px;
+}
+
+.business-equipment-input-wrap {
+  position: relative;
+}
+
+.business-equipment-input-wrap input {
+  height: var(--business-equipment-control-height);
+  padding-left: 36px;
+}
+
+.business-equipment-input-icon {
+  position: absolute;
+  left: 11px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  color: #9caac0;
+  pointer-events: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.business-equipment-form input::placeholder {
+  color: #94a6bc;
+}
+
+.business-equipment-submit {
+  margin-top: 14px;
+  width: 100%;
+  border: none;
+  border-radius: 9px;
+  height: var(--business-equipment-control-height);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  background: linear-gradient(90deg, #177a9e 0%, #4f46e5 100%);
+}
+
+.business-equipment-form-note {
+  margin: 8px 4px 0;
+  color: #95a5bc;
+  font-size: 10px;
+  text-align: center;
+}
+
+.business-equipment-about-section {
+  margin-top: 68px;
+  margin-left: 0;
+  margin-right: 0;
+  width: 100%;
+  padding: 24px 150px 8px;
+  box-sizing: border-box;
+}
+
+.about {
+  background: #fff;
+  margin-left: 0;
+  margin-right: 0;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0;
+}
+
+.business-equipment-about-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.business-equipment-about-content h2,
+.business-equipment-importance h3 {
+  margin: 0;
+  color: #1c2531;
+  font-size: 38px;
+  line-height: 1.2;
+  font-weight: 700;
+}
+
+.business-equipment-about-content p {
+  margin: 14px 0 0;
+  max-width: 760px;
+  color: #6f8197;
+  font-size: 15px;
+  line-height: 1.65;
+}
+
+.business-equipment-importance {
+  margin-top: 76px;
+}
+
+.business-equipment-importance-grid {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px 16px;
+}
+
+.business-equipment-importance-card {
+  border: 1px solid #d7dfea;
+  border-radius: 12px;
+  background: #fdfefe;
+  padding: 16px 18px;
+  min-height: 64px;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.business-equipment-importance-card i {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  border: 1.5px solid #8c5be2;
+  box-sizing: border-box;
+  display: inline-block;
+  margin-top: 3px;
+  flex: 0 0 auto;
+  position: relative;
+  background: #f4eefe;
+}
+
+.business-equipment-importance-card i::after {
+  content: '';
+  position: absolute;
+  left: 4px;
+  top: 2.5px;
+  width: 4px;
+  height: 7px;
+  border-right: 1.8px solid #8c5be2;
+  border-bottom: 1.8px solid #8c5be2;
+  transform: rotate(45deg);
+}
+
+.business-equipment-importance-card p {
+  margin: 0;
+  color: #384d66;
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.business-equipment-covered-section {
+  margin-top: 64px;
+  padding: 0 150px 24px;
+  box-sizing: border-box;
+}
+
+.business-equipment-covered-block h3,
+.business-equipment-benefits-block h3 {
+  margin: 0;
+  color: #1c2531;
+  font-size: 42px;
+  line-height: 1.2;
+  font-weight: 700;
+}
+
+.business-equipment-covered-grid,
+.business-equipment-benefits-grid {
+  margin-top: 18px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.business-equipment-covered-card {
+  border: 1px solid #d7dfea;
+  border-radius: 12px;
+  background: #fdfefe;
+  padding: 18px 16px;
+  min-height: 108px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  text-align: center;
+}
+
+.business-equipment-covered-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 11px;
+  background: #f4eefe;
+  color: #8c5be2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.business-equipment-covered-icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.business-equipment-covered-icon svg path,
+.business-equipment-covered-icon svg circle,
+.business-equipment-covered-icon svg rect {
+  stroke: currentColor;
+  stroke-width: 1.7;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.business-equipment-covered-card p {
+  margin: 0;
+  color: #2f3d4f;
+  font-size: 14px;
+  line-height: 1.35;
+  font-weight: 600;
+}
+
+.business-equipment-benefits-block {
+  margin-top: 88px;
+}
+
+.business-equipment-benefit-card {
+  min-height: 92px;
+}
+
+@media (max-width: 1024px) {
+  .business-equipment-wrap {
+    padding: 0;
+  }
+
+  .business-equipment-layout {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .business-equipment-content p {
+    font-size: 20px;
+  }
+
+  .business-equipment-form-card h2 {
+    font-size: 15px;
+  }
+
+  .business-equipment-about-section {
+    margin-top: 56px;
+    margin-left: 0;
+    margin-right: 0;
+    width: 100%;
+    padding: 16px clamp(18px, 4vw, 28px) 8px;
+  }
+
+  .about {
+    margin-left: 0;
+    margin-right: 0;
+    width: 100%;
+    padding: 0;
+  }
+
+  .business-equipment-about-content h2,
+  .business-equipment-importance h3 {
+    font-size: 32px;
+  }
+
+  .business-equipment-importance {
+    margin-top: 58px;
+  }
+
+  .business-equipment-covered-section {
+    padding: 0 clamp(18px, 4vw, 28px) 24px;
+  }
+
+  .business-equipment-covered-block h3,
+  .business-equipment-benefits-block h3 {
+    font-size: 32px;
+  }
+
+  .business-equipment-covered-grid,
+  .business-equipment-benefits-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .business-equipment-benefits-block {
+    margin-top: 56px;
+  }
+}
+
+@media (max-width: 640px) {
+  .business-equipment-page {
+    padding: 0 0 28px;
+  }
+
+  .business-equipment-hero {
+    padding: 26px 14px 16px;
+  }
+
+  .business-equipment-back-link {
+    margin: 0 auto;
+  }
+
+  .business-equipment-layout {
+    justify-items: center;
+    text-align: center;
+  }
+
+  .business-equipment-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .business-equipment-info-panel {
+    width: 100%;
+  }
+
+  .business-equipment-hero-group {
+    width: 100%;
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .business-equipment-content h1 {
+    font-size: 30px;
+  }
+
+  .business-equipment-content p {
+    font-size: 16px;
+    text-align: center;
+  }
+
+  .business-equipment-tags {
+    justify-content: center;
+  }
+
+  .business-equipment-form-card {
+    width: min(100%, 520px);
+  }
+
+  .business-equipment-form-card h2,
+  .business-equipment-form-subtitle {
+    text-align: center;
+  }
+
+  .business-equipment-form {
+    grid-template-columns: 1fr;
+  }
+
+  .business-equipment-form label:nth-child(1),
+  .business-equipment-form label:nth-child(2),
+  .business-equipment-form label:nth-child(5),
+  .business-equipment-form label:nth-child(6) {
+    grid-column: auto;
+  }
+
+  .business-equipment-about-section {
+    margin-top: 48px;
+    padding: 12px 14px 6px;
+  }
+
+  .business-equipment-about-content {
+    align-items: center;
+    text-align: center;
+  }
+
+  .business-equipment-about-content h2,
+  .business-equipment-importance h3 {
+    font-size: 26px;
+  }
+
+  .business-equipment-about-content p {
+    font-size: 13px;
+  }
+
+  .business-equipment-importance {
+    margin-top: 44px;
+    text-align: center;
+  }
+
+  .business-equipment-importance-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .business-equipment-importance-card {
+    justify-content: center;
+  }
+
+  .business-equipment-covered-section {
+    margin-top: 52px;
+    padding: 0 14px 20px;
+  }
+
+  .business-equipment-covered-block h3,
+  .business-equipment-benefits-block h3 {
+    font-size: 26px;
+    text-align: center;
+  }
+
+  .business-equipment-covered-grid,
+  .business-equipment-benefits-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .business-equipment-benefits-block {
+    margin-top: 46px;
+  }
+
+  .business-equipment-covered-card {
+    min-height: 96px;
+  }
+}
+
