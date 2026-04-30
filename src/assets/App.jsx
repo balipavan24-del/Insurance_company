@@ -10,6 +10,7 @@ import CargoHome from '../components/cargo/Cargo-Home';
 import CargoMerain from '../components/cargo/Cargo-Merain';
 import CargoAir from '../components/cargo/Cargo-Air';
 import CargoInland from '../components/cargo/Cargo-Inland';
+import TermHome from '../components/Term/Term-Home';
 import BusinessHome from '../components/BusinessInsurance/Business-Home';
 import BusinessFire from '../components/BusinessInsurance/Business-Fire';
 import BusinessNatural from '../components/BusinessInsurance/Business-Natural';
@@ -116,6 +117,11 @@ function App() {
       return;
     }
 
+    if (optionId === 'term-insurance' || optionId.startsWith('term-')) {
+      navigate('/term-insurance');
+      return;
+    }
+
     navigate(`/?menu=${optionId}`);
   };
 
@@ -137,6 +143,11 @@ function App() {
 
     if (optionId === 'business-insurance') {
       navigate('/business-insurance');
+      return;
+    }
+
+    if (optionId === 'term-insurance') {
+      navigate('/term-insurance');
     }
   };
 
@@ -144,6 +155,7 @@ function App() {
     location.pathname === '/'
     || location.pathname.startsWith('/motor-insurance')
     || location.pathname.startsWith('/health-insurance')
+    || location.pathname.startsWith('/term-insurance')
     || location.pathname.startsWith('/cargo-insurance')
     || location.pathname.startsWith('/business-insurance')
     || location.pathname.startsWith('/business');
@@ -243,6 +255,14 @@ function App() {
           element={(
             <div className="app-screen app-screen--cargo-insurance">
               <CargoInland onBackToCargo={() => navigate('/cargo-insurance')} />
+            </div>
+          )}
+        />
+        <Route
+          path="/term-insurance"
+          element={(
+            <div className="app-screen app-screen--term-insurance">
+              <TermHome />
             </div>
           )}
         />

@@ -35,6 +35,7 @@ function Hero({ insuranceOptions, onInsuranceCardClick, showHomeSnackbar }) {
             {insuranceOptions.map((item) => {
               const isClickableInsuranceCard = item.id === 'motor-insurance'
                 || item.id === 'health-insurance'
+                || item.id === 'term-insurance'
                 || item.id === 'cargo-insurance'
                 || item.id === 'business-insurance';
               return (
