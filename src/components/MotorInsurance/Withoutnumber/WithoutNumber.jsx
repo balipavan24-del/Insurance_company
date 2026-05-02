@@ -261,11 +261,13 @@ function WithoutNumber({ selectedCategory = 'motor-car', onBackToVehicleCheck, o
                 ))}
               </select>
 
-              <label className="motor-plan-label">Claim in Last Year?</label>
-              <div className="motor-yes-no-row">
+              <label className="motor-plan-label" id="motor-guest-claim-label">Claim in Last Year?</label>
+              <div className="motor-yes-no-row" role="group" aria-labelledby="motor-guest-claim-label">
                 <button
                   type="button"
                   className={`motor-yes-no-btn${insuranceForm.hadClaimLastYear === 'yes' ? ' is-active' : ''}`}
+                  aria-pressed={insuranceForm.hadClaimLastYear === 'yes'}
+                  aria-label="Claim in last year: Yes"
                   onClick={() => handleInsuranceToggleChange('hadClaimLastYear', 'yes')}
                 >
                   Yes
@@ -273,17 +275,21 @@ function WithoutNumber({ selectedCategory = 'motor-car', onBackToVehicleCheck, o
                 <button
                   type="button"
                   className={`motor-yes-no-btn${insuranceForm.hadClaimLastYear === 'no' ? ' is-active' : ''}`}
+                  aria-pressed={insuranceForm.hadClaimLastYear === 'no'}
+                  aria-label="Claim in last year: No"
                   onClick={() => handleInsuranceToggleChange('hadClaimLastYear', 'no')}
                 >
                   No
                 </button>
               </div>
 
-              <label className="motor-plan-label">Has ownership changed in last 12 months?</label>
-              <div className="motor-yes-no-row">
+              <label className="motor-plan-label" id="motor-guest-ownership-label">Has ownership changed in last 12 months?</label>
+              <div className="motor-yes-no-row" role="group" aria-labelledby="motor-guest-ownership-label">
                 <button
                   type="button"
                   className={`motor-yes-no-btn${insuranceForm.ownershipChangedLast12Months === 'yes' ? ' is-active' : ''}`}
+                  aria-pressed={insuranceForm.ownershipChangedLast12Months === 'yes'}
+                  aria-label="Ownership changed in last 12 months: Yes"
                   onClick={() => handleInsuranceToggleChange('ownershipChangedLast12Months', 'yes')}
                 >
                   Yes
@@ -291,6 +297,8 @@ function WithoutNumber({ selectedCategory = 'motor-car', onBackToVehicleCheck, o
                 <button
                   type="button"
                   className={`motor-yes-no-btn${insuranceForm.ownershipChangedLast12Months === 'no' ? ' is-active' : ''}`}
+                  aria-pressed={insuranceForm.ownershipChangedLast12Months === 'no'}
+                  aria-label="Ownership changed in last 12 months: No"
                   onClick={() => handleInsuranceToggleChange('ownershipChangedLast12Months', 'no')}
                 >
                   No

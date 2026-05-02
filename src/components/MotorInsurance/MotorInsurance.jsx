@@ -12,12 +12,23 @@ import { getPolicyCardFromVehicleNumber } from './MotorPolicyDummyData';
 import WithoutNumber from './Withoutnumber/WithoutNumber';
 import Newcar from './Newcar/Newcar';
 
-/** Logs quote-shaped payloads in dev (`npm run dev`) only. */
-const debugMotorQuotePayload = (eventLabel, payload) => {
-  if (!import.meta.env.DEV) {
-    return;
+/** True in dev, or on any build when URL has ?motorDebug=1 or ?debug=motor */
+const isMotorConsoleDebug = () => {
+  if (import.meta.env.DEV) {
+    return true;
   }
-  console.info(`[MotorInsurance] ${eventLabel}`, payload);
+  if (typeof window === 'undefined') {
+    return false;
+  }
+  const q = new URLSearchParams(window.location.search);
+  return q.get('motorDebug') === '1' || q.get('debug') === 'motor';
+};
+
+const logMotorQuoteLead = (eventLabel, payload) => {
+  console.info(`[MotorInsurance] ${eventLabel}`);
+  if (isMotorConsoleDebug()) {
+    console.info('[MotorInsurance] payload', payload);
+  }
 };
 
 const normalizeMotorCategory = (categoryId) => {
@@ -293,6 +304,12 @@ function MotorInsurance({ onBackHome, selectedCategory = 'motor-car' }) {
   }, [activeCategoryId]);
 
   useEffect(() => {
+    if (import.meta.env.DEV) {
+      console.info('[MotorInsurance] View Plans logs one line each click; full payload in dev or add ?motorDebug=1 on production.');
+    }
+  }, []);
+
+  useEffect(() => {
     if (!isBrandSelectionOpen && !isModelSelectionOpen && !isVariantSelectionOpen) {
       return undefined;
     }
@@ -419,7 +436,7 @@ function MotorInsurance({ onBackHome, selectedCategory = 'motor-car' }) {
               selectedCategory={selectedCategory}
               onBackToVehicleCheck={() => setIsWithoutVehicleFlow(false)}
               onContinue={({ vehicle, insurance }) => {
-                debugMotorQuotePayload('Continue without vehicle number — View Plans', {
+                logMotorQuoteLead('Continue without vehicle number — View Plans', {
                   flow: 'without-vehicle-number',
                   selectedCategory: activeCategoryId,
                   vehicleNumber: null,
@@ -437,7 +454,7 @@ function MotorInsurance({ onBackHome, selectedCategory = 'motor-car' }) {
               vehicleType={newVehicleType}
               onBackToVehicleCheck={() => setIsNewCarFlow(false)}
               onContinue={(newCarFormDetails) => {
-                debugMotorQuotePayload('Brand new vehicle — View Plans (no plate yet)', {
+                logMotorQuoteLead('Brand new vehicle — View Plans (no plate yet)', {
                   flow: 'brand-new-vehicle-without-number',
                   selectedCategory: activeCategoryId,
                   vehicleType: newVehicleType,
