@@ -1,0 +1,63 @@
+/* Minimal motion: short entrances + light stagger. Full “off” under prefers-reduced-motion. */
+
+@keyframes insureease-rise {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 10px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes insureease-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .landing-page .hero-section {
+    animation: insureease-rise 0.44s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .landing-page .insurance-panel {
+    animation: insureease-rise 0.44s cubic-bezier(0.22, 1, 0.36, 1) 0.06s both;
+  }
+
+  .landing-page .choose-section {
+    animation: insureease-rise 0.44s cubic-bezier(0.22, 1, 0.36, 1) 0.1s both;
+  }
+
+  .landing-page .promo-video-section {
+    animation: insureease-rise 0.44s cubic-bezier(0.22, 1, 0.36, 1) 0.14s both;
+  }
+
+  .landing-page .it-works-section {
+    animation: insureease-rise 0.44s cubic-bezier(0.22, 1, 0.36, 1) 0.18s both;
+  }
+
+  .app-screen {
+    animation: insureease-fade 0.32s ease-out both;
+  }
+
+  .main-wrapper > .navbar-container {
+    animation: insureease-fade 0.32s ease-out both;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .landing-page .hero-section,
+  .landing-page .insurance-panel,
+  .landing-page .choose-section,
+  .landing-page .promo-video-section,
+  .landing-page .it-works-section,
+  .app-screen,
+  .main-wrapper > .navbar-container {
+    animation: none;
+  }
+}
