@@ -75,16 +75,16 @@ function ItWorks() {
         {STEPS.map((item) => {
           const Icon = item.icon;
           return (
-          <li key={item.id} className="it-works-card">
-            <span className="it-works-step" aria-hidden="true">
-              {item.step}
-            </span>
-            <div className={`it-works-icon ${item.iconClass}`} aria-hidden="true">
-              <Icon />
-            </div>
-            <h3 className="it-works-card-title">{item.title}</h3>
-            <p className="it-works-card-text">{item.description}</p>
-          </li>
+            <li key={item.id} className="it-works-card">
+              <span className="it-works-step" aria-hidden="true">
+                {item.step}
+              </span>
+              <div className={`it-works-icon ${item.iconClass}`} aria-hidden="true">
+                <Icon />
+              </div>
+              <h3 className="it-works-card-title">{item.title}</h3>
+              <p className="it-works-card-text">{item.description}</p>
+            </li>
           );
         })}
       </ol>

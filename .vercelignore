@@ -1,0 +1,9 @@
+# Reduce upload size for Vercel CLI (optional; Git integration ignores most of this)
+.git
+.github
+.vscode
+.cursor
+*.md
+dist
+coverage
+.nyc_output

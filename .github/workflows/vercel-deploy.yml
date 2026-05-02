@@ -1,10 +1,22 @@
+# Deploys via Vercel CLI. Add GitHub secrets: VERCEL_TOKEN, VERCEL_ORG_ID, VERCEL_PROJECT_ID
+# (Vercel dashboard → Project → Settings → Environment / or `vercel link`.)
+# If the repo is already connected in Vercel’s Git tab, you can rely on that instead and disable this workflow to avoid double deploys.
+
 name: Deploy to Vercel
 
 on:
   push:
     branches:
       - main
+      - master
   workflow_dispatch:
+
+concurrency:
+  group: vercel-deploy-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
 
 jobs:
   deploy:
@@ -22,7 +34,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v5
         with:
-          node-version: 20
+          node-version: 22
           cache: npm
 
       - name: Install dependencies
