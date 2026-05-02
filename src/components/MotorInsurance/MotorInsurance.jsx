@@ -12,6 +12,14 @@ import { getPolicyCardFromVehicleNumber } from './MotorPolicyDummyData';
 import WithoutNumber from './Withoutnumber/WithoutNumber';
 import Newcar from './Newcar/Newcar';
 
+/** Logs quote-shaped payloads in dev (`npm run dev`) only. */
+const debugMotorQuotePayload = (eventLabel, payload) => {
+  if (!import.meta.env.DEV) {
+    return;
+  }
+  console.info(`[MotorInsurance] ${eventLabel}`, payload);
+};
+
 const normalizeMotorCategory = (categoryId) => {
   switch (categoryId) {
     case 'motor-bike':
@@ -410,14 +418,33 @@ function MotorInsurance({ onBackHome, selectedCategory = 'motor-car' }) {
             <WithoutNumber
               selectedCategory={selectedCategory}
               onBackToVehicleCheck={() => setIsWithoutVehicleFlow(false)}
+              onContinue={({ vehicle, insurance }) => {
+                debugMotorQuotePayload('Continue without vehicle number — View Plans', {
+                  flow: 'without-vehicle-number',
+                  selectedCategory: activeCategoryId,
+                  vehicleNumber: null,
+                  continuedWithoutVehicleNumber: true,
+                  vehicle,
+                  insurance
+                });
+              }}
             />
           </div>
         ) : isNewCarFlow ? (
           <div className="motor-screen motor-screen--new-car-flow">
             <Newcar
+              selectedCategory={activeCategoryId}
               vehicleType={newVehicleType}
               onBackToVehicleCheck={() => setIsNewCarFlow(false)}
-              onContinue={() => {
+              onContinue={(newCarFormDetails) => {
+                debugMotorQuotePayload('Brand new vehicle — View Plans (no plate yet)', {
+                  flow: 'brand-new-vehicle-without-number',
+                  selectedCategory: activeCategoryId,
+                  vehicleType: newVehicleType,
+                  vehicleNumber: null,
+                  continuedWithoutVehicleNumber: true,
+                  newCarDetails: newCarFormDetails
+                });
                 setIsNewCarFlow(false);
               }}
             />

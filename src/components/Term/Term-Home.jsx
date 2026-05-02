@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react';
 import './Term-Home.css';
 import Footer from '../../pages/Landing/Footer';
+import TermQuotePanel from './TermQuotePanel';
 
 function formatINR(value) {
   return `₹${Math.round(value).toLocaleString('en-IN')}`;
@@ -221,110 +222,6 @@ function TermHome() {
     document.getElementById(targetId)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
-  const renderQuotePanel = ({ panelId, idSuffix = '', extraClass = '' }) => (
-    <aside className={`term-quote-panel ${extraClass}`.trim()} id={panelId}>
-      <div className="term-quote-head">
-        <p>Free Quote in 60 sec</p>
-        <h2>Get Your Term Insurance Plan</h2>
-        <span>Secure your family&apos;s future in minutes</span>
-      </div>
-
-      <div className="term-quote-whatsapp">
-        <div>
-          <strong>Get details on WhatsApp</strong>
-          <p>{isWhatsappEnabled ? 'Plan details sent instantly' : 'WhatsApp updates are off'}</p>
-        </div>
-        <button
-          type="button"
-          className={`term-whatsapp-toggle${isWhatsappEnabled ? ' is-on' : ''}`}
-          role="switch"
-          aria-checked={isWhatsappEnabled}
-          aria-label="Toggle WhatsApp details"
-          onClick={() => setIsWhatsappEnabled((previous) => !previous)}
-        />
-      </div>
-
-      <form className="term-quote-form" onSubmit={handleQuoteSubmit}>
-        <label htmlFor={`termGender${idSuffix}`}>Gender *</label>
-        <div className="term-gender-row" id={`termGender${idSuffix}`}>
-          <button
-            type="button"
-            className={selectedGender === 'male' ? 'is-active' : ''}
-            aria-pressed={selectedGender === 'male'}
-            onClick={() => setSelectedGender('male')}
-          >
-            Male
-          </button>
-          <button
-            type="button"
-            className={selectedGender === 'female' ? 'is-active' : ''}
-            aria-pressed={selectedGender === 'female'}
-            onClick={() => setSelectedGender('female')}
-          >
-            Female
-          </button>
-        </div>
-
-        <label htmlFor={`termName${idSuffix}`}>Full Name *</label>
-        <input
-          id={`termName${idSuffix}`}
-          type="text"
-          placeholder="Enter your name"
-          value={fullName}
-          onChange={(event) => setFullName(event.target.value)}
-        />
-
-        <label htmlFor={`termDob${idSuffix}`}>Date of Birth *</label>
-        <input
-          id={`termDob${idSuffix}`}
-          type="text"
-          placeholder="mm/dd/yyyy"
-          value={dateOfBirth}
-          onChange={(event) => setDateOfBirth(event.target.value)}
-        />
-
-        <label htmlFor={`termMobile${idSuffix}`}>Mobile Number *</label>
-        <input
-          id={`termMobile${idSuffix}`}
-          type="tel"
-          placeholder="10-digit mobile"
-          value={mobileNumber}
-          onChange={(event) => setMobileNumber(event.target.value.replace(/\D/g, '').slice(0, 10))}
-        />
-        <p className="term-form-note">
-          {isWhatsappEnabled
-            ? 'We\'ll send plan details instantly on WhatsApp'
-            : 'Enable WhatsApp to receive instant plan details'}
-        </p>
-
-        <label htmlFor={`termSmoke${idSuffix}`}>Do you smoke? *</label>
-        <div className="term-gender-row" id={`termSmoke${idSuffix}`}>
-          <button
-            type="button"
-            className={isSmoker === 'no' ? 'is-active' : ''}
-            aria-pressed={isSmoker === 'no'}
-            onClick={() => setIsSmoker('no')}
-          >
-            NO
-          </button>
-          <button
-            type="button"
-            className={isSmoker === 'yes' ? 'is-active' : ''}
-            aria-pressed={isSmoker === 'yes'}
-            onClick={() => setIsSmoker('yes')}
-          >
-            YES
-          </button>
-        </div>
-
-        <button type="submit" className="term-submit-btn">Get My Quote →</button>
-      </form>
-      {leadQueue.length > 0 && (
-        <p className="term-form-note">Queued leads: {leadQueue.length}</p>
-      )}
-    </aside>
-  );
-
   const handleQuoteSubmit = (event) => {
     event.preventDefault();
 
@@ -355,10 +252,32 @@ function TermHome() {
     }
   };
 
+  const quotePanelProps = {
+    isWhatsappEnabled,
+    onWhatsappToggle: () => setIsWhatsappEnabled((previous) => !previous),
+    selectedGender,
+    onGenderChange: setSelectedGender,
+    fullName,
+    onFullNameChange: setFullName,
+    dateOfBirth,
+    onDateOfBirthChange: setDateOfBirth,
+    mobileNumber,
+    onMobileNumberChange: setMobileNumber,
+    isSmoker,
+    onSmokerChange: setIsSmoker,
+    leadQueueLength: leadQueue.length,
+    onSubmit: handleQuoteSubmit
+  };
+
   return (
     <main className="term-home-page">
       <section className="term-home-layout">
-        {renderQuotePanel({ panelId: 'term-quote-panel-desktop', idSuffix: 'Desktop', extraClass: 'term-quote-panel--desktop' })}
+        <TermQuotePanel
+          {...quotePanelProps}
+          panelId="term-quote-panel-desktop"
+          idSuffix="Desktop"
+          extraClass="term-quote-panel--desktop"
+        />
 
         <section className="term-content-panel">
           <h1>
@@ -369,7 +288,12 @@ function TermHome() {
             Term insurance provides financial security to your loved ones in case of an unfortunate event.
             With high coverage at low premiums, it ensures your family&apos;s goals and lifestyle are protected.
           </p>
-          {renderQuotePanel({ panelId: 'term-quote-panel-mobile', idSuffix: 'Mobile', extraClass: 'term-quote-panel--mobile' })}
+          <TermQuotePanel
+            {...quotePanelProps}
+            panelId="term-quote-panel-mobile"
+            idSuffix="Mobile"
+            extraClass="term-quote-panel--mobile"
+          />
 
           <div className="term-feature-strip">
             <div>

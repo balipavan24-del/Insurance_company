@@ -1,0 +1,2 @@
+# Netlify / some static hosts: send all routes to the SPA shell
+/*    /index.html   200

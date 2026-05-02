@@ -694,6 +694,12 @@
   font-weight: 600;
 }
 
+.new-car-summary-item--no-plate .new-car-summary-item-content span {
+  font-size: 11px;
+  line-height: 1.35;
+  color: #475569;
+}
+
 .new-car-summary-edit-btn {
   border: 1px solid #cfe0fb;
   border-radius: 999px;

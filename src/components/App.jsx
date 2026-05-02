@@ -68,7 +68,13 @@ function App() {
           )}
         </main>
       ) : (
-        <Suspense fallback={<div className="route-fallback" role="status" aria-live="polite" />}>
+        <Suspense
+          fallback={(
+            <div className="route-fallback" role="status" aria-live="polite">
+              Loading…
+            </div>
+          )}
+        >
           <Login
             onClose={() => setCurrentView('home')}
             onAccountCreated={handleAccountCreated}

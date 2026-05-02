@@ -83,7 +83,11 @@ function WithoutNumber({ selectedCategory = 'motor-car', onBackToVehicleCheck, o
   const vehicleSummary = `${planForm.brand} ${planForm.model} ${planForm.variant} • ${planForm.registrationYear} • ${planForm.registrationCity}`;
 
   return (
-    <section className="motor-plans-view">
+    <section
+      className="motor-plans-view"
+      data-motor-flow="without-vehicle-number"
+      data-motor-selected-category={selectedCategory}
+    >
       <button
         type="button"
         className="motor-plans-back-link"

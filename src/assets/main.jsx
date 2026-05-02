@@ -2,12 +2,24 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import '../components/index.css';
+import { ErrorBoundary } from '../components/ErrorBoundary.jsx';
 import App from './App.jsx';
 
-createRoot(document.getElementById('root')).render(
+const rootElement = document.getElementById('root');
+
+if (!rootElement) {
+  throw new Error('InsureEase: missing #root element in index.html');
+}
+
+const baseUrl = import.meta.env.BASE_URL || '/';
+const routerBasename = baseUrl.length > 1 ? baseUrl.replace(/\/$/, '') : baseUrl;
+
+createRoot(rootElement).render(
   <StrictMode>
-    <BrowserRouter>
-      <App />
+    <BrowserRouter basename={routerBasename}>
+      <ErrorBoundary>
+        <App />
+      </ErrorBoundary>
     </BrowserRouter>
   </StrictMode>,
 );

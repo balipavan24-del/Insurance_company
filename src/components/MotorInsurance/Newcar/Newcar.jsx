@@ -89,6 +89,13 @@ const BikeGlyph = () => (
   </svg>
 );
 
+const PlateGlyph = () => (
+  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none">
+    <rect x="4" y="7" width="16" height="10" rx="1.5" stroke="currentColor" strokeWidth="1.4" />
+    <path d="M7 10.5h10M7 13.5h6" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
+  </svg>
+);
+
 const SummaryFieldIcon = ({ fieldKey, vehicleType }) => {
   switch (fieldKey) {
     case 'brand':
@@ -146,7 +153,12 @@ const SummaryFieldIcon = ({ fieldKey, vehicleType }) => {
   }
 };
 
-function Newcar({ onBackToVehicleCheck, onContinue, vehicleType = 'car' }) {
+function Newcar({
+  onBackToVehicleCheck,
+  onContinue,
+  vehicleType = 'car',
+  selectedCategory = 'motor-car'
+}) {
   const BIKE_FUEL_CARD_OPTIONS = [
     { value: 'Petrol', tone: 'is-petrol', icon: <FuelDropGlyph /> },
     { value: 'Electric', tone: 'is-electric', icon: <ElectricBoltGlyph /> }
@@ -514,7 +526,15 @@ function Newcar({ onBackToVehicleCheck, onContinue, vehicleType = 'car' }) {
     .replace(/when will you start using the car\?/i, `When will you start using the ${vehicleTypeLower}?`);
 
   return (
-    <section className="new-car-overlay" role="dialog" aria-modal="true" aria-label={`New ${vehicleTypeLower} details form`}>
+    <section
+      className="new-car-overlay"
+      role="dialog"
+      aria-modal="true"
+      aria-label={`New ${vehicleTypeLower} details form`}
+      data-motor-flow="brand-new-without-vehicle-number"
+      data-motor-selected-category={selectedCategory}
+      data-motor-vehicle-type={vehicleType}
+    >
       <section className="new-car-modal">
         <div className="new-car-left-pane">
           <header className="new-car-left-header">
@@ -571,6 +591,15 @@ function Newcar({ onBackToVehicleCheck, onContinue, vehicleType = 'car' }) {
                 )}
               </div>
             ))}
+            <div className="new-car-summary-item is-filled new-car-summary-item--no-plate">
+              <span className="new-car-summary-item-icon" aria-hidden="true">
+                <PlateGlyph />
+              </span>
+              <div className="new-car-summary-item-content">
+                <p>Vehicle number</p>
+                <span>Not assigned — continue without registration number</span>
+              </div>
+            </div>
           </div>
           <button
             type="button"
