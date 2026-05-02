@@ -2,6 +2,7 @@
   "name": "project_first",
   "private": true,
   "version": "0.0.0",
+  "homepage": "https://test-1-one-swart.vercel.app",
   "type": "module",
   "engines": {
     "node": ">=20"
