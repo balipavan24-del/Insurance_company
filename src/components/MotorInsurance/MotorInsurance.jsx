@@ -165,7 +165,7 @@ const BRAND_MODEL_VARIANT_DUMMY_DATA = {
 };
 
 const getBrandInitials = (brandName) => (
-  brandName
+  String(brandName ?? '')
     .split(' ')
     .filter(Boolean)
     .slice(0, 2)
@@ -528,7 +528,7 @@ function MotorInsurance({ onBackHome, selectedCategory = 'motor-car' }) {
               {rcScanError && <p className="motor-rc-scan-error">{rcScanError}</p>}
               {rcScanRecords.length > 0 && (
                 <p className="motor-rc-scan-meta" aria-live="polite">
-                  Stored RC scans: {rcScanRecords.length} (latest registration {rcScanRecords[rcScanRecords.length - 1].extracted.registrationNumber})
+                  Stored RC scans: {rcScanRecords.length} (latest registration {rcScanRecords[rcScanRecords.length - 1]?.extracted?.registrationNumber ?? '—'})
                 </p>
               )}
               <button

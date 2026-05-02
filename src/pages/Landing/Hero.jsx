@@ -9,7 +9,9 @@ import Footer from './Footer';
 
 const shouldShowPromoVideo = Boolean(INSURANCE_VIDEO_01);
 
-function Hero({ insuranceOptions, onInsuranceCardClick, showHomeSnackbar }) {
+function Hero({ insuranceOptions = [], onInsuranceCardClick, showHomeSnackbar }) {
+  const cards = Array.isArray(insuranceOptions) ? insuranceOptions : [];
+
   return (
     <div className="landing-page">
       <main className="hero-page">
@@ -32,7 +34,7 @@ function Hero({ insuranceOptions, onInsuranceCardClick, showHomeSnackbar }) {
         <section className="insurance-panel">
           <h2>What would you like to insure?</h2>
           <div className="insurance-grid">
-            {insuranceOptions.map((item) => {
+            {cards.map((item) => {
               const isClickableInsuranceCard = item.id === 'motor-insurance'
                 || item.id === 'health-insurance'
                 || item.id === 'term-insurance'
@@ -43,13 +45,13 @@ function Hero({ insuranceOptions, onInsuranceCardClick, showHomeSnackbar }) {
                   key={item.id}
                   className={`insurance-card${item.popular ? ' is-popular' : ''}${isClickableInsuranceCard ? ' insurance-card--clickable' : ''}`}
                   data-insurance-id={item.id}
-                  onClick={isClickableInsuranceCard ? () => onInsuranceCardClick(item.id) : undefined}
+                  onClick={isClickableInsuranceCard ? () => onInsuranceCardClick?.(item.id) : undefined}
                   onKeyDown={
                     isClickableInsuranceCard
                       ? (event) => {
                           if (event.key === 'Enter' || event.key === ' ') {
                             event.preventDefault();
-                            onInsuranceCardClick(item.id);
+                            onInsuranceCardClick?.(item.id);
                           }
                         }
                       : undefined

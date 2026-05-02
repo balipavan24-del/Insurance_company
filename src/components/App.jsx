@@ -46,7 +46,7 @@ function App() {
           <section className="insurance-panel">
             <h2>What would you like to insure?</h2>
             <div className="insurance-grid">
-              {insuranceOptions.map((item) => (
+              {(Array.isArray(insuranceOptions) ? insuranceOptions : []).map((item) => (
                 <article
                   key={item.id}
                   className={`insurance-card${item.popular ? ' is-popular' : ''}`}

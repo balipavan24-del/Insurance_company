@@ -53,10 +53,11 @@ const createPolicyCardByStatus = (statusType) => {
 };
 
 const getPolicyStatusFromNumber = (vehicleId) => {
-  if (/(EX|BX|TE|CE)/.test(vehicleId)) {
+  const id = String(vehicleId ?? '');
+  if (/(EX|BX|TE|CE)/.test(id)) {
     return 'expired';
   }
-  if (/(SO|BS|TS|CS)/.test(vehicleId)) {
+  if (/(SO|BS|TS|CS)/.test(id)) {
     return 'expiringSoon';
   }
   return 'active';

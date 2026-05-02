@@ -129,7 +129,7 @@ function Navbar({ onLoginClick, onMenuOptionSelect, onBrandClick }) {
                       <li key={option.id} className="dropdown-group">
                         <span className="dropdown-item dropdown-item-group">{option.label}</span>
                         <ul className="dropdown-submenu">
-                          {option.children.map((child) => (
+                          {(option.children ?? []).map((child) => (
                             <li key={child.id}>
                               <button
                                 className="dropdown-item dropdown-subitem"

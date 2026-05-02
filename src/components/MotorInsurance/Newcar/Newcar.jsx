@@ -198,7 +198,9 @@ function Newcar({
       : NEWCAR_SELECTION_KEYS),
     [vehicleType]
   );
-  const currentField = activeStepSequence[currentStepIndex];
+  const lastStepIndex = Math.max(0, activeStepSequence.length - 1);
+  const safeStepIndex = Math.min(Math.max(0, currentStepIndex), lastStepIndex);
+  const currentField = activeStepSequence[safeStepIndex] ?? 'brand';
   const vehicleTypeTitle = vehicleType === 'bike' ? 'Bike' : 'Car';
   const vehicleTypeLower = vehicleType === 'bike' ? 'bike' : 'car';
   const brandModelVariantData = vehicleType === 'bike'
@@ -261,7 +263,7 @@ function Newcar({
         const searchableText = `${option.value}`.toLowerCase();
         return searchableText.includes(searchText.trim().toLowerCase());
       }
-      return option.toLowerCase().includes(searchText.trim().toLowerCase());
+      return String(option).toLowerCase().includes(searchText.trim().toLowerCase());
     });
   }, [optionValues, searchText, currentField]);
 
@@ -303,7 +305,8 @@ function Newcar({
 
     const currentValue = String(carFormData[currentField] || '').trim();
     if (!currentValue) {
-      setErrorMessage(`Please select ${FIELD_LABELS[currentField].toLowerCase()}.`);
+      const label = (FIELD_LABELS[currentField] ?? 'this field').toLowerCase();
+      setErrorMessage(`Please select ${label}.`);
       return false;
     }
     return true;
@@ -319,17 +322,21 @@ function Newcar({
       return;
     }
     setSearchText('');
-    setCurrentStepIndex((previous) => previous + 1);
+    setCurrentStepIndex((previous) => {
+      const p = Math.min(Math.max(0, previous), lastStepIndex);
+      return Math.min(p + 1, lastStepIndex);
+    });
   };
 
   const handleBack = () => {
-    if (currentStepIndex === 0) {
+    const idx = safeStepIndex;
+    if (idx === 0) {
       onBackToVehicleCheck?.();
       return;
     }
     setSearchText('');
     setErrorMessage('');
-    setCurrentStepIndex((previous) => previous - 1);
+    setCurrentStepIndex(idx - 1);
   };
 
   const contactDetailsStepIndex = activeStepSequence.indexOf('contactDetails');
@@ -341,10 +348,13 @@ function Newcar({
     setErrorMessage('');
     setSuppressAutoNextAfterSummaryEdit(false);
     setSearchText('');
-    setCurrentStepIndex(contactDetailsStepIndex);
+    setCurrentStepIndex(Math.min(Math.max(0, contactDetailsStepIndex), lastStepIndex));
   };
 
   const handleStepSelection = (rawValue) => {
+    if (!currentField || currentField === 'contactDetails') {
+      return;
+    }
     const mergedForm = mergeSelectionUpdate(carFormData, currentField, rawValue);
     updateFieldValue(currentField, rawValue);
     setErrorMessage('');
@@ -354,7 +364,7 @@ function Newcar({
       setSuppressAutoNextAfterSummaryEdit(false);
     }
 
-    const shouldAutoAdvance = currentField !== 'contactDetails' && currentStepIndex < activeStepSequence.length - 1;
+    const shouldAutoAdvance = currentField !== 'contactDetails' && safeStepIndex < lastStepIndex;
 
     if (!shouldAutoAdvance) {
       return;
@@ -365,7 +375,10 @@ function Newcar({
     }
 
     setSearchText('');
-    setCurrentStepIndex((previous) => previous + 1);
+    setCurrentStepIndex((previous) => {
+      const p = Math.min(Math.max(0, previous), lastStepIndex);
+      return Math.min(p + 1, lastStepIndex);
+    });
   };
 
   const renderStepInput = () => {
@@ -473,7 +486,7 @@ function Newcar({
               type="text"
               value={searchText}
               onChange={(event) => setSearchText(event.target.value)}
-              placeholder={isCityStep ? 'Search city...' : `Search ${FIELD_LABELS[currentField].toLowerCase()}...`}
+              placeholder={isCityStep ? 'Search city...' : `Search ${(FIELD_LABELS[currentField] ?? 'options').toLowerCase()}...`}
               className="new-car-search-input"
             />
           </div>
