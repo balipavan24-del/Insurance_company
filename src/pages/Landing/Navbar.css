@@ -11,7 +11,8 @@
   position: sticky;
   top: 0;
   z-index: 1000;
-  box-shadow: 0 2px 12px rgba(15, 23, 42, 0.06);
+  box-shadow: none;
+  border-bottom: 1px solid #e6ecf5;
   padding: 0 var(--nav-inline-padding);
   overflow: visible;
 }
@@ -19,6 +20,9 @@
 .brand {
   position: relative;
   flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
   font-size: 22px;
   font-weight: 700;
   color: #1f2937;
@@ -28,6 +32,10 @@
   background: transparent;
   cursor: pointer;
   z-index: 2;
+}
+
+.brand-text {
+  letter-spacing: -0.02em;
 }
 
 .mobile-more-btn {
@@ -113,8 +121,7 @@
   margin-top: 4px;
 }
 
-.dropdown-menu.is-open,
-.nav-link-item:focus-within > .dropdown-menu {
+.dropdown-menu.is-open {
   opacity: 1;
   transform: translateY(0);
   pointer-events: auto;
@@ -167,7 +174,7 @@
 .nav-login-btn {
   flex: 0 0 auto;
   padding: 11px 28px;
-  background: linear-gradient(90deg, #177a9e 0%, #4f46e5 100%);
+  background: linear-gradient(90deg, #2e88c7 0%, #4f46e5 100%);
   color: #ffffff;
   border: none;
   border-radius: 50px;
@@ -177,7 +184,7 @@
 }
 
 .nav-login-btn:hover {
-  background: linear-gradient(90deg, #177a9e 0%, #4f46e5 100%);
+  background: linear-gradient(90deg, #2e88c7 0%, #4f46e5 100%);
   color: #ffffff;
   transform: translateY(-1px);
   box-shadow: 0 8px 18px rgba(79, 70, 229, 0.28);
@@ -248,14 +255,23 @@
     position: relative;
     display: flex;
     justify-content: space-between;
-    padding: 10px clamp(14px, 4.5vw, 26px);
-    min-height: 70px;
+    padding: 12px clamp(16px, 4.5vw, 24px);
+    min-height: 74px;
     gap: 12px;
   }
 
   .brand {
     font-size: 20px;
-    padding: 6px 10px;
+    font-weight: 700;
+    color: #111827;
+    padding: 4px 0;
+    gap: 0;
+  }
+
+  .brand-text {
+    font-size: clamp(20px, 4.8vw, 22px);
+    font-weight: 700;
+    line-height: 1.1;
   }
 
   .desktop-only {
@@ -266,16 +282,22 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 38px;
-    height: 38px;
+    width: 42px;
+    height: 42px;
     flex: 0 0 auto;
-    border: 1px solid #dbe6f3;
-    border-radius: 10px;
-    background: #f8fbff;
-    color: #1f2937;
-    font-size: 24px;
+    border: none;
+    border-radius: 12px;
+    background: transparent;
+    color: #111827;
+    font-size: 30px;
+    font-weight: 600;
     line-height: 1;
     cursor: pointer;
+    padding: 0;
+  }
+
+  .hamburger-icon {
+    transform: translateY(-1px);
   }
 
   .nav-menu {
@@ -346,6 +368,12 @@
     width: 100%;
     text-align: center;
     padding: 11px 16px;
+  }
+}
+
+@media (max-width: 600px) {
+  .brand-text {
+    font-size: clamp(18px, 6vw, 22px);
   }
 }
 

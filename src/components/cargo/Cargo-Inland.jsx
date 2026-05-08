@@ -1,11 +1,28 @@
 import './Cargo-Merain.css';
 import cargoInlandLogo from '../../assets/logos/cargo-inland-logo.svg';
 import Footer from '../../pages/Landing/Footer';
+import { sanitizePhoneNumber, validateCargoLeadDetails } from '../../utils/leadValidation';
 
 function CargoInland({ onBackToCargo }) {
+  const handleQuoteSubmit = (event) => {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    const validationErrors = validateCargoLeadDetails({
+      fullName: formData.get('fullName'),
+      businessName: formData.get('businessName'),
+      mobileNumber: formData.get('mobileNumber'),
+      email: formData.get('email')
+    });
+    if (validationErrors.length > 0) {
+      window.alert(validationErrors.join('\n'));
+      return;
+    }
+    window.alert('Thanks! Inland transit quote details captured successfully.');
+  };
+
   return (
-    <main className="cargo-merain-page cargo-inland-theme">
-      <section className="cargo-merain-wrap">
+    <main className="cargo-merain-page cargo-inland-theme page-section page-section--hero">
+      <section className="cargo-merain-wrap page-section-container">
         <div className="Hero">
           <button
             type="button"
@@ -41,7 +58,7 @@ function CargoInland({ onBackToCargo }) {
               <h2>Get Your Inland Transit Insurance Quote</h2>
               <p>Fill in the details and our expert will reach out to you.</p>
 
-              <form className="cargo-merain-form">
+              <form className="cargo-merain-form" onSubmit={handleQuoteSubmit}>
                 <label>
                   <span className="cargo-merain-label-text">Shipment Type <em>*</em></span>
                   <select defaultValue="" disabled aria-disabled="true">
@@ -66,7 +83,7 @@ function CargoInland({ onBackToCargo }) {
                         <path d="M4.8 15.3C5.5 12.8 7.5 11.8 10 11.8C12.5 11.8 14.5 12.8 15.2 15.3" />
                       </svg>
                     </span>
-                    <input type="text" placeholder="Your full name" />
+                    <input name="fullName" type="text" placeholder="Your full name" required />
                   </div>
                 </label>
 
@@ -80,7 +97,7 @@ function CargoInland({ onBackToCargo }) {
                         <path d="M7.2 8.2H8.5M9.8 8.2H11.1M7.2 10.4H8.5M9.8 10.4H11.1" />
                       </svg>
                     </span>
-                    <input type="text" placeholder="Company name" />
+                    <input name="businessName" type="text" placeholder="Company name" required />
                   </div>
                 </label>
 
@@ -92,7 +109,15 @@ function CargoInland({ onBackToCargo }) {
                         <path d="M6.7 4.8C7.2 4.2 8.1 4.2 8.7 4.8L9.7 5.8C10.2 6.3 10.3 7.1 9.8 7.7L9.2 8.4C9.8 9.6 10.7 10.6 11.9 11.2L12.6 10.6C13.2 10.1 14 10.2 14.5 10.7L15.5 11.7C16.1 12.3 16.1 13.2 15.5 13.7L14.8 14.4C14.2 15 13.3 15.2 12.4 14.9C9.8 14.1 7.4 11.8 6.6 9.1C6.3 8.2 6.5 7.3 7.1 6.7L7.8 6" />
                       </svg>
                     </span>
-                    <input type="tel" placeholder="10-digit mobile" />
+                    <input
+                      name="mobileNumber"
+                      type="tel"
+                      placeholder="10-digit mobile"
+                      onChange={(event) => {
+                        event.currentTarget.value = sanitizePhoneNumber(event.currentTarget.value);
+                      }}
+                      required
+                    />
                   </div>
                 </label>
 
@@ -105,14 +130,13 @@ function CargoInland({ onBackToCargo }) {
                         <path d="M4.8 7.2L10 10.5L15.2 7.2" />
                       </svg>
                     </span>
-                    <input type="email" placeholder="you@company.com" />
+                    <input name="email" type="email" placeholder="you@company.com" />
                   </div>
                 </label>
+                <button type="submit" className="cargo-merain-whatsapp-btn">
+                  Get Details on WhatsApp
+                </button>
               </form>
-
-              <button type="button" className="cargo-merain-whatsapp-btn">
-                Get Details on WhatsApp
-              </button>
               <p className="cargo-merain-note">
                 By submitting, you agree to be contacted by our insurance experts.
               </p>

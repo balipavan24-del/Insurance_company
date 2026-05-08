@@ -227,6 +227,24 @@
   background-repeat: no-repeat;
   background-position: right 12px center;
   background-size: 14px 14px;
+  transition: border-color 140ms ease, box-shadow 140ms ease, background-color 140ms ease;
+}
+
+.business-equipment-form select:hover {
+  border-color: #7b7fff;
+  background-color: #f7f4ff;
+}
+
+.business-equipment-form select:focus {
+  outline: none;
+  border-color: transparent;
+  box-shadow: 0 0 0 3px rgba(97, 95, 255, 0.18);
+  background-image:
+    linear-gradient(#ffffff, #ffffff),
+    var(--gradient-primary),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 20 20'%3E%3Cpath d='M5.5 7.5L10 12l4.5-4.5' fill='none' stroke='%23555ce8' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-origin: border-box;
+  background-clip: padding-box, border-box, border-box;
 }
 
 .business-equipment-input-wrap {
@@ -266,7 +284,7 @@
   font-size: 13px;
   font-weight: 700;
   cursor: pointer;
-  background: linear-gradient(90deg, #177a9e 0%, #4f46e5 100%);
+  background: linear-gradient(90deg, #2e88c7 0%, #4f46e5 100%);
 }
 
 .business-equipment-form-note {

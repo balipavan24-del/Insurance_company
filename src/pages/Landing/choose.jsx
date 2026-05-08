@@ -69,7 +69,7 @@ const FEATURES = [
 
 function Choose() {
   return (
-    <section className="choose-section" aria-labelledby="choose-heading">
+    <section className="choose-section page-section page-section--regular" aria-labelledby="choose-heading">
       <h2 id="choose-heading" className="choose-title">
         Why Choose <span className="choose-title-accent">Us</span>
       </h2>

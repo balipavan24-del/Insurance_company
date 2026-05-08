@@ -1,3 +1,5 @@
+import { sanitizePhoneNumber } from '../../utils/leadValidation';
+
 function TermQuotePanel({
   panelId,
   idSuffix = '',
@@ -43,13 +45,19 @@ function TermQuotePanel({
       </div>
 
       <form className="term-quote-form" onSubmit={onSubmit}>
-        <label htmlFor={`termGender${idSuffix}`}>Gender *</label>
-        <div className="term-gender-row" id={`termGender${idSuffix}`}>
+        <span className="term-form-group-heading" id={`termGenderHeading${idSuffix}`}>
+          Gender (optional)
+        </span>
+        <div
+          className="term-gender-row"
+          role="group"
+          aria-labelledby={`termGenderHeading${idSuffix}`}
+        >
           <button
             type="button"
             className={selectedGender === 'male' ? 'is-active' : ''}
             aria-pressed={selectedGender === 'male'}
-            onClick={() => onGenderChange('male')}
+            onClick={() => onGenderChange(selectedGender === 'male' ? null : 'male')}
           >
             Male
           </button>
@@ -57,7 +65,7 @@ function TermQuotePanel({
             type="button"
             className={selectedGender === 'female' ? 'is-active' : ''}
             aria-pressed={selectedGender === 'female'}
-            onClick={() => onGenderChange('female')}
+            onClick={() => onGenderChange(selectedGender === 'female' ? null : 'female')}
           >
             Female
           </button>
@@ -87,7 +95,7 @@ function TermQuotePanel({
           type="tel"
           placeholder="10-digit mobile"
           value={mobileNumber}
-          onChange={(event) => onMobileNumberChange(event.target.value.replace(/\D/g, '').slice(0, 10))}
+          onChange={(event) => onMobileNumberChange(sanitizePhoneNumber(event.target.value))}
         />
         <p className="term-form-note">
           {isWhatsappEnabled
@@ -95,13 +103,19 @@ function TermQuotePanel({
             : 'Enable WhatsApp to receive instant plan details'}
         </p>
 
-        <label htmlFor={`termSmoke${idSuffix}`}>Do you smoke? *</label>
-        <div className="term-gender-row" id={`termSmoke${idSuffix}`}>
+        <span className="term-form-group-heading" id={`termSmokeHeading${idSuffix}`}>
+          Do you smoke? (optional)
+        </span>
+        <div
+          className="term-gender-row"
+          role="group"
+          aria-labelledby={`termSmokeHeading${idSuffix}`}
+        >
           <button
             type="button"
             className={isSmoker === 'no' ? 'is-active' : ''}
             aria-pressed={isSmoker === 'no'}
-            onClick={() => onSmokerChange('no')}
+            onClick={() => onSmokerChange(isSmoker === 'no' ? null : 'no')}
           >
             NO
           </button>
@@ -109,7 +123,7 @@ function TermQuotePanel({
             type="button"
             className={isSmoker === 'yes' ? 'is-active' : ''}
             aria-pressed={isSmoker === 'yes'}
-            onClick={() => onSmokerChange('yes')}
+            onClick={() => onSmokerChange(isSmoker === 'yes' ? null : 'yes')}
           >
             YES
           </button>

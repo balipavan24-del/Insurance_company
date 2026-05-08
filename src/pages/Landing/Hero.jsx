@@ -14,7 +14,7 @@ function Hero({ insuranceOptions = [], onInsuranceCardClick, showHomeSnackbar })
 
   return (
     <div className="landing-page">
-      <main className="hero-page">
+      <main className="hero-page page-section page-section--hero page-section-container">
         <section className="hero-section">
           <span className="hero-chip">Simple. Fast. Reliable</span>
           <h1 className="hero-title">
@@ -23,12 +23,6 @@ function Hero({ insuranceOptions = [], onInsuranceCardClick, showHomeSnackbar })
           <p className="hero-subtitle">
             Compare, choose, and get insured in minutes - without confusion.
           </p>
-
-          <div className="hero-points">
-            <span>50,000+ customers</span>
-            <span>Instant policy issuance</span>
-            <span>24/7 claim support</span>
-          </div>
         </section>
 
         <section className="insurance-panel">

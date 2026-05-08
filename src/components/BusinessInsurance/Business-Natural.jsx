@@ -71,8 +71,8 @@ function BusinessNaturalIcon({ name }) {
 function BusinessNatural({ onBackToBusinessHome }) {
   return (
     <>
-      <main className="business-natural-page">
-        <section className="business-natural-wrap">
+      <main className="business-natural-page page-section page-section--hero">
+        <section className="business-natural-wrap page-section-container">
           <div className="business-natural-hero">
             <button
               type="button"
@@ -118,7 +118,7 @@ function BusinessNatural({ onBackToBusinessHome }) {
                       <option value="shop">Retail Shop</option>
                       <option value="office">Office</option>
                       <option value="warehouse">Warehouse</option>
-                      <option value="factory">Factory</option>
+                      <option value="manufacturing">Manufacturing Unit</option>
                     </select>
                   </label>
 
@@ -127,9 +127,8 @@ function BusinessNatural({ onBackToBusinessHome }) {
                     <select id="business-natural-need" defaultValue="">
                       <option value="" disabled>Select</option>
                       <option value="building">Building</option>
-                      <option value="stock">Stock</option>
-                      <option value="machinery">Machinery</option>
-                      <option value="all">All of the above</option>
+                      <option value="stock-inventory">Stock / Inventory</option>
+                      <option value="equipment">Equipment</option>
                     </select>
                   </label>
 
@@ -159,9 +158,7 @@ function BusinessNatural({ onBackToBusinessHome }) {
                     <select id="business-natural-location" defaultValue="">
                       <option value="" disabled>Select floor</option>
                       <option value="ground">Ground floor</option>
-                      <option value="first">First floor</option>
-                      <option value="upper">Upper floors</option>
-                      <option value="mixed">Mixed structure</option>
+                      <option value="upper">Upper floor</option>
                     </select>
                   </label>
 
@@ -169,9 +166,8 @@ function BusinessNatural({ onBackToBusinessHome }) {
                     <span className="business-natural-label-text">Area Risk <em>*</em></span>
                     <select id="business-natural-risk" defaultValue="">
                       <option value="" disabled>Select risk level</option>
-                      <option value="low">Low risk</option>
-                      <option value="medium">Medium risk</option>
-                      <option value="high">High risk</option>
+                      <option value="flood-prone">Flood-prone</option>
+                      <option value="normal">Normal</option>
                     </select>
                   </label>
 

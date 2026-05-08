@@ -23,6 +23,17 @@ const FIRE_BENEFITS = [
   { id: 'business-continuity', title: 'Business Continuity', icon: 'shield' },
 ];
 
+const FIRE_DETAIL_COVER_ITEMS = [
+  'Accidental fire incidents',
+  'Explosion-related damage',
+  'Stock and inventory loss',
+  'Electrical short circuit damage',
+  'Structural damage',
+  'Smoke damage',
+];
+
+const businessFireDetailImage = `${import.meta.env.BASE_URL}images/Business-fire.png`;
+
 function BusinessFireIcon({ name }) {
   if (name === 'bolt') {
     return <svg viewBox="0 0 24 24" focusable="false"><path d="M13 3L5 14h6l-1 7 9-12h-6l1-6Z" /></svg>;
@@ -42,8 +53,8 @@ function BusinessFireIcon({ name }) {
 function BusinessFire({ onBackToBusinessHome }) {
   return (
     <>
-      <main className="business-fire-page">
-        <section className="business-fire-wrap">
+      <main className="business-fire-page page-section page-section--hero">
+        <section className="business-fire-wrap page-section-container">
         <div className="business-fire-hero">
           <button
             type="button"
@@ -89,7 +100,7 @@ function BusinessFire({ onBackToBusinessHome }) {
                     <option value="shop">Retail Shop</option>
                     <option value="office">Office</option>
                     <option value="warehouse">Warehouse</option>
-                    <option value="factory">Factory</option>
+                    <option value="manufacturing">Manufacturing Unit</option>
                   </select>
                 </label>
 
@@ -129,10 +140,8 @@ function BusinessFire({ onBackToBusinessHome }) {
                   <span className="business-fire-label-text">Fire Safety Measures</span>
                   <select id="safety-measures" defaultValue="">
                     <option value="" disabled>Select</option>
-                    <option value="extinguishers">Fire extinguishers</option>
-                    <option value="alarm-system">Alarm system</option>
-                    <option value="sprinklers">Sprinklers</option>
-                    <option value="all">All of the above</option>
+                    <option value="yes">Yes - Fire extinguishers / sprinklers installed</option>
+                    <option value="no">No</option>
                   </select>
                 </label>
 
@@ -195,35 +204,83 @@ function BusinessFire({ onBackToBusinessHome }) {
           </div>
         </section>
 
-          <section className="business-fire-covered-section">
-          <div className="business-fire-covered-block">
-            <h3>What&apos;s Covered</h3>
-            <div className="business-fire-covered-grid">
-              {FIRE_COVERED_ITEMS.map((item) => (
-                <article key={item.id} className="business-fire-covered-card">
-                  <span className="business-fire-covered-icon" aria-hidden="true">
-                    <BusinessFireIcon name={item.icon} />
-                  </span>
-                  <p>{item.title}</p>
-                </article>
-              ))}
+        <section className="business-fire-whats-covered" aria-label="What's covered">
+          <div
+            className="business-fire-detail-coverage"
+            aria-labelledby="business-fire-detail-coverage-heading"
+          >
+            <header className="business-fire-detail-coverage__header">
+              <p className="business-fire-detail-coverage__eyebrow">Detailed coverage</p>
+              <h2 id="business-fire-detail-coverage-heading">What Each Cover Protects</h2>
+              <p className="business-fire-detail-coverage__lede">
+                A closer look at every coverage type and what&apos;s included.
+              </p>
+            </header>
+
+            <div className="business-fire-detail-coverage__split">
+              <div className="business-fire-detail-coverage__media">
+                <img
+                  src={businessFireDetailImage}
+                  alt="Commercial building fire emergency with fire department response"
+                  width={640}
+                  height={420}
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+              <div className="business-fire-detail-coverage__body">
+                <span className="business-fire-detail-coverage__emoji" aria-hidden="true">
+                  🔥
+                </span>
+                <h3>Fire Damage Cover</h3>
+                <p className="business-fire-detail-coverage__intro">
+                  Fire damage cover protects your business against losses caused by fire-related
+                  incidents. It ensures that damage to property, assets, and inventory is
+                  financially covered.
+                </p>
+                <p className="business-fire-detail-coverage__list-label">What&apos;s covered</p>
+                <ul className="business-fire-detail-coverage__checks">
+                  {FIRE_DETAIL_COVER_ITEMS.map((label) => (
+                    <li key={label}>
+                      <span className="business-fire-detail-coverage__check" aria-hidden="true" />
+                      <span>{label}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
           </div>
 
-          <div className="business-fire-benefits-block">
-            <h3>Benefits</h3>
-            <div className="business-fire-benefits-grid">
-              {FIRE_BENEFITS.map((item) => (
-                <article key={item.id} className="business-fire-covered-card business-fire-benefit-card">
-                  <span className="business-fire-covered-icon" aria-hidden="true">
-                    <BusinessFireIcon name={item.icon} />
-                  </span>
-                  <p>{item.title}</p>
-                </article>
-              ))}
+          <section className="business-fire-covered-section">
+            <div className="business-fire-covered-block">
+              <h3>What&apos;s Covered</h3>
+              <div className="business-fire-covered-grid">
+                {FIRE_COVERED_ITEMS.map((item) => (
+                  <article key={item.id} className="business-fire-covered-card">
+                    <span className="business-fire-covered-icon" aria-hidden="true">
+                      <BusinessFireIcon name={item.icon} />
+                    </span>
+                    <p>{item.title}</p>
+                  </article>
+                ))}
+              </div>
             </div>
-          </div>
+
+            <div className="business-fire-benefits-block">
+              <h3>Benefits</h3>
+              <div className="business-fire-benefits-grid">
+                {FIRE_BENEFITS.map((item) => (
+                  <article key={item.id} className="business-fire-covered-card business-fire-benefit-card">
+                    <span className="business-fire-covered-icon" aria-hidden="true">
+                      <BusinessFireIcon name={item.icon} />
+                    </span>
+                    <p>{item.title}</p>
+                  </article>
+                ))}
+              </div>
+            </div>
           </section>
+        </section>
         </section>
       </main>
       <Footer />

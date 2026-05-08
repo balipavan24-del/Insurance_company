@@ -114,8 +114,8 @@ function TheftBusinessIcon({ name }) {
 function TheftBusiness({ onBackToBusinessHome }) {
   return (
     <>
-      <main className="theft-business-page">
-        <div className="theft-business-wrap">
+      <main className="theft-business-page page-section page-section--hero">
+        <div className="theft-business-wrap page-section-container">
           {/* —— Hero (matches Fire layout: back link, intro + quote form) —— */}
           <div className="theft-business-section theft-business-section--hero">
             <div className="theft-business-hero">
@@ -163,7 +163,7 @@ function TheftBusiness({ onBackToBusinessHome }) {
                         <option value="shop">Retail Shop</option>
                         <option value="office">Office</option>
                         <option value="warehouse">Warehouse</option>
-                        <option value="factory">Factory</option>
+                        <option value="manufacturing">Manufacturing Unit</option>
                       </select>
                     </label>
 
@@ -203,10 +203,9 @@ function TheftBusiness({ onBackToBusinessHome }) {
                       <span className="theft-business-label-text">Storage Type <em>*</em></span>
                       <select id="theft-storage-type" defaultValue="">
                         <option value="" disabled>Select storage type</option>
-                        <option value="on-premises">On premises</option>
-                        <option value="warehouse-only">Warehouse only</option>
-                        <option value="retail-floor">Retail floor + back office</option>
-                        <option value="mixed">Mixed locations</option>
+                        <option value="shop">Shop</option>
+                        <option value="warehouse">Warehouse</option>
+                        <option value="office">Office</option>
                       </select>
                     </label>
 
@@ -215,10 +214,8 @@ function TheftBusiness({ onBackToBusinessHome }) {
                       <select id="theft-security" defaultValue="">
                         <option value="" disabled>Select</option>
                         <option value="cctv">CCTV</option>
-                        <option value="alarm">Intruder alarm</option>
-                        <option value="grills">Grills / shutters</option>
-                        <option value="guard">Security guard</option>
-                        <option value="multiple">Multiple of the above</option>
+                        <option value="security">Security</option>
+                        <option value="none">None</option>
                       </select>
                     </label>
 

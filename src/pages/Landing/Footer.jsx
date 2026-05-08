@@ -34,7 +34,7 @@ function Footer() {
     'Cargo Insurance': '/?footer=cargo-insurance',
     'Help Center': '/?footer=help-center',
     FAQs: '/?footer=faqs',
-    'Contact Us': '/?footer=contact-us',
+    'Contact Us': '/contact-us',
     'Claim Support': '/?footer=claim-support',
     'Track Request': '/?footer=track-request',
     'Check Insurance Status': '/?footer=check-insurance-status',

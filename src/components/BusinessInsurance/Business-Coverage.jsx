@@ -2,8 +2,8 @@ import './Business-Coverage.css';
 
 function BusinessCoverage({ title, description, onBackToBusinessHome }) {
   return (
-    <main className="business-coverage-page">
-      <section className="business-coverage-wrap">
+    <main className="business-coverage-page page-section page-section--hero">
+      <section className="business-coverage-wrap page-section-container">
         <button
           type="button"
           className="business-coverage-back-link"

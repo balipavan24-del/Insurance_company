@@ -64,12 +64,15 @@
   align-items: center;
   gap: 14px;
   width: min(980px, 100%);
+  /* Replaces vertical space previously taken by .hero-points */
+  padding-bottom: calc(14px + 16px + clamp(24px, 3vw, 32px));
+  box-sizing: border-box;
 }
 
 .hero-chip {
   font-size: 14px;
   font-weight: 600;
-  color: #1e7bb9;
+  color: #2e88c7;
   background: #edf7ff;
   border: 1px solid #d7ebff;
   padding: 8px 14px;
@@ -170,6 +173,10 @@
   background: #2f80ed;
   border-radius: 999px;
   padding: 3px 8px;
+  line-height: 1.2;
+  white-space: nowrap;
+  max-width: calc(100% - 12px);
+  box-sizing: border-box;
 }
 
 .insurance-card.is-popular .card-icon {
@@ -215,6 +222,7 @@
 
   .hero-section {
     gap: 10px;
+    padding-bottom: calc(10px + 10px + clamp(64px, 18vw, 100px));
   }
 
   .hero-subtitle { max-width: 100%; }
@@ -230,11 +238,29 @@
   .insurance-grid {
     grid-template-columns: repeat(1, minmax(0, 1fr));
   }
+
+  .insurance-card.is-popular {
+    padding-top: clamp(32px, 9vw, 40px);
+  }
+
+  .insurance-card.is-popular .card-icon {
+    margin-top: 8px;
+  }
+
+  .popular-badge {
+    font-size: 8px;
+    padding: 2px 7px;
+    letter-spacing: 0.2px;
+  }
 }
 
 @media (max-width: 480px) {
   .hero-page {
     gap: 14px;
+  }
+
+  .hero-section {
+    padding-bottom: calc(10px + 10px + clamp(56px, 22vw, 88px));
   }
 
   .hero-chip {
@@ -267,11 +293,6 @@
 }
 
 @media (min-width: 1280px) {
-  .hero-page {
-    max-width: 1320px;
-    margin: 0 auto;
-  }
-
   .insurance-panel {
     border-radius: 16px;
   }

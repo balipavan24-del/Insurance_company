@@ -1,7 +1,10 @@
 import { useMemo, useState } from 'react';
 import './Term-Home.css';
 import Footer from '../../pages/Landing/Footer';
+import InsuranceFaqAccordion from '../shared/InsuranceFaqAccordion';
+import { termInsuranceFaqItems } from '../../config/insurance/productContent';
 import TermQuotePanel from './TermQuotePanel';
+import { sanitizePhoneNumber, validateTermLeadDetails } from '../../utils/leadValidation';
 
 function formatINR(value) {
   return `₹${Math.round(value).toLocaleString('en-IN')}`;
@@ -192,15 +195,30 @@ function MatterIcon({ type }) {
   );
 }
 
+function TermPreFooterCtaIcon() {
+  return (
+    <svg viewBox="0 0 56 56" aria-hidden="true" focusable="false" className="term-footer-cta-icon-svg">
+      <path
+        fill="currentColor"
+        d="M28 10l3.2 9.4h9.9l-8 5.8 3.1 9.6L28 33.6l-8.2 5.2 3.1-9.6-8-5.8h9.9L28 10z"
+      />
+      <path
+        fill="currentColor"
+        d="M42 8h2.8v2.8H48v2.8h-3.2V16.4h-2.8v-2.8H38V11h4V8z"
+      />
+    </svg>
+  );
+}
+
 const MONTHLY_INCOME_MIN = 10_000;
 const MONTHLY_INCOME_MAX = 500_000;
 const LIABILITIES_MIN = 0;
 const LIABILITIES_MAX = 20_000_000;
 
 function TermHome() {
-  const [isWhatsappEnabled, setIsWhatsappEnabled] = useState(true);
-  const [selectedGender, setSelectedGender] = useState('male');
-  const [isSmoker, setIsSmoker] = useState('no');
+  const [isWhatsappEnabled, setIsWhatsappEnabled] = useState(false);
+  const [selectedGender, setSelectedGender] = useState(null);
+  const [isSmoker, setIsSmoker] = useState(null);
   const [fullName, setFullName] = useState('');
   const [dateOfBirth, setDateOfBirth] = useState('');
   const [mobileNumber, setMobileNumber] = useState('');
@@ -224,11 +242,20 @@ function TermHome() {
 
   const handleQuoteSubmit = (event) => {
     event.preventDefault();
+    const validationErrors = validateTermLeadDetails({
+      fullName,
+      dateOfBirth,
+      mobileNumber
+    });
+    if (validationErrors.length > 0) {
+      window.alert(validationErrors.join('\n'));
+      return;
+    }
 
     const leadPayload = {
       fullName: fullName.trim(),
       dateOfBirth: dateOfBirth.trim(),
-      mobileNumber: mobileNumber.trim(),
+      mobileNumber: sanitizePhoneNumber(mobileNumber),
       gender: selectedGender,
       smoker: isSmoker,
       whatsappOptIn: isWhatsappEnabled,
@@ -239,13 +266,21 @@ function TermHome() {
     setLeadQueue((previousQueue) => [...previousQueue, leadPayload]);
 
     if (isWhatsappEnabled) {
+      const genderLine =
+        leadPayload.gender === 'male' || leadPayload.gender === 'female'
+          ? leadPayload.gender.charAt(0).toUpperCase() + leadPayload.gender.slice(1)
+          : 'Not specified';
+      const smokerLine =
+        leadPayload.smoker === 'yes' || leadPayload.smoker === 'no'
+          ? leadPayload.smoker.toUpperCase()
+          : 'Not specified';
       const message = [
         'Hi, I need a Term Insurance quote.',
         `Name: ${leadPayload.fullName || '-'}`,
-        `Gender: ${leadPayload.gender}`,
+        `Gender: ${genderLine}`,
         `DOB: ${leadPayload.dateOfBirth || '-'}`,
         `Mobile: ${leadPayload.mobileNumber || '-'}`,
-        `Smoker: ${leadPayload.smoker}`
+        `Smoker: ${smokerLine}`
       ].join('\n');
       const whatsappUrl = `https://wa.me/91${encodeURIComponent(leadPayload.mobileNumber || '')}?text=${encodeURIComponent(message)}`;
       window.open(whatsappUrl, '_blank', 'noopener,noreferrer');
@@ -270,8 +305,8 @@ function TermHome() {
   };
 
   return (
-    <main className="term-home-page">
-      <section className="term-home-layout">
+    <main className="term-home-page page-section page-section--hero">
+      <section className="term-home-layout page-section-container">
         <TermQuotePanel
           {...quotePanelProps}
           panelId="term-quote-panel-desktop"
@@ -583,8 +618,35 @@ function TermHome() {
               <span className="term-emotional-cta-icon"><PromiseIcon /></span>
             </aside>
           </section>
+
+          <section className="term-footer-cta" aria-labelledby="term-footer-cta-heading">
+            <div className="term-footer-cta-inner">
+              <span className="term-footer-cta-icon-wrap" aria-hidden="true">
+                <TermPreFooterCtaIcon />
+              </span>
+              <h2 id="term-footer-cta-heading" className="term-footer-cta-title">
+                Still thinking? Get a personalized plan in seconds
+              </h2>
+              <p className="term-footer-cta-sub">
+                Compare ₹1 Cr+ plans from top insurers. Zero spam, instant quotes.
+              </p>
+              <button type="button" className="term-footer-cta-btn" onClick={scrollToQuotePanel}>
+                Get My Quote →
+              </button>
+            </div>
+          </section>
+
         </section>
       </section>
+
+      <div className="term-faq-section-wrapper">
+        <InsuranceFaqAccordion
+          title="Frequently Asked Questions"
+          subtitle="Find answers to common questions about term insurance plans, coverage, and costs."
+          items={termInsuranceFaqItems}
+        />
+      </div>
+
       <Footer />
     </main>
   );

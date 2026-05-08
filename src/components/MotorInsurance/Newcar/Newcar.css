@@ -340,7 +340,7 @@
   margin-top: 6px;
   border: none;
   border-radius: 12px;
-  background: linear-gradient(90deg, #177a9e 0%, #4f46e5 100%);
+  background: linear-gradient(90deg, #2e88c7 0%, #4f46e5 100%);
   color: #ffffff;
   height: 44px;
   font-size: 16px;
@@ -362,7 +362,7 @@
   width: 100%;
   border: none;
   border-radius: 12px;
-  background: linear-gradient(90deg, #177a9e 0%, #4f46e5 100%);
+  background: linear-gradient(90deg, #2e88c7 0%, #4f46e5 100%);
   color: #ffffff;
   height: 40px;
   font-size: 15px;
@@ -555,7 +555,7 @@
 
 .new-car-next-btn {
   border: none;
-  background: linear-gradient(90deg, #177a9e 0%, #4f46e5 100%);
+  background: linear-gradient(90deg, #2e88c7 0%, #4f46e5 100%);
   color: #ffffff;
 }
 

@@ -28,7 +28,7 @@ function Login({ onClose, onAccountCreated }) {
   };
 
   return (
-    <main className="auth-page">
+    <main className="auth-page page-section page-section--hero page-section-container">
       <div className="auth-brand-wrap" aria-hidden="true">
         <div className="auth-brand-text">InsureEase</div>
       </div>

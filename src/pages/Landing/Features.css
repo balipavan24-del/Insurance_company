@@ -61,6 +61,14 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: clamp(8px, 2.5vw, 12px);
   }
+
+  .insurance-card.is-popular {
+    padding-top: clamp(32px, 10cqi, 42px);
+  }
+
+  .insurance-card.is-popular .card-icon {
+    margin-top: 6px;
+  }
 }
 
 .insurance-card {
@@ -106,9 +114,13 @@
   letter-spacing: 0.35px;
   text-transform: uppercase;
   color: #ffffff;
-  background: linear-gradient(90deg, #177a9e 0%, #4f46e5 100%);
+  background: linear-gradient(90deg, #2e88c7 0%, #4f46e5 100%);
   border-radius: 999px;
   padding: 3px 8px;
+  line-height: 1.2;
+  white-space: nowrap;
+  max-width: calc(100% - 12px);
+  box-sizing: border-box;
 }
 
 .insurance-card.is-popular .card-icon {
@@ -167,6 +179,14 @@
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: clamp(8px, 2vw, 12px);
     }
+
+    .insurance-card.is-popular {
+      padding-top: clamp(32px, 10vw, 42px);
+    }
+
+    .insurance-card.is-popular .card-icon {
+      margin-top: 6px;
+    }
   }
 }
 
@@ -201,17 +221,18 @@
   }
 
   .insurance-card.is-popular {
-    padding-top: 26px;
+    padding-top: clamp(30px, 9vw, 36px);
   }
 
   .popular-badge {
     font-size: 8px;
-    padding: 2px 6px;
+    padding: 2px 7px;
     top: 5px;
+    letter-spacing: 0.2px;
   }
 
   .insurance-card.is-popular .card-icon {
-    margin-top: 6px;
+    margin-top: 8px;
   }
 
   .card-icon {
@@ -245,6 +266,21 @@
 
   .insurance-card {
     padding: 10px 6px 8px;
+  }
+
+  /* Shorthand above resets padding-top — keep room for badge + icon */
+  .insurance-card.is-popular {
+    padding-top: clamp(30px, 10vw, 38px);
+  }
+
+  .popular-badge {
+    font-size: 7.5px;
+    padding: 2px 6px;
+    top: 4px;
+  }
+
+  .insurance-card.is-popular .card-icon {
+    margin-top: 6px;
   }
 
   .card-icon {

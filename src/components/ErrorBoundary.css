@@ -15,10 +15,10 @@
   border-radius: 16px;
   background: #fff;
   box-shadow: var(--shadow, 0 10px 40px rgba(0, 0, 0, 0.08));
-  border: 1px solid rgba(23, 122, 158, 0.15);
+  border: 1px solid rgba(46, 136, 199, 0.15);
 }
 
-.error-boundary-card h1 {
+.error-boundary-card h1 { 
   margin: 0 0 0.5rem;
   font-size: 1.25rem;
   font-family: var(--heading, system-ui, sans-serif);
@@ -49,14 +49,14 @@
 }
 
 .error-boundary-actions button[type='button']:first-of-type {
-  background: var(--accent, #177a9e);
+  background: var(--accent, #2e88c7);
   color: #fff;
 }
 
 .error-boundary-actions button[type='button']:last-of-type:not(:only-of-type) {
   background: transparent;
-  color: var(--accent, #177a9e);
-  border: 1px solid rgba(23, 122, 158, 0.35);
+  color: var(--accent, #2e88c7);
+  border: 1px solid rgba(46, 136, 199, 0.35);
 }
 
 .error-boundary-detail {

@@ -60,8 +60,8 @@ function EquipmentIcon({ name }) {
 function BusinessEquipment({ onBackToBusinessHome }) {
   return (
     <>
-      <main className="business-equipment-page">
-        <section className="business-equipment-wrap">
+      <main className="business-equipment-page page-section page-section--hero">
+        <section className="business-equipment-wrap page-section-container">
           <section className="business-equipment-hero">
             <div className="business-equipment-shell">
               <button
@@ -108,7 +108,7 @@ function BusinessEquipment({ onBackToBusinessHome }) {
                       <option value="shop">Retail Shop</option>
                       <option value="office">Office</option>
                       <option value="warehouse">Warehouse</option>
-                      <option value="factory">Factory</option>
+                      <option value="manufacturing">Manufacturing Unit</option>
                     </select>
                   </label>
 
@@ -117,9 +117,8 @@ function BusinessEquipment({ onBackToBusinessHome }) {
                     <select id="insurance-need" defaultValue="">
                       <option value="" disabled>Select</option>
                       <option value="building">Building</option>
-                      <option value="stock">Stock</option>
-                      <option value="machinery">Machinery</option>
-                      <option value="all">All of the above</option>
+                      <option value="stock-inventory">Stock / Inventory</option>
+                      <option value="equipment">Equipment</option>
                     </select>
                   </label>
 
@@ -148,9 +147,9 @@ function BusinessEquipment({ onBackToBusinessHome }) {
                     <span className="business-equipment-label-text">Equipment Type <em>*</em></span>
                     <select id="equipment-type" defaultValue="">
                       <option value="" disabled>Select type</option>
-                      <option value="industrial">Industrial Machinery</option>
-                      <option value="electronics">Electronic Equipment</option>
-                      <option value="tools">Business Tools</option>
+                      <option value="machinery">Machinery</option>
+                      <option value="electronics">Electronics</option>
+                      <option value="mixed">Mixed</option>
                     </select>
                   </label>
 
@@ -158,9 +157,8 @@ function BusinessEquipment({ onBackToBusinessHome }) {
                     <span className="business-equipment-label-text">Equipment Usage <em>*</em></span>
                     <select id="equipment-usage" defaultValue="">
                       <option value="" disabled>Select usage</option>
-                      <option value="light">Light Usage</option>
-                      <option value="moderate">Moderate Usage</option>
                       <option value="heavy">Heavy Usage</option>
+                      <option value="occasional">Occasional Usage</option>
                     </select>
                   </label>
 

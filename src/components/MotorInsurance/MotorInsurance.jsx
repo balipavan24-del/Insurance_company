@@ -428,8 +428,8 @@ function MotorInsurance({ onBackHome, selectedCategory = 'motor-car' }) {
   };
 
   return (
-    <main className="motor-page">
-      <section className="motor-wrap">
+    <main className="motor-page page-section page-section--hero">
+      <section className="motor-wrap page-section-container">
         {isWithoutVehicleFlow ? (
           <div className="motor-screen motor-screen--guest-flow">
             <WithoutNumber
@@ -827,6 +827,7 @@ function MotorInsurance({ onBackHome, selectedCategory = 'motor-car' }) {
           </div>
         )}
       </section>
+
     </main>
   );
 }

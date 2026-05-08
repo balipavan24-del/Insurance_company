@@ -70,7 +70,7 @@
 }
 
 .motor-category-link:hover {
-  border-color: rgba(23, 122, 158, 0.35);
+  border-color: rgba(46, 136, 199, 0.35);
   background: var(--accent-bg);
   color: var(--accent);
 }
@@ -196,7 +196,7 @@
 .motor-check-btn {
   border: none;
   border-radius: 12px;
-  background: linear-gradient(90deg, #177a9e 0%, #4f46e5 100%);
+  background: linear-gradient(90deg, #2e88c7 0%, #4f46e5 100%);
   color: #ffffff;
   min-width: 130px;
   height: 46px;
@@ -230,7 +230,7 @@
 .motor-check-btn:disabled {
   opacity: 1;
   cursor: not-allowed;
-  background: linear-gradient(90deg, #177a9e 0%, #4f46e5 100%);
+  background: linear-gradient(90deg, #2e88c7 0%, #4f46e5 100%);
 }
 
 .motor-input-row input[aria-invalid='true']::placeholder {
@@ -302,16 +302,16 @@
   padding: 14px 18px;
   border-radius: 14px;
   border: 1px solid #2f5ace;
-  background: linear-gradient(90deg, #177a9e 0%, #4f46e5 100%);
+  background: linear-gradient(90deg, #2e88c7 0%, #4f46e5 100%);
   color: #ffffff;
   font-size: 17px;
   font-weight: 700;
   cursor: pointer;
-  box-shadow: 0 10px 20px rgba(23, 122, 158, 0.26);
+  box-shadow: 0 10px 20px rgba(46, 136, 199, 0.26);
 }
 
 .motor-rc-scan-upload-btn:hover:not(:disabled) {
-  background: linear-gradient(90deg, #177a9e 0%, #136884 100%);
+  background: linear-gradient(90deg, #2e88c7 0%, #136884 100%);
   border-color: #105e76;
 }
 
@@ -410,8 +410,8 @@
 
 .motor-selected-brand-model-card {
   margin-top: 12px;
-  border: 1px solid rgba(23, 122, 158, 0.24);
-  background: rgba(23, 122, 158, 0.08);
+  border: 1px solid rgba(46, 136, 199, 0.24);
+  background: rgba(46, 136, 199, 0.08);
   border-radius: 14px;
   padding: 12px 14px;
 }
@@ -485,13 +485,13 @@
   width: 34px;
   height: 34px;
   border-radius: 999px;
-  background: linear-gradient(180deg, rgba(23, 122, 158, 0.1) 0%, rgba(23, 122, 158, 0.16) 100%);
+  background: linear-gradient(180deg, rgba(46, 136, 199, 0.1) 0%, rgba(46, 136, 199, 0.16) 100%);
   color: var(--accent);
   display: inline-flex;
   align-items: center;
   justify-content: center;
   flex: 0 0 auto;
-  border: 1px solid rgba(23, 122, 158, 0.24);
+  border: 1px solid rgba(46, 136, 199, 0.24);
 }
 
 .brand-select-modal-icon svg,
@@ -552,7 +552,7 @@
 
 .brand-select-search-wrap {
   margin: 12px 18px 0;
-  border: 1px solid rgba(23, 122, 158, 0.24);
+  border: 1px solid rgba(46, 136, 199, 0.24);
   border-radius: 14px;
   min-height: 48px;
   background: #f8fafc;
@@ -564,7 +564,7 @@
 
 .brand-select-search-wrap:focus-within {
   border-color: var(--accent);
-  box-shadow: 0 0 0 2px rgba(23, 122, 158, 0.12);
+  box-shadow: 0 0 0 2px rgba(46, 136, 199, 0.12);
 }
 
 .brand-select-search-icon {
@@ -624,8 +624,8 @@
 }
 
 .brand-select-list-item:hover {
-  border-color: rgba(23, 122, 158, 0.28);
-  background: rgba(23, 122, 158, 0.06);
+  border-color: rgba(46, 136, 199, 0.28);
+  background: rgba(46, 136, 199, 0.06);
 }
 
 .brand-select-grid::-webkit-scrollbar {
@@ -647,8 +647,8 @@
 }
 
 .brand-select-item:hover {
-  border-color: rgba(23, 122, 158, 0.28);
-  background: rgba(23, 122, 158, 0.06);
+  border-color: rgba(46, 136, 199, 0.28);
+  background: rgba(46, 136, 199, 0.06);
   transform: translateY(-1px);
   box-shadow: 0 8px 16px rgba(15, 23, 42, 0.08);
 }
@@ -727,8 +727,8 @@
 }
 
 .brand-flow-chip:hover {
-  border-color: rgba(23, 122, 158, 0.28);
-  background: rgba(23, 122, 158, 0.06);
+  border-color: rgba(46, 136, 199, 0.28);
+  background: rgba(46, 136, 199, 0.06);
 }
 
 .brand-flow-chip.is-selected {
@@ -813,7 +813,7 @@
 .policy-action-btn {
   margin-top: 12px;
   border: none;
-  background: linear-gradient(90deg, #177a9e 0%, #4f46e5 100%);
+  background: linear-gradient(90deg, #2e88c7 0%, #4f46e5 100%);
   color: #ffffff;
   border-radius: 999px;
   padding: 8px 18px;
@@ -850,7 +850,7 @@
 }
 
 .policy-status-card.is-expired .policy-action-btn {
-  background: linear-gradient(90deg, #177a9e 0%, #4f46e5 100%);
+  background: linear-gradient(90deg, #2e88c7 0%, #4f46e5 100%);
 }
 
 .policy-status-card.is-expiring-soon {
@@ -869,7 +869,7 @@
 }
 
 .policy-status-card.is-expiring-soon .policy-action-btn {
-  background: linear-gradient(90deg, #177a9e 0%, #4f46e5 100%);
+  background: linear-gradient(90deg, #2e88c7 0%, #4f46e5 100%);
 }
 
 body.motor-disable-hover .motor-category-link:hover {
@@ -879,7 +879,7 @@ body.motor-disable-hover .motor-category-link:hover {
 }
 
 body.motor-disable-hover .motor-check-btn:hover:not(:disabled) {
-  background: linear-gradient(90deg, #177a9e 0%, #4f46e5 100%);
+  background: linear-gradient(90deg, #2e88c7 0%, #4f46e5 100%);
 }
 
 body.motor-disable-hover .motor-continue-link:hover {

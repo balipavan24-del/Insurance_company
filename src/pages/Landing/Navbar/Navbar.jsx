@@ -1,7 +1,10 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import '../Navbar.css';
 
 function Navbar({ onLoginClick, onMenuOptionSelect, onBrandClick }) {
+  const location = useLocation();
+  const navRef = useRef(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(null);
   const isMobileView = () => window.matchMedia('(max-width: 1279px)').matches;
@@ -79,9 +82,20 @@ function Navbar({ onLoginClick, onMenuOptionSelect, onBrandClick }) {
     setOpenDropdown(null);
   };
 
+  useEffect(() => {
+    setMobileMenuOpen(false);
+    setOpenDropdown(null);
+    const activeElement = document.activeElement;
+    if (navRef.current && activeElement instanceof HTMLElement && navRef.current.contains(activeElement)) {
+      activeElement.blur();
+    }
+  }, [location.pathname, location.search, location.hash]);
+
   return (
-    <nav className="navbar-container">
-      <button className="brand" type="button" onClick={onBrandClick}>InsureEase</button>
+    <nav ref={navRef} className="navbar-container">
+      <button className="brand" type="button" onClick={onBrandClick}>
+        <span className="brand-text">InsureEase</span>
+      </button>
       <ul className={`nav-menu ${mobileMenuOpen ? 'is-open' : ''}`}>
         {menu.map((item) => (
           <li
@@ -171,7 +185,7 @@ function Navbar({ onLoginClick, onMenuOptionSelect, onBrandClick }) {
           setOpenDropdown(null);
         }}
       >
-        ⋯
+        <span className="hamburger-icon" aria-hidden="true">☰</span>
       </button>
     </nav>
   );

@@ -1,6 +1,8 @@
 import './Cargo-Home.css';
 import cargoHomeImage from '../../assets/CargoHome.png';
 import Footer from '../../pages/Landing/Footer';
+import InsuranceFaqAccordion from '../shared/InsuranceFaqAccordion';
+import { cargoInsuranceFaqItems } from '../../config/insurance/productContent';
 
 const CARGO_OPTIONS = [
   {
@@ -165,8 +167,8 @@ function CargoHome({ onBackHome, onMarineCargoSelect, onAirCargoSelect, onInland
   };
 
   return (
-    <main className="cargo-page">
-      <section className="cargo-wrap">
+    <main className="cargo-page page-section page-section--hero">
+      <section className="cargo-wrap page-section-container">
         {onBackHome ? (
           <button
             type="button"
@@ -258,7 +260,15 @@ function CargoHome({ onBackHome, onMarineCargoSelect, onAirCargoSelect, onInland
             ))}
           </div>
         </section>
+
+        <InsuranceFaqAccordion
+          title="Cargo Insurance FAQs"
+          subtitle="Answers to common questions about coverage, eligibility, and policy options."
+          items={cargoInsuranceFaqItems}
+          buttonLabel="View More Cargo FAQs →"
+        />
       </section>
+
       <Footer />
     </main>
   );

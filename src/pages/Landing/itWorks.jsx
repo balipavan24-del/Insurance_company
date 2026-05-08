@@ -62,7 +62,7 @@ const STEPS = [
 
 function ItWorks() {
   return (
-    <section className="it-works-section" aria-labelledby="it-works-heading">
+    <section className="it-works-section page-section page-section--regular" aria-labelledby="it-works-heading">
       <p className="it-works-kicker">Simple Process</p>
       <h2 id="it-works-heading" className="it-works-title">
         How It Works

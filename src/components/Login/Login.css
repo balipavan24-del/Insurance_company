@@ -218,7 +218,7 @@
   border: none;
   border-radius: 14px;
   height: 42px;
-  background: linear-gradient(90deg, #177a9e 0%, #4f46e5 100%);
+  background: linear-gradient(90deg, #2e88c7 0%, #4f46e5 100%);
   color: #ffffff;
   font-size: 16px;
   font-weight: 800;
@@ -228,7 +228,7 @@
 
 .otp-btn:disabled {
   cursor: not-allowed;
-  background: linear-gradient(90deg, #177a9e 0%, #4f46e5 100%);
+  background: linear-gradient(90deg, #2e88c7 0%, #4f46e5 100%);
   opacity: 1;
 }
 

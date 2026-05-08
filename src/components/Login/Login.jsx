@@ -38,7 +38,7 @@ function Login({ onClose, onGuestLogin, onSignupClick }) {
   };
 
   return (
-    <main className="login-page">
+    <main className="login-page page-section page-section--hero page-section-container">
       <header className="login-header">
         <div className="login-brand">
           <span className="login-brand-icon" aria-hidden="true">
