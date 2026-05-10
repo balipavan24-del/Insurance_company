@@ -1,6 +1,7 @@
 import { useLayoutEffect } from 'react';
 import { Link } from 'react-router-dom';
 import InsuranceFaqAccordion from '../../components/shared/InsuranceFaqAccordion';
+import Footer from '../../components/shared/Footer';
 import { contactSupportFaqItems } from '../../config/insurance/productContent';
 import './ContactUs.css';
 
@@ -55,6 +56,22 @@ const IconMail = () => (
 const IconPin = () => (
   <svg viewBox="0 0 24 24" aria-hidden="true">
     <path d="M12 22c4-4.7 6-8.4 6-11a6 6 0 1 0-12 0c0 2.6 2 6.3 6 11Zm0-8.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z" />
+  </svg>
+);
+
+const IconClock = () => (
+  <svg viewBox="0 0 24 24" aria-hidden="true">
+    <circle cx="12" cy="12" r="9" />
+    <path d="M12 7v6l4 2" />
+  </svg>
+);
+
+const IconWhatsApp = () => (
+  <svg viewBox="0 0 24 24" aria-hidden="true">
+    <path
+      fill="currentColor"
+      d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.435 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"
+    />
   </svg>
 );
 
@@ -184,6 +201,26 @@ function ContactInfoRow({
   );
 }
 
+const OFFICE_MAP_EMBED =
+  'https://www.google.com/maps?q=HITEC+City%2C+Hyderabad%2C+Telangana%2C+India&z=14&output=embed';
+const OFFICE_DIRECTIONS_URL =
+  'https://www.google.com/maps/dir/?api=1&destination=' +
+  encodeURIComponent('InsureEase HQ, Hitec City, Hyderabad, Telangana 500081');
+
+function OfficeInfoBlock({ icon: Icon, title, children }) {
+  return (
+    <div className="contact-office__block">
+      <span className="contact-office__block-icon contact-connect__icon-shell contact-connect__icon-shell--blue" aria-hidden="true">
+        <Icon />
+      </span>
+      <div className="contact-office__block-body">
+        <h3 className="contact-office__block-title">{title}</h3>
+        <div className="contact-office__block-text">{children}</div>
+      </div>
+    </div>
+  );
+}
+
 function ContactUs() {
   useLayoutEffect(() => {
     // Ensure Contact Us always starts from the hero section on mount.
@@ -192,6 +229,10 @@ function ContactUs() {
     document.body.scrollTop = 0;
   }, []);
 
+  const scrollToMessageForm = () => {
+    document.getElementById('contact-message-title')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  };
+
   const infoRows = [
     { icon: IconPhone, label: 'Toll Free', value: '+91 1800-123-4567', tintClass: 'contact-connect__icon-shell--blue' },
     { icon: IconChat, label: 'WhatsApp', value: 'Chat instantly', tintClass: 'contact-connect__icon-shell--green' },
@@ -199,6 +240,7 @@ function ContactUs() {
   ];
 
   return (
+    <>
     <main className="contact-page page-section page-section-container" aria-labelledby="contact-hero-title">
       <section className="contact-hero">
         <div className="contact-hero__intro">
@@ -397,7 +439,96 @@ function ContactUs() {
         subtitle="Quick answers to common support and claim assistance questions."
         items={contactSupportFaqItems}
       />
+
+      <section className="contact-office" aria-labelledby="contact-office-title">
+        <div className="contact-office__inner">
+          <header className="contact-office__header">
+            <h2 id="contact-office-title" className="contact-office__title">
+              Visit Our <span>Office</span>
+            </h2>
+            <p className="contact-office__subtitle">Drop by — we&apos;d love to meet you in person.</p>
+          </header>
+
+          <div className="contact-office__grid">
+            <div className="contact-office__map-shell">
+              <iframe
+                className="contact-office__map"
+                title="Map of HITEC City, Hyderabad — InsureEase office area"
+                src={OFFICE_MAP_EMBED}
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                allowFullScreen
+              />
+            </div>
+
+            <article className="contact-office__card">
+              <OfficeInfoBlock icon={IconPin} title="Office Address">
+                <p>InsureEase HQ, Hitec City, Hyderabad, Telangana 500081</p>
+              </OfficeInfoBlock>
+
+              <OfficeInfoBlock icon={IconClock} title="Working Hours">
+                <p>Monday – Saturday: 9 AM – 7 PM</p>
+                <p>Sunday: WhatsApp &amp; Email only</p>
+              </OfficeInfoBlock>
+
+              <OfficeInfoBlock icon={IconPhone} title="Contact Details">
+                <p>
+                  <a href="tel:+9118001234567">+91 1800-123-4567</a>
+                </p>
+                <p>
+                  <a href="mailto:support@insureease.com">support@insureease.com</a>
+                </p>
+              </OfficeInfoBlock>
+
+              <a
+                href={OFFICE_DIRECTIONS_URL}
+                className="contact-office__directions"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <span className="contact-office__directions-icon" aria-hidden="true">
+                  <IconPin />
+                </span>
+                Get Directions
+              </a>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section className="contact-choose" aria-labelledby="contact-choose-title">
+        <div className="contact-choose__inner">
+          <div className="contact-choose__banner">
+            <h2 id="contact-choose-title" className="contact-choose__title">
+              Need Help Choosing the Right Insurance Plan?
+            </h2>
+            <p className="contact-choose__subtitle">
+              Talk to our experts and get personalized guidance in minutes.
+            </p>
+            <div className="contact-choose__actions">
+              <button
+                type="button"
+                className="contact-choose__btn contact-choose__btn--expert"
+                onClick={scrollToMessageForm}
+              >
+                Talk to an Expert
+                <span className="contact-choose__btn-arrow" aria-hidden="true">
+                  <IconArrowRight />
+                </span>
+              </button>
+              <Link to="/?contact=whatsapp" className="contact-choose__btn contact-choose__btn--whatsapp">
+                <span className="contact-choose__btn-wa-icon" aria-hidden="true">
+                  <IconWhatsApp />
+                </span>
+                WhatsApp
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
     </main>
+    <Footer />
+    </>
   );
 }
 
