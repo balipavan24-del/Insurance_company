@@ -5,30 +5,51 @@ import InsuranceDetailPanel from '../shared/InsuranceDetailPanel';
 import InsuranceFaqAccordion from '../shared/InsuranceFaqAccordion';
 import { businessInsuranceFaqItems } from '../../config/insurance/productContent';
 import { sanitizePhoneNumber, validateBusinessLeadDetails } from '../../utils/leadValidation';
+import businessDisasterIcon from '../../assets/icons/Business-Disaster.png';
+import businessEquipmentIcon from '../../assets/icons/Business-Equipment.png';
+import businessFireIcon from '../../assets/icons/Fire-Business.png';
+import businessTheftIcon from '../../assets/icons/Business-theft.png';
 
 const BUSINESS_COVERAGE_OPTIONS = [
   {
     id: 'fire-damage',
     title: 'Fire Damage',
+    displayTitle: 'Fire Cover',
+    subtitle: 'Property and stock damage',
     icon: '🔥',
+    cardIcon: businessFireIcon,
+    cardIconAlt: 'Fire cover',
     accentClass: 'is-fire',
   },
   {
     id: 'theft-protection',
     title: 'Theft Protection',
-    icon: '🛡️',
+    subtitle: 'Break-in and stolen assets',
+    icon: businessTheftIcon,
+    iconAlt: 'Theft protection',
+    isImageIcon: true,
+    cardIcon: businessTheftIcon,
+    cardIconAlt: 'Theft protection',
     accentClass: 'is-theft',
   },
   {
     id: 'natural-disaster',
     title: 'Natural Disaster Cover',
+    displayTitle: 'Natural Disaster Cover',
+    subtitle: 'Flood, storm and weather risks',
     icon: '🌧️',
+    cardIcon: businessDisasterIcon,
+    cardIconAlt: 'Natural disaster cover',
     accentClass: 'is-natural',
   },
   {
     id: 'equipment-breakdown',
     title: 'Equipment Breakdown',
+    displayTitle: 'Equipment Breakdown',
+    subtitle: 'Machinery and system failures',
     icon: '🛠️',
+    cardIcon: businessEquipmentIcon,
+    cardIconAlt: 'Equipment breakdown',
     accentClass: 'is-equipment',
   },
 ];
@@ -192,6 +213,22 @@ const BUSINESS_POPUP_EQUIPMENT_USAGE_OPTIONS = [
   { value: 'occasional', label: 'Occasional Usage' },
 ];
 
+function BusinessCoverageIcon({ option, className = 'business-option-icon' }) {
+  if (option?.isImageIcon) {
+    return (
+      <span className={className} aria-hidden="true">
+        <img src={option.icon} alt="" />
+      </span>
+    );
+  }
+
+  return (
+    <span className={className} aria-hidden="true">
+      {option?.icon}
+    </span>
+  );
+}
+
 function BusinessHome({
   onBackHome,
   onFireDamageSelect,
@@ -216,7 +253,7 @@ function BusinessHome({
 
   const selectedCoverage = BUSINESS_COVERAGE_OPTIONS.find((option) => option.id === selectedCoverageId);
   const selectedCoverageTitle = selectedCoverage?.title || 'Business';
-  const selectedCoverageIcon = selectedCoverage?.icon || '🧳';
+  const selectedCoverageIconOption = selectedCoverage || { icon: '🧳' };
   const popupCoverageFieldConfig =
     BUSINESS_POPUP_COVERAGE_FIELD_CONFIG[selectedCoverageId] || BUSINESS_POPUP_COVERAGE_FIELD_CONFIG['fire-damage'];
 
@@ -320,7 +357,7 @@ function BusinessHome({
                 <span className="business-trigger-value">
                   {selectedCoverage ? (
                     <>
-                      <span className="business-option-icon" aria-hidden="true">{selectedCoverage.icon}</span>
+                      <BusinessCoverageIcon option={selectedCoverage} />
                       {selectedCoverage.title}
                     </>
                   ) : (
@@ -339,7 +376,7 @@ function BusinessHome({
                         className={`business-select-option ${selectedCoverageId === option.id ? 'is-selected' : ''}`}
                         onClick={() => handleSelectCoverage(option.id)}
                       >
-                        <span className="business-option-icon" aria-hidden="true">{option.icon}</span>
+                        <BusinessCoverageIcon option={option} />
                         <span>{option.title}</span>
                       </button>
                     </li>
@@ -378,13 +415,15 @@ function BusinessHome({
                     if (action) action();
                   }}
                 >
+                  {option.badge && <span className="business-list-badge">{option.badge}</span>}
                   <div className={`business-list-banner ${option.accentClass}`}>
-                    <span className="business-list-icon" aria-hidden="true">
-                      {option.icon}
+                    <span className={`business-list-icon ${option.accentClass}`} aria-hidden="true">
+                      <img src={option.cardIcon} alt="" />
                     </span>
                   </div>
                   <div className="business-list-content">
-                    <h3>{option.title}</h3>
+                    <h3>{option.displayTitle || option.title}</h3>
+                    <p>{option.subtitle}</p>
                   </div>
                 </button>
               ))}
@@ -444,7 +483,7 @@ function BusinessHome({
               ×
             </button>
             <h3 id="business-popup-title">
-              <span className="business-popup-title-icon" aria-hidden="true">{selectedCoverageIcon}</span>
+              <BusinessCoverageIcon option={selectedCoverageIconOption} className="business-popup-title-icon" />
               Get Your {selectedCoverageTitle} Insurance Quote
             </h3>
             <p className="business-popup-subtitle">Fill in the details and our expert will reach out to you.</p>
@@ -461,7 +500,7 @@ function BusinessHome({
 
               <label htmlFor="business-popup-insure">What would you like to insure?</label>
               <div id="business-popup-insure" className="business-popup-readonly-value" aria-live="polite">
-                <span className="business-popup-readonly-icon" aria-hidden="true">{selectedCoverageIcon}</span>
+                <BusinessCoverageIcon option={selectedCoverageIconOption} className="business-popup-readonly-icon" />
                 <span>{selectedCoverageTitle}</span>
               </div>
 

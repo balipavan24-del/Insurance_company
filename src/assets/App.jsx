@@ -168,7 +168,23 @@ function App() {
       return;
     }
 
-    if (optionId === 'business-insurance' || optionId.startsWith('business-') || optionId.startsWith('property-')) {
+    if (optionId === 'business-fire-damage') {
+      navigate('/business/fire');
+      return;
+    }
+    if (optionId === 'business-theft-protection') {
+      navigate('/business-insurance/theft-protection');
+      return;
+    }
+    if (optionId === 'business-natural-disaster') {
+      navigate('/business-insurance/natural-disaster');
+      return;
+    }
+    if (optionId === 'business-equipment-breakdown') {
+      navigate('/business-insurance/equipment-breakdown');
+      return;
+    }
+    if (optionId === 'business-insurance' || optionId.startsWith('property-')) {
       navigate('/business-insurance');
       return;
     }

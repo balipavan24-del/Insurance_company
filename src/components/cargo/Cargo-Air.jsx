@@ -1,5 +1,5 @@
 import './Cargo-Merain.css';
-import cargoAirLogo from '../../assets/logos/cargo-air-logo.svg';
+import cargoAirLogo from '../../assets/icons/cargo-air-logo.svg';
 import Footer from '../../pages/Landing/Footer';
 import { sanitizePhoneNumber, validateCargoLeadDetails } from '../../utils/leadValidation';
 

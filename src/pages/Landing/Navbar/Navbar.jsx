@@ -46,9 +46,14 @@ function Navbar({ onLoginClick, onMenuOptionSelect, onBrandClick }) {
       ]
     },
     {
-      id: 'property-insurance',
+      id: 'business-insurance',
       label: 'Business Insurance',
-      dropdown: [{ id: 'property-personal', label: 'Personal' }]
+      dropdown: [
+        { id: 'business-fire-damage', label: 'Fire Damage' },
+        { id: 'business-theft-protection', label: 'Theft Protection' },
+        { id: 'business-natural-disaster', label: 'Natural Disaster Cover' },
+        { id: 'business-equipment-breakdown', label: 'Equipment Breakdown' },
+      ],
     },
     {
       id: 'term-insurance',
@@ -112,7 +117,7 @@ function Navbar({ onLoginClick, onMenuOptionSelect, onBrandClick }) {
                   aria-haspopup="menu"
                   aria-expanded={openDropdown === item.id}
                   onClick={() => {
-                    if (item.id === 'health-insurance' || item.id === 'cargo-insurance' || item.id === 'property-insurance') {
+                    if (item.id === 'health-insurance' || item.id === 'cargo-insurance' || item.id === 'business-insurance') {
                       handleOptionSelect(item.id);
                       return;
                     }

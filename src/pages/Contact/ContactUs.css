@@ -551,9 +551,9 @@
 .contact-choose__banner {
   border-radius: clamp(24px, 4vw, 36px);
   padding: clamp(36px, 5vw, 56px) clamp(22px, 4vw, 48px);
-  background: linear-gradient(105deg, #156b85 0%, #1e8cbd 48%, #35a8e8 100%);
+  background: #1e7ead;
   text-align: center;
-  box-shadow: 0 16px 40px rgba(21, 107, 133, 0.22);
+  box-shadow: 0 16px 36px rgba(30, 126, 173, 0.28);
 }
 
 .contact-choose__title {

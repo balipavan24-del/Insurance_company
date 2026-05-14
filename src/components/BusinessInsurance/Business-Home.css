@@ -240,6 +240,15 @@
   align-items: center;
   justify-content: center;
   width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.business-option-icon img {
+  display: block;
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
 }
 
 .business-select-menu {
@@ -321,15 +330,19 @@
 }
 
 .business-coverage {
-  background: #ffffff;
-  border: 1px solid #e6ecf5;
+  background: rgba(255, 255, 255, 0.96);
+  border: 1px solid rgba(226, 232, 240, 0.9);
   border-radius: 22px;
-  padding: 28px;
-  box-shadow: 0 14px 34px rgba(15, 23, 42, 0.05);
+  padding: clamp(26px, 3.4vw, 42px);
+  box-shadow: 0 24px 58px rgba(47, 72, 123, 0.1);
 }
 
 .business-coverage-section {
-  margin-top: 156px;
+  margin-top: 138px;
+  padding: 64px 28px 72px;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(79, 70, 229, 0.08), transparent 36%),
+    linear-gradient(180deg, #f7faff 0%, #eef4ff 100%);
 }
 
 .business-coverage-wrap {
@@ -338,84 +351,150 @@
 }
 
 .business-coverage h2 {
-  margin: 0 0 16px;
-  color: #1f2937;
-  font-size: clamp(20px, 1.7vw, 28px);
-  font-weight: 700;
+  margin: 0 0 22px;
+  color: #0f172a;
+  font-size: clamp(22px, 2.1vw, 30px);
+  font-weight: 800;
   text-align: center;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
 }
 
 .business-list {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 14px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+  align-items: stretch;
 }
 
 .business-list-item {
-  border-radius: 14px;
-  overflow: hidden;
-  border: 1px solid #e5e7eb;
-  background: #ffffff;
+  position: relative;
+  min-height: 245px;
+  border: 1px solid #e7edf6;
+  border-radius: 15px;
+  background: linear-gradient(180deg, #ffffff 0%, #fbfdff 100%);
   cursor: pointer;
-  padding: 0;
-  text-align: left;
-  transition: transform 160ms ease, box-shadow 160ms ease, border-color 160ms ease;
+  padding: 26px 16px 22px;
+  text-align: center;
+  box-shadow: 0 10px 28px rgba(15, 23, 42, 0.035);
+  transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease, background 180ms ease;
 }
 
 .business-list-item:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 26px rgba(15, 23, 42, 0.08);
+  transform: translateY(-3px);
+  border-color: rgba(79, 70, 229, 0.3);
+  box-shadow: 0 16px 34px rgba(79, 70, 229, 0.12);
 }
 
 .business-list-item.is-active {
-  border-color: #7a3ff1;
-  box-shadow: 0 12px 28px rgba(122, 63, 241, 0.18);
+  border-color: rgba(79, 70, 229, 0.55);
+  background:
+    linear-gradient(#ffffff, #ffffff) padding-box,
+    var(--gradient-primary) border-box;
+  box-shadow: 0 18px 36px rgba(79, 70, 229, 0.16);
 }
 
-.business-list-banner {
-  height: 94px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.business-list-banner.is-fire {
-  background: #f8e7df;
-}
-
-.business-list-banner.is-theft {
-  background: #e2eaf8;
-}
-
-.business-list-banner.is-natural {
-  background: #deece8;
-}
-
-.business-list-banner.is-equipment {
-  background: #e9e2f2;
-}
-
-.business-list-icon {
-  width: 52px;
-  height: 52px;
-  border-radius: 14px;
+.business-list-badge {
+  position: absolute;
+  top: 7px;
+  left: 50%;
+  transform: translateX(-50%);
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.5rem;
-  background: rgba(255, 255, 255, 0.42);
+  min-width: 76px;
+  height: 18px;
+  padding: 0 10px;
+  border-radius: 999px;
+  color: #ffffff;
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: var(--gradient-primary);
+  box-shadow: 0 7px 14px rgba(79, 70, 229, 0.22);
+}
+
+.business-list-banner {
+  height: 143px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+}
+
+.business-list-banner.is-fire {
+  background: transparent;
+}
+
+.business-list-banner.is-theft {
+  background: transparent;
+}
+
+.business-list-banner.is-natural {
+  background: transparent;
+}
+
+.business-list-banner.is-equipment {
+  background: transparent;
+}
+
+.business-list-icon {
+  width: 159px;
+  height: 139px;
+  border-radius: 20px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #4f46e5;
+  background: linear-gradient(135deg, rgba(46, 136, 199, 0.12), rgba(79, 70, 229, 0.12));
+  box-shadow: inset 0 0 0 1px rgba(79, 70, 229, 0.08);
+}
+
+.business-list-icon.is-fire {
+  color: #e47a38;
+  background: linear-gradient(135deg, rgba(228, 122, 56, 0.14), rgba(79, 70, 229, 0.1));
+}
+
+.business-list-icon.is-theft {
+  color: #2e88c7;
+}
+
+.business-list-icon.is-natural {
+  color: #0d9488;
+  background: linear-gradient(135deg, rgba(13, 148, 136, 0.13), rgba(79, 70, 229, 0.1));
+}
+
+.business-list-icon.is-equipment {
+  color: #7a3ff1;
+}
+
+.business-list-icon img {
+  display: block;
+  width: 149px;
+  height: 131px;
+  object-fit: contain;
 }
 
 .business-list-content {
-  padding: 14px 16px 16px;
+  padding: 0;
 }
 
 .business-list-content h3 {
+  margin: 0 0 5px;
+  color: #111827;
+  font-size: clamp(15px, 1.1vw, 18px);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+}
+
+.business-list-content p {
   margin: 0;
-  color: #1f2937;
-  font-size: var(--font-size-18);
-  font-weight: 700;
+  color: #667085;
+  font-size: 12px;
+  line-height: 1.35;
+  font-weight: 500;
 }
 
 .business-home-whats-covered {
@@ -696,6 +775,13 @@
   background: #f1f5fb;
 }
 
+.business-popup-title-icon img {
+  display: block;
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+}
+
 .business-popup-subtitle {
   margin: 6px 0 14px;
   text-align: left;
@@ -753,6 +839,15 @@
   align-items: center;
   justify-content: center;
   width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.business-popup-readonly-icon img {
+  display: block;
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
 }
 
 .business-popup-form select {
@@ -842,7 +937,8 @@
   }
 
   .business-list {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
   }
 }
 
@@ -866,6 +962,41 @@
 
   .business-coverage-section {
     margin-top: 92px;
+    padding: 42px 14px 52px;
+  }
+
+  .business-coverage h2 {
+    margin-bottom: 22px;
+    font-size: clamp(22px, 6.5vw, 28px);
+  }
+
+  .business-list {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .business-list-item {
+    min-height: 237px;
+    padding: 24px 16px 20px;
+  }
+
+  .business-list-banner {
+    height: 137px;
+    margin-bottom: 12px;
+  }
+
+  .business-list-icon {
+    width: 153px;
+    height: 133px;
+  }
+
+  .business-list-icon img {
+    width: 143px;
+    height: 125px;
+  }
+
+  .business-list-content h3 {
+    font-size: 17px;
   }
 
   .business-home-whats-covered {
@@ -887,7 +1018,7 @@
   }
 
   .business-coverage {
-    padding: 18px 14px;
+    padding: 20px 14px;
     border-radius: 16px;
   }
 

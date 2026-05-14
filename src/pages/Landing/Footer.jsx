@@ -29,9 +29,9 @@ function Footer() {
   const footerRouteMap = {
     'Motor Insurance': '/motor-insurance/car',
     'Health Insurance': '/health-insurance',
-    'Term Insurance': '/?footer=term-insurance',
-    'Business Insurance': '/?footer=business-insurance',
-    'Cargo Insurance': '/?footer=cargo-insurance',
+    'Term Insurance': '/term-insurance',
+    'Business Insurance': '/business-insurance',
+    'Cargo Insurance': '/cargo-insurance',
     'Help Center': '/?footer=help-center',
     FAQs: '/?footer=faqs',
     'Contact Us': '/contact-us',

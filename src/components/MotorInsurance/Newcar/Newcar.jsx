@@ -555,6 +555,14 @@ function Newcar({
               ←
             </button>
             <h2>{resolvedStepTitle}</h2>
+            <button
+              type="button"
+              className="new-car-header-close"
+              onClick={onBackToVehicleCheck}
+              aria-label="Close new vehicle popup"
+            >
+              ×
+            </button>
           </header>
 
           {renderStepInput()}
