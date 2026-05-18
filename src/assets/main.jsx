@@ -1,8 +1,8 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
-import '../components/index.css';
-import { ErrorBoundary } from '../components/ErrorBoundary.jsx';
+import './index.css';
+import { ErrorBoundary } from './ErrorBoundary.jsx';
 import App from './App.jsx';
 
 const rootElement = document.getElementById('root');

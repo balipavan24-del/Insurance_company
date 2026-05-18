@@ -1,30 +1,36 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { Navigate, Route, Routes, useLocation, useNavigate, useParams } from 'react-router-dom';
 import './App.css';
-import Navbar from '../pages/Landing/Navbar/Navbar';
-import Login from '../components/Login/Login';
-import Signup from '../components/Signup/Signup';
-import MotorInsurance from '../components/MotorInsurance/MotorInsurance';
-import HealthHome from '../components/HealthInsurance/Health-Home';
-import CargoHome from '../components/cargo/Cargo-Home';
-import CargoMerain from '../components/cargo/Cargo-Merain';
-import CargoAir from '../components/cargo/Cargo-Air';
-import CargoInland from '../components/cargo/Cargo-Inland';
-import TermHome from '../components/Term/Term-Home';
-import BusinessHome from '../components/BusinessInsurance/Business-Home';
-import BusinessFire from '../components/BusinessInsurance/Business-Fire';
-import BusinessNatural from '../components/BusinessInsurance/Business-Natural';
-import TheftBusiness from '../components/BusinessInsurance/Theft-Business';
-import BusinessEquipment from '../components/BusinessInsurance/Business-Equipment';
-import Hero from '../pages/Landing/Hero';
-import ContactUs from '../pages/Contact/ContactUs';
+import Navbar from './layout/Navbar';
+import Login from './Login/Login';
+import Signup from './Signup/Signup';
+import MotorHome from './MotorInsurance/MotorInsurance';
+import HealthHome from './HealthInsurance/Health-Home';
+import CargoHome from './cargo/Cargo-Home';
+import CargoMerain from './cargo/Cargo-Merain';
+import CargoAir from './cargo/Cargo-Air';
+import CargoInland from './cargo/Cargo-Inland';
+import TermHome from './Term/Term-Home';
+import BusinessHome from './BusinessInsurance/Business-Home';
+import BusinessFire from './BusinessInsurance/Business-Fire';
+import BusinessNatural from './BusinessInsurance/Business-Natural';
+import TheftBusiness from './BusinessInsurance/Theft-Business';
+import BusinessEquipment from './BusinessInsurance/Business-Equipment';
+import LandingPage from './Landingpage/Landing-Page';
+import ContactUs from './Contact/ContactUs';
+import InsuranceBasics from './InsuranceBasics/InsuranceBasics';
+import iconParentMotor from './icons/Parent-Motor.webp';
+import iconParentHealth from './icons/Parent-Health.webp';
+import iconParentTerm from './icons/Parent-Term.webp';
+import iconParentBusiness from './icons/Parent-Business.webp';
+import iconParentCargo from './icons/Parent-Cargo.webp';
 
 const INSURANCE_OPTIONS = [
-  { id: 'motor-insurance', title: 'Motor Insurance', subtitle: '4 category motor coverage', icon: '🚗', popular: true },
-  { id: 'health-insurance', title: 'Health Insurance', subtitle: 'Medical & hospitalization', icon: '💗' },
-  { id: 'term-insurance', title: 'Term Insurance', subtitle: 'Life protection plans', icon: '🛡️' },
-  { id: 'business-insurance', title: 'Business Insurance', subtitle: 'Cover your business', icon: '🏢' },
-  { id: 'cargo-insurance', title: 'Cargo Insurance', subtitle: 'Goods in transit', icon: '📦' }
+  { id: 'motor-insurance', title: 'Motor Insurance', subtitle: '4 category motor coverage', iconSrc: iconParentMotor, popular: true },
+  { id: 'health-insurance', title: 'Health Insurance', subtitle: 'Medical & hospitalization', iconSrc: iconParentHealth },
+  { id: 'term-insurance', title: 'Term Insurance', subtitle: 'Life protection plans', iconSrc: iconParentTerm },
+  { id: 'business-insurance', title: 'Business Insurance', subtitle: 'Cover your business', iconSrc: iconParentBusiness },
+  { id: 'cargo-insurance', title: 'Cargo Insurance', subtitle: 'Goods in transit', iconSrc: iconParentCargo },
 ];
 
 const MOTOR_CATEGORY_SLUGS = {
@@ -55,7 +61,7 @@ function MotorInsuranceRoute({ onBackHome }) {
   }
 
   return (
-    <MotorInsurance
+    <MotorHome
       onBackHome={onBackHome}
       selectedCategory={selectedCategory}
     />
@@ -194,6 +200,51 @@ function App() {
       return;
     }
 
+    if (optionId.startsWith('renewal-motor-')) {
+      const renewalMotorCategory = {
+        'renewal-motor-car': 'motor-car',
+        'renewal-motor-bike': 'motor-bike',
+        'renewal-motor-commercial': 'motor-commercial-vehicle',
+        'renewal-motor-three-wheeler': 'motor-three-wheeler',
+      }[optionId];
+      if (renewalMotorCategory) {
+        navigate(`${getMotorRouteFromCategory(renewalMotorCategory)}?renew=1`);
+        return;
+      }
+    }
+
+    if (optionId.startsWith('renewal-health-')) {
+      const healthRenewParams = new URLSearchParams({ renew: '1' });
+      if (optionId === 'renewal-health-family') {
+        healthRenewParams.set('plan', 'family');
+      } else if (optionId === 'renewal-health-senior') {
+        healthRenewParams.set('plan', 'senior');
+      } else {
+        healthRenewParams.set('plan', 'individual');
+      }
+      navigate(`/health-insurance?${healthRenewParams.toString()}`);
+      return;
+    }
+
+    if (optionId === 'renewal-term') {
+      navigate('/term-insurance?renew=1');
+      return;
+    }
+
+    if (
+      optionId === 'renewal-track-policy'
+      || optionId === 'renewal-download-copy'
+      || optionId === 'renewal-claim-assistance'
+    ) {
+      navigate('/contact-us');
+      return;
+    }
+
+    if (optionId === 'support') {
+      navigate('/contact-us');
+      return;
+    }
+
     navigate(`/?menu=${optionId}`);
   };
 
@@ -231,7 +282,8 @@ function App() {
     || location.pathname.startsWith('/cargo-insurance')
     || location.pathname.startsWith('/business-insurance')
     || location.pathname.startsWith('/business')
-    || location.pathname.startsWith('/contact-us');
+    || location.pathname.startsWith('/contact-us')
+    || location.pathname.startsWith('/insurance-basics');
 
   return (
     <div className="main-wrapper">
@@ -248,7 +300,7 @@ function App() {
           <Route
             path="/"
             element={(
-              <Hero
+              <LandingPage
                 insuranceOptions={INSURANCE_OPTIONS}
                 onInsuranceCardClick={handleInsuranceCardClick}
                 showHomeSnackbar={showHomeSnackbar}
@@ -399,6 +451,14 @@ function App() {
             element={(
               <div className="app-screen app-screen--contact-us">
                 <ContactUs />
+              </div>
+            )}
+          />
+          <Route
+            path="/insurance-basics"
+            element={(
+              <div className="app-screen app-screen--insurance-basics">
+                <InsuranceBasics />
               </div>
             )}
           />

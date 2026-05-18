@@ -10,3 +10,7 @@
 .app-screen--business-insurance {
   background: linear-gradient(180deg, #f8fbff 0%, #f5f8ff 45%, #f8f7ff 100%);
 }
+
+.app-screen--insurance-basics {
+  background: #f8fafc;
+}
