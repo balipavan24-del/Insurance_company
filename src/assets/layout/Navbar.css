@@ -2,6 +2,7 @@
 .navbar-container {
   --nav-inline-padding: clamp(20px, 5vw, 72px);
   --nav-collapse: 1279px;
+  --nav-accent: #2e88c7; /* matches .hero-title — "Insurance made simple" */
   display: flex;
   align-items: center;
   width: 100%;
@@ -15,6 +16,7 @@
   border-bottom: 1px solid #e6ecf5;
   padding: 0 var(--nav-inline-padding);
   overflow: visible;
+  text-align: left; /* override #root { text-align: center } */
 }
 
 .brand {
@@ -73,7 +75,7 @@
   align-items: center;
   gap: 6px;
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 550;
   color: #374151;
   cursor: pointer;
   white-space: nowrap;
@@ -81,31 +83,41 @@
   background: transparent;
   border-radius: 999px;
   padding: 10px 14px;
-  transition: background-color 0.2s ease, color 0.2s ease;
+  text-align: left;
+  transition: color 0.2s ease;
 }
 
 .nav-label:hover {
-  color: #0066ff;
-  background: #f1f6ff;
+  color: var(--nav-accent);
+  background: transparent;
+}
+
+.nav-label:hover .dropdown-arrow {
+  color: var(--nav-accent);
+}
+
+.nav-label:focus-visible {
+  outline: 2px solid #93c5fd;
+  outline-offset: 2px;
 }
 
 .nav-dropdown-trigger {
   padding-right: 10px;
 }
 
-.dropdown-caret {
-  font-size: 11px;
-  transition: transform 0.2s ease;
+.dropdown-open .nav-dropdown-trigger {
+  color: var(--nav-accent);
+  background: transparent;
 }
 
-.dropdown-caret.is-open {
-  transform: rotate(180deg);
+.dropdown-open .nav-dropdown-trigger .dropdown-arrow {
+  color: var(--nav-accent);
 }
 
 .dropdown-menu {
   position: absolute;
   left: 0;
-  top: 100%;
+  top: calc(100% + 6px);
   min-width: 220px;
   list-style: none;
   margin: 0;
@@ -140,7 +152,7 @@
   padding: 10px 12px;
   border-radius: 10px;
   font-size: 14px;
-  font-weight: 500;
+  font-weight: 550;
   cursor: pointer;
   transition: background-color 0.2s ease, color 0.2s ease;
 }
@@ -157,7 +169,7 @@
 .dropdown-item-group {
   display: block;
   color: #475569;
-  font-weight: 600;
+  font-weight: 550;
   cursor: default;
 }
 
@@ -182,7 +194,8 @@
   color: #ffffff;
   border: none;
   border-radius: 50px;
-  font-weight: 600;
+  font-size: 14px;
+  font-weight: 550;
   cursor: pointer;
   transition: background-color 0.22s ease, color 0.22s ease, transform 0.22s ease, box-shadow 0.22s ease;
 }
@@ -216,6 +229,25 @@
     column-gap: clamp(12px, 1.8vw, 28px);
     row-gap: 8px;
     min-height: 80px;
+    /* Positioning context: mega menus use top: 100% to sit flush below the bar */
+    position: sticky;
+  }
+
+  .nav-link-item:not(.nav-link-item--mega) {
+    position: relative;
+  }
+
+  .nav-link-item--mega {
+    position: static;
+  }
+
+  .dropdown-menu::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: -8px;
+    height: 8px;
   }
 
   .brand {
@@ -247,10 +279,50 @@
   .nav-label {
     padding: 10px clamp(8px, 0.85vw, 14px);
     font-size: clamp(13px, 0.35vw + 12px, 14px);
+    font-weight: 550;
   }
 
   .nav-login-btn {
     padding: 11px clamp(18px, 1.8vw, 28px);
+  }
+
+  /* Full-width invisible bridge between navbar and centered mega menus */
+  .motor-mega-menu--desktop::before,
+  .health-mega-menu--desktop::before,
+  .renewal-mega-menu--desktop::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100vw;
+    top: -16px;
+    height: 16px;
+  }
+
+  /* Shared smooth enter / exit animation for all mega menus */
+  .motor-mega-menu--desktop,
+  .health-mega-menu--desktop,
+  .renewal-mega-menu--desktop {
+    transform: translateX(-50%) translateY(-8px) scale(0.988);
+    transform-origin: top center;
+    box-shadow: 0 10px 28px rgba(15, 23, 42, 0.08);
+    transition:
+      opacity 0.55s cubic-bezier(0.4, 0, 0.2, 1),
+      transform 0.62s cubic-bezier(0.4, 0, 0.2, 1),
+      visibility 0s linear 0.62s,
+      box-shadow 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .motor-mega-menu--desktop.is-open,
+  .health-mega-menu--desktop.is-open,
+  .renewal-mega-menu--desktop.is-open {
+    transform: translateX(-50%) translateY(0) scale(1);
+    box-shadow: 0 24px 48px rgba(15, 23, 42, 0.14);
+    transition:
+      opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.34s cubic-bezier(0.16, 1, 0.3, 1),
+      visibility 0s,
+      box-shadow 0.34s cubic-bezier(0.16, 1, 0.3, 1);
   }
 }
 
@@ -258,10 +330,13 @@
   .navbar-container {
     position: relative;
     display: flex;
+    flex-wrap: nowrap;
     justify-content: space-between;
+    align-items: center;
     padding: 12px clamp(16px, 4.5vw, 24px);
     min-height: 74px;
     gap: 12px;
+    text-align: left;
   }
 
   .brand {
@@ -270,6 +345,8 @@
     color: #111827;
     padding: 4px 0;
     gap: 0;
+    margin-right: auto;
+    justify-content: flex-start;
   }
 
   .brand-text {
@@ -286,6 +363,8 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    margin-left: auto;
+    flex-shrink: 0;
     width: 42px;
     height: 42px;
     flex: 0 0 auto;
@@ -307,9 +386,11 @@
   .nav-menu {
     display: none;
     position: absolute;
-    right: 12px;
-    top: calc(100% - 4px);
-    width: min(320px, calc(100% - 24px));
+    left: clamp(12px, 4vw, 24px);
+    right: clamp(12px, 4vw, 24px);
+    top: calc(100% + 4px);
+    width: auto;
+    max-width: none;
     flex-direction: column;
     align-items: stretch;
     gap: 6px;
@@ -321,18 +402,42 @@
     z-index: 1400;
     flex-wrap: nowrap;
     justify-content: flex-start;
+    text-align: left;
   }
 
   .nav-menu.is-open {
     display: flex;
+    max-height: min(70vh, calc(100dvh - 88px));
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .nav-link-item {
+    width: 100%;
+    text-align: left;
+  }
+
+  .nav-link-item--mega {
+    position: relative;
   }
 
   .nav-label {
     width: 100%;
+    display: flex;
     justify-content: flex-start;
+    align-items: center;
+    text-align: left;
     border-radius: 10px;
     padding: 10px 12px;
     font-size: 14px;
+    font-weight: 550;
+    box-sizing: border-box;
+  }
+
+  .nav-dropdown-trigger {
+    justify-content: space-between;
   }
 
   .dropdown-menu {
@@ -347,6 +452,7 @@
     pointer-events: auto;
     transform: none;
     display: none;
+    text-align: left;
   }
 
   .dropdown-menu.is-open {
@@ -355,7 +461,13 @@
 
   .dropdown-item {
     padding: 9px 10px;
-    font-size: 13px;
+    font-size: 14px;
+    font-weight: 550;
+    text-align: left;
+  }
+
+  .dropdown-item-group {
+    text-align: left;
   }
 
   .login-item {
@@ -373,6 +485,17 @@
     text-align: center;
     padding: 11px 16px;
   }
+
+  /* Mobile mega-menus inside drawer — full width */
+  .nav-link-item .motor-mega-menu--mobile,
+  .nav-link-item .health-mega-menu--mobile,
+  .nav-link-item .renewal-mega-menu--mobile {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    text-align: left;
+  }
+
 }
 
 @media (max-width: 600px) {
@@ -381,11 +504,52 @@
   }
 }
 
+/* Lock page scroll while mobile nav drawer is open */
+html.navbar-scroll-lock,
+body.navbar-scroll-lock,
+#root.navbar-scroll-lock {
+  overflow: hidden !important;
+  overscroll-behavior: none;
+}
+
+html.navbar-scroll-lock,
+body.navbar-scroll-lock {
+  height: 100%;
+}
+
+.navbar-scroll-lock .nav-menu.is-open,
+.navbar-scroll-lock .motor-mega-menu--desktop,
+.navbar-scroll-lock .health-mega-menu--desktop,
+.navbar-scroll-lock .renewal-mega-menu--desktop {
+  touch-action: pan-y;
+  -webkit-overflow-scrolling: touch;
+}
+
+@media (min-width: 1280px) {
+  .motor-mega-menu--desktop.is-open,
+  .health-mega-menu--desktop.is-open,
+  .renewal-mega-menu--desktop.is-open {
+    max-height: min(75vh, calc(100dvh - 96px));
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .nav-login-btn,
   .dropdown-menu,
-  .dropdown-caret {
+  .dropdown-arrow {
     transition: none;
+  }
+
+  .motor-mega-menu--desktop,
+  .health-mega-menu--desktop,
+  .renewal-mega-menu--desktop {
+    transition: none;
+  }
+
+  .dropdown-open .dropdown-arrow {
+    transform: none;
   }
 
   .nav-login-btn:hover {

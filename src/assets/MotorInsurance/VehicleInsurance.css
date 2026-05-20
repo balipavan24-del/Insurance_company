@@ -16,6 +16,11 @@
   width: 100%;
 }
 
+.motor-screen--vehicle-check.is-behind-modal {
+  pointer-events: none;
+  user-select: none;
+}
+
 .motor-screen--guest-flow {
   width: min(620px, 100%);
   margin: 0 auto;
@@ -201,13 +206,13 @@
 
 .motor-offerings-tab-icon {
   flex: 0 0 auto;
-  width: 42px;
-  height: 42px;
-  border-radius: 999px;
+  width: auto;
+  height: auto;
+  border-radius: 0;
+  background: transparent;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  color: #ffffff;
 }
 
 .motor-offerings-tab-icon svg {
@@ -221,28 +226,19 @@
 }
 
 .motor-offerings-tab-icon .motor-category-type-icon-img {
-  width: 26px;
-  height: 26px;
-  max-width: 26px;
-  max-height: 26px;
+  width: 36px;
+  height: 36px;
+  max-width: 36px;
+  max-height: 36px;
   object-fit: contain;
   display: block;
 }
 
-.motor-offerings-tab-icon--car {
-  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
-}
-
-.motor-offerings-tab-icon--bike {
-  background: linear-gradient(135deg, #ec4899 0%, #7c3aed 100%);
-}
-
-.motor-offerings-tab-icon--three {
-  background: linear-gradient(135deg, #7c3aed 0%, #5b21b6 100%);
-}
-
+.motor-offerings-tab-icon--car,
+.motor-offerings-tab-icon--bike,
+.motor-offerings-tab-icon--three,
 .motor-offerings-tab-icon--commercial {
-  background: linear-gradient(135deg, #f97316 0%, #dc2626 100%);
+  background: transparent;
 }
 
 .motor-offerings-tab-label {
@@ -276,15 +272,15 @@
 }
 
 .motor-offerings-card-icon {
-  width: 72px;
-  height: 72px;
-  border-radius: 16px;
+  width: auto;
+  height: auto;
+  border-radius: 0;
   display: flex;
   align-items: center;
   justify-content: center;
   margin-top: 8px;
   margin-bottom: 16px;
-  color: #ffffff;
+  background: transparent;
 }
 
 .motor-offerings-card-icon svg {
@@ -298,28 +294,19 @@
 }
 
 .motor-offerings-card-icon .motor-category-type-icon-img {
-  width: 40px;
-  height: 40px;
-  max-width: 40px;
-  max-height: 40px;
+  width: 56px;
+  height: 56px;
+  max-width: 56px;
+  max-height: 56px;
   object-fit: contain;
   display: block;
 }
 
-.motor-offerings-card-icon--car {
-  background: linear-gradient(135deg, #2563eb 0%, #4f46e5 100%);
-}
-
-.motor-offerings-card-icon--bike {
-  background: linear-gradient(135deg, #ec4899 0%, #7c3aed 100%);
-}
-
-.motor-offerings-card-icon--three {
-  background: linear-gradient(135deg, #7c3aed 0%, #5b21b6 100%);
-}
-
+.motor-offerings-card-icon--car,
+.motor-offerings-card-icon--bike,
+.motor-offerings-card-icon--three,
 .motor-offerings-card-icon--commercial {
-  background: linear-gradient(135deg, #f97316 0%, #dc2626 100%);
+  background: transparent;
 }
 
 .motor-offerings-card-title {
@@ -1184,8 +1171,9 @@
 .brand-select-modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(248, 250, 252, 0.64);
-  backdrop-filter: blur(8px);
+  background: rgba(248, 250, 252, 0.58);
+  backdrop-filter: blur(2px) saturate(1.05);
+  -webkit-backdrop-filter: blur(2px) saturate(1.05);
   display: flex;
   justify-content: center;
   align-items: flex-start;

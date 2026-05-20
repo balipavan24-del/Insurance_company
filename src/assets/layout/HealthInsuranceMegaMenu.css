@@ -1,0 +1,307 @@
+.health-mega-menu {
+  border: 1px solid #e2e8f0;
+  border-radius: 18px;
+  background: #ffffff;
+  box-shadow: 0 24px 48px rgba(15, 23, 42, 0.14);
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+  overflow: hidden;
+  text-align: left;
+}
+
+.health-mega-menu.is-open {
+  opacity: 1;
+  pointer-events: auto;
+  visibility: visible;
+}
+
+.health-mega-menu__body {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1.95fr);
+  gap: 0;
+}
+
+.health-mega-menu__promo {
+  padding: 28px 26px 24px;
+  background: linear-gradient(160deg, #eef8ff 0%, #edf7f5 45%, #ffffff 100%);
+  border-right: 1px solid #edf2f7;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.health-mega-menu__tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: #e6f4ff;
+  color: #2e88c7;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.health-mega-menu__tag-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+.health-mega-menu__promo-title {
+  margin: 18px 0 10px;
+  font-size: 22px;
+  line-height: 1.25;
+  font-weight: 700;
+  color: #0f172a;
+  letter-spacing: -0.02em;
+  text-align: left;
+  width: 100%;
+  align-self: stretch;
+}
+
+.health-mega-menu__promo-text {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.55;
+  color: #64748b;
+  max-width: 34ch;
+  text-align: left;
+  align-self: flex-start;
+}
+
+.health-mega-menu__instant-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 22px;
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: #ffffff;
+  border: 1px solid #e8eef4;
+  box-shadow: 0 8px 20px rgba(46, 136, 199, 0.08);
+  text-align: left;
+  align-self: stretch;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.health-mega-menu__instant-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #0ea5e9 0%, #2563eb 100%);
+  color: #ffffff;
+  font-size: 18px;
+  flex: 0 0 auto;
+}
+
+.health-mega-menu__instant-card strong {
+  display: block;
+  font-size: 14px;
+  color: #0f172a;
+}
+
+.health-mega-menu__instant-card small {
+  display: block;
+  margin-top: 2px;
+  font-size: 12px;
+  color: #64748b;
+}
+
+.health-mega-menu__columns {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  padding: 20px 18px 20px;
+}
+
+.health-mega-menu__column {
+  border-radius: 14px;
+  padding: 16px 14px 14px;
+}
+
+.health-mega-menu__column--family {
+  background: #edf9f7;
+}
+
+.health-mega-menu__column--specialised {
+  background: #f3f0ff;
+}
+
+.health-mega-menu__column--browse {
+  background: #ece8ff;
+}
+
+.health-mega-menu__column-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 12px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.health-mega-menu__column-icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  background: #ffffff;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.06);
+}
+
+.health-mega-menu__column-icon--family {
+  color: #0d9488;
+}
+
+.health-mega-menu__column-icon--specialised {
+  color: #7c3aed;
+}
+
+.health-mega-menu__column-icon--browse {
+  color: #6366f1;
+}
+
+.health-mega-menu__links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.health-mega-menu__links > li + li {
+  margin-top: 4px;
+}
+
+.health-mega-menu__link {
+  width: 100%;
+  text-align: left;
+  border: none;
+  background: transparent;
+  padding: 8px 10px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #334155;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  transition:
+    background-color 0.18s ease,
+    color 0.18s ease,
+    padding-right 0.18s ease;
+}
+
+.health-mega-menu__link::after {
+  content: '→';
+  flex: 0 0 auto;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1;
+  color: #2e88c7;
+  opacity: 0;
+  transform: translateX(-6px);
+  transition: opacity 0.18s ease, transform 0.18s ease;
+}
+
+.health-mega-menu__link:hover,
+.health-mega-menu__link:focus-visible {
+  background: rgba(255, 255, 255, 0.72);
+  color: #2e88c7;
+}
+
+.health-mega-menu__link:hover::after,
+.health-mega-menu__link:focus-visible::after {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.health-mega-menu--mobile {
+  position: static;
+  width: 100%;
+  max-width: 100%;
+  transform: none;
+  opacity: 1;
+  pointer-events: auto;
+  margin-top: 6px;
+  box-shadow: none;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  display: none;
+  box-sizing: border-box;
+}
+
+.health-mega-menu--mobile.is-open {
+  display: block;
+}
+
+@media (max-width: 1279px) {
+  .health-mega-menu--mobile .health-mega-menu__body,
+  .health-mega-menu--mobile .health-mega-menu__promo,
+  .health-mega-menu--mobile .health-mega-menu__columns,
+  .health-mega-menu--mobile .health-mega-menu__column {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .health-mega-menu--mobile .health-mega-menu__instant-card {
+    align-self: stretch;
+  }
+}
+
+.health-mega-menu--mobile .health-mega-menu__body {
+  grid-template-columns: 1fr;
+}
+
+.health-mega-menu--mobile .health-mega-menu__promo {
+  border-right: none;
+  border-bottom: 1px solid #edf2f7;
+}
+
+.health-mega-menu--mobile .health-mega-menu__columns {
+  grid-template-columns: 1fr;
+}
+
+.health-mega-menu--desktop {
+  display: block;
+}
+
+@media (max-width: 1279px) {
+  .health-mega-menu--desktop {
+    display: none !important;
+  }
+}
+
+@media (min-width: 1280px) {
+  .health-mega-menu--desktop {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    z-index: 1600;
+    width: min(1040px, calc(100vw - 32px));
+  }
+
+  .health-mega-menu--mobile {
+    display: none !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .health-mega-menu,
+  .health-mega-menu--desktop {
+    transition: none;
+  }
+}

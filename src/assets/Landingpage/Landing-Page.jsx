@@ -1,5 +1,6 @@
 import './Landing-Page.css';
 import { INSURANCE_VIDEO_01 } from '../../media';
+import ScrollReveal, { revealInView, revealOnScroll } from '../components/ScrollReveal';
 import Footer from '../layout/Footer';
 
 const shouldShowPromoVideo = Boolean(INSURANCE_VIDEO_01);
@@ -134,21 +135,25 @@ function LandingPage({ insuranceOptions = [], onInsuranceCardClick, showHomeSnac
   return (
     <div className="landing-page">
       <main className="hero-page page-section page-section--hero page-section-container">
-        {/* —— Hero —— */}
-        <section className="hero-section">
-          <span className="hero-chip">Simple. Fast. Reliable</span>
-          <h1 className="hero-title">
-            Insurance made <span>simple</span>
-          </h1>
-          <p className="hero-subtitle">
-            Compare, choose, and get insured in minutes - without confusion.
-          </p>
-        </section>
+        {/* —— Hero: headline + insurance categories —— */}
+        <section className="hero" aria-labelledby="hero-title">
+          <ScrollReveal className="hero-intro" {...revealInView}>
+            <span className="hero-chip">Simple. Fast. Reliable</span>
+            <h1 id="hero-title" className="hero-title">
+              Insurance made <span>simple</span>
+            </h1>
+            <p className="hero-subtitle">
+              Compare, choose, and get insured in minutes - without confusion.
+            </p>
+          </ScrollReveal>
 
-        {/* —— Insurance categories —— */}
-        <section className="insurance-panel">
-          <h2>What would you like to insure?</h2>
-          <div className="insurance-grid">
+          <ScrollReveal
+            className="hero-insurance insurance-panel"
+            delay={180}
+            {...revealOnScroll}
+          >
+            <h2>What would you like to insure?</h2>
+            <div className="insurance-grid">
             {cards.map((item) => {
               const isClickableInsuranceCard =
                 item.id === 'motor-insurance'
@@ -190,11 +195,17 @@ function LandingPage({ insuranceOptions = [], onInsuranceCardClick, showHomeSnac
                 </article>
               );
             })}
-          </div>
+            </div>
+          </ScrollReveal>
         </section>
 
         {/* —— Why Choose Us —— */}
-        <section className="choose-section page-section page-section--regular" aria-labelledby="choose-heading">
+        <ScrollReveal
+          as="section"
+          className="choose-section page-section page-section--regular"
+          aria-labelledby="choose-heading"
+          {...revealOnScroll}
+        >
           <h2 id="choose-heading" className="choose-title">
             Why Choose <span className="choose-title-accent">Us</span>
           </h2>
@@ -210,11 +221,16 @@ function LandingPage({ insuranceOptions = [], onInsuranceCardClick, showHomeSnac
               </article>
             ))}
           </div>
-        </section>
+        </ScrollReveal>
 
         {/* —— Promo video —— */}
         {shouldShowPromoVideo && (
-          <section className="promo-video-section" aria-labelledby="promo-video-heading">
+          <ScrollReveal
+            as="section"
+            className="promo-video-section"
+            aria-labelledby="promo-video-heading"
+            {...revealOnScroll}
+          >
             <div className="promo-video-inner">
               <h2 id="promo-video-heading" className="promo-video-title">
                 Insurance in <span className="promo-video-title-accent">60 seconds</span>
@@ -234,11 +250,16 @@ function LandingPage({ insuranceOptions = [], onInsuranceCardClick, showHomeSnac
                 </video>
               </div>
             </div>
-          </section>
+          </ScrollReveal>
         )}
 
         {/* —— How It Works —— */}
-        <section className="it-works-section page-section page-section--regular" aria-labelledby="it-works-heading">
+        <ScrollReveal
+          as="section"
+          className="it-works-section page-section page-section--regular"
+          aria-labelledby="it-works-heading"
+          {...revealOnScroll}
+        >
           <p className="it-works-kicker">Simple Process</p>
           <h2 id="it-works-heading" className="it-works-title">
             How It Works
@@ -261,7 +282,7 @@ function LandingPage({ insuranceOptions = [], onInsuranceCardClick, showHomeSnac
               );
             })}
           </ol>
-        </section>
+        </ScrollReveal>
 
         {showHomeSnackbar && (
           <div className="home-snackbar" role="status" aria-live="polite">
@@ -269,7 +290,9 @@ function LandingPage({ insuranceOptions = [], onInsuranceCardClick, showHomeSnac
           </div>
         )}
       </main>
-      <Footer />
+      <ScrollReveal className="landing-footer-reveal" {...revealOnScroll}>
+        <Footer />
+      </ScrollReveal>
     </div>
   );
 }

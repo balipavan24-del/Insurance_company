@@ -620,27 +620,12 @@ function MotorInsurance({ onBackHome, selectedCategory = 'motor-car' }) {
               }}
             />
           </div>
-        ) : isNewCarFlow ? (
-          <div className="motor-screen motor-screen--new-car-flow">
-            <Newcar
-              selectedCategory={activeCategoryId}
-              vehicleType={newVehicleType}
-              onBackToVehicleCheck={() => setIsNewCarFlow(false)}
-              onContinue={(newCarFormDetails) => {
-                logMotorQuoteLead('Brand new vehicle — View Plans (no plate yet)', {
-                  flow: 'brand-new-vehicle-without-number',
-                  selectedCategory: activeCategoryId,
-                  vehicleType: newVehicleType,
-                  vehicleNumber: null,
-                  continuedWithoutVehicleNumber: true,
-                  newCarDetails: newCarFormDetails
-                });
-                setIsNewCarFlow(false);
-              }}
-            />
-          </div>
         ) : (
-          <div className="motor-screen motor-screen--vehicle-check">
+          <>
+          <div
+            className={`motor-screen motor-screen--vehicle-check${isNewCarFlow ? ' is-behind-modal' : ''}`}
+            aria-hidden={isNewCarFlow ? true : undefined}
+          >
             <button
               type="button"
               className="motor-back-link"
@@ -1193,6 +1178,25 @@ function MotorInsurance({ onBackHome, selectedCategory = 'motor-car' }) {
             </div>
           )}
           </div>
+          {isNewCarFlow && (
+            <Newcar
+              selectedCategory={activeCategoryId}
+              vehicleType={newVehicleType}
+              onBackToVehicleCheck={() => setIsNewCarFlow(false)}
+              onContinue={(newCarFormDetails) => {
+                logMotorQuoteLead('Brand new vehicle — View Plans (no plate yet)', {
+                  flow: 'brand-new-vehicle-without-number',
+                  selectedCategory: activeCategoryId,
+                  vehicleType: newVehicleType,
+                  vehicleNumber: null,
+                  continuedWithoutVehicleNumber: true,
+                  newCarDetails: newCarFormDetails
+                });
+                setIsNewCarFlow(false);
+              }}
+            />
+          )}
+          </>
         )}
       </section>
 

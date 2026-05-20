@@ -220,3 +220,127 @@ export const motorInsuranceFaqItems = [
       'Common exclusions include wear and tear, mechanical breakdown without an add-on, driving under the influence, invalid licence, and use outside policy terms. Always read your policy wording for exact exclusions.',
   },
 ];
+
+export const insuranceBasicsQuickSection = {
+  eyebrow: 'Foundations',
+  title: 'Quick Insurance',
+  titleAccent: 'Basics',
+  subtitle: 'Understand the most important insurance concepts in a simple and easy way.',
+};
+
+export const insuranceBasicsQuickCards = [
+  {
+    id: 'insurance',
+    index: '01',
+    title: 'What is Insurance?',
+    description:
+      'A financial protection system where you pay a premium in exchange for coverage against unexpected risks like accidents, illness, theft, or damage.',
+    tone: 'blue',
+    icon: 'shield',
+  },
+  {
+    id: 'premium',
+    index: '02',
+    title: 'What is Premium?',
+    description:
+      'The amount you pay monthly or yearly to keep your insurance policy active and maintain your coverage benefits.',
+    tone: 'purple',
+    icon: 'card',
+  },
+  {
+    id: 'claim',
+    index: '03',
+    title: 'What is a Claim?',
+    description:
+      'A formal request to your insurer for compensation after a covered loss, accident, or medical emergency.',
+    tone: 'violet',
+    icon: 'document',
+  },
+  {
+    id: 'ncb',
+    index: '04',
+    title: 'What is No Claim Bonus (NCB)?',
+    description:
+      'A reward or discount offered for not making claims during a policy period, helping you reduce future premiums.',
+    tone: 'green',
+    icon: 'gift',
+  },
+  {
+    id: 'deductible',
+    index: '05',
+    title: 'What is Deductible?',
+    description:
+      'The amount you pay from your pocket before the insurance company covers the remaining approved expenses.',
+    tone: 'amber',
+    icon: 'wallet',
+  },
+  {
+    id: 'policy-terms',
+    index: '06',
+    title: 'Why Read Policy Terms?',
+    description:
+      "Understanding your policy terms helps you know what's covered, what's excluded, and how your benefits work.",
+    tone: 'rose',
+    icon: 'book',
+  },
+];
+
+export const insuranceBasicsTypesSection = {
+  eyebrow: 'Categories',
+  title: 'Types of',
+  titleAccent: 'Insurance',
+  subtitle: 'Explore different insurance solutions designed for various protection needs.',
+};
+
+export const insuranceBasicsTypesCards = [
+  {
+    id: 'health',
+    title: 'Health Insurance',
+    description:
+      'Medical coverage for individuals and families against hospitalization and treatment expenses.',
+    tone: 'rose',
+    icon: 'health',
+    href: '/health-insurance',
+    cta: 'Explore plans',
+  },
+  {
+    id: 'motor',
+    title: 'Motor Insurance',
+    description:
+      'Protection for cars, bikes, and commercial vehicles against accidents, theft, and damages.',
+    tone: 'blue',
+    icon: 'motor',
+    href: '/motor-insurance/car',
+    cta: 'Explore plans',
+  },
+  {
+    id: 'term',
+    title: 'Term Insurance',
+    description:
+      'Life coverage that provides financial security to your family in case of unfortunate events.',
+    tone: 'purple',
+    icon: 'term',
+    href: '/term-insurance',
+    cta: 'Explore plans',
+  },
+  {
+    id: 'cargo',
+    title: 'Cargo Insurance',
+    description:
+      'Covers goods and shipments against loss, damage, or delays during transport.',
+    tone: 'green',
+    icon: 'cargo',
+    href: '/cargo-insurance',
+    cta: 'Explore plans',
+  },
+  {
+    id: 'business',
+    title: 'Business Insurance',
+    description:
+      'Safeguards business assets, operations, and equipment from risks like fire, theft, and disasters.',
+    tone: 'amber',
+    icon: 'business',
+    href: '/business-insurance',
+    cta: 'Explore plans',
+  },
+];

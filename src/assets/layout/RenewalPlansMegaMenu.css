@@ -1,25 +1,19 @@
 .renewal-mega-menu {
-  position: fixed;
-  left: 50%;
-  top: 80px;
-  z-index: 1600;
-  width: min(1040px, calc(100vw - 32px));
-  transform: translateX(-50%) translateY(-6px);
   border: 1px solid #e2e8f0;
   border-radius: 18px;
   background: #ffffff;
   box-shadow: 0 24px 48px rgba(15, 23, 42, 0.14);
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.2s ease, transform 0.2s ease;
+  visibility: hidden;
   overflow: hidden;
   text-align: left;
 }
 
 .renewal-mega-menu.is-open {
   opacity: 1;
-  transform: translateX(-50%) translateY(0);
   pointer-events: auto;
+  visibility: visible;
 }
 
 .renewal-mega-menu__body {
@@ -308,30 +302,112 @@
 .renewal-mega-menu--mobile {
   position: static;
   width: 100%;
+  max-width: 100%;
   transform: none;
   opacity: 1;
   pointer-events: auto;
   margin-top: 6px;
   box-shadow: none;
   border-radius: 12px;
+  border: 1px solid #e2e8f0;
   display: none;
+  box-sizing: border-box;
 }
 
 .renewal-mega-menu--mobile.is-open {
-  display: block;
+  display: flex;
+  flex-direction: column;
 }
 
+/* Unwrap body so promo, footer, and columns share one flex order stack */
 .renewal-mega-menu--mobile .renewal-mega-menu__body {
-  grid-template-columns: 1fr;
+  display: contents;
 }
 
+/* 1 — Promo: Renew in Minutes, title, copy, instant card */
 .renewal-mega-menu--mobile .renewal-mega-menu__promo {
+  order: 1;
   border-right: none;
   border-bottom: 1px solid #edf2f7;
+  padding: 16px 14px 14px;
 }
 
+.renewal-mega-menu--mobile .renewal-mega-menu__promo-title {
+  margin-top: 12px;
+  font-size: 18px;
+}
+
+.renewal-mega-menu--mobile .renewal-mega-menu__promo-text {
+  max-width: none;
+}
+
+.renewal-mega-menu--mobile .renewal-mega-menu__instant-card {
+  margin-top: 14px;
+}
+
+/* 2 — Quick Actions (priority before insurance columns) */
+.renewal-mega-menu--mobile .renewal-mega-menu__footer {
+  order: 2;
+  border-top: none;
+  border-bottom: 1px solid #edf2f7;
+  padding: 12px 14px 14px;
+  background: #f8fbff;
+}
+
+.renewal-mega-menu--mobile .renewal-mega-menu__footer-label {
+  margin-bottom: 8px;
+  font-size: 12px;
+}
+
+.renewal-mega-menu--mobile .renewal-mega-menu__actions {
+  flex-direction: column;
+  align-items: stretch;
+  gap: 6px;
+}
+
+.renewal-mega-menu--mobile .renewal-mega-menu__actions > li {
+  width: 100%;
+}
+
+.renewal-mega-menu--mobile .renewal-mega-menu__action {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  box-sizing: border-box;
+}
+
+.renewal-mega-menu--mobile .renewal-mega-menu__action:hover {
+  background: #f1f6ff;
+}
+
+/* 3 — Insurance columns: first two side-by-side, life full width */
 .renewal-mega-menu--mobile .renewal-mega-menu__columns {
-  grid-template-columns: 1fr;
+  order: 3;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  padding: 12px 14px 14px;
+}
+
+.renewal-mega-menu--mobile .renewal-mega-menu__column--life {
+  grid-column: 1 / -1;
+}
+
+.renewal-mega-menu--mobile .renewal-mega-menu__column {
+  min-width: 0;
+  padding: 12px 10px 10px;
+}
+
+.renewal-mega-menu--mobile .renewal-mega-menu__column-title {
+  font-size: 13px;
+  margin-bottom: 8px;
+}
+
+.renewal-mega-menu--mobile .renewal-mega-menu__link {
+  padding: 7px 8px;
+  font-size: 13px;
 }
 
 .renewal-mega-menu--desktop {
@@ -345,21 +421,22 @@
 }
 
 @media (min-width: 1280px) {
+  .renewal-mega-menu--desktop {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    z-index: 1600;
+    width: min(1040px, calc(100vw - 32px));
+  }
+
   .renewal-mega-menu--mobile {
     display: none !important;
   }
 }
 
-@media (max-width: 900px) {
-  .renewal-mega-menu--mobile .renewal-mega-menu__actions {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 6px;
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
-  .renewal-mega-menu {
+  .renewal-mega-menu,
+  .renewal-mega-menu--desktop {
     transition: none;
   }
 }

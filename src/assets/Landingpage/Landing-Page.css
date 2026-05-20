@@ -1,52 +1,122 @@
 /* Landing page — consolidated from Landing, Hero, Features, choose, PromoVideo, itWorks */
 
 .landing-page {
+  --landing-section-gap: 0;
+  --landing-section-pad-extra: 10px; /* +10px top & bottom per section (+20px height) */
   min-height: calc(100svh - clamp(70px, 10vw, 80px));
   width: 100%;
+  background: #f8fafc;
+}
+
+.landing-page .hero-page {
+  gap: 0;
+}
+
+.landing-page .page-section--regular {
+  margin-top: 0;
+}
+
+.landing-page .choose-section,
+.landing-page .promo-video-section,
+.landing-page .it-works-section {
+  margin-top: 0;
+}
+
+/* Shared landing bands: flush stack, extra vertical space, centered content */
+.landing-page .hero,
+.landing-page .choose-section,
+.landing-page .promo-video-section,
+.landing-page .it-works-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
 }
 
 .hero-page {
   width: 100%;
-  padding: clamp(16px, 2.6vw, 24px) 0 clamp(22px, 3.6vw, 32px);
+  padding: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
+  gap: 0;
+  background: transparent;
+}
+
+.hero {
+  gap: 14px;
+  width: 100%;
+  max-width: 100%;
+  align-self: stretch;
+  padding: calc(clamp(16px, 2.6vw, 24px) + var(--landing-section-pad-extra))
+    var(--section-container-inline, clamp(14px, 2.4vw, 28px))
+    calc(clamp(22px, 3.6vw, 32px) + var(--landing-section-pad-extra));
   background: linear-gradient(180deg, #f5f8ff 0%, #eef2ff 45%, #f8fafc 100%);
 }
 
-@media (max-width: 768px) {
-  .hero-page {
-    gap: 14px;
-  }
+.hero .hero-title {
+  width: min(980px, 100%);
+  max-width: 100%;
 }
 
-@media (max-width: 480px) {
-  .hero-page {
-    gap: 10px;
-  }
-}
-
-.hero-section {
+.hero .hero-intro {
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 14px;
-  width: min(980px, 100%);
-  /* Replaces vertical space previously taken by .hero-points (gap + margin-top + row height) */
-  padding-bottom: calc(14px + clamp(10px, 1.8vw, 16px) + clamp(22px, 3vw, 32px));
-  box-sizing: border-box;
+}
+
+.hero .hero-insurance {
+  width: min(1120px, 100%);
+  margin-top: clamp(10px, 1.8vw, 18px);
+}
+
+@keyframes hero-chip-stroke {
+  0%,
+  100% {
+    background-position:
+      0 0,
+      0% 50%;
+    box-shadow: 0 8px 16px rgba(79, 70, 229, 0.24);
+  }
+
+  50% {
+    background-position:
+      0 0,
+      100% 50%;
+    box-shadow:
+      0 8px 16px rgba(79, 70, 229, 0.28),
+      0 0 0 2px rgba(56, 189, 248, 0.22);
+  }
 }
 
 .hero-chip {
   font-size: 14px;
   font-weight: 600;
   color: #ffffff;
-  background: linear-gradient(90deg, #2e88c7 0%, #4f46e5 100%);
-  border: 1px solid rgba(79, 70, 229, 0.2);
   padding: 8px 14px;
   border-radius: 999px;
+  border: 4px solid transparent;
+  background:
+    linear-gradient(90deg, #2e88c7 0%, #4f46e5 100%) padding-box,
+    linear-gradient(90deg, #38bdf8 0%, #4f46e5 35%, #2e88c7 70%, #38bdf8 100%) border-box;
+  background-size:
+    100% 100%,
+    220% 100%;
   box-shadow: 0 8px 16px rgba(79, 70, 229, 0.24);
+  animation: hero-chip-stroke 2.4s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-chip {
+    animation: none;
+    background:
+      linear-gradient(90deg, #2e88c7 0%, #4f46e5 100%) padding-box,
+      linear-gradient(90deg, #38bdf8 0%, #4f46e5 50%, #2e88c7 100%) border-box;
+    background-size: 100% 100%, 100% 100%;
+  }
 }
 
 .hero-title {
@@ -88,9 +158,8 @@
 }
 
 @media (max-width: 768px) {
-  .hero-section {
-    gap: 10px;
-    padding-bottom: calc(10px + 10px + clamp(36px, 9vw, 56px));
+  .hero {
+    gap: 16px;
   }
 
   .hero-subtitle {
@@ -117,8 +186,13 @@
 }
 
 @media (max-width: 640px) {
-  .hero-section {
-    padding-bottom: calc(10px + 8px + clamp(32px, 10vw, 52px));
+  .hero {
+    gap: 14px;
+    padding-bottom: calc(clamp(18px, 4vw, 24px) + var(--landing-section-pad-extra, 10px));
+  }
+
+  .hero .hero-insurance {
+    width: 100%;
   }
 
   .hero-points {
@@ -176,15 +250,19 @@
   container-type: inline-size;
   container-name: insurance-panel;
   width: min(1120px, 100%);
+  overflow: visible;
   background: #ffffff;
   border-radius: 22px;
-  padding: clamp(18px, 2.6vw, 28px) clamp(16px, 2.4vw, 24px) clamp(20px, 3vw, 30px);
-  box-shadow: 0 12px 34px rgba(15, 23, 42, 0.08);
+  padding: clamp(26px, 3.2vw, 38px) clamp(16px, 2.4vw, 24px) clamp(28px, 3.6vw, 40px);
+  box-shadow:
+    0 24px 56px rgba(15, 23, 42, 0.22),
+    0 10px 24px rgba(15, 23, 42, 0.16),
+    0 2px 8px rgba(15, 23, 42, 0.1);
   border: 1px solid #e9eef6;
 }
 
 .insurance-panel h2 {
-  margin: 0 0 14px;
+  margin: 0 0 18px;
   color: #0f172a;
   font-size: clamp(18px, 2.6vw, 26px);
   font-weight: 700;
@@ -195,6 +273,8 @@
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: clamp(6px, 0.84vw, 10px);
+  padding-top: 18px;
+  overflow: visible;
 }
 
 @container insurance-panel (max-width: 1040px) {
@@ -210,7 +290,7 @@
   }
 
   .insurance-card.is-popular {
-    padding-top: clamp(19px, 6cqi, 25px);
+    padding-top: clamp(12px, 2cqi, 14px);
   }
 
   .insurance-card.is-popular .insurance-card-icon {
@@ -222,10 +302,11 @@
   background: #f8fafc;
   border: 1px solid #e8edf5;
   border-radius: 8px;
-  padding: clamp(6px, 0.72vw, 8px) clamp(5px, 0.6vw, 7px);
+  padding: clamp(10px, 1.1vw, 12px) clamp(6px, 0.7vw, 8px);
   text-align: center;
-  min-height: 156px;
+  min-height: 180px;
   position: relative;
+  overflow: visible;
   transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
 }
 
@@ -248,30 +329,65 @@
   background: #f7fbff;
   border-color: #c6d6f5;
   box-shadow: 0 10px 22px rgba(79, 70, 229, 0.14);
-  padding-top: 20px;
+  padding-top: clamp(12px, 1.2vw, 14px);
+  z-index: 1;
 }
 
+@keyframes popular-badge-float {
+  0%,
+  100% {
+    transform: translate(-50%, calc(-100% + var(--popular-badge-anchor, 8px))) translateY(0);
+  }
+
+  50% {
+    transform: translate(-50%, calc(-100% + var(--popular-badge-anchor, 8px))) translateY(-6px);
+  }
+}
+
+/* Speech-bubble badge — sits above card top edge with downward pointer */
 .popular-badge {
+  --popular-badge-tail: #3b6fd4;
+  --popular-badge-anchor: 8px;
   position: absolute;
-  top: 4px;
+  top: 0;
   left: 50%;
-  transform: translateX(-50%);
-  font-size: 8px;
+  z-index: 2;
+  transform: translate(-50%, calc(-100% + var(--popular-badge-anchor)));
+  animation: popular-badge-float 3.2s ease-in-out infinite;
+  font-size: clamp(11px, 0.95vw, 13px);
   font-weight: 700;
-  letter-spacing: 0.25px;
-  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  text-transform: none;
   color: #ffffff;
   background: linear-gradient(90deg, #2e88c7 0%, #4f46e5 100%);
-  border-radius: 999px;
-  padding: 2px 5px;
-  line-height: 1.2;
+  border-radius: 8px;
+  padding: 9px 18px 11px;
+  line-height: 1.25;
+  min-height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   white-space: nowrap;
-  max-width: calc(100% - 12px);
+  max-width: calc(100% - 8px);
   box-sizing: border-box;
+  box-shadow: 0 6px 14px rgba(46, 136, 199, 0.35);
+}
+
+.popular-badge::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: -7px;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 8px solid var(--popular-badge-tail);
 }
 
 .insurance-card.is-popular .insurance-card-icon {
-  margin-top: 6px;
+  margin-top: 4px;
 }
 
 .insurance-card-icon {
@@ -280,7 +396,7 @@
   max-width: 110px;
   height: auto;
   max-height: 100px;
-  margin: 2px auto 5px;
+  margin: 4px auto 8px;
   object-fit: contain;
 }
 
@@ -301,6 +417,10 @@
 
 @media (prefers-reduced-motion: reduce) {
   .home-snackbar {
+    animation: none;
+  }
+
+  .popular-badge {
     animation: none;
   }
 
@@ -327,7 +447,7 @@
     }
 
     .insurance-card.is-popular {
-      padding-top: clamp(19px, 6vw, 25px);
+      padding-top: clamp(11px, 2.5vw, 13px);
     }
 
     .insurance-card.is-popular .insurance-card-icon {
@@ -348,11 +468,11 @@
 
 @media (max-width: 640px) {
   .insurance-panel {
-    padding: clamp(12px, 3vw, 16px) clamp(10px, 2.5vw, 14px) clamp(14px, 3.2vw, 18px);
+    padding: clamp(18px, 3.5vw, 22px) clamp(10px, 2.5vw, 14px) clamp(20px, 3.8vw, 26px);
   }
 
   .insurance-panel h2 {
-    margin-bottom: 12px;
+    margin-bottom: 14px;
     font-size: clamp(17px, 4.2vw, 22px);
   }
 
@@ -361,30 +481,38 @@
   }
 
   .insurance-card {
-    padding: 7px 5px 6px;
-    min-height: 0;
+    padding: 9px 6px 8px;
+    min-height: 152px;
     border-radius: 7px;
   }
 
   .insurance-card.is-popular {
-    padding-top: clamp(18px, 5.4vw, 22px);
+    padding-top: 11px;
   }
 
   .popular-badge {
-    font-size: 7px;
-    padding: 2px 4px;
-    top: 3px;
-    letter-spacing: 0.15px;
+    --popular-badge-anchor: 7px;
+    font-size: 10px;
+    padding: 8px 14px 10px;
+    min-height: 28px;
+    border-radius: 7px;
+  }
+
+  .popular-badge::after {
+    bottom: -6px;
+    border-left-width: 7px;
+    border-right-width: 7px;
+    border-top-width: 7px;
   }
 
   .insurance-card.is-popular .insurance-card-icon {
-    margin-top: 5px;
+    margin-top: 4px;
   }
 
   .insurance-card-icon {
-    max-width: 95px;
-    max-height: 100px;
-    margin: 2px auto 6px;
+    max-width: 90px;
+    max-height: 96px;
+    margin: 3px auto 7px;
   }
 
   .insurance-card h3 {
@@ -414,17 +542,18 @@
 
   /* Shorthand above resets padding-top â€” keep room for badge + icon */
   .insurance-card.is-popular {
-    padding-top: clamp(18px, 6vw, 23px);
+    padding-top: 10px;
   }
 
   .popular-badge {
-    font-size: 6.5px;
-    padding: 1px 4px;
-    top: 3px;
+    font-size: 9px;
+    padding: 7px 12px 9px;
+    min-height: 26px;
+    max-width: calc(100% - 4px);
   }
 
   .insurance-card.is-popular .insurance-card-icon {
-    margin-top: 4px;
+    margin-top: 3px;
   }
 }
 
@@ -451,10 +580,10 @@
   width: 100%;
   max-width: 100%;
   align-self: stretch;
-  margin-top: clamp(56px, 7vw, 92px);
+  margin-top: 0;
   margin-inline: 0;
-  box-sizing: border-box;
-  padding: clamp(24px, 3.4vw, 38px) var(--choose-pad-x) clamp(28px, 4vw, 44px);
+  padding: calc(clamp(24px, 3.4vw, 38px) + var(--landing-section-pad-extra, 10px)) var(--choose-pad-x)
+    calc(clamp(28px, 4vw, 44px) + var(--landing-section-pad-extra, 10px));
   background: #f8fafc;
   border-radius: 0;
   text-align: center;
@@ -553,9 +682,9 @@
 @media (max-width: 640px) {
   .choose-section {
     --choose-pad-x: clamp(14px, 4vw, 50px);
-    margin-top: 18px;
-    padding-top: clamp(18px, 4vw, 24px);
-    padding-bottom: clamp(22px, 5vw, 30px);
+    margin-top: 0;
+    padding-top: calc(clamp(18px, 4vw, 24px) + var(--landing-section-pad-extra, 10px));
+    padding-bottom: calc(clamp(22px, 5vw, 30px) + var(--landing-section-pad-extra, 10px));
   }
 
   .choose-title {
@@ -638,15 +767,14 @@
 }
 .promo-video-section {
   --promo-pad-x: clamp(16px, 4vw, 40px);
-  width: calc(100% + 2 * var(--promo-pad-x));
-  max-width: none;
-  margin-left: calc(-1 * var(--promo-pad-x));
-  margin-right: calc(-1 * var(--promo-pad-x));
-  box-sizing: border-box;
-  padding: clamp(40px, 5vw, 64px) var(--promo-pad-x);
+  width: 100%;
+  max-width: 100%;
+  margin-left: 0;
+  margin-right: 0;
+  padding: calc(clamp(40px, 5vw, 64px) + var(--landing-section-pad-extra, 10px)) var(--promo-pad-x);
   background: #ffffff;
-  border-top: 1px solid rgba(226, 232, 240, 0.85);
-  border-bottom: 1px solid rgba(226, 232, 240, 0.85);
+  border-top: none;
+  border-bottom: none;
   text-align: center;
 }
 
@@ -654,6 +782,10 @@
   width: 100%;
   max-width: min(920px, 100%);
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .promo-video-title {
@@ -700,7 +832,7 @@
 
 @media (max-width: 480px) {
   .promo-video-section {
-    padding: clamp(32px, 6vw, 48px) var(--promo-pad-x);
+    padding: calc(clamp(32px, 6vw, 48px) + var(--landing-section-pad-extra, 10px)) var(--promo-pad-x);
   }
 }
 /* Same layout pattern as choose-section: full-width band, 50px side inset, centered grid */
@@ -712,8 +844,8 @@
   max-width: 100%;
   align-self: stretch;
   margin-inline: 0;
-  box-sizing: border-box;
-  padding: clamp(24px, 3.4vw, 38px) var(--it-works-pad-x) clamp(28px, 4vw, 44px);
+  padding: calc(clamp(24px, 3.4vw, 38px) + var(--landing-section-pad-extra, 10px)) var(--it-works-pad-x)
+    calc(clamp(28px, 4vw, 44px) + var(--landing-section-pad-extra, 10px));
   background: #f8fafc;
   border-radius: 0;
   text-align: center;
@@ -877,8 +1009,8 @@
 @media (max-width: 640px) {
   .it-works-section {
     --it-works-pad-x: clamp(14px, 4vw, 50px);
-    padding-top: clamp(18px, 4vw, 24px);
-    padding-bottom: clamp(22px, 5vw, 30px);
+    padding-top: calc(clamp(18px, 4vw, 24px) + var(--landing-section-pad-extra, 10px));
+    padding-bottom: calc(clamp(22px, 5vw, 30px) + var(--landing-section-pad-extra, 10px));
   }
 
   .it-works-title {

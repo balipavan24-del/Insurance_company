@@ -212,20 +212,6 @@
   box-shadow: 0 0 0 2px rgba(46, 136, 199, 0.2);
 }
 
-.business-chevron {
-  flex-shrink: 0;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 22px;
-  height: 22px;
-  margin-left: auto;
-  color: #64748b;
-  font-size: 0.75rem;
-  line-height: 1;
-  transform: translateY(1px);
-}
-
 .business-trigger-value {
   flex: 1;
   min-width: 0;

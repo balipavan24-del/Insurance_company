@@ -89,6 +89,12 @@ const BikeGlyph = () => (
   </svg>
 );
 
+const ChevronUpGlyph = () => (
+  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+    <path d="M6 14l6-6 6 6" />
+  </svg>
+);
+
 const PlateGlyph = () => (
   <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none">
     <rect x="4" y="7" width="16" height="10" rx="1.5" stroke="currentColor" strokeWidth="1.4" />
@@ -351,6 +357,26 @@ function Newcar({
     setCurrentStepIndex(Math.min(Math.max(0, contactDetailsStepIndex), lastStepIndex));
   };
 
+  const searchPlaceholder = useMemo(() => {
+    if (currentField === 'brand') {
+      return 'Search brand...';
+    }
+    if (currentField === 'city') {
+      return 'Search city...';
+    }
+    if (currentField === 'model') {
+      return 'Search model...';
+    }
+    if (currentField === 'variant') {
+      return 'Search variant...';
+    }
+    return `Search ${(FIELD_LABELS[currentField] ?? 'options').toLowerCase()}...`;
+  }, [currentField]);
+
+  const showBrandStyleSearch = currentField === 'brand'
+    || currentField === 'model'
+    || currentField === 'variant';
+
   const handleStepSelection = (rawValue) => {
     if (!currentField || currentField === 'contactDetails') {
       return;
@@ -476,7 +502,7 @@ function Newcar({
     return (
       <>
         {!isEngineStep && !isBikeVariantStep && (
-          <div className={`new-car-search-wrap${isCityStep ? ' new-car-search-wrap--city' : ''}`}>
+          <div className={`new-car-search-wrap${isCityStep ? ' new-car-search-wrap--city' : ''}${showBrandStyleSearch ? ' new-car-search-wrap--brand' : ''}`}>
             {isCityStep && (
               <span className="new-car-city-search-icon" aria-hidden="true">
                 <SearchGlyph />
@@ -486,12 +512,15 @@ function Newcar({
               type="text"
               value={searchText}
               onChange={(event) => setSearchText(event.target.value)}
-              placeholder={isCityStep ? 'Search city...' : `Search ${(FIELD_LABELS[currentField] ?? 'options').toLowerCase()}...`}
+              placeholder={searchPlaceholder}
               className="new-car-search-input"
+              aria-label={searchPlaceholder}
             />
           </div>
         )}
-        <div className={`new-car-options-grid${(currentField === 'model' || currentField === 'variant') ? ' is-single-column' : ''}${isCityStep ? ' is-city-list' : ''}${isEngineStep ? ' is-engine-grid' : ''}`}>
+        <div
+          className={`new-car-options-grid${currentField === 'brand' ? ' is-brand-grid' : ''}${(currentField === 'model' || currentField === 'variant') ? ' is-single-column' : ''}${isCityStep ? ' is-city-list' : ''}${isEngineStep ? ' is-engine-grid' : ''}`}
+        >
           {filteredOptionValues.map((optionValue) => (
             <button
               key={currentField === 'engine' ? optionValue.value : optionValue}
@@ -552,17 +581,9 @@ function Newcar({
         <div className="new-car-left-pane">
           <header className="new-car-left-header">
             <button type="button" className="new-car-top-back-btn" onClick={handleBack} aria-label="Go back">
-              ←
+              <span aria-hidden="true">←</span>
             </button>
             <h2>{resolvedStepTitle}</h2>
-            <button
-              type="button"
-              className="new-car-header-close"
-              onClick={onBackToVehicleCheck}
-              aria-label="Close new vehicle popup"
-            >
-              ×
-            </button>
           </header>
 
           {renderStepInput()}
@@ -579,13 +600,24 @@ function Newcar({
         </div>
 
         <aside className="new-car-summary-pane">
-          <h3>
-            <span className="new-car-summary-head-icon" aria-hidden="true">
-              {vehicleType === 'bike' ? <BikeGlyph /> : '✦'}
-            </span>
-            Your {vehicleTypeTitle} Details
-          </h3>
-          <div className="new-car-summary-list">
+          <div className="new-car-summary-header">
+            <h3>
+              <span className="new-car-summary-head-icon" aria-hidden="true">
+                <ChevronUpGlyph />
+              </span>
+              Your {vehicleTypeTitle} Details
+            </h3>
+            <button
+              type="button"
+              className="new-car-close-icon"
+              onClick={onBackToVehicleCheck}
+              aria-label="Close new car popup"
+            >
+              ×
+            </button>
+          </div>
+          <div className="new-car-summary-scroll">
+            <div className="new-car-summary-list">
             {summaryPanelData.map((item) => (
               <div key={item.key} className={`new-car-summary-item${item.value === '-' ? ' is-empty' : ' is-filled'}`}>
                 <span className="new-car-summary-item-icon" aria-hidden="true">
@@ -612,7 +644,10 @@ function Newcar({
                 )}
               </div>
             ))}
-            <div className="new-car-summary-item is-filled new-car-summary-item--no-plate">
+            </div>
+          </div>
+          <footer className="new-car-summary-footer">
+            <div className="new-car-summary-item is-filled new-car-summary-item--no-plate new-car-summary-vehicle-card">
               <span className="new-car-summary-item-icon" aria-hidden="true">
                 <PlateGlyph />
               </span>
@@ -621,15 +656,7 @@ function Newcar({
                 <span>Not assigned — continue without registration number</span>
               </div>
             </div>
-          </div>
-          <button
-            type="button"
-            className="new-car-close-icon"
-            onClick={onBackToVehicleCheck}
-            aria-label="Close new car popup"
-          >
-            x
-          </button>
+          </footer>
         </aside>
       </section>
     </section>

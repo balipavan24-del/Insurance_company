@@ -1,9 +1,9 @@
-/* Minimal motion: short entrances + light stagger. Full “off” under prefers-reduced-motion. */
+/* Scroll-triggered entrances — slow, smooth ease. Off under prefers-reduced-motion. */
 
 @keyframes insureease-rise {
   from {
     opacity: 0;
-    transform: translate3d(0, 10px, 0);
+    transform: translate3d(0, 12px, 0);
   }
   to {
     opacity: 1;
@@ -21,41 +21,84 @@
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .landing-page .hero-section {
-    animation: insureease-rise 0.44s cubic-bezier(0.22, 1, 0.36, 1) both;
+  .landing-page {
+    --reveal-ease: cubic-bezier(0.25, 0.8, 0.25, 1);
+    --reveal-section-duration: 1.05s;
+    --reveal-child-duration: 0.85s;
   }
 
-  .landing-page .insurance-panel {
-    animation: insureease-rise 0.44s cubic-bezier(0.22, 1, 0.36, 1) 0.06s both;
+  .landing-page .scroll-reveal {
+    opacity: 0;
+    transform: translate3d(0, 22px, 0);
+    transition:
+      opacity var(--reveal-section-duration) var(--reveal-ease),
+      transform var(--reveal-section-duration) var(--reveal-ease);
+    transition-delay: var(--scroll-reveal-delay, 0ms);
   }
 
-  .landing-page .choose-section {
-    animation: insureease-rise 0.44s cubic-bezier(0.22, 1, 0.36, 1) 0.1s both;
+  .landing-page .scroll-reveal.is-visible {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
   }
 
-  .landing-page .promo-video-section {
-    animation: insureease-rise 0.44s cubic-bezier(0.22, 1, 0.36, 1) 0.14s both;
+  .landing-page .landing-footer-reveal {
+    width: 100%;
   }
 
-  .landing-page .it-works-section {
-    animation: insureease-rise 0.44s cubic-bezier(0.22, 1, 0.36, 1) 0.18s both;
+  .landing-page .scroll-reveal.is-visible .insurance-card,
+  .landing-page .scroll-reveal.is-visible .choose-card,
+  .landing-page .scroll-reveal.is-visible .it-works-card,
+  .landing-page .scroll-reveal.is-visible .promo-video-title,
+  .landing-page .scroll-reveal.is-visible .promo-video-subtitle,
+  .landing-page .scroll-reveal.is-visible .promo-video-shell {
+    animation: insureease-rise var(--reveal-child-duration) var(--reveal-ease) both;
   }
+
+  .landing-page .scroll-reveal.is-visible .insurance-card:nth-child(1) { animation-delay: 0.12s; }
+  .landing-page .scroll-reveal.is-visible .insurance-card:nth-child(2) { animation-delay: 0.2s; }
+  .landing-page .scroll-reveal.is-visible .insurance-card:nth-child(3) { animation-delay: 0.28s; }
+  .landing-page .scroll-reveal.is-visible .insurance-card:nth-child(4) { animation-delay: 0.36s; }
+  .landing-page .scroll-reveal.is-visible .insurance-card:nth-child(5) { animation-delay: 0.44s; }
+  .landing-page .scroll-reveal.is-visible .insurance-card:nth-child(6) { animation-delay: 0.52s; }
+
+  .landing-page .scroll-reveal.is-visible .choose-card:nth-child(1) { animation-delay: 0.14s; }
+  .landing-page .scroll-reveal.is-visible .choose-card:nth-child(2) { animation-delay: 0.26s; }
+  .landing-page .scroll-reveal.is-visible .choose-card:nth-child(3) { animation-delay: 0.38s; }
+  .landing-page .scroll-reveal.is-visible .choose-card:nth-child(4) { animation-delay: 0.5s; }
+
+  .landing-page .scroll-reveal.is-visible .it-works-card:nth-child(1) { animation-delay: 0.14s; }
+  .landing-page .scroll-reveal.is-visible .it-works-card:nth-child(2) { animation-delay: 0.28s; }
+  .landing-page .scroll-reveal.is-visible .it-works-card:nth-child(3) { animation-delay: 0.42s; }
+
+  .landing-page .scroll-reveal.is-visible .promo-video-title { animation-delay: 0.14s; }
+  .landing-page .scroll-reveal.is-visible .promo-video-subtitle { animation-delay: 0.28s; }
+  .landing-page .scroll-reveal.is-visible .promo-video-shell { animation-delay: 0.42s; }
 
   .app-screen {
-    animation: insureease-fade 0.32s ease-out both;
+    animation: insureease-fade 0.45s var(--reveal-ease) both;
   }
 
   .main-wrapper > .navbar-container {
-    animation: insureease-fade 0.32s ease-out both;
+    animation: insureease-fade 0.45s var(--reveal-ease) both;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .landing-page .hero-section,
-  .landing-page .insurance-panel,
-  .landing-page .choose-section,
-  .landing-page .promo-video-section,
-  .landing-page .it-works-section,
+  .landing-page .scroll-reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .landing-page .scroll-reveal.is-visible .insurance-card,
+  .landing-page .scroll-reveal.is-visible .choose-card,
+  .landing-page .scroll-reveal.is-visible .it-works-card,
+  .landing-page .scroll-reveal.is-visible .promo-video-title,
+  .landing-page .scroll-reveal.is-visible .promo-video-subtitle,
+  .landing-page .scroll-reveal.is-visible .promo-video-shell {
+    animation: none;
+  }
+
   .app-screen,
   .main-wrapper > .navbar-container {
     animation: none;

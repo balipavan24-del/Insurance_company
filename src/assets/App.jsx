@@ -147,12 +147,72 @@ function App() {
   }, [location.pathname, location.key]);
 
   const handleMenuItemSelect = (optionId) => {
+    if (optionId.startsWith('motor-addon-')) {
+      const addonParam = {
+        'motor-addon-zero-depreciation': 'zero-depreciation',
+        'motor-addon-roadside': 'roadside-assistance',
+        'motor-addon-engine': 'engine-protection',
+      }[optionId];
+      if (addonParam) {
+        navigate(`/motor-insurance/car?addon=${addonParam}`);
+        return;
+      }
+    }
+
+    if (optionId === 'motor-tool-premium-calculator') {
+      navigate('/motor-insurance/car?tool=premium-calculator');
+      return;
+    }
+
+    if (optionId === 'motor-tool-browse-plans') {
+      navigate('/motor-insurance/car');
+      return;
+    }
+
+    if (optionId === 'motor-tool-claim-support') {
+      navigate('/contact-us');
+      return;
+    }
+
+    if (optionId === 'motor-insurance') {
+      navigate(getMotorRouteFromCategory('motor-car'));
+      return;
+    }
+
     if (optionId.startsWith('motor-')) {
       navigate(getMotorRouteFromCategory(optionId));
       return;
     }
 
-    if (optionId === 'health-insurance' || optionId.startsWith('health-')) {
+    if (optionId === 'health-premium-calculator') {
+      navigate('/health-insurance?tool=premium-calculator');
+      return;
+    }
+
+    if (optionId === 'health-claim-support') {
+      navigate('/contact-us');
+      return;
+    }
+
+    if (optionId === 'health-all-plans' || optionId === 'health-insurance') {
+      navigate('/health-insurance');
+      return;
+    }
+
+    if (optionId.startsWith('health-')) {
+      const healthPlanParam = {
+        'health-individual': 'individual',
+        'health-family-floater': 'family',
+        'health-senior-citizen': 'senior',
+        'health-critical-illness': 'critical',
+        'health-top-up': 'top-up',
+      }[optionId];
+
+      if (healthPlanParam) {
+        navigate(`/health-insurance?plan=${healthPlanParam}`);
+        return;
+      }
+
       navigate('/health-insurance');
       return;
     }
@@ -240,7 +300,7 @@ function App() {
       return;
     }
 
-    if (optionId === 'support') {
+    if (optionId === 'support' || optionId === 'renewal-plans') {
       navigate('/contact-us');
       return;
     }

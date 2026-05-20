@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import './Business-Home.css';
 import Footer from '../layout/Footer';
+import DropdownChevron from '../shared/DropdownChevron';
 import InsuranceDetailPanel from '../shared/InsuranceDetailPanel';
 import InsuranceFaqAccordion from '../shared/InsuranceFaqAccordion';
 import { businessInsuranceFaqItems } from '../../productContent';
@@ -345,7 +346,10 @@ function BusinessHome({
               Insurance type
             </label>
 
-            <div className="business-custom-select" ref={dropdownRef}>
+            <div
+              className={`business-custom-select${isDropdownOpen ? ' dropdown-open' : ''}`}
+              ref={dropdownRef}
+            >
               <button
                 id="business-coverage-select"
                 type="button"
@@ -364,7 +368,7 @@ function BusinessHome({
                     'Select insurance type'
                   )}
                 </span>
-                <span className="business-chevron" aria-hidden="true">▾</span>
+                <DropdownChevron className="dropdown-arrow--select" />
               </button>
 
               {isDropdownOpen && (

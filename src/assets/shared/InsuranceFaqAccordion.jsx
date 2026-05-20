@@ -1,6 +1,6 @@
 import { useState } from 'react';
+import DropdownChevron from './DropdownChevron';
 import './InsuranceFaqAccordion.css';
-
 function InsuranceFaqAccordion({ title, subtitle, items, buttonLabel = 'View More FAQs →' }) {
   const [openFaqId, setOpenFaqId] = useState('');
 
@@ -17,7 +17,7 @@ function InsuranceFaqAccordion({ title, subtitle, items, buttonLabel = 'View Mor
             {items.map((item) => (
               <article
                 key={item.id}
-                className={`business-home-faqs__item business-home-faqs__item--accordion ${openFaqId === item.id ? 'is-open' : ''}`}
+                className={`business-home-faqs__item business-home-faqs__item--accordion ${openFaqId === item.id ? 'is-open dropdown-open' : ''}`}
                 role="listitem"
               >
                 <button
@@ -28,8 +28,7 @@ function InsuranceFaqAccordion({ title, subtitle, items, buttonLabel = 'View Mor
                   aria-controls={`business-faq-answer-${item.id}`}
                 >
                   <span>{item.question}</span>
-                  <span className="business-home-faqs__chevron" aria-hidden="true">▾</span>
-                </button>
+                  <DropdownChevron className="dropdown-arrow--faq" />                </button>
                 <div
                   id={`business-faq-answer-${item.id}`}
                   className={`business-home-faqs__answer-wrap ${openFaqId === item.id ? 'is-open' : ''}`}

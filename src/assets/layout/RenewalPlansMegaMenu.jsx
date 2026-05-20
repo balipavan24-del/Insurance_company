@@ -146,7 +146,7 @@ function RenewalPlansMegaMenu({
     <div
       className={`renewal-mega-menu renewal-mega-menu--${variant} ${isOpen ? 'is-open' : ''}`}
       role="menu"
-      aria-label="Renewal plans"
+      aria-label="Renew plans"
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
     >

@@ -48,7 +48,7 @@
   letter-spacing: 0.18px;
   color-scheme: light dark;
   color: var(--text);
-  background: var(--bg);
+  background: #f8fafc;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -117,7 +117,7 @@ select:focus-visible {
 
 body {
   margin: 0;
-  background-color: #f5f8fb; /* The background color from your screenshot */
+  background-color: #f8fafc;
   font-family: 'Inter', sans-serif;
   overflow-x: hidden;
 }
