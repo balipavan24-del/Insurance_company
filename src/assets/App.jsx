@@ -217,6 +217,31 @@ function App() {
       return;
     }
 
+    if (optionId === 'cargo-claim-support' || optionId === 'cargo-track-request') {
+      navigate('/contact-us');
+      return;
+    }
+
+    if (optionId === 'cargo-request-quote') {
+      navigate('/cargo-insurance/marine');
+      return;
+    }
+
+    if (optionId === 'cargo-single-transit') {
+      navigate('/cargo-insurance?coverage=single-transit');
+      return;
+    }
+
+    if (optionId === 'cargo-open-cover') {
+      navigate('/cargo-insurance?coverage=open-cover');
+      return;
+    }
+
+    if (optionId === 'cargo-annual-policy') {
+      navigate('/cargo-insurance?coverage=annual-policy');
+      return;
+    }
+
     if (optionId === 'cargo-insurance' || optionId.startsWith('cargo-')) {
       if (optionId === 'cargo-marine') {
         navigate('/cargo-insurance/marine');
@@ -231,6 +256,21 @@ function App() {
         return;
       }
       navigate('/cargo-insurance');
+      return;
+    }
+
+    if (optionId === 'business-premium-calculator') {
+      navigate('/business-insurance?tool=premium-calculator');
+      return;
+    }
+
+    if (optionId === 'business-claim-support') {
+      navigate('/contact-us');
+      return;
+    }
+
+    if (optionId === 'business-all-plans' || optionId === 'business-insurance') {
+      navigate('/business-insurance');
       return;
     }
 
@@ -250,7 +290,7 @@ function App() {
       navigate('/business-insurance/equipment-breakdown');
       return;
     }
-    if (optionId === 'business-insurance' || optionId.startsWith('property-')) {
+    if (optionId.startsWith('property-')) {
       navigate('/business-insurance');
       return;
     }

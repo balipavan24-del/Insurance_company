@@ -289,6 +289,8 @@
   /* Full-width invisible bridge between navbar and centered mega menus */
   .motor-mega-menu--desktop::before,
   .health-mega-menu--desktop::before,
+  .business-mega-menu--desktop::before,
+  .cargo-mega-menu--desktop::before,
   .renewal-mega-menu--desktop::before {
     content: '';
     position: absolute;
@@ -302,6 +304,8 @@
   /* Shared smooth enter / exit animation for all mega menus */
   .motor-mega-menu--desktop,
   .health-mega-menu--desktop,
+  .business-mega-menu--desktop,
+  .cargo-mega-menu--desktop,
   .renewal-mega-menu--desktop {
     transform: translateX(-50%) translateY(-8px) scale(0.988);
     transform-origin: top center;
@@ -315,6 +319,8 @@
 
   .motor-mega-menu--desktop.is-open,
   .health-mega-menu--desktop.is-open,
+  .business-mega-menu--desktop.is-open,
+  .cargo-mega-menu--desktop.is-open,
   .renewal-mega-menu--desktop.is-open {
     transform: translateX(-50%) translateY(0) scale(1);
     box-shadow: 0 24px 48px rgba(15, 23, 42, 0.14);
@@ -489,6 +495,8 @@
   /* Mobile mega-menus inside drawer — full width */
   .nav-link-item .motor-mega-menu--mobile,
   .nav-link-item .health-mega-menu--mobile,
+  .nav-link-item .business-mega-menu--mobile,
+  .nav-link-item .cargo-mega-menu--mobile,
   .nav-link-item .renewal-mega-menu--mobile {
     width: 100%;
     max-width: 100%;
@@ -520,6 +528,8 @@ body.navbar-scroll-lock {
 .navbar-scroll-lock .nav-menu.is-open,
 .navbar-scroll-lock .motor-mega-menu--desktop,
 .navbar-scroll-lock .health-mega-menu--desktop,
+.navbar-scroll-lock .business-mega-menu--desktop,
+.navbar-scroll-lock .cargo-mega-menu--desktop,
 .navbar-scroll-lock .renewal-mega-menu--desktop {
   touch-action: pan-y;
   -webkit-overflow-scrolling: touch;
@@ -528,6 +538,8 @@ body.navbar-scroll-lock {
 @media (min-width: 1280px) {
   .motor-mega-menu--desktop.is-open,
   .health-mega-menu--desktop.is-open,
+  .business-mega-menu--desktop.is-open,
+  .cargo-mega-menu--desktop.is-open,
   .renewal-mega-menu--desktop.is-open {
     max-height: min(75vh, calc(100dvh - 96px));
     overflow-y: auto;
@@ -544,6 +556,8 @@ body.navbar-scroll-lock {
 
   .motor-mega-menu--desktop,
   .health-mega-menu--desktop,
+  .business-mega-menu--desktop,
+  .cargo-mega-menu--desktop,
   .renewal-mega-menu--desktop {
     transition: none;
   }

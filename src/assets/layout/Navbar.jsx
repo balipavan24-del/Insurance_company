@@ -1,6 +1,8 @@
 import { startTransition, useEffect, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import DropdownChevron from '../shared/DropdownChevron';
+import BusinessInsuranceMegaMenu from './BusinessInsuranceMegaMenu';
+import CargoInsuranceMegaMenu from './CargoInsuranceMegaMenu';
 import HealthInsuranceMegaMenu from './HealthInsuranceMegaMenu';
 import MotorInsuranceMegaMenu from './MotorInsuranceMegaMenu';
 import RenewalPlansMegaMenu from './RenewalPlansMegaMenu';
@@ -39,6 +41,8 @@ function Navbar({ onLoginClick, onMenuOptionSelect, onBrandClick }) {
 
   const MOTOR_INSURANCE_ID = 'motor-insurance';
   const HEALTH_INSURANCE_ID = 'health-insurance';
+  const BUSINESS_INSURANCE_ID = 'business-insurance';
+  const CARGO_INSURANCE_ID = 'cargo-insurance';
   const RENEWAL_PLANS_ID = 'renewal-plans';
 
   const menu = [
@@ -57,30 +61,14 @@ function Navbar({ onLoginClick, onMenuOptionSelect, onBrandClick }) {
       label: 'Term Insurance'
     },
     {
-      id: 'business-insurance',
+      id: BUSINESS_INSURANCE_ID,
       label: 'Business Insurance',
-      dropdown: [
-        { id: 'business-fire-damage', label: 'Fire Damage' },
-        { id: 'business-theft-protection', label: 'Theft Protection' },
-        { id: 'business-natural-disaster', label: 'Natural Disaster Cover' },
-        { id: 'business-equipment-breakdown', label: 'Equipment Breakdown' },
-      ],
+      megaMenu: 'business',
     },
     {
-      id: 'cargo-insurance',
+      id: CARGO_INSURANCE_ID,
       label: 'Cargo Insurance',
-      dropdown: [
-        { id: 'cargo-marine', label: 'Marine' },
-        { id: 'cargo-air', label: 'Air' },
-        {
-          id: 'cargo-inland',
-          label: 'Inland',
-          children: [
-            { id: 'cargo-inland-road', label: 'Road' },
-            { id: 'cargo-inland-rail', label: 'Rail' }
-          ]
-        }
-      ]
+      megaMenu: 'cargo',
     },
     {
       id: RENEWAL_PLANS_ID,
@@ -174,7 +162,7 @@ function Navbar({ onLoginClick, onMenuOptionSelect, onBrandClick }) {
       if (!(target instanceof Element)) return false;
       return Boolean(
         target.closest(
-          '.motor-mega-menu--desktop, .health-mega-menu--desktop, .renewal-mega-menu--desktop, .dropdown-menu'
+          '.motor-mega-menu--desktop, .health-mega-menu--desktop, .business-mega-menu--desktop, .cargo-mega-menu--desktop, .renewal-mega-menu--desktop, .dropdown-menu'
         )
       );
     };
@@ -251,6 +239,34 @@ function Navbar({ onLoginClick, onMenuOptionSelect, onBrandClick }) {
             onMouseLeave={() => !isMobileView() && scheduleCloseHover(HEALTH_INSURANCE_ID)}
           />
           <HealthInsuranceMegaMenu variant="mobile" {...commonProps} />
+        </>
+      );
+    }
+
+    if (item.megaMenu === 'business') {
+      return (
+        <>
+          <BusinessInsuranceMegaMenu
+            variant="desktop"
+            {...commonProps}
+            onMouseEnter={() => !isMobileView() && openDropdownHover(BUSINESS_INSURANCE_ID)}
+            onMouseLeave={() => !isMobileView() && scheduleCloseHover(BUSINESS_INSURANCE_ID)}
+          />
+          <BusinessInsuranceMegaMenu variant="mobile" {...commonProps} />
+        </>
+      );
+    }
+
+    if (item.megaMenu === 'cargo') {
+      return (
+        <>
+          <CargoInsuranceMegaMenu
+            variant="desktop"
+            {...commonProps}
+            onMouseEnter={() => !isMobileView() && openDropdownHover(CARGO_INSURANCE_ID)}
+            onMouseLeave={() => !isMobileView() && scheduleCloseHover(CARGO_INSURANCE_ID)}
+          />
+          <CargoInsuranceMegaMenu variant="mobile" {...commonProps} />
         </>
       );
     }
