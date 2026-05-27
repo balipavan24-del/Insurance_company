@@ -1,0 +1,247 @@
+@import './components/Animations/motion.css';
+
+:root {
+  --text: #6b6375;
+  --text-h: #08060d;
+  --bg: #f5f8fb;
+  --border: transparent; /* Set to transparent to remove lines */
+  --code-bg: #f4f3ec;
+  --accent: #2E88C7;
+  /* Primary brand gradient (matches CTAs across product flows) */
+  --gradient-primary: linear-gradient(90deg, #2e88c7 0%, #4f46e5 100%);
+  --accent-bg: rgba(46, 136, 199, 0.1);
+  --accent-border: transparent;
+  --social-bg: rgba(244, 243, 236, 0.5);
+  --shadow: rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
+
+  /*
+   * Shared UI typography (px-based). Use in product pages for consistent sizing.
+   * Root `font-size` clamp below still sets the document rem scale; these are explicit UI steps.
+   */
+  --font-size-10: 10px;
+  --font-size-12: 12px;
+  --font-size-13: 13px;
+  --font-size-14: 14px;
+  --font-size-15: 15px;
+  --font-size-16: 16px;
+  --font-size-17: 17px;
+  --font-size-18: 18px;
+  --font-size-body: clamp(15px, 0.28vw + 13.6px, 18px);
+  --font-size-h1: clamp(32px, 3.3vw, 48px);
+  --font-size-h2: clamp(24px, 2.2vw, 34px);
+  --font-size-h3: clamp(20px, 1.7vw, 28px);
+  --font-size-h4: clamp(18px, 1.35vw, 24px);
+  --font-size-h5: clamp(16px, 1.1vw, 20px);
+  --font-size-h6: clamp(14px, 1vw, 18px);
+  --font-size-paragraph: clamp(15px, 0.42vw + 13.4px, 18px);
+  --font-size-panel-title: clamp(22px, 2.8vw, 26px);
+  --font-size-hero-display: clamp(34px, 4.2vw, 48px);
+
+  --sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --heading: 'Inter', system-ui, sans-serif;
+  --mono: ui-monospace, Consolas, monospace;
+
+  /* Scales smoothly across laptop widths instead of jumping at one breakpoint */
+  font-size: var(--font-size-body);
+  font-family: var(--sans);
+  line-height: 145%;
+  letter-spacing: 0.18px;
+  color-scheme: light dark;
+  color: var(--text);
+  background: #f8fafc;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* Global micro-interactions for interactive controls across the site */
+a,
+button,
+[role='button'],
+input,
+textarea,
+select {
+  transition: background-color 220ms ease, color 220ms ease, border-color 220ms ease,
+    box-shadow 220ms ease, transform 220ms ease, opacity 220ms ease;
+}
+
+a:hover,
+button:hover,
+[role='button']:hover {
+  transform: translateY(-1px);
+}
+
+a:focus-visible,
+button:focus-visible,
+[role='button']:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid rgba(46, 136, 199, 0.75);
+  outline-offset: 2px;
+}
+
+/* Dark Mode support */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --text: #9ca3af;
+    --text-h: #f3f4f6;
+    --bg: #16171d;
+    --border: transparent;
+    --code-bg: #1f2028;
+    --accent: #5ba3d9;
+    --gradient-primary: linear-gradient(90deg, #2e88c7 0%, #6366f1 100%);
+    --accent-bg: rgba(46, 136, 199, 0.22);
+    --social-bg: rgba(47, 48, 58, 0.5);
+    --shadow: rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+body {
+  margin: 0;
+  background-color: #f8fafc;
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+}
+
+#root {
+  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  /* Removed border-inline: 1px solid var(--border); */
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+}
+
+h1, h2 {
+  font-family: var(--heading);
+  color: var(--text-h);
+}
+
+h1 {
+  font-size: var(--font-size-h1);
+  font-weight: 800;
+  line-height: 1.12;
+  letter-spacing: -0.03em;
+  margin: clamp(1.1rem, 2.2vw, 2rem) 0;
+}
+
+h2 {
+  font-size: var(--font-size-h2);
+  font-weight: 700;
+  line-height: 118%;
+  letter-spacing: -0.01em;
+  margin: 0 0 8px;
+}
+
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--heading);
+  color: var(--text-h);
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+h3 {
+  font-size: var(--font-size-h3);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+h4 {
+  font-size: var(--font-size-h4);
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+h5 {
+  font-size: var(--font-size-h5);
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+h6 {
+  font-size: var(--font-size-h6);
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+p {
+  font-size: var(--font-size-paragraph);
+  font-weight: 400;
+  line-height: 1.6;
+  margin: 0;
+}
+
+code, .counter {
+  font-family: var(--mono);
+  display: inline-flex;
+  border-radius: 4px;
+  color: var(--text-h);
+  border: none; /* Ensuring no borders on counters */
+}
+
+code {
+  font-size: var(--font-size-15);
+  line-height: 135%;
+  padding: 4px 8px;
+  background: var(--code-bg);
+}
+
+/* Global section scaffolding (opt-in only, does not alter existing layouts unless used) */
+:root {
+  --section-gap-lg: clamp(56px, 7vw, 120px);
+  --section-gap-md: clamp(32px, 4.5vw, 72px);
+  --section-gap-sm: clamp(20px, 3.2vw, 40px);
+  --section-container-max: 1220px;
+  --section-container-inline: clamp(14px, 2.4vw, 28px);
+}
+
+.page-section {
+  width: 100%;
+}
+
+.page-section--hero {
+  margin-top: 0;
+}
+
+.page-section--spacious {
+  margin-top: var(--section-gap-lg);
+}
+
+.page-section--regular {
+  margin-top: var(--section-gap-md);
+}
+
+.page-section--compact {
+  margin-top: var(--section-gap-sm);
+}
+
+.page-section-container {
+  width: min(var(--section-container-max), 100%);
+  margin-inline: auto;
+  padding-inline: var(--section-container-inline);
+}

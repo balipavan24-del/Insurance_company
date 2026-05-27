@@ -1,0 +1,630 @@
+.business-natural-page {
+  --business-band-pad-y: 40px;
+  --business-pad-x: clamp(16px, 4vw, 50px);
+  --business-content-max: 1320px;
+  min-height: calc(130svh - 80px);
+  background: #edf3fb;
+  padding: 0;
+  box-sizing: border-box;
+  --business-natural-control-height: 42px;
+}
+
+.business-natural-page .business-natural-hero,
+.business-natural-page .business-natural-about-band,
+.business-natural-page .business-natural-covered-band {
+  box-sizing: border-box;
+  width: 100%;
+  margin: 0;
+  padding: var(--business-band-pad-y) var(--business-pad-x);
+}
+
+.business-natural-page .landing-footer {
+  margin-top: 0;
+}
+
+.business-natural-wrap {
+  width: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.business-natural-hero {
+  background: #dcece7;
+}
+
+.business-natural-back-link {
+  display: block;
+  text-align: left;
+  width: fit-content;
+  border: none;
+  background: transparent;
+  color: #73859a;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 6px 0;
+}
+
+.business-natural-layout {
+  margin-top: 18px;
+  display: grid;
+  grid-template-columns: minmax(420px, 1fr) minmax(360px, 490px);
+  gap: clamp(20px, 2.8vw, 48px);
+  align-items: start;
+}
+
+.business-natural-info-panel {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.business-natural-hero-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.business-natural-icon {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: #c8eedf;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #2aa875;
+}
+
+.business-natural-icon svg,
+.business-natural-input-icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+.business-natural-icon svg path,
+.business-natural-icon svg circle,
+.business-natural-icon svg rect,
+.business-natural-input-icon svg path,
+.business-natural-input-icon svg circle,
+.business-natural-input-icon svg rect {
+  stroke: currentColor;
+  stroke-width: 1.7;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.business-natural-content h1 {
+  margin: 18px 0 8px;
+  color: #192737;
+  font-size: clamp(34px, 3.35vw, 52px);
+  line-height: 1.08;
+  letter-spacing: -0.3px;
+}
+
+.business-natural-content p {
+  margin: 0;
+  max-width: 545px;
+  color: #667a92;
+  font-size: 17px;
+  line-height: 1.43;
+}
+
+.business-natural-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+  margin-top: 18px;
+}
+
+.business-natural-tags span {
+  border: 1px solid #d8e1ee;
+  border-radius: 999px;
+  padding: 5px 11px 5px 9px;
+  color: #3f546d;
+  font-size: 11px;
+  font-weight: 600;
+  background: #fefefe;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.business-natural-tags i {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1.5px solid #2aa875;
+  display: inline-block;
+  box-sizing: border-box;
+  position: relative;
+  background: #eaf8f1;
+}
+
+.business-natural-tags i::after {
+  content: '';
+  position: absolute;
+  left: 2.6px;
+  top: 0.8px;
+  width: 2.4px;
+  height: 4.6px;
+  border-right: 1.4px solid #2aa875;
+  border-bottom: 1.4px solid #2aa875;
+  transform: rotate(45deg);
+}
+
+.business-natural-form-card {
+  background: #fff;
+  border: 1px solid #dbe2ec;
+  border-radius: 16px;
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.1);
+  padding: 24px;
+}
+
+.business-natural-form-card h2 {
+  margin: 0;
+  font-size: 18px;
+  color: #1f2d3d;
+  line-height: 1.25;
+}
+
+.business-natural-form-subtitle {
+  margin: 6px 0 14px;
+  color: #6d7f95;
+  font-size: 13px;
+}
+
+.business-natural-form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.business-natural-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  color: #1f2937;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.business-natural-form label:nth-child(1),
+.business-natural-form label:nth-child(2),
+.business-natural-form label:nth-child(5),
+.business-natural-form label:nth-child(6) {
+  grid-column: 1 / -1;
+}
+
+.business-natural-label-text {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.business-natural-form em {
+  color: #ea5b5b;
+  font-style: normal;
+}
+
+.business-natural-form input,
+.business-natural-form select {
+  width: 100%;
+  height: var(--business-natural-control-height);
+  border: 1px solid #d2dae6;
+  border-radius: 10px;
+  padding: 0 12px;
+  font-size: 13px;
+  color: #2c3b4f;
+  background: #f5f8fd;
+  box-sizing: border-box;
+}
+
+.business-natural-form select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  padding-right: 38px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 20 20'%3E%3Cpath d='M5.5 7.5L10 12l4.5-4.5' fill='none' stroke='%23697f99' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 14px 14px;
+  transition: border-color 140ms ease, box-shadow 140ms ease, background-color 140ms ease;
+}
+
+.business-natural-form select:hover {
+  border-color: #7b7fff;
+  background-color: #f7f4ff;
+}
+
+.business-natural-form select:focus {
+  outline: none;
+  border-color: transparent;
+  box-shadow: 0 0 0 3px rgba(97, 95, 255, 0.18);
+  background-image:
+    linear-gradient(#ffffff, #ffffff),
+    var(--gradient-primary),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 20 20'%3E%3Cpath d='M5.5 7.5L10 12l4.5-4.5' fill='none' stroke='%23555ce8' stroke-width='1.9' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-origin: border-box;
+  background-clip: padding-box, border-box, border-box;
+}
+
+.business-natural-input-wrap {
+  position: relative;
+}
+
+.business-natural-input-wrap input {
+  height: var(--business-natural-control-height);
+  padding-left: 36px;
+}
+
+.business-natural-input-icon {
+  position: absolute;
+  left: 11px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  color: #2aa875;
+  pointer-events: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.business-natural-form input::placeholder {
+  color: #94a6bc;
+}
+
+.business-natural-submit {
+  margin-top: 14px;
+  width: 100%;
+  border: none;
+  border-radius: 9px;
+  height: var(--business-natural-control-height);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  background: linear-gradient(90deg, #2e88c7 0%, #4f46e5 100%);
+}
+
+.business-natural-form-note {
+  margin: 8px 4px 0;
+  color: #95a5bc;
+  font-size: 10px;
+  text-align: center;
+}
+
+.business-natural-about-band {
+  background: #f8f9fa;
+}
+
+.business-natural-about-section {
+  max-width: min(var(--business-content-max), 100%);
+  margin-inline: auto;
+}
+
+.business-natural-about-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.business-natural-about-content h2,
+.business-natural-importance h3 {
+  margin: 0;
+  color: #1c2531;
+  font-size: 42px;
+  line-height: 1.2;
+  font-weight: 700;
+}
+
+.business-natural-about-content p {
+  margin: 14px 0 0;
+  max-width: 720px;
+  color: #5c6b7f;
+  font-size: 15px;
+  line-height: 1.65;
+}
+
+.business-natural-importance {
+  margin-top: 56px;
+}
+
+.business-natural-importance-grid {
+  margin-top: 22px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px 20px;
+}
+
+.business-natural-importance-card {
+  border: 1px solid #e8eaed;
+  border-radius: 12px;
+  background: #fff;
+  padding: 18px 20px;
+  min-height: 72px;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+}
+
+.business-natural-importance-card i {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  border: 1.5px solid #2aa875;
+  box-sizing: border-box;
+  display: inline-block;
+  margin-top: 3px;
+  flex: 0 0 auto;
+  position: relative;
+  background: #eaf8f1;
+}
+
+.business-natural-importance-card i::after {
+  content: '';
+  position: absolute;
+  left: 4px;
+  top: 2.5px;
+  width: 4px;
+  height: 7px;
+  border-right: 1.8px solid #2aa875;
+  border-bottom: 1.8px solid #2aa875;
+  transform: rotate(45deg);
+}
+
+.business-natural-importance-card p {
+  margin: 0;
+  color: #384d66;
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.business-natural-covered-band {
+  background: #eef0f4;
+}
+
+.business-natural-covered-section {
+  max-width: min(var(--business-content-max), 100%);
+  margin-inline: auto;
+}
+
+.business-natural-covered-block h3,
+.business-natural-benefits-block h3 {
+  margin: 0;
+  color: #1c2531;
+  font-size: 42px;
+  line-height: 1.2;
+  font-weight: 700;
+}
+
+.business-natural-covered-grid,
+.business-natural-benefits-grid {
+  margin-top: 22px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.business-natural-covered-card {
+  border: 1px solid #e4e8ef;
+  border-radius: 12px;
+  background: #fff;
+  padding: 22px 16px;
+  min-height: 112px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.06);
+}
+
+.business-natural-covered-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 11px;
+  background: #c8eedf;
+  color: #2aa875;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.business-natural-covered-icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.business-natural-covered-card p {
+  margin: 0;
+  color: #2f3d4f;
+  font-size: 14px;
+  line-height: 1.35;
+  font-weight: 600;
+}
+
+.business-natural-benefits-block {
+  margin-top: 64px;
+}
+
+.business-natural-benefit-card {
+  min-height: 100px;
+}
+
+.business-natural-benefit-card .business-natural-covered-icon {
+  width: auto;
+  height: auto;
+  min-width: 40px;
+  min-height: 40px;
+  padding: 0;
+  background: transparent;
+  border-radius: 0;
+}
+
+.business-natural-benefit-card .business-natural-covered-icon svg {
+  width: 38px;
+  height: 38px;
+}
+
+@media (max-width: 1024px) {
+  .business-natural-wrap {
+    padding: 0;
+  }
+
+  .business-natural-hero {
+    padding: 48px clamp(18px, 4vw, 28px) 24px;
+  }
+
+  .business-natural-layout {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .business-natural-content p {
+    font-size: 20px;
+  }
+
+  .business-natural-form-card h2 {
+    font-size: 15px;
+  }
+
+  .business-natural-about-content h2,
+  .business-natural-importance h3 {
+    font-size: 32px;
+  }
+
+  .business-natural-importance {
+    margin-top: 68px;
+  }
+
+  .business-natural-importance-card p {
+    font-size: 13px;
+  }
+
+  .business-natural-covered-block h3,
+  .business-natural-benefits-block h3 {
+    font-size: 32px;
+  }
+
+  .business-natural-covered-grid,
+  .business-natural-benefits-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .business-natural-benefits-block {
+    margin-top: 56px;
+  }
+}
+
+@media (max-width: 640px) {
+  .business-natural-back-link {
+    margin: 0 auto;
+  }
+
+  .business-natural-layout {
+    justify-items: center;
+    text-align: center;
+  }
+
+  .business-natural-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .business-natural-info-panel {
+    width: 100%;
+  }
+
+  .business-natural-hero-group {
+    width: 100%;
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .business-natural-content h1 {
+    font-size: 30px;
+  }
+
+  .business-natural-content p {
+    font-size: 16px;
+    text-align: center;
+  }
+
+  .business-natural-tags {
+    justify-content: center;
+  }
+
+  .business-natural-form-card {
+    width: min(100%, 520px);
+  }
+
+  .business-natural-form-card h2,
+  .business-natural-form-subtitle {
+    text-align: center;
+  }
+
+  .business-natural-form {
+    grid-template-columns: 1fr;
+  }
+
+  .business-natural-form label:nth-child(1),
+  .business-natural-form label:nth-child(2),
+  .business-natural-form label:nth-child(5),
+  .business-natural-form label:nth-child(6) {
+    grid-column: auto;
+  }
+
+  .business-natural-about-content {
+    align-items: center;
+    text-align: center;
+  }
+
+  .business-natural-about-content h2,
+  .business-natural-importance h3 {
+    font-size: 26px;
+  }
+
+  .business-natural-about-content p {
+    font-size: 13px;
+  }
+
+  .business-natural-importance {
+    margin-top: 54px;
+    text-align: center;
+  }
+
+  .business-natural-importance-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .business-natural-importance-card {
+    justify-content: center;
+  }
+
+  .business-natural-covered-block h3,
+  .business-natural-benefits-block h3 {
+    font-size: 26px;
+    text-align: center;
+  }
+
+  .business-natural-covered-grid,
+  .business-natural-benefits-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .business-natural-benefits-block {
+    margin-top: 46px;
+  }
+
+  .business-natural-covered-card {
+    min-height: 96px;
+  }
+}

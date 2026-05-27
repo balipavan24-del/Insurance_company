@@ -1,0 +1,26 @@
+.brand-logo {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  object-fit: contain;
+  transform: none;
+  image-rendering: auto;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+/* Navbar bar height is fixed in Navbar.css — adjust logo size here only */
+.brand-logo--navbar {
+  display: block;
+  height: 80px;
+  width: auto;
+  max-height: none;
+  object-fit: contain;
+  object-position: center;
+}
+
+.brand-logo--auth,
+.brand-logo--footer {
+  max-height: 120px;
+}

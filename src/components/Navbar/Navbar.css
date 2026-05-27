@@ -1,0 +1,606 @@
+/* Breakpoint: horizontal nav needs ~1280px+ with these labels; below 1280px -> menu drawer */
+.navbar-container {
+  --nav-inline-padding: clamp(20px, 5vw, 72px);
+  --nav-collapse: 1279px;
+  --nav-accent: #2e88c7; /* matches .hero-title — "Insurance made simple" */
+  display: flex;
+  align-items: center;
+  width: 100%;
+  box-sizing: border-box;
+  /* Fixed height — logo size must not stretch the bar (use height on .brand-logo--navbar only) */
+  height: 100px;
+  min-height: 100px;
+  max-height: 100px;
+  background-color: #ffffff;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: none;
+  border-bottom: 1px solid #e6ecf5;
+  padding: 0 var(--nav-inline-padding);
+  overflow: visible;
+  text-align: left; /* override #root { text-align: center } */
+}
+
+.brand {
+  position: relative;
+  flex: 0 0 auto;
+  display: inline-flex;
+  align-items: center;
+  align-self: center;
+  height: 100px;
+  max-height: 100px;
+  overflow: visible;
+  gap: 0;
+  font-size: 22px;
+  font-weight: 700;
+  color: #1f2937;
+  padding: 0 8px;
+  line-height: 0;
+  border-radius: 10px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  z-index: 2;
+}
+
+/* No lift/blur on logo — overrides global button:hover transform in index.css */
+button.brand,
+button.brand:hover,
+button.brand:focus-visible,
+button.brand:active {
+  transform: none;
+  box-shadow: none;
+  background: transparent;
+}
+
+.brand-text {
+  letter-spacing: -0.02em;
+}
+
+.mobile-more-btn {
+  display: none;
+}
+
+.nav-right {
+  position: relative;
+  flex: 0 0 auto;
+  z-index: 2;
+}
+
+.nav-menu {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 8px;
+  align-items: center;
+}
+
+.nav-link-item {
+  padding: 0;
+  position: relative;
+  flex: 0 0 auto;
+  min-width: 0;
+}
+
+.nav-link-item--mega {
+  position: static;
+}
+
+.nav-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 550;
+  color: #374151;
+  cursor: pointer;
+  white-space: nowrap;
+  border: none;
+  background: transparent;
+  border-radius: 999px;
+  padding: 10px 14px;
+  text-align: left;
+  transition: color 0.2s ease;
+}
+
+.nav-label:hover {
+  color: var(--nav-accent);
+  background: transparent;
+}
+
+.nav-label:hover .dropdown-arrow {
+  color: var(--nav-accent);
+}
+
+.nav-label:focus-visible {
+  outline: 2px solid #93c5fd;
+  outline-offset: 2px;
+}
+
+.nav-label--inactive {
+  cursor: default;
+  pointer-events: none;
+  user-select: none;
+}
+
+.nav-label--inactive:hover {
+  color: #374151;
+}
+
+.nav-dropdown-trigger {
+  padding-right: 10px;
+}
+
+.dropdown-open .nav-dropdown-trigger {
+  color: var(--nav-accent);
+  background: transparent;
+}
+
+.dropdown-open .nav-dropdown-trigger .dropdown-arrow {
+  color: var(--nav-accent);
+}
+
+.dropdown-menu {
+  position: absolute;
+  left: 0;
+  top: calc(100% + 6px);
+  min-width: 220px;
+  list-style: none;
+  margin: 0;
+  padding: 8px;
+  border: 1px solid #dce7f5;
+  border-radius: 14px;
+  background: #ffffff;
+  box-shadow: 0 14px 28px rgba(15, 23, 42, 0.14);
+  opacity: 0;
+  transform: translateY(-4px);
+  pointer-events: none;
+  transition: opacity 0.18s ease, transform 0.18s ease;
+  z-index: 1500;
+}
+
+.dropdown-menu > li + li {
+  margin-top: 4px;
+}
+
+.dropdown-menu.is-open {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.dropdown-item {
+  width: 100%;
+  text-align: left;
+  border: none;
+  background: transparent;
+  color: #334155;
+  padding: 10px 12px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 550;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.dropdown-item:hover {
+  background: #f1f6ff;
+  color: #0066ff;
+}
+
+.dropdown-group {
+  list-style: none;
+}
+
+.dropdown-item-group {
+  display: block;
+  color: #475569;
+  font-weight: 550;
+  cursor: default;
+}
+
+.dropdown-submenu {
+  list-style: none;
+  margin: 0;
+  padding: 0 0 0 12px;
+}
+
+.dropdown-submenu > li + li {
+  margin-top: 4px;
+}
+
+.dropdown-subitem {
+  padding-left: 18px;
+}
+
+.nav-login-btn {
+  flex: 0 0 auto;
+  padding: 11px 28px;
+  background: linear-gradient(90deg, #2e88c7 0%, #4f46e5 100%);
+  color: #ffffff;
+  border: none;
+  border-radius: 50px;
+  font-size: 14px;
+  font-weight: 550;
+  cursor: pointer;
+  transition: background-color 0.22s ease, color 0.22s ease, transform 0.22s ease, box-shadow 0.22s ease;
+}
+
+.nav-login-btn:hover {
+  background: linear-gradient(90deg, #2e88c7 0%, #4f46e5 100%);
+  color: #ffffff;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 18px rgba(79, 70, 229, 0.28);
+}
+
+.nav-login-btn:focus-visible {
+  outline: 2px solid #93c5fd;
+  outline-offset: 2px;
+}
+
+.login-item {
+  margin-left: 8px;
+}
+
+.mobile-only {
+  display: none;
+}
+
+/* Wide desktop: fixed columns so links never slide under logo or Login; wrap if needed */
+@media (min-width: 1280px) {
+  .navbar-container {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    align-items: center;
+    column-gap: clamp(12px, 1.8vw, 28px);
+    row-gap: 8px;
+    height: 100px;
+    min-height: 100px;
+    max-height: 100px;
+    /* Positioning context: mega menus use top: 100% to sit flush below the bar */
+    position: sticky;
+  }
+
+  .nav-link-item:not(.nav-link-item--mega) {
+    position: relative;
+  }
+
+  .nav-link-item--mega {
+    position: static;
+  }
+
+  .dropdown-menu::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: -8px;
+    height: 8px;
+  }
+
+  .brand {
+    grid-column: 1;
+    justify-self: start;
+  }
+
+  .nav-menu {
+    grid-column: 2;
+    justify-self: stretch;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    flex-wrap: wrap;
+    justify-content: center;
+    row-gap: 6px;
+    column-gap: clamp(4px, 0.6vw, 10px);
+  }
+
+  .nav-right {
+    grid-column: 3;
+    justify-self: end;
+  }
+
+  .mobile-more-btn {
+    display: none;
+  }
+
+  .nav-label {
+    padding: 10px clamp(8px, 0.85vw, 14px);
+    font-size: clamp(13px, 0.35vw + 12px, 14px);
+    font-weight: 550;
+  }
+
+  .nav-login-btn {
+    padding: 11px clamp(18px, 1.8vw, 28px);
+  }
+
+  /* Full-width invisible bridge between navbar and centered mega menus */
+  .motor-mega-menu--desktop::before,
+  .health-mega-menu--desktop::before,
+  .business-mega-menu--desktop::before,
+  .cargo-mega-menu--desktop::before,
+  .renewal-mega-menu--desktop::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100vw;
+    top: -16px;
+    height: 16px;
+  }
+
+  /* Shared smooth enter / exit animation for all mega menus */
+  .motor-mega-menu--desktop,
+  .health-mega-menu--desktop,
+  .business-mega-menu--desktop,
+  .cargo-mega-menu--desktop,
+  .renewal-mega-menu--desktop {
+    transform: translateX(-50%) translateY(-8px) scale(0.988);
+    transform-origin: top center;
+    box-shadow: 0 10px 28px rgba(15, 23, 42, 0.08);
+    transition:
+      opacity 0.55s cubic-bezier(0.4, 0, 0.2, 1),
+      transform 0.62s cubic-bezier(0.4, 0, 0.2, 1),
+      visibility 0s linear 0.62s,
+      box-shadow 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .motor-mega-menu--desktop.is-open,
+  .health-mega-menu--desktop.is-open,
+  .business-mega-menu--desktop.is-open,
+  .cargo-mega-menu--desktop.is-open,
+  .renewal-mega-menu--desktop.is-open {
+    transform: translateX(-50%) translateY(0) scale(1);
+    box-shadow: 0 24px 48px rgba(15, 23, 42, 0.14);
+    transition:
+      opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.34s cubic-bezier(0.16, 1, 0.3, 1),
+      visibility 0s,
+      box-shadow 0.34s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+}
+
+@media (max-width: 1279px) {
+  .navbar-container {
+    position: relative;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px clamp(16px, 4.5vw, 24px);
+    height: 100px;
+    min-height: 100px;
+    max-height: 100px;
+    gap: 12px;
+    text-align: left;
+  }
+
+  .brand {
+    height: 100px;
+    max-height: 100px;
+    font-size: 20px;
+    font-weight: 700;
+    color: #111827;
+    padding: 4px 0;
+    gap: 0;
+    margin-right: auto;
+    justify-content: flex-start;
+  }
+
+  .brand-text {
+    font-size: clamp(20px, 4.8vw, 22px);
+    font-weight: 700;
+    line-height: 1.1;
+  }
+
+  .desktop-only {
+    display: none;
+  }
+
+  .mobile-more-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+    flex-shrink: 0;
+    width: 42px;
+    height: 42px;
+    flex: 0 0 auto;
+    border: none;
+    border-radius: 12px;
+    background: transparent;
+    color: #111827;
+    font-size: 30px;
+    font-weight: 600;
+    line-height: 1;
+    cursor: pointer;
+    padding: 0;
+  }
+
+  .hamburger-icon {
+    transform: translateY(-1px);
+  }
+
+  .nav-menu {
+    display: none;
+    position: absolute;
+    left: clamp(12px, 4vw, 24px);
+    right: clamp(12px, 4vw, 24px);
+    top: calc(100% + 4px);
+    width: auto;
+    max-width: none;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 6px;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    box-shadow: 0 10px 22px rgba(15, 23, 42, 0.12);
+    padding: 10px;
+    z-index: 1400;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    text-align: left;
+  }
+
+  .nav-menu.is-open {
+    display: flex;
+    max-height: min(70vh, calc(100dvh - 88px));
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .nav-link-item {
+    width: 100%;
+    text-align: left;
+  }
+
+  .nav-link-item--mega {
+    position: relative;
+  }
+
+  .nav-label {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: left;
+    border-radius: 10px;
+    padding: 10px 12px;
+    font-size: 14px;
+    font-weight: 550;
+    box-sizing: border-box;
+  }
+
+  .nav-dropdown-trigger {
+    justify-content: space-between;
+  }
+
+  .dropdown-menu {
+    position: static;
+    min-width: 100%;
+    margin-top: 4px;
+    border-radius: 10px;
+    border: 1px solid #e2e8f0;
+    box-shadow: none;
+    padding: 6px;
+    opacity: 1;
+    pointer-events: auto;
+    transform: none;
+    display: none;
+    text-align: left;
+  }
+
+  .dropdown-menu.is-open {
+    display: block;
+  }
+
+  .dropdown-item {
+    padding: 9px 10px;
+    font-size: 14px;
+    font-weight: 550;
+    text-align: left;
+  }
+
+  .dropdown-item-group {
+    text-align: left;
+  }
+
+  .login-item {
+    margin-left: 0;
+    padding-top: 8px;
+    border-top: 1px solid #e2e8f0;
+  }
+
+  .mobile-only {
+    display: block;
+  }
+
+  .nav-login-btn {
+    width: 100%;
+    text-align: center;
+    padding: 11px 16px;
+  }
+
+  /* Mobile mega-menus inside drawer — full width */
+  .nav-link-item .motor-mega-menu--mobile,
+  .nav-link-item .health-mega-menu--mobile,
+  .nav-link-item .business-mega-menu--mobile,
+  .nav-link-item .cargo-mega-menu--mobile,
+  .nav-link-item .renewal-mega-menu--mobile {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    text-align: left;
+  }
+
+}
+
+@media (max-width: 600px) {
+  .brand-text {
+    font-size: clamp(18px, 6vw, 22px);
+  }
+}
+
+/* Lock page scroll while mobile nav drawer is open */
+html.navbar-scroll-lock,
+body.navbar-scroll-lock,
+#root.navbar-scroll-lock {
+  overflow: hidden !important;
+  overscroll-behavior: none;
+}
+
+html.navbar-scroll-lock,
+body.navbar-scroll-lock {
+  height: 100%;
+}
+
+.navbar-scroll-lock .nav-menu.is-open,
+.navbar-scroll-lock .motor-mega-menu--desktop,
+.navbar-scroll-lock .health-mega-menu--desktop,
+.navbar-scroll-lock .business-mega-menu--desktop,
+.navbar-scroll-lock .cargo-mega-menu--desktop,
+.navbar-scroll-lock .renewal-mega-menu--desktop {
+  touch-action: pan-y;
+  -webkit-overflow-scrolling: touch;
+}
+
+@media (min-width: 1280px) {
+  .motor-mega-menu--desktop.is-open,
+  .health-mega-menu--desktop.is-open,
+  .business-mega-menu--desktop.is-open,
+  .cargo-mega-menu--desktop.is-open,
+  .renewal-mega-menu--desktop.is-open {
+    max-height: min(75vh, calc(100dvh - 96px));
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nav-login-btn,
+  .dropdown-menu,
+  .dropdown-arrow {
+    transition: none;
+  }
+
+  .motor-mega-menu--desktop,
+  .health-mega-menu--desktop,
+  .business-mega-menu--desktop,
+  .cargo-mega-menu--desktop,
+  .renewal-mega-menu--desktop {
+    transition: none;
+  }
+
+  .dropdown-open .dropdown-arrow {
+    transform: none;
+  }
+
+  .nav-login-btn:hover {
+    transform: none;
+  }
+}
