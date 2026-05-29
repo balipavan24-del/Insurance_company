@@ -5,6 +5,7 @@ import BusinessInsuranceMegaMenu from './BusinessInsuranceMegaMenu';
 import CargoInsuranceMegaMenu from './CargoInsuranceMegaMenu';
 import HealthInsuranceMegaMenu from './HealthInsuranceMegaMenu';
 import MotorInsuranceMegaMenu from './MotorInsuranceMegaMenu';
+import RenewalPlansMegaMenu from './RenewalPlansMegaMenu';
 import BrandLogo from '../BrandLogo/BrandLogo';
 import './Navbar.css';
 
@@ -43,6 +44,7 @@ function Navbar({ onLoginClick, onMenuOptionSelect, onBrandClick }) {
   const HEALTH_INSURANCE_ID = 'health-insurance';
   const BUSINESS_INSURANCE_ID = 'business-insurance';
   const CARGO_INSURANCE_ID = 'cargo-insurance';
+  const RENEWAL_PLANS_ID = 'renewal-plans';
   const menu = [
     {
       id: MOTOR_INSURANCE_ID,
@@ -65,9 +67,9 @@ function Navbar({ onLoginClick, onMenuOptionSelect, onBrandClick }) {
       megaMenu: 'cargo',
     },
     {
-      id: 'renewal-plans',
+      id: RENEWAL_PLANS_ID,
       label: 'Renew Plans',
-      nonFunctional: true,
+      megaMenu: 'renewal',
     },
     {
       id: 'support',
@@ -80,6 +82,11 @@ function Navbar({ onLoginClick, onMenuOptionSelect, onBrandClick }) {
   };
 
   const handleNavParentClick = (item) => {
+    if (item.id === RENEWAL_PLANS_ID) {
+      toggleDropdown(item.id);
+      return;
+    }
+
     if (isMobileView() && (item.dropdown || item.megaMenu)) {
       toggleDropdown(item.id);
       return;
@@ -156,7 +163,7 @@ function Navbar({ onLoginClick, onMenuOptionSelect, onBrandClick }) {
       if (!(target instanceof Element)) return false;
       return Boolean(
         target.closest(
-          '.motor-mega-menu--desktop, .health-mega-menu--desktop, .business-mega-menu--desktop, .cargo-mega-menu--desktop, .dropdown-menu'
+          '.motor-mega-menu--desktop, .health-mega-menu--desktop, .business-mega-menu--desktop, .cargo-mega-menu--desktop, .renewal-mega-menu--desktop, .dropdown-menu'
         )
       );
     };
@@ -261,6 +268,20 @@ function Navbar({ onLoginClick, onMenuOptionSelect, onBrandClick }) {
             onMouseLeave={() => !isMobileView() && scheduleCloseHover(CARGO_INSURANCE_ID)}
           />
           <CargoInsuranceMegaMenu variant="mobile" {...commonProps} />
+        </>
+      );
+    }
+
+    if (item.megaMenu === 'renewal') {
+      return (
+        <>
+          <RenewalPlansMegaMenu
+            variant="desktop"
+            {...commonProps}
+            onMouseEnter={() => !isMobileView() && openDropdownHover(RENEWAL_PLANS_ID)}
+            onMouseLeave={() => !isMobileView() && scheduleCloseHover(RENEWAL_PLANS_ID)}
+          />
+          <RenewalPlansMegaMenu variant="mobile" {...commonProps} />
         </>
       );
     }

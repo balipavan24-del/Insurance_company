@@ -19,6 +19,7 @@ import BusinessEquipment from './pages/Business/Business-Equipment';
 import LandingPage from './pages/Landing/Landing-Page';
 import ContactUs from './pages/Contact/ContactUs';
 import InsuranceBasics from './pages/InsuranceBasics/InsuranceBasics';
+import CarRenew from './pages/RenewPlans/Car-Renew';
 import iconLandingMotor from './assets/icons/landing-motor.png';
 import iconLandingHealth from './assets/icons/landing-health.png';
 import iconLandingTerm from './assets/icons/landing-term.png';
@@ -147,6 +148,66 @@ function App() {
   }, [location.pathname, location.key]);
 
   const handleMenuItemSelect = (optionId) => {
+    if (optionId === 'renewal-plans') {
+      navigate('/?menu=renewal-plans');
+      return;
+    }
+
+    if (optionId === 'renewal-motor-car') {
+      navigate('/renew-plans/car');
+      return;
+    }
+
+    if (optionId === 'renewal-motor-bike') {
+      navigate('/motor-insurance/bike?flow=renewal');
+      return;
+    }
+
+    if (optionId === 'renewal-motor-commercial') {
+      navigate('/motor-insurance/commercial-vehicle?flow=renewal');
+      return;
+    }
+
+    if (optionId === 'renewal-motor-three-wheeler') {
+      navigate('/motor-insurance/three-wheeler?flow=renewal');
+      return;
+    }
+
+    if (optionId === 'renewal-health-individual') {
+      navigate('/health-insurance?flow=renewal&plan=individual');
+      return;
+    }
+
+    if (optionId === 'renewal-health-family') {
+      navigate('/health-insurance?flow=renewal&plan=family');
+      return;
+    }
+
+    if (optionId === 'renewal-health-senior') {
+      navigate('/health-insurance?flow=renewal&plan=senior');
+      return;
+    }
+
+    if (optionId === 'renewal-term') {
+      navigate('/term-insurance?flow=renewal');
+      return;
+    }
+
+    if (optionId === 'renewal-track-policy') {
+      navigate('/contact-us?topic=track-policy');
+      return;
+    }
+
+    if (optionId === 'renewal-download-copy') {
+      navigate('/contact-us?topic=policy-copy');
+      return;
+    }
+
+    if (optionId === 'renewal-claim-assistance') {
+      navigate('/contact-us?topic=claim-assistance');
+      return;
+    }
+
     if (optionId.startsWith('motor-addon-')) {
       const addonParam = {
         'motor-addon-zero-depreciation': 'zero-depreciation',
@@ -343,7 +404,8 @@ function App() {
     || location.pathname.startsWith('/business-insurance')
     || location.pathname.startsWith('/business')
     || location.pathname.startsWith('/contact-us')
-    || location.pathname.startsWith('/insurance-basics');
+    || location.pathname.startsWith('/insurance-basics')
+    || location.pathname.startsWith('/renew-plans');
 
   return (
     <div className="main-wrapper">
@@ -519,6 +581,14 @@ function App() {
             element={(
               <div className="app-screen app-screen--insurance-basics">
                 <InsuranceBasics />
+              </div>
+            )}
+          />
+          <Route
+            path="/renew-plans/car"
+            element={(
+              <div className="app-screen app-screen--renew-plans">
+                <CarRenew />
               </div>
             )}
           />

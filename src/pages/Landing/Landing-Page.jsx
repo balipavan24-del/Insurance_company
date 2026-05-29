@@ -118,6 +118,8 @@ function LandingPage({ insuranceOptions = [], onInsuranceCardClick, showHomeSnac
           className="choose-section page-section page-section--regular"
           aria-labelledby="choose-heading"
           {...revealOnScroll}
+          threshold={0.05}
+          rootMargin="0px 0px -4% 0px"
         >
           <div className="choose-header">
             <p className="choose-kicker">Why customers trust us</p>
@@ -130,8 +132,15 @@ function LandingPage({ insuranceOptions = [], onInsuranceCardClick, showHomeSnac
             </p>
           </div>
           <div className="choose-grid">
-            {CHOOSE_FEATURES.map((item) => (
-              <article key={item.id} className="choose-card">
+            {CHOOSE_FEATURES.map((item, index) => (
+              <article
+                key={item.id}
+                className="choose-card choose-card--float"
+                style={{
+                  '--choose-pop-delay': `${120 + index * 220}ms`,
+                  '--choose-wave-offset': `${index * 280}ms`,
+                }}
+              >
                 <div className="choose-card-icon" style={{ background: item.iconBg }}>
                   {item.logoSrc ? (
                     <img

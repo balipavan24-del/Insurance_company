@@ -15,5 +15,4 @@ function BrandLogo({ className = '', alt = 'InsureEase', ...imgProps }) {
     />
   );
 }
-
 export default BrandLogo;

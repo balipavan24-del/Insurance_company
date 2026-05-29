@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import BrandLogo from '../BrandLogo/BrandLogo';
+import footerLogoWhite from '../../assets/images/footer-logo-white.png';
 import './Footer.css';
 
 function Footer() {
@@ -27,6 +27,12 @@ function Footer() {
   ];
 
   const socialLinks = ['x', 'in', 'fb', 'yt'];
+  const popularSearches = [
+    'Car Insurance Renewal',
+    'Bike Insurance Renewal',
+    'Best Insurance Plans',
+    'Cheapest Insurance',
+  ];
   const footerRouteMap = {
     'Motor Insurance': '/motor-insurance/car',
     'Health Insurance': '/health-insurance',
@@ -52,6 +58,10 @@ function Footer() {
     'Terms & Conditions': '/?footer=terms-and-conditions',
     Disclaimer: '/?footer=disclaimer',
     'Cancellation & Refund Policy': '/?footer=cancellation-and-refund-policy',
+    'Car Insurance Renewal': '/renew-plans/car',
+    'Bike Insurance Renewal': '/?search=bike-insurance-renewal',
+    'Best Insurance Plans': '/?search=best-insurance-plans',
+    'Cheapest Insurance': '/?search=cheapest-insurance',
   };
 
   return (
@@ -74,9 +84,26 @@ function Footer() {
           ))}
         </div>
 
+        <div className="footer-popular-searches" aria-label="Popular searches">
+          <h3 className="footer-popular-searches-title">Popular Searches</h3>
+          <div className="footer-popular-searches-list">
+            {popularSearches.map((searchItem) => (
+              <Link key={searchItem} to={footerRouteMap[searchItem] || '/'}>
+                {searchItem}
+              </Link>
+            ))}
+          </div>
+        </div>
+
         <div className="footer-bottom">
           <div className="footer-brand">
-            <BrandLogo className="brand-logo--footer" />
+            <img
+              src={footerLogoWhite}
+              alt="InsureEase"
+              className="footer-logo-image"
+              loading="lazy"
+              decoding="async"
+            />
           </div>
 
           <div className="footer-social-links" aria-label="Social links">
