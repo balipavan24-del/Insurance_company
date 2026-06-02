@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import DropdownChevron from '../../components/Dropdown/DropdownChevron';
+import InsuranceFaqAccordion from '../../components/Faq/InsuranceFaqAccordion';
 import Footer from '../../components/Footer/Footer';
+import { carRenewFaqItems, carRenewFaqSection, carRenewSupportCard } from '../../data/productContent';
 import carRenewHeroImage from '../../assets/images/car-renew-hero.png';
 import './Car-Renew.css';
 
@@ -118,6 +120,83 @@ const RENEW_ADDONS = [
     title: 'Consumables Cover',
     description: 'Reimbursement for nuts, bolts, oils and other consumables.',
     icon: 'wrench',
+  },
+];
+
+const RENEW_WHY_US = [
+  {
+    id: 'instant-renewal',
+    title: 'Instant Policy Renewal',
+    description: 'Renew in minutes with zero hassle.',
+    icon: 'bolt',
+  },
+  {
+    id: 'price-comparison',
+    title: 'Best Price Comparison',
+    description: 'Compare quotes from top insurers side by side.',
+    icon: 'star',
+  },
+  {
+    id: 'trusted-partners',
+    title: 'Trusted Insurance Partners',
+    description: "Tie-ups with India's most reliable insurers.",
+    icon: 'shield-check',
+  },
+  {
+    id: 'claim-support',
+    title: 'Claim Assistance Support',
+    description: 'Dedicated support from filing to settlement.',
+    icon: 'headset',
+  },
+  {
+    id: 'secure-payments',
+    title: 'Secure Payments',
+    description: 'Bank-grade encryption on every transaction.',
+    icon: 'lock',
+  },
+  {
+    id: 'expert-guidance',
+    title: 'Expert Guidance',
+    description: 'Talk to certified advisors anytime you need.',
+    icon: 'award',
+  },
+];
+
+const RENEW_STEPS = [
+  {
+    id: 'enter-details',
+    step: 1,
+    title: 'Enter Vehicle Details',
+    description: 'Share your car number and basic info.',
+    icon: 'clipboard',
+  },
+  {
+    id: 'compare-plans',
+    step: 2,
+    title: 'Compare Renewal Plans',
+    description: 'Browse plans from top trusted insurers.',
+    icon: 'search',
+  },
+  {
+    id: 'select-addons',
+    step: 3,
+    title: 'Select Add-ons',
+    description: 'Pick the right cover and customise add-ons.',
+    icon: 'list',
+  },
+  {
+    id: 'secure-payment',
+    step: 4,
+    title: 'Make Secure Payment',
+    description: 'Pay securely using your preferred method.',
+    icon: 'card',
+  },
+  {
+    id: 'receive-policy',
+    step: 5,
+    title: 'Receive Policy Instantly',
+    description: 'Get your renewed policy in your inbox.',
+    icon: 'document',
   },
 ];
 
@@ -296,6 +375,119 @@ function RenewAddonIcon({ name }) {
   );
 }
 
+function RenewWhyUsIcon({ name }) {
+  const props = { viewBox: '0 0 24 24', width: 20, height: 20, 'aria-hidden': true, focusable: 'false' };
+  if (name === 'star') {
+    return (
+      <svg {...props}>
+        <path
+          d="M12 4.2 14.1 9.5l5.7.5-4.3 3.7 1.3 5.6L12 16.8 7.2 19.3l1.3-5.6-4.3-3.7 5.7-.5L12 4.2Z"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.75"
+          strokeLinejoin="round"
+        />
+      </svg>
+    );
+  }
+  if (name === 'shield-check') {
+    return (
+      <svg {...props}>
+        <path d="M12 3 5 6.5v5c0 4.1 2.8 7.3 7 8.5 4.2-1.2 7-4.4 7-8.5v-5L12 3Z" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinejoin="round" />
+        <path d="m9.2 11.8 1.9 1.9 3.6-3.8" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+    );
+  }
+  if (name === 'headset') {
+    return (
+      <svg {...props}>
+        <path d="M4 14v-2a8 8 0 0 1 16 0v2" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" />
+        <rect x="3" y="14" width="4" height="6" rx="1.5" fill="none" stroke="currentColor" strokeWidth="1.75" />
+        <rect x="17" y="14" width="4" height="6" rx="1.5" fill="none" stroke="currentColor" strokeWidth="1.75" />
+      </svg>
+    );
+  }
+  if (name === 'lock') {
+    return (
+      <svg {...props}>
+        <rect x="5" y="11" width="14" height="10" rx="2" fill="none" stroke="currentColor" strokeWidth="1.75" />
+        <path d="M8 11V8a4 4 0 0 1 8 0v3" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" />
+      </svg>
+    );
+  }
+  if (name === 'award') {
+    return (
+      <svg {...props}>
+        <circle cx="12" cy="9" r="4" fill="none" stroke="currentColor" strokeWidth="1.75" />
+        <path d="M8.8 13 7 21l5-2.6 5 2.6-1.8-8" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+    );
+  }
+  return (
+    <svg {...props}>
+      <path d="M11 2 5.3 12H11l-1 10 8.7-12H13l1-8Z" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+function RenewStepIcon({ name }) {
+  const props = { viewBox: '0 0 24 24', width: 22, height: 22, 'aria-hidden': true, focusable: 'false' };
+  if (name === 'search') {
+    return (
+      <svg {...props}>
+        <circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" strokeWidth="1.75" />
+        <path d="M16 16l4 4" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" />
+      </svg>
+    );
+  }
+  if (name === 'list') {
+    return (
+      <svg {...props}>
+        <path d="M8 7h12M8 12h12M8 17h12" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" />
+        <circle cx="5" cy="7" r="1.1" fill="currentColor" />
+        <circle cx="5" cy="12" r="1.1" fill="currentColor" />
+        <circle cx="5" cy="17" r="1.1" fill="currentColor" />
+      </svg>
+    );
+  }
+  if (name === 'card') {
+    return (
+      <svg {...props}>
+        <rect x="3" y="6" width="18" height="12" rx="2" fill="none" stroke="currentColor" strokeWidth="1.75" />
+        <path d="M3 10h18" fill="none" stroke="currentColor" strokeWidth="1.75" />
+        <path d="M7 15h4" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" />
+      </svg>
+    );
+  }
+  if (name === 'document') {
+    return (
+      <svg {...props}>
+        <path
+          d="M8 4h8l2 2v14H6V4h2Z"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="1.75"
+          strokeLinejoin="round"
+        />
+        <path d="M14 4v4h4M10 13h4M10 16h4" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" />
+      </svg>
+    );
+  }
+  return (
+    <svg {...props}>
+      <path
+        d="M9 4h6M10 2h4v3h-4zM7 5h10a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Z"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.75"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path d="M9 10h6M9 13h4" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" />
+    </svg>
+  );
+}
+
 function RenewPricingIcon({ name }) {
   const props = { viewBox: '0 0 24 24', width: 22, height: 22, 'aria-hidden': true, focusable: 'false' };
   if (name === 'calendar') {
@@ -462,6 +654,15 @@ function RenewCoverageIcon({ name }) {
 function CarRenew() {
   const [openExclusionId, setOpenExclusionId] = useState('');
 
+  const scrollToRenewForm = () => {
+    const formCard = document.getElementById('car-renew-form');
+    formCard?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    const input = document.getElementById('car-reg-no');
+    if (input instanceof HTMLInputElement) {
+      window.setTimeout(() => input.focus(), 400);
+    }
+  };
+
   return (
     <div className="renew-plans-page">
       <section className="car-renew-hero page-section page-section--regular page-section-container" aria-labelledby="car-renew-heading">
@@ -486,7 +687,7 @@ function CarRenew() {
 
           </div>
 
-          <aside className="car-renew-form-card" aria-label="Car renewal form">
+          <aside id="car-renew-form" className="car-renew-form-card" aria-label="Car renewal form">
             <span className="car-renew-form-card__chip">Renew in under 2 minutes</span>
             <h2 className="car-renew-form-card__title">Renew Your Car Insurance</h2>
             <p className="car-renew-form-card__copy">
@@ -785,6 +986,94 @@ function CarRenew() {
               </li>
             ))}
           </ul>
+        </div>
+      </section>
+
+      <section className="car-renew-process page-section page-section--regular page-section-container" aria-labelledby="car-renew-process-heading">
+        <div className="car-renew-process__inner">
+          <p className="car-renew-process__eyebrow">
+            <span className="car-renew-process__eyebrow-line" aria-hidden="true" />
+            Process
+            <span className="car-renew-process__eyebrow-line" aria-hidden="true" />
+          </p>
+          <h2 id="car-renew-process-heading" className="car-renew-process__title">
+            How to Renew in <span className="car-renew-process__title-accent">5 Easy Steps</span>
+          </h2>
+
+          <div className="car-renew-process__steps-wrap">
+            <div className="car-renew-process__track" aria-hidden="true" />
+
+            <ol className="car-renew-process__grid">
+              {RENEW_STEPS.map((step) => (
+                <li key={step.id} className="car-renew-process__item">
+                  <article className="car-renew-process-card car-renew-process-card--float">
+                    <div className="car-renew-process-card__icon-wrap">
+                      <span className="car-renew-process-card__icon" aria-hidden="true">
+                        <RenewStepIcon name={step.icon} />
+                      </span>
+                      <span className="car-renew-process-card__step">{step.step}</span>
+                    </div>
+                    <h3 className="car-renew-process-card__title">{step.title}</h3>
+                    <p className="car-renew-process-card__text">{step.description}</p>
+                  </article>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </div>
+      </section>
+
+      <section className="car-renew-why-us page-section page-section--regular page-section-container" aria-labelledby="car-renew-why-us-heading">
+        <div className="car-renew-why-us__inner">
+          <p className="car-renew-why-us__eyebrow">
+            <span className="car-renew-why-us__eyebrow-line" aria-hidden="true" />
+            Why Us
+            <span className="car-renew-why-us__eyebrow-line" aria-hidden="true" />
+          </p>
+          <h2 id="car-renew-why-us-heading" className="car-renew-why-us__title">
+            Why Choose Us for <span className="car-renew-why-us__title-accent">Your Renewal</span>
+          </h2>
+
+          <ul className="car-renew-why-us__grid">
+            {RENEW_WHY_US.map((item) => (
+              <li key={item.id}>
+                <article className="car-renew-why-us-card">
+                  <span className="car-renew-why-us-card__icon" aria-hidden="true">
+                    <RenewWhyUsIcon name={item.icon} />
+                  </span>
+                  <h3 className="car-renew-why-us-card__title">{item.title}</h3>
+                  <p className="car-renew-why-us-card__text">{item.description}</p>
+                </article>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      <InsuranceFaqAccordion
+        title={carRenewFaqSection.title}
+        subtitle={carRenewFaqSection.subtitle}
+        items={carRenewFaqItems}
+        buttonLabel={carRenewFaqSection.buttonLabel}
+      />
+
+      <section className="car-renew-support page-section page-section--regular page-section-container" aria-labelledby="car-renew-support-heading">
+        <div className="car-renew-support__inner">
+          <div className="car-renew-support__banner">
+            <h2 id="car-renew-support-heading" className="car-renew-support__title">
+              {carRenewSupportCard.title}
+            </h2>
+            <p className="car-renew-support__subtitle">{carRenewSupportCard.subtitle}</p>
+            <div className="car-renew-support__actions">
+              <button type="button" className="car-renew-support__btn car-renew-support__btn--primary" onClick={scrollToRenewForm}>
+                {carRenewSupportCard.primaryCta}
+                <span aria-hidden="true">→</span>
+              </button>
+              <Link to={carRenewSupportCard.expertHref} className="car-renew-support__btn car-renew-support__btn--ghost">
+                {carRenewSupportCard.secondaryCta}
+              </Link>
+            </div>
+          </div>
         </div>
       </section>
 

@@ -22,6 +22,143 @@
   margin-top: 0;
 }
 
+.renew-plans-page .business-home-faqs {
+  margin-top: 0;
+  padding: 0 0 var(--renew-band-pad-y);
+  box-sizing: border-box;
+  width: 100%;
+  max-width: min(var(--renew-content-max), 100%);
+  margin-inline: auto;
+  padding-inline: var(--renew-pad-x);
+}
+
+.renew-plans-page .business-home-faqs .business-coverage-wrap {
+  max-width: 100%;
+  padding-inline: 0;
+}
+
+/* Support CTA card */
+.car-renew-support {
+  width: 100%;
+  padding: 0;
+}
+
+.car-renew-support__inner {
+  width: 100%;
+  max-width: min(var(--renew-content-max), 100%);
+  margin: 0 auto;
+  box-sizing: border-box;
+  padding: 0 var(--renew-pad-x) var(--renew-band-pad-y);
+}
+
+.car-renew-support__banner {
+  border-radius: clamp(18px, 2.4vw, 28px);
+  padding: clamp(32px, 4.5vw, 52px) clamp(20px, 4vw, 40px);
+  text-align: center;
+  background: linear-gradient(90deg, #2e88c7 0%, #4f46e5 100%);
+  box-shadow: 0 16px 40px rgba(46, 136, 199, 0.28);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.car-renew-support__title {
+  margin: 0 auto;
+  max-width: none;
+  color: #ffffff;
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  line-height: 1.15;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+}
+
+.car-renew-support__subtitle {
+  margin: 12px auto 0;
+  max-width: 46ch;
+  color: rgba(255, 255, 255, 0.94);
+  font-size: clamp(14px, 1.6vw, 17px);
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+.car-renew-support__actions {
+  margin-top: 24px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+}
+
+.car-renew-support__btn {
+  min-height: 48px;
+  padding: 0 24px;
+  border-radius: 999px;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.car-renew-support__btn--primary {
+  border: none;
+  background: rgba(67, 56, 202, 0.92);
+  color: #ffffff;
+  box-shadow: 0 8px 20px rgba(30, 27, 75, 0.22);
+}
+
+.car-renew-support__btn--primary:hover {
+  transform: translateY(-1px);
+  background: rgba(55, 48, 163, 0.98);
+  box-shadow: 0 10px 24px rgba(30, 27, 75, 0.28);
+}
+
+.car-renew-support__btn--ghost {
+  border: 1.5px solid rgba(255, 255, 255, 0.92);
+  background: transparent;
+  color: #ffffff;
+}
+
+.car-renew-support__btn--ghost:hover {
+  transform: translateY(-1px);
+  background: rgba(255, 255, 255, 0.1);
+  border-color: #ffffff;
+}
+
+.car-renew-support__btn:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .car-renew-support__btn--primary:hover,
+  .car-renew-support__btn--ghost:hover {
+    transform: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .car-renew-support__title {
+    white-space: normal;
+    font-size: clamp(1.35rem, 5.5vw, 1.75rem);
+  }
+
+  .car-renew-support__actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .car-renew-support__btn {
+    width: 100%;
+    max-width: 320px;
+  }
+}
+
 .car-renew-hero {
   width: 100%;
   padding: 0;
@@ -903,6 +1040,322 @@
   font-weight: 600;
 }
 
+/* How to Renew — process steps */
+.car-renew-process {
+  width: 100%;
+  background: #f8fafc;
+}
+
+.car-renew-process__inner {
+  position: relative;
+  width: 100%;
+  max-width: min(var(--renew-content-max), 100%);
+  margin: 0 auto;
+  box-sizing: border-box;
+  padding: var(--renew-band-pad-y) var(--renew-pad-x);
+}
+
+.car-renew-process__eyebrow {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: #3b828f;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.car-renew-process__eyebrow-line {
+  width: 52px;
+  height: 1px;
+  background: #77a8b2;
+}
+
+.car-renew-process__title {
+  margin: 14px auto 0;
+  text-align: center;
+  color: #111827;
+  font-size: clamp(2rem, 3vw, 2.8rem);
+  line-height: 1.12;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.car-renew-process__title-accent {
+  background: linear-gradient(90deg, #2e88c7 0%, #4f46e5 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.car-renew-process__steps-wrap {
+  position: relative;
+  margin-top: 32px;
+}
+
+.car-renew-process__track {
+  position: absolute;
+  left: 6%;
+  right: 6%;
+  top: 47px;
+  height: 3px;
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    rgba(26, 79, 122, 0.3) 0%,
+    #1e5f96 18%,
+    #2e88c7 50%,
+    #1e5f96 82%,
+    rgba(26, 79, 122, 0.3) 100%
+  );
+  box-shadow: 0 0 12px rgba(46, 136, 199, 0.22);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.car-renew-process__grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.car-renew-process__item {
+  min-width: 0;
+}
+
+.car-renew-process-card {
+  height: 100%;
+  padding: 22px 14px 18px;
+  border-radius: 14px;
+  background: #ffffff;
+  border: 1px solid rgba(226, 232, 240, 0.95);
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.07), 0 2px 6px rgba(15, 23, 42, 0.04);
+  text-align: center;
+  transition: box-shadow 0.28s ease, border-color 0.28s ease;
+}
+
+.car-renew-process-card:hover {
+  border-color: #c7d7ea;
+  box-shadow: 0 16px 36px rgba(15, 23, 42, 0.11), 0 4px 10px rgba(15, 23, 42, 0.06);
+}
+
+@keyframes car-renew-step-float {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -10px, 0);
+  }
+}
+
+.car-renew-process-card--float {
+  animation: car-renew-step-float 4.6s ease-in-out infinite;
+  will-change: transform;
+}
+
+.car-renew-process__item:nth-child(1) .car-renew-process-card--float {
+  animation-delay: 0s;
+}
+
+.car-renew-process__item:nth-child(2) .car-renew-process-card--float {
+  animation-delay: 0.35s;
+}
+
+.car-renew-process__item:nth-child(3) .car-renew-process-card--float {
+  animation-delay: 0.7s;
+}
+
+.car-renew-process__item:nth-child(4) .car-renew-process-card--float {
+  animation-delay: 1.05s;
+}
+
+.car-renew-process__item:nth-child(5) .car-renew-process-card--float {
+  animation-delay: 1.4s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .car-renew-process-card--float {
+    animation: none;
+    will-change: auto;
+  }
+}
+
+.car-renew-process-card__icon-wrap {
+  position: relative;
+  display: inline-flex;
+  margin-bottom: 14px;
+}
+
+.car-renew-process-card__icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+  display: inline-grid;
+  place-items: center;
+  color: #ffffff;
+  background: linear-gradient(180deg, #2e88c7 0%, #4f46e5 100%);
+  box-shadow: 0 10px 20px rgba(79, 70, 229, 0.24);
+}
+
+.car-renew-process-card__step {
+  position: absolute;
+  top: -6px;
+  right: -10px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: inline-grid;
+  place-items: center;
+  background: #ffffff;
+  border: 2px solid #2e88c7;
+  color: #2e88c7;
+  font-size: 11px;
+  font-weight: 800;
+  line-height: 1;
+  box-shadow: 0 4px 10px rgba(46, 136, 199, 0.18);
+}
+
+.car-renew-process-card__title {
+  margin: 0 0 8px;
+  color: #111827;
+  font-size: 15px;
+  line-height: 1.32;
+  font-weight: 700;
+}
+
+.car-renew-process-card__text {
+  margin: 0;
+  color: #64748b;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+/* Why Choose Us */
+.car-renew-why-us {
+  width: 100%;
+  background: #ffffff;
+}
+
+.car-renew-why-us__inner {
+  width: 100%;
+  max-width: min(var(--renew-content-max), 100%);
+  margin: 0 auto;
+  box-sizing: border-box;
+  padding: var(--renew-band-pad-y) var(--renew-pad-x);
+}
+
+.car-renew-why-us__eyebrow {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: #3b828f;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.car-renew-why-us__eyebrow-line {
+  width: 52px;
+  height: 1px;
+  background: #77a8b2;
+}
+
+.car-renew-why-us__title {
+  margin: 14px auto 0;
+  text-align: center;
+  color: #111827;
+  font-size: clamp(2rem, 3vw, 2.8rem);
+  line-height: 1.12;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.car-renew-why-us__title-accent {
+  background: linear-gradient(90deg, #2e88c7 0%, #4f46e5 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.car-renew-why-us__grid {
+  list-style: none;
+  margin: 28px 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.car-renew-why-us-card {
+  min-height: 148px;
+  padding: 18px 16px 16px;
+  border-radius: 14px;
+  border: 1px solid #e2e8f0;
+  background: #ffffff;
+  box-shadow: 0 4px 18px rgba(15, 23, 42, 0.05), 0 1px 3px rgba(15, 23, 42, 0.04);
+  text-align: left;
+  transition: transform 0.24s ease, box-shadow 0.24s ease, border-color 0.24s ease;
+}
+
+.car-renew-why-us-card:hover {
+  transform: translateY(-3px);
+  border-color: #c7d7ea;
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.09);
+}
+
+.car-renew-why-us-card:hover .car-renew-why-us-card__icon {
+  background: linear-gradient(180deg, #2e88c7 0%, #4f46e5 100%);
+  color: #ffffff;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .car-renew-why-us-card {
+    transition: box-shadow 0.24s ease, border-color 0.24s ease;
+  }
+
+  .car-renew-why-us-card:hover {
+    transform: none;
+  }
+}
+
+.car-renew-why-us-card__icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 11px;
+  background: #eaf5ff;
+  color: #2e88c7;
+  display: inline-grid;
+  place-items: center;
+  transition: background 0.24s ease, color 0.24s ease;
+}
+
+.car-renew-why-us-card__title {
+  margin: 14px 0 6px;
+  color: #111827;
+  font-size: 16px;
+  line-height: 1.34;
+  font-weight: 700;
+}
+
+.car-renew-why-us-card__text {
+  margin: 0;
+  color: #64748b;
+  font-size: 14px;
+  line-height: 1.52;
+}
+
 /* What's Covered / What's Not Covered */
 .car-renew-coverage {
   --renew-coverage-accent: #e91e8c;
@@ -1146,6 +1599,19 @@
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
+  .car-renew-process__track {
+    left: 4%;
+    right: 4%;
+  }
+
+  .car-renew-process__grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .car-renew-why-us__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .car-renew-form-card {
     max-width: 560px;
   }
@@ -1223,6 +1689,31 @@
   }
 
   .car-renew-pricing-card {
+    min-height: 0;
+  }
+
+  .car-renew-process__eyebrow-line {
+    width: 34px;
+  }
+
+  .car-renew-process__grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .car-renew-process__track {
+    display: none;
+  }
+
+  .car-renew-why-us__eyebrow-line {
+    width: 34px;
+  }
+
+  .car-renew-why-us__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .car-renew-why-us-card {
     min-height: 0;
   }
 

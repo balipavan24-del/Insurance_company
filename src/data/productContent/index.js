@@ -221,6 +221,53 @@ export const motorInsuranceFaqItems = [
   },
 ];
 
+export const carRenewFaqSection = {
+  title: 'Frequently Asked Questions',
+  subtitle: 'Answers about expired policies, online renewal, NCB, documents, and switching insurers.',
+  buttonLabel: 'View More FAQs →',
+};
+
+export const carRenewFaqItems = [
+  {
+    id: 'expired-policy-impact',
+    question: 'What happens if my car insurance expires?',
+    answer:
+      'Your vehicle becomes legally non-compliant and you lose financial protection. You may also have to undergo a vehicle inspection before renewal.',
+  },
+  {
+    id: 'renew-expired-online',
+    question: 'Can I renew expired car insurance online?',
+    answer:
+      'Yes, you can renew an expired policy online. Some insurers may require a quick vehicle inspection if the policy has been expired for a long time.',
+  },
+  {
+    id: 'ncb-after-expiry',
+    question: 'Will I lose my No Claim Bonus?',
+    answer:
+      'If you renew within 90 days of expiry, your accumulated NCB is generally retained. Beyond that, NCB benefits may be forfeited.',
+  },
+  {
+    id: 'renewal-documents',
+    question: 'What documents are required for renewal?',
+    answer:
+      'Usually your existing policy, RC copy, and basic owner KYC details are sufficient for online renewal.',
+  },
+  {
+    id: 'switch-insurer-renewal',
+    question: 'Can I switch insurers during renewal?',
+    answer:
+      'Absolutely. Renewal is a great time to compare insurers and switch to a better plan while retaining your NCB.',
+  },
+];
+
+export const carRenewSupportCard = {
+  title: 'Drive Protected Without Interruptions',
+  subtitle: 'Renew your car insurance instantly and stay protected on every journey.',
+  primaryCta: 'Renew Your Policy',
+  secondaryCta: 'Talk to an Expert',
+  expertHref: '/contact-us?topic=car-renewal',
+};
+
 export const insuranceBasicsQuickSection = {
   eyebrow: 'Foundations',
   title: 'Quick Insurance',
