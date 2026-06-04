@@ -18,6 +18,7 @@
   max-height: none;
   object-fit: contain;
   object-position: center;
+  background: #ffffff;
 }
 
 .brand-logo--auth,

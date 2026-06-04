@@ -2,7 +2,7 @@ import { useMemo, useState } from 'react';
 import { GUEST_DUMMY_DATA, getGuestCategoryDummyData } from '../GuestDummyData';
 import './WithoutNumber.css';
 
-function WithoutNumber({ selectedCategory = 'motor-car', onBackToVehicleCheck, onContinue }) {
+function WithoutNumber({ selectedCategory = 'motor-car', onBackToVehicleCheck, onContinue, isModal = false }) {
   const requiredVehicleFields = ['brand', 'model', 'variant', 'registrationYear', 'registrationCity'];
   const withoutNumberSteps = GUEST_DUMMY_DATA.steps.filter((step) => step.id !== 3);
   const initialCategoryDummyData = useMemo(
@@ -84,17 +84,19 @@ function WithoutNumber({ selectedCategory = 'motor-car', onBackToVehicleCheck, o
 
   return (
     <section
-      className="motor-plans-view"
+      className={`motor-plans-view${isModal ? ' motor-plans-view--modal' : ''}`}
       data-motor-flow="without-vehicle-number"
       data-motor-selected-category={selectedCategory}
     >
-      <button
-        type="button"
-        className="motor-plans-back-link"
-        onClick={onBackToVehicleCheck}
-      >
-        ← Back to Vehicle Check
-      </button>
+      {!isModal && (
+        <button
+          type="button"
+          className="motor-plans-back-link"
+          onClick={onBackToVehicleCheck}
+        >
+          ← Back to Vehicle Check
+        </button>
+      )}
 
       <header className="motor-plans-header">
         <h1>{GUEST_DUMMY_DATA.titles.heading}</h1>

@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import motorHeroImage from '../../assets/images/Motor-Hero.webp';
+import bikeInsuranceHeroImage from '../../assets/images/bike-insurance-hero.png';
 import motorIconTwoWheeler from '../../assets/icons/Motor-TwoWheeler.webp';
 import motorIconThreeWheeler from '../../assets/icons/Motor-ThreeWheeler.webp';
 import motorIconFourWheeler from '../../assets/icons/Motor-FourWheeler.webp';
@@ -421,6 +422,10 @@ function MotorInsurance({ onBackHome, selectedCategory = 'motor-car' }) {
   const [motorOfferingsTab, setMotorOfferingsTab] = useState('motor-car');
   const activeCategoryId = normalizeMotorCategory(selectedCategory);
   const categoryDetails = useMemo(() => getCategoryDetails(activeCategoryId), [activeCategoryId]);
+  const heroImage = activeCategoryId === 'motor-bike' ? bikeInsuranceHeroImage : motorHeroImage;
+  const heroImageAlt = activeCategoryId === 'motor-bike'
+    ? 'Bike insurance protection illustration'
+    : 'Motor insurance illustration';
   const newVehicleType = activeCategoryId === 'motor-bike' ? 'bike' : 'car';
   const newVehicleTypeLabel = newVehicleType === 'bike' ? 'Bike' : 'Car';
   const normalizedVehicleNumber = vehicleNumber.toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 10);
@@ -483,7 +488,8 @@ function MotorInsurance({ onBackHome, selectedCategory = 'motor-car' }) {
   }, []);
 
   useEffect(() => {
-    if (!isBrandSelectionOpen && !isModelSelectionOpen && !isVariantSelectionOpen) {
+    const isModalOpen = isBrandSelectionOpen || isModelSelectionOpen || isVariantSelectionOpen || isWithoutVehicleFlow;
+    if (!isModalOpen) {
       return undefined;
     }
 
@@ -491,15 +497,22 @@ function MotorInsurance({ onBackHome, selectedCategory = 'motor-car' }) {
     document.body.style.overflow = 'hidden';
 
     const handleEscClose = (event) => {
-      if (event.key === 'Escape') {
-        if (isVariantSelectionOpen) {
-          setIsVariantSelectionOpen(false);
-          return;
-        }
-        if (isModelSelectionOpen) {
-          setIsModelSelectionOpen(false);
-          return;
-        }
+      if (event.key !== 'Escape') {
+        return;
+      }
+      if (isWithoutVehicleFlow) {
+        setIsWithoutVehicleFlow(false);
+        return;
+      }
+      if (isVariantSelectionOpen) {
+        setIsVariantSelectionOpen(false);
+        return;
+      }
+      if (isModelSelectionOpen) {
+        setIsModelSelectionOpen(false);
+        return;
+      }
+      if (isBrandSelectionOpen) {
         setIsBrandSelectionOpen(false);
       }
     };
@@ -519,7 +532,7 @@ function MotorInsurance({ onBackHome, selectedCategory = 'motor-car' }) {
       document.body.style.overflow = originalBodyOverflow;
       window.removeEventListener('keydown', handleEscClose);
     };
-  }, [isBrandSelectionOpen, isModelSelectionOpen, isVariantSelectionOpen]);
+  }, [isBrandSelectionOpen, isModelSelectionOpen, isVariantSelectionOpen, isWithoutVehicleFlow]);
 
   const closeSelectionModals = () => {
     if (document.activeElement instanceof HTMLElement) {
@@ -601,30 +614,12 @@ function MotorInsurance({ onBackHome, selectedCategory = 'motor-car' }) {
   };
 
   return (
-    <main className="motor-page page-section page-section--hero">
+    <main className={`motor-page page-section page-section--hero${activeCategoryId === 'motor-bike' ? ' motor-page--bike' : ''}`}>
       <section className="motor-wrap page-section-container">
-        {isWithoutVehicleFlow ? (
-          <div className="motor-screen motor-screen--guest-flow">
-            <WithoutNumber
-              selectedCategory={selectedCategory}
-              onBackToVehicleCheck={() => setIsWithoutVehicleFlow(false)}
-              onContinue={({ vehicle, insurance }) => {
-                logMotorQuoteLead('Continue without vehicle number — View Plans', {
-                  flow: 'without-vehicle-number',
-                  selectedCategory: activeCategoryId,
-                  vehicleNumber: null,
-                  continuedWithoutVehicleNumber: true,
-                  vehicle,
-                  insurance
-                });
-              }}
-            />
-          </div>
-        ) : (
           <>
           <div
-            className={`motor-screen motor-screen--vehicle-check${isNewCarFlow ? ' is-behind-modal' : ''}`}
-            aria-hidden={isNewCarFlow ? true : undefined}
+            className={`motor-screen motor-screen--vehicle-check${isNewCarFlow || isWithoutVehicleFlow ? ' is-behind-modal' : ''}`}
+            aria-hidden={isNewCarFlow || isWithoutVehicleFlow ? true : undefined}
           >
             <button
               type="button"
@@ -664,8 +659,8 @@ function MotorInsurance({ onBackHome, selectedCategory = 'motor-car' }) {
 
                     <div className="motor-image-placeholder">
                       <img
-                        src={motorHeroImage}
-                        alt="Motor insurance illustration"
+                        src={heroImage}
+                        alt={heroImageAlt}
                         className="motor-hero-image"
                         decoding="async"
                         fetchPriority="high"
@@ -1178,6 +1173,55 @@ function MotorInsurance({ onBackHome, selectedCategory = 'motor-car' }) {
             </div>
           )}
           </div>
+
+          {isWithoutVehicleFlow && (
+            <div
+              className="brand-select-modal-overlay motor-without-number-overlay"
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="motor-without-number-title"
+              onClick={() => setIsWithoutVehicleFlow(false)}
+            >
+              <section
+                className="motor-without-number-modal"
+                onClick={(event) => event.stopPropagation()}
+              >
+                <header className="motor-without-number-modal__header">
+                  <div>
+                    <h3 id="motor-without-number-title">Continue without vehicle number</h3>
+                    <p>Enter your vehicle details to compare plans</p>
+                  </div>
+                  <button
+                    type="button"
+                    className="brand-select-modal-close"
+                    onClick={() => setIsWithoutVehicleFlow(false)}
+                    aria-label="Close"
+                  >
+                    ×
+                  </button>
+                </header>
+                <div className="motor-without-number-modal__body">
+                  <WithoutNumber
+                    isModal
+                    selectedCategory={selectedCategory}
+                    onBackToVehicleCheck={() => setIsWithoutVehicleFlow(false)}
+                    onContinue={({ vehicle, insurance }) => {
+                      logMotorQuoteLead('Continue without vehicle number — View Plans', {
+                        flow: 'without-vehicle-number',
+                        selectedCategory: activeCategoryId,
+                        vehicleNumber: null,
+                        continuedWithoutVehicleNumber: true,
+                        vehicle,
+                        insurance
+                      });
+                      setIsWithoutVehicleFlow(false);
+                    }}
+                  />
+                </div>
+              </section>
+            </div>
+          )}
+
           {isNewCarFlow && (
             <Newcar
               selectedCategory={activeCategoryId}
@@ -1197,7 +1241,6 @@ function MotorInsurance({ onBackHome, selectedCategory = 'motor-car' }) {
             />
           )}
           </>
-        )}
       </section>
 
       <InsuranceFaqAccordion

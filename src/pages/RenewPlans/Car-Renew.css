@@ -37,6 +37,107 @@
   padding-inline: 0;
 }
 
+/* Continue without car number modal */
+.car-renew-without-number-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2250;
+  background: rgba(248, 250, 252, 0.58);
+  backdrop-filter: blur(2px) saturate(1.05);
+  -webkit-backdrop-filter: blur(2px) saturate(1.05);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 74px 16px 20px;
+  overflow-y: auto;
+  animation: carRenewOverlayFadeIn 0.22s ease-out both;
+}
+
+.car-renew-without-number-modal {
+  width: min(560px, 100%);
+  max-height: calc(100vh - 98px);
+  border-radius: 18px;
+  border: 1px solid #dce3ec;
+  background: #ffffff;
+  box-shadow: 0 22px 48px rgba(15, 23, 42, 0.22);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transform-origin: top center;
+  animation: carRenewModalIn 0.34s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.car-renew-without-number-modal__header {
+  padding: 14px 16px;
+  border-bottom: 1px solid #e5ebf2;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.car-renew-without-number-modal__header h3 {
+  margin: 0;
+  color: #1f2937;
+  font-size: 16px;
+  line-height: 1.25;
+  font-weight: 700;
+}
+
+.car-renew-without-number-modal__header p {
+  margin: 4px 0 0;
+  color: #64748b;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.car-renew-without-number-modal__close {
+  border: none;
+  background: transparent;
+  color: #475569;
+  font-size: 28px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0;
+}
+
+.car-renew-without-number-modal__body {
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 16px 18px 20px;
+  scrollbar-width: thin;
+}
+
+.car-renew-without-number-modal__body .motor-plans-view--modal {
+  width: 100%;
+  max-width: none;
+}
+
+.car-renew-without-number-modal__body .motor-plans-header h1 {
+  font-size: clamp(20px, 2.8vw, 26px);
+}
+
+@keyframes carRenewOverlayFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes carRenewModalIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-12px) scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
 /* Support CTA card */
 .car-renew-support {
   width: 100%;
@@ -143,6 +244,14 @@
 }
 
 @media (max-width: 640px) {
+  .car-renew-without-number-overlay {
+    padding: 62px 10px 14px;
+  }
+
+  .car-renew-without-number-modal__body {
+    padding: 12px 12px 14px;
+  }
+
   .car-renew-support__title {
     white-space: normal;
     font-size: clamp(1.35rem, 5.5vw, 1.75rem);
@@ -269,6 +378,20 @@
   display: block;
   width: 100%;
   height: auto;
+}
+
+.renew-plans-page--bike .car-renew-hero__visual {
+  aspect-ratio: 22 / 10;
+  height: auto;
+  max-height: none;
+  margin-top: 20px;
+}
+
+.renew-plans-page--bike .car-renew-hero__visual-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
 }
 
 .car-renew-form-card {

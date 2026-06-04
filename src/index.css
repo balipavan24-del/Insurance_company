@@ -3,7 +3,7 @@
 :root {
   --text: #6b6375;
   --text-h: #08060d;
-  --bg: #f5f8fb;
+  --bg: #ffffff;
   --border: transparent; /* Set to transparent to remove lines */
   --code-bg: #f4f3ec;
   --accent: #2E88C7;
@@ -48,7 +48,7 @@
   letter-spacing: 0.18px;
   color-scheme: light dark;
   color: var(--text);
-  background: #f8fafc;
+  background: #ffffff;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -117,7 +117,7 @@ select:focus-visible {
 
 body {
   margin: 0;
-  background-color: #f8fafc;
+  background-color: #ffffff;
   font-family: 'Inter', sans-serif;
   overflow-x: hidden;
 }

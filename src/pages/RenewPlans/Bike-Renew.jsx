@@ -5,22 +5,25 @@ import InsuranceFaqAccordion from '../../components/Faq/InsuranceFaqAccordion';
 import ContactHumanModal from '../../components/ContactHumanModal/ContactHumanModal';
 import Footer from '../../components/Footer/Footer';
 import WithoutNumber from '../Motor/Withoutnumber/WithoutNumber';
-import { carRenewFaqItems, carRenewFaqSection, carRenewSupportCard } from '../../data/productContent';
-import carRenewHeroImage from '../../assets/images/car-renew-hero.png';
+import { bikeRenewFaqItems, bikeRenewFaqSection, bikeRenewSupportCard } from '../../data/productContent';
+import bikeRenewHeroImage from '../../assets/images/bike-renew-hero.png';
 import './Car-Renew.css';
+
+/** Set to true when Add-ons, Pricing, Process, Why Us, FAQs, and Support are ready. */
+const SHOW_BIKE_RENEW_POST_COVERAGE_SECTIONS = false;
 
 const RENEW_HIGHLIGHTS = [
   { id: 'instant-renewal', label: 'Instant Renewal', icon: 'bolt' },
-  { id: 'cashless-garages', label: 'Cashless Garages', icon: 'wrench' },
+  { id: 'network-garages', label: 'Network Garages', icon: 'wrench' },
   { id: 'quick-claims', label: 'Quick Claims', icon: 'clipboard' },
   { id: 'zero-paperwork', label: 'Zero Paperwork', icon: 'sparkle' },
 ];
 
 const RENEW_BENEFITS = [
-  {  
+  {
     id: 'continuous-coverage',
     title: 'Continuous Coverage',
-    description: 'Avoid coverage gaps and stay financially protected.',
+    description: 'Avoid coverage gaps and stay financially protected on every ride.',
     icon: 'shield',
   },
   {
@@ -32,13 +35,13 @@ const RENEW_BENEFITS = [
   {
     id: 'inspection-delays',
     title: 'Avoid Inspection Delays',
-    description: 'Expired policies may require vehicle inspections before activation.',
+    description: 'Expired policies may require bike inspections before activation.',
     icon: 'clock',
   },
   {
     id: 'legal-compliance',
     title: 'Legal Compliance',
-    description: 'Third-party insurance is mandatory for vehicle owners.',
+    description: 'Third-party insurance is mandatory for two-wheeler owners.',
     icon: 'scale',
   },
   {
@@ -50,7 +53,7 @@ const RENEW_BENEFITS = [
   {
     id: 'peace-of-mind',
     title: 'Peace of Mind',
-    description: 'Drive confidently knowing your vehicle remains protected.',
+    description: 'Ride confidently knowing your bike remains protected.',
     icon: 'smile',
   },
 ];
@@ -169,7 +172,7 @@ const RENEW_STEPS = [
     id: 'enter-details',
     step: 1,
     title: 'Enter Vehicle Details',
-    description: 'Share your car number and basic info.',
+    description: 'Share your bike number and basic info.',
     icon: 'clipboard',
   },
   {
@@ -204,7 +207,7 @@ const RENEW_STEPS = [
 
 const RENEW_PRICING_FACTORS = [
   { id: 'vehicle-age', label: 'Vehicle age', icon: 'calendar' },
-  { id: 'car-model', label: 'Car model', icon: 'car' },
+  { id: 'bike-model', label: 'Bike model', icon: 'car' },
   { id: 'city-location', label: 'City / location', icon: 'location' },
   { id: 'claim-history', label: 'Claim history', icon: 'history' },
   { id: 'addons-selected', label: 'Add-ons selected', icon: 'layers' },
@@ -227,7 +230,7 @@ const RENEW_PLAN_TYPES = [
   {
     id: 'own-damage',
     title: 'Own Damage Cover',
-    description: 'Protects your own vehicle against damages.',
+    description: 'Protects your own bike against damages.',
     tone: 'amber',
   },
 ];
@@ -645,22 +648,22 @@ function RenewCoverageIcon({ name }) {
   );
 }
 
-function CarRenew() {
+function BikeRenew() {
   const [openExclusionId, setOpenExclusionId] = useState('');
-  const [isWithoutCarNumberOpen, setIsWithoutCarNumberOpen] = useState(false);
+  const [isWithoutBikeNumberOpen, setIsWithoutBikeNumberOpen] = useState(false);
   const [isTalkToHumanOpen, setIsTalkToHumanOpen] = useState(false);
 
   const scrollToRenewForm = () => {
-    const formCard = document.getElementById('car-renew-form');
+    const formCard = document.getElementById('bike-renew-form');
     formCard?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    const input = document.getElementById('car-reg-no');
+    const input = document.getElementById('bike-reg-no');
     if (input instanceof HTMLInputElement) {
       window.setTimeout(() => input.focus(), 400);
     }
   };
 
   useEffect(() => {
-    if (!isWithoutCarNumberOpen) {
+    if (!isWithoutBikeNumberOpen) {
       return undefined;
     }
     const previousBodyOverflow = document.body.style.overflow;
@@ -668,7 +671,7 @@ function CarRenew() {
 
     const handleEscClose = (event) => {
       if (event.key === 'Escape') {
-        setIsWithoutCarNumberOpen(false);
+        setIsWithoutBikeNumberOpen(false);
       }
     };
 
@@ -677,25 +680,25 @@ function CarRenew() {
       document.body.style.overflow = previousBodyOverflow;
       window.removeEventListener('keydown', handleEscClose);
     };
-  }, [isWithoutCarNumberOpen]);
+  }, [isWithoutBikeNumberOpen]);
 
   return (
-    <div className="renew-plans-page">
-      <section className="car-renew-hero page-section page-section--regular page-section-container" aria-labelledby="car-renew-heading">
+    <div className="renew-plans-page renew-plans-page--bike">
+      <section className="car-renew-hero page-section page-section--regular page-section-container" aria-labelledby="bike-renew-heading">
         <div className="car-renew-hero__layout">
           <div className="car-renew-hero__content">
             <Link className="car-renew-hero__back-link" to="/">
               ← Back to Home
             </Link>
-            <span className="car-renew-hero__tag">Car Insurance Renewal</span>
-            <h1 id="car-renew-heading" className="car-renew-hero__title">
-              <span className="car-renew-hero__title-line">Renew Your Car Insurance</span>
+            <span className="car-renew-hero__tag">Bike Insurance Renewal</span>
+            <h1 id="bike-renew-heading" className="car-renew-hero__title">
+              <span className="car-renew-hero__title-line">Renew Your Bike Insurance</span>
               <span className="car-renew-hero__title-line car-renew-hero__title-line--gradient">in Minutes</span>
             </h1>
             <div className="car-renew-hero__visual">
               <img
-                src={carRenewHeroImage}
-                alt="Car insurance protection overview"
+                src={bikeRenewHeroImage}
+                alt="Bike insurance protection overview"
                 className="car-renew-hero__visual-img"
                 loading="lazy"
               />
@@ -703,22 +706,22 @@ function CarRenew() {
 
           </div>
 
-          <aside id="car-renew-form" className="car-renew-form-card" aria-label="Car renewal form">
+          <aside id="bike-renew-form" className="car-renew-form-card" aria-label="Bike renewal form">
             <span className="car-renew-form-card__chip">Renew in under 2 minutes</span>
-            <h2 className="car-renew-form-card__title">Renew Your Car Insurance</h2>
+            <h2 className="car-renew-form-card__title">Renew Your Bike Insurance</h2>
             <p className="car-renew-form-card__copy">
               Enter your registration number to get instant renewal quotes.
             </p>
 
-            <label className="car-renew-form-card__label" htmlFor="car-reg-no">
-              Car Registration Number
+            <label className="car-renew-form-card__label" htmlFor="bike-reg-no">
+              Bike Registration Number
             </label>
             <input
-              id="car-reg-no"
+              id="bike-reg-no"
               className="car-renew-form-card__input"
               type="text"
-              defaultValue="MH01AB1234"
-              aria-label="Car registration number"
+              placeholder="e.g. MH12AB1234"
+              aria-label="Bike registration number"
             />
 
             <button type="button" className="car-renew-form-card__primary-btn">
@@ -730,9 +733,9 @@ function CarRenew() {
             <button
               type="button"
               className="car-renew-form-card__secondary-btn"
-              onClick={() => setIsWithoutCarNumberOpen(true)}
+              onClick={() => setIsWithoutBikeNumberOpen(true)}
             >
-              Continue Without Car Number
+              Continue Without Bike Number
             </button>
 
             <ul className="car-renew-form-card__stats" aria-label="Renewal speed and trust indicators">
@@ -750,7 +753,7 @@ function CarRenew() {
               </li>
             </ul>
 
-            <ul className="car-renew-form-card__highlights" aria-label="Car renewal highlights">
+            <ul className="car-renew-form-card__highlights" aria-label="Bike renewal highlights">
               {RENEW_HIGHLIGHTS.map((item) => (
                 <li key={item.id}>
                   <span className="car-renew-form-card__highlight-icon" aria-hidden="true">
@@ -773,7 +776,7 @@ function CarRenew() {
             </p>
             <h2 id="car-renew-overview-heading" className="car-renew-overview__title">
               <span className="car-renew-overview__title-line">
-                What is Car <span className="car-renew-overview__title-accent">Insurance</span>
+                What is Bike <span className="car-renew-overview__title-accent">Insurance</span>
               </span>
               <span className="car-renew-overview__title-line">
                 <span className="car-renew-overview__title-accent">Renewal?</span>
@@ -781,8 +784,8 @@ function CarRenew() {
             </h2>
           </div>
           <article className="car-renew-overview__card">
-            Car insurance renewal is the process of extending your existing insurance policy before or
-            after its expiry date to maintain uninterrupted financial protection for your vehicle.
+            Bike insurance renewal is the process of extending your existing two-wheeler insurance policy
+            before or after its expiry date to maintain uninterrupted financial protection for your bike.
             Renewing your policy on time helps you continue enjoying coverage against accidents, theft,
             damages, third-party liabilities, and unexpected repair expenses.
           </article>
@@ -798,14 +801,14 @@ function CarRenew() {
           </p>
           <h2 id="car-renew-benefits-heading" className="car-renew-benefits__title">
             <span className="car-renew-benefits__title-line">
-              Why Should You Renew Your Car
+              Why Should You Renew Your Bike
             </span>
             <span className="car-renew-benefits__title-line">
               <span className="car-renew-benefits__title-accent">Insurance on Time?</span>
             </span>
           </h2>
           <p className="car-renew-benefits__subtitle">
-            Timely renewal protects your wallet, your vehicle, and your peace of mind.
+            Timely renewal protects your wallet, your bike, and your peace of mind.
           </p>
 
           <ul className="car-renew-benefits__grid">
@@ -834,7 +837,7 @@ function CarRenew() {
             <span className="car-renew-plan-types__eyebrow-line" aria-hidden="true" />
           </p>
           <h2 id="car-renew-plan-types-heading" className="car-renew-plan-types__title">
-            Types of <span className="car-renew-plan-types__title-accent">Car Insurance</span>
+            Types of <span className="car-renew-plan-types__title-accent">Bike Insurance</span>
           </h2>
           <p className="car-renew-plan-types__subtitle">
             Pick the right level of cover for your needs and budget.
@@ -948,6 +951,8 @@ function CarRenew() {
         </div>
       </section>
 
+      {SHOW_BIKE_RENEW_POST_COVERAGE_SECTIONS && (
+        <>
       <section className="car-renew-addons page-section page-section--regular page-section-container" aria-labelledby="car-renew-addons-heading">
         <div className="car-renew-addons__inner">
           <p className="car-renew-addons__eyebrow">
@@ -1071,22 +1076,22 @@ function CarRenew() {
       </section>
 
       <InsuranceFaqAccordion
-        title={carRenewFaqSection.title}
-        subtitle={carRenewFaqSection.subtitle}
-        items={carRenewFaqItems}
-        buttonLabel={carRenewFaqSection.buttonLabel}
+        title={bikeRenewFaqSection.title}
+        subtitle={bikeRenewFaqSection.subtitle}
+        items={bikeRenewFaqItems}
+        buttonLabel={bikeRenewFaqSection.buttonLabel}
       />
 
       <section className="car-renew-support page-section page-section--regular page-section-container" aria-labelledby="car-renew-support-heading">
         <div className="car-renew-support__inner">
           <div className="car-renew-support__banner">
             <h2 id="car-renew-support-heading" className="car-renew-support__title">
-              {carRenewSupportCard.title}
+              {bikeRenewSupportCard.title}
             </h2>
-            <p className="car-renew-support__subtitle">{carRenewSupportCard.subtitle}</p>
+            <p className="car-renew-support__subtitle">{bikeRenewSupportCard.subtitle}</p>
             <div className="car-renew-support__actions">
               <button type="button" className="car-renew-support__btn car-renew-support__btn--primary" onClick={scrollToRenewForm}>
-                {carRenewSupportCard.primaryCta}
+                {bikeRenewSupportCard.primaryCta}
                 <span aria-hidden="true">→</span>
               </button>
               <button
@@ -1094,31 +1099,33 @@ function CarRenew() {
                 className="car-renew-support__btn car-renew-support__btn--ghost"
                 onClick={() => setIsTalkToHumanOpen(true)}
               >
-                {carRenewSupportCard.secondaryCta}
+                {bikeRenewSupportCard.secondaryCta}
               </button>
             </div>
           </div>
         </div>
       </section>
+        </>
+      )}
 
-      {isWithoutCarNumberOpen && (
+      {isWithoutBikeNumberOpen && (
         <div
           className="car-renew-without-number-overlay"
           role="dialog"
           aria-modal="true"
           aria-labelledby="car-renew-without-number-title"
-          onClick={() => setIsWithoutCarNumberOpen(false)}
+          onClick={() => setIsWithoutBikeNumberOpen(false)}
         >
           <section className="car-renew-without-number-modal" onClick={(event) => event.stopPropagation()}>
             <header className="car-renew-without-number-modal__header">
               <div>
-                <h3 id="car-renew-without-number-title">Continue without car number</h3>
+                <h3 id="car-renew-without-number-title">Continue without bike number</h3>
                 <p>Enter your vehicle details to compare renewal plans</p>
               </div>
               <button
                 type="button"
                 className="car-renew-without-number-modal__close"
-                onClick={() => setIsWithoutCarNumberOpen(false)}
+                onClick={() => setIsWithoutBikeNumberOpen(false)}
                 aria-label="Close"
               >
                 ×
@@ -1127,9 +1134,9 @@ function CarRenew() {
             <div className="car-renew-without-number-modal__body">
               <WithoutNumber
                 isModal
-                selectedCategory="motor-car"
-                onBackToVehicleCheck={() => setIsWithoutCarNumberOpen(false)}
-                onContinue={() => setIsWithoutCarNumberOpen(false)}
+                selectedCategory="motor-bike"
+                onBackToVehicleCheck={() => setIsWithoutBikeNumberOpen(false)}
+                onContinue={() => setIsWithoutBikeNumberOpen(false)}
               />
             </div>
           </section>
@@ -1147,4 +1154,4 @@ function CarRenew() {
   );
 }
 
-export default CarRenew;
+export default BikeRenew;

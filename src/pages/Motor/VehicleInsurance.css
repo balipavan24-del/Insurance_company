@@ -54,28 +54,63 @@
   user-select: none;
 }
 
-.motor-screen--guest-flow {
-  width: min(620px, 100%);
-  margin: 0 auto;
-  max-height: calc(100svh - 120px);
+.motor-without-number-overlay {
+  z-index: 2250;
+}
+
+.motor-without-number-modal {
+  width: min(540px, 100%);
+  max-height: calc(100vh - 98px);
+  border-radius: 18px;
+  border: 1px solid #dce3ec;
+  background: #ffffff;
+  box-shadow: 0 22px 48px rgba(15, 23, 42, 0.22);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transform-origin: top center;
+  animation: brandModalIn 0.34s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.motor-without-number-modal__header {
+  padding: 14px 16px;
+  border-bottom: 1px solid #e5ebf2;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.motor-without-number-modal__header h3 {
+  margin: 0;
+  color: #1f2937;
+  font-size: 16px;
+  line-height: 1.25;
+  font-weight: 700;
+}
+
+.motor-without-number-modal__header p {
+  margin: 4px 0 0;
+  color: #64748b;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.motor-without-number-modal__body {
   overflow-y: auto;
   overscroll-behavior: contain;
-  padding: var(--motor-band-pad-y) var(--motor-pad-x);
-  scrollbar-gutter: stable;
+  padding: 16px 18px 20px;
   scrollbar-width: thin;
 }
 
-.motor-screen--guest-flow::-webkit-scrollbar {
-  width: 8px;
+.motor-without-number-modal__body .motor-plans-view--modal {
+  width: 100%;
+  max-width: none;
 }
 
-.motor-screen--guest-flow::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
-  border-radius: 999px;
-}
-
-.motor-screen--guest-flow::-webkit-scrollbar-track {
-  background: transparent;
+.motor-without-number-modal__body .motor-plans-header h1 {
+  font-size: clamp(20px, 2.8vw, 26px);
 }
 
 .motor-back-link {
@@ -729,6 +764,15 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center center;
+}
+
+.motor-page--bike .motor-image-placeholder {
+  aspect-ratio: 22 / 10;
+  margin: 14px 0 16px;
+}
+
+.motor-page--bike .motor-hero-image {
   object-position: center center;
 }
 

@@ -268,6 +268,53 @@ export const carRenewSupportCard = {
   expertHref: '/contact-us?topic=car-renewal',
 };
 
+export const bikeRenewFaqSection = {
+  title: 'Frequently Asked Questions',
+  subtitle: 'Answers about expired bike policies, online renewal, NCB, documents, and switching insurers.',
+  buttonLabel: 'View More FAQs →',
+};
+
+export const bikeRenewFaqItems = [
+  {
+    id: 'expired-bike-policy-impact',
+    question: 'What happens if my bike insurance expires?',
+    answer:
+      'Your two-wheeler becomes legally non-compliant and you lose financial protection. You may also need a vehicle inspection before renewal.',
+  },
+  {
+    id: 'renew-expired-bike-online',
+    question: 'Can I renew expired bike insurance online?',
+    answer:
+      'Yes, you can renew an expired bike policy online. Some insurers may require inspection if the policy has been expired for a long time.',
+  },
+  {
+    id: 'bike-ncb-after-expiry',
+    question: 'Will I lose my No Claim Bonus on my bike?',
+    answer:
+      'If you renew within 90 days of expiry, your accumulated NCB is generally retained. Beyond that, NCB benefits may be forfeited.',
+  },
+  {
+    id: 'bike-renewal-documents',
+    question: 'What documents are required for bike renewal?',
+    answer:
+      'Usually your existing policy, RC copy, and basic owner KYC details are sufficient for online renewal.',
+  },
+  {
+    id: 'switch-bike-insurer-renewal',
+    question: 'Can I switch insurers during bike renewal?',
+    answer:
+      'Absolutely. Renewal is a great time to compare insurers and switch to a better plan while retaining your NCB.',
+  },
+];
+
+export const bikeRenewSupportCard = {
+  title: 'Ride Protected Without Interruptions',
+  subtitle: 'Renew your bike insurance instantly and stay protected on every ride.',
+  primaryCta: 'Renew Your Policy',
+  secondaryCta: 'Talk to an Expert',
+  expertHref: '/contact-us?topic=bike-renewal',
+};
+
 export const insuranceBasicsQuickSection = {
   eyebrow: 'Foundations',
   title: 'Quick Insurance',

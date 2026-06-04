@@ -89,6 +89,39 @@
   color: #0f2948;
 }
 
+.login-mode-switch {
+  margin: 0 0 14px;
+  border: 1px solid #8ea4ff;
+  border-radius: 12px;
+  background: #eef2ff;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+  padding: 6px;
+}
+
+.login-mode-btn {
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  color: #3f5398;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  min-height: 36px;
+  padding: 8px 10px;
+}
+
+.login-mode-btn.is-active {
+  background: linear-gradient(90deg, #2e88c7 0%, #4f46e5 100%);
+  color: #ffffff;
+  box-shadow: 0 4px 10px rgba(79, 70, 229, 0.3);
+}
+
+.login-mode-btn:not(.is-active):hover {
+  background: rgba(79, 70, 229, 0.1);
+}
+
 .login-form {
   display: flex;
   flex-direction: column;
@@ -102,10 +135,16 @@
 .mobile-input-wrap {
   border: 1px solid #d4dfeb;
   border-radius: 14px;
-  background: #eef2f6;
+  background: #ffffff;
   display: flex;
   align-items: center;
   padding: 0 12px;
+  transition: border-color 0.18s ease, box-shadow 0.18s ease;
+}
+
+.mobile-input-wrap:focus-within {
+  border-color: #5b63f6;
+  box-shadow: 0 0 0 3px rgba(91, 99, 246, 0.14);
 }
 
 .mobile-input-icon {
@@ -134,6 +173,17 @@
   content: none;
 }
 
+.login-user-icon {
+  width: 18px;
+  height: 18px;
+  color: #7186a2;
+  display: inline-grid;
+  place-items: center;
+  flex: 0 0 auto;
+  font-size: 12px;
+  font-weight: 800;
+}
+
 .mobile-input-wrap input {
   flex: 1;
   border: none;
@@ -146,6 +196,16 @@
   -webkit-text-fill-color: #1f2a37;
   caret-color: #1f2a37;
   outline: none;
+}
+
+.password-visibility-btn {
+  border: none;
+  background: transparent;
+  color: #2f80ed;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 0 0 0 10px;
 }
 
 .change-number-btn {
@@ -202,14 +262,14 @@
 }
 
 .mobile-input-wrap input::placeholder {
-  color: #7d8fa8;
+  color: #a2b1c5;
 }
 
 .mobile-input-wrap input:-webkit-autofill,
 .mobile-input-wrap input:-webkit-autofill:hover,
 .mobile-input-wrap input:-webkit-autofill:focus,
 .mobile-input-wrap input:-webkit-autofill:active {
-  -webkit-box-shadow: 0 0 0 1000px #eef2f6 inset;
+  -webkit-box-shadow: 0 0 0 1000px #ffffff inset;
   -webkit-text-fill-color: #1f2a37;
   caret-color: #1f2a37;
 }

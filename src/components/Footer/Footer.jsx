@@ -59,7 +59,7 @@ function Footer() {
     Disclaimer: '/?footer=disclaimer',
     'Cancellation & Refund Policy': '/?footer=cancellation-and-refund-policy',
     'Car Insurance Renewal': '/renew-plans/car',
-    'Bike Insurance Renewal': '/?search=bike-insurance-renewal',
+    'Bike Insurance Renewal': '/renew-plans/bike',
     'Best Insurance Plans': '/?search=best-insurance-plans',
     'Cheapest Insurance': '/?search=cheapest-insurance',
   };
