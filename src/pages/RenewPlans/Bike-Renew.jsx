@@ -9,9 +9,6 @@ import { bikeRenewFaqItems, bikeRenewFaqSection, bikeRenewSupportCard } from '..
 import bikeRenewHeroImage from '../../assets/images/bike-renew-hero.png';
 import './Car-Renew.css';
 
-/** Set to true when Add-ons, Pricing, Process, Why Us, FAQs, and Support are ready. */
-const SHOW_BIKE_RENEW_POST_COVERAGE_SECTIONS = false;
-
 const RENEW_HIGHLIGHTS = [
   { id: 'instant-renewal', label: 'Instant Renewal', icon: 'bolt' },
   { id: 'network-garages', label: 'Network Garages', icon: 'wrench' },
@@ -951,8 +948,6 @@ function BikeRenew() {
         </div>
       </section>
 
-      {SHOW_BIKE_RENEW_POST_COVERAGE_SECTIONS && (
-        <>
       <section className="car-renew-addons page-section page-section--regular page-section-container" aria-labelledby="car-renew-addons-heading">
         <div className="car-renew-addons__inner">
           <p className="car-renew-addons__eyebrow">
@@ -964,7 +959,7 @@ function BikeRenew() {
             Boost Your Renewal With <span className="car-renew-addons__title-accent">Add-ons</span>
           </h2>
           <p className="car-renew-addons__subtitle">
-            Customise your policy with extra protection that fits your driving habits.
+            Customise your policy with extra protection that fits your riding habits.
           </p>
 
           <ul className="car-renew-addons__grid">
@@ -1105,8 +1100,6 @@ function BikeRenew() {
           </div>
         </div>
       </section>
-        </>
-      )}
 
       {isWithoutBikeNumberOpen && (
         <div
