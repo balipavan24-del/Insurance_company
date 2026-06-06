@@ -7,6 +7,7 @@ import motorIconThreeWheeler from '../../assets/icons/Motor-ThreeWheeler.webp';
 import motorIconFourWheeler from '../../assets/icons/Motor-FourWheeler.webp';
 import motorIconCommercial from '../../assets/icons/Motor-Commercial.webp';
 import Footer from '../../components/Footer/Footer';
+import { modalOverlayClass, modalPanelClass, useAnimatedModal } from '../../components/AnimatedModal/AnimatedModal';
 import InsuranceFaqAccordion from '../../components/Faq/InsuranceFaqAccordion';
 import { motorInsuranceFaqItems } from '../../data/productContent';
 import './VehicleInsurance.css';
@@ -411,6 +412,11 @@ function MotorInsurance({ onBackHome, selectedCategory = 'motor-car' }) {
   const [isBrandSelectionOpen, setIsBrandSelectionOpen] = useState(false);
   const [isModelSelectionOpen, setIsModelSelectionOpen] = useState(false);
   const [isVariantSelectionOpen, setIsVariantSelectionOpen] = useState(false);
+  const brandModalMotion = useAnimatedModal(isBrandSelectionOpen);
+  const modelModalMotion = useAnimatedModal(isModelSelectionOpen);
+  const variantModalMotion = useAnimatedModal(isVariantSelectionOpen);
+  const withoutVehicleModalMotion = useAnimatedModal(isWithoutVehicleFlow);
+  const newCarModalMotion = useAnimatedModal(isNewCarFlow);
   const [brandSearchQuery, setBrandSearchQuery] = useState('');
   const [modelSearchQuery, setModelSearchQuery] = useState('');
   const [variantSearchQuery, setVariantSearchQuery] = useState('');
@@ -488,7 +494,11 @@ function MotorInsurance({ onBackHome, selectedCategory = 'motor-car' }) {
   }, []);
 
   useEffect(() => {
-    const isModalOpen = isBrandSelectionOpen || isModelSelectionOpen || isVariantSelectionOpen || isWithoutVehicleFlow;
+    const isModalOpen = brandModalMotion.visible
+      || modelModalMotion.visible
+      || variantModalMotion.visible
+      || withoutVehicleModalMotion.visible
+      || newCarModalMotion.visible;
     if (!isModalOpen) {
       return undefined;
     }
@@ -532,7 +542,17 @@ function MotorInsurance({ onBackHome, selectedCategory = 'motor-car' }) {
       document.body.style.overflow = originalBodyOverflow;
       window.removeEventListener('keydown', handleEscClose);
     };
-  }, [isBrandSelectionOpen, isModelSelectionOpen, isVariantSelectionOpen, isWithoutVehicleFlow]);
+  }, [
+    brandModalMotion.visible,
+    modelModalMotion.visible,
+    variantModalMotion.visible,
+    withoutVehicleModalMotion.visible,
+    newCarModalMotion.visible,
+    isBrandSelectionOpen,
+    isModelSelectionOpen,
+    isVariantSelectionOpen,
+    isWithoutVehicleFlow,
+  ]);
 
   const closeSelectionModals = () => {
     if (document.activeElement instanceof HTMLElement) {
@@ -950,15 +970,18 @@ function MotorInsurance({ onBackHome, selectedCategory = 'motor-car' }) {
               </div>
             </section>
 
-          {isBrandSelectionOpen && (
+          {brandModalMotion.visible && (
             <div
-              className="brand-select-modal-overlay"
+              className={modalOverlayClass(brandModalMotion.closing, 'brand-select-modal-overlay')}
               role="dialog"
               aria-modal="true"
               aria-labelledby="brand-select-title"
               onClick={() => setIsBrandSelectionOpen(false)}
             >
-              <section className="brand-select-modal-card" onClick={(event) => event.stopPropagation()}>
+              <section
+                className={modalPanelClass(brandModalMotion.closing, 'brand-select-modal-card')}
+                onClick={(event) => event.stopPropagation()}
+              >
                 <header className="brand-select-modal-header">
                   <div className="brand-select-modal-title-wrap">
                     <span className="brand-select-modal-icon" aria-hidden="true">
@@ -1021,15 +1044,18 @@ function MotorInsurance({ onBackHome, selectedCategory = 'motor-car' }) {
             </div>
           )}
 
-          {isModelSelectionOpen && (
+          {modelModalMotion.visible && (
             <div
-              className="brand-select-modal-overlay"
+              className={modalOverlayClass(modelModalMotion.closing, 'brand-select-modal-overlay')}
               role="dialog"
               aria-modal="true"
               aria-labelledby="model-select-title"
               onClick={() => setIsModelSelectionOpen(false)}
             >
-              <section className="brand-select-modal-card brand-select-modal-card--list" onClick={(event) => event.stopPropagation()}>
+              <section
+                className={modalPanelClass(modelModalMotion.closing, 'brand-select-modal-card brand-select-modal-card--list')}
+                onClick={(event) => event.stopPropagation()}
+              >
                 <header className="brand-select-modal-header">
                   <div className="brand-select-modal-title-wrap">
                     <button
@@ -1097,15 +1123,18 @@ function MotorInsurance({ onBackHome, selectedCategory = 'motor-car' }) {
             </div>
           )}
 
-          {isVariantSelectionOpen && (
+          {variantModalMotion.visible && (
             <div
-              className="brand-select-modal-overlay"
+              className={modalOverlayClass(variantModalMotion.closing, 'brand-select-modal-overlay')}
               role="dialog"
               aria-modal="true"
               aria-labelledby="variant-select-title"
               onClick={() => setIsVariantSelectionOpen(false)}
             >
-              <section className="brand-select-modal-card brand-select-modal-card--list" onClick={(event) => event.stopPropagation()}>
+              <section
+                className={modalPanelClass(variantModalMotion.closing, 'brand-select-modal-card brand-select-modal-card--list')}
+                onClick={(event) => event.stopPropagation()}
+              >
                 <header className="brand-select-modal-header">
                   <div className="brand-select-modal-title-wrap">
                     <button
@@ -1174,16 +1203,16 @@ function MotorInsurance({ onBackHome, selectedCategory = 'motor-car' }) {
           )}
           </div>
 
-          {isWithoutVehicleFlow && (
+          {withoutVehicleModalMotion.visible && (
             <div
-              className="brand-select-modal-overlay motor-without-number-overlay"
+              className={modalOverlayClass(withoutVehicleModalMotion.closing, 'brand-select-modal-overlay motor-without-number-overlay')}
               role="dialog"
               aria-modal="true"
               aria-labelledby="motor-without-number-title"
               onClick={() => setIsWithoutVehicleFlow(false)}
             >
               <section
-                className="motor-without-number-modal"
+                className={modalPanelClass(withoutVehicleModalMotion.closing, 'motor-without-number-modal')}
                 onClick={(event) => event.stopPropagation()}
               >
                 <header className="motor-without-number-modal__header">
@@ -1222,10 +1251,11 @@ function MotorInsurance({ onBackHome, selectedCategory = 'motor-car' }) {
             </div>
           )}
 
-          {isNewCarFlow && (
+          {newCarModalMotion.visible && (
             <Newcar
               selectedCategory={activeCategoryId}
               vehicleType={newVehicleType}
+              motionClosing={newCarModalMotion.closing}
               onBackToVehicleCheck={() => setIsNewCarFlow(false)}
               onContinue={(newCarFormDetails) => {
                 logMotorQuoteLead('Brand new vehicle — View Plans (no plate yet)', {

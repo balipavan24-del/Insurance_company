@@ -47,24 +47,19 @@
   -webkit-backdrop-filter: blur(2px) saturate(1.05);
   display: flex;
   justify-content: center;
-  align-items: flex-start;
-  padding: 74px 16px 20px;
-  overflow-y: auto;
-  animation: carRenewOverlayFadeIn 0.22s ease-out both;
+  align-items: center;
+  padding: 16px;
+  overflow: hidden;
+  box-sizing: border-box;
 }
 
 .car-renew-without-number-modal {
   width: min(560px, 100%);
-  max-height: calc(100vh - 98px);
+  max-height: min(92vh, 920px);
   border-radius: 18px;
-  border: 1px solid #dce3ec;
-  background: #ffffff;
-  box-shadow: 0 22px 48px rgba(15, 23, 42, 0.22);
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  transform-origin: top center;
-  animation: carRenewModalIn 0.34s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 .car-renew-without-number-modal__header {
@@ -116,26 +111,11 @@
 
 .car-renew-without-number-modal__body .motor-plans-header h1 {
   font-size: clamp(20px, 2.8vw, 26px);
+  text-align: left;
 }
 
-@keyframes carRenewOverlayFadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes carRenewModalIn {
-  0% {
-    opacity: 0;
-    transform: translateY(-12px) scale(0.98);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
+.car-renew-without-number-modal__body .motor-plans-header p {
+  text-align: left;
 }
 
 /* Support CTA card */
@@ -245,7 +225,7 @@
 
 @media (max-width: 640px) {
   .car-renew-without-number-overlay {
-    padding: 62px 10px 14px;
+    padding: 12px;
   }
 
   .car-renew-without-number-modal__body {
@@ -1319,20 +1299,27 @@
 }
 
 .car-renew-process-card__icon {
-  width: 52px;
-  height: 52px;
-  border-radius: 14px;
+  width: 124px;
+  height: 124px;
+  border-radius: 30px;
   display: inline-grid;
   place-items: center;
-  color: #ffffff;
-  background: linear-gradient(180deg, #2e88c7 0%, #4f46e5 100%);
-  box-shadow: 0 10px 20px rgba(79, 70, 229, 0.24);
+  overflow: hidden;
+  background: transparent;
+  box-shadow: none;
+}
+
+.car-renew-process-card__icon-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
 }
 
 .car-renew-process-card__step {
   position: absolute;
-  top: -6px;
-  right: -10px;
+  top: 0;
+  right: -4px;
   width: 22px;
   height: 22px;
   border-radius: 50%;
@@ -1428,7 +1415,7 @@
   border: 1px solid #e2e8f0;
   background: #ffffff;
   box-shadow: 0 4px 18px rgba(15, 23, 42, 0.05), 0 1px 3px rgba(15, 23, 42, 0.04);
-  text-align: left;
+  text-align: center;
   transition: transform 0.24s ease, box-shadow 0.24s ease, border-color 0.24s ease;
 }
 
@@ -1454,14 +1441,33 @@
 }
 
 .car-renew-why-us-card__icon {
-  width: 40px;
-  height: 40px;
-  border-radius: 11px;
+  display: grid;
+  place-items: center;
+  margin-inline: auto;
+  overflow: hidden;
+  transition: background 0.24s ease, color 0.24s ease;
+}
+
+.car-renew-why-us-card__icon--image {
+  width: 80px;
+  height: 80px;
+  border-radius: 18px;
+  background: transparent;
+}
+
+.car-renew-why-us-card__icon--svg {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
   background: #eaf5ff;
   color: #2e88c7;
-  display: inline-grid;
-  place-items: center;
-  transition: background 0.24s ease, color 0.24s ease;
+}
+
+.car-renew-why-us-card__icon-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
 }
 
 .car-renew-why-us-card__title {

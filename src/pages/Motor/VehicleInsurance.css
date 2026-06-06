@@ -60,16 +60,11 @@
 
 .motor-without-number-modal {
   width: min(540px, 100%);
-  max-height: calc(100vh - 98px);
+  max-height: min(92vh, 920px);
   border-radius: 18px;
-  border: 1px solid #dce3ec;
-  background: #ffffff;
-  box-shadow: 0 22px 48px rgba(15, 23, 42, 0.22);
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  transform-origin: top center;
-  animation: brandModalIn 0.34s cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
 .motor-without-number-modal__header {
@@ -111,6 +106,11 @@
 
 .motor-without-number-modal__body .motor-plans-header h1 {
   font-size: clamp(20px, 2.8vw, 26px);
+  text-align: left;
+}
+
+.motor-without-number-modal__body .motor-plans-header p {
+  text-align: left;
 }
 
 .motor-back-link {
@@ -1226,13 +1226,13 @@
   -webkit-backdrop-filter: blur(2px) saturate(1.05);
   display: flex;
   justify-content: center;
-  align-items: flex-start;
-  padding: 74px 16px 20px;
+  align-items: center;
+  padding: 16px;
   z-index: 2200;
-  overflow-y: auto;
+  overflow: hidden;
+  box-sizing: border-box;
   scrollbar-width: none;
   -ms-overflow-style: none;
-  animation: motorOverlayFadeIn 0.22s ease-out both;
 }
 
 .brand-select-modal-overlay::-webkit-scrollbar {
@@ -1242,20 +1242,14 @@
 .brand-select-modal-card {
   width: min(410px, 100%);
   border-radius: 18px;
-  border: 1px solid #dce3ec;
-  background: #ffffff;
-  box-shadow: 0 22px 48px rgba(15, 23, 42, 0.22);
-  max-height: calc(100vh - 98px);
+  max-height: min(92vh, 920px);
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  transform-origin: top center;
-  animation: brandModalIn 0.34s cubic-bezier(0.16, 1, 0.3, 1) both;
-  will-change: opacity, transform;
 }
 
 .brand-select-modal-card--list {
-  max-height: calc(100vh - 90px);
+  max-height: min(92vh, 920px);
 }
 
 .brand-select-modal-header {
@@ -1473,36 +1467,7 @@
   text-align: center;
 }
 
-@keyframes motorOverlayFadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes brandModalIn {
-  from {
-    opacity: 0;
-    transform: translateY(18px) scale(0.96);
-  }
-  70% {
-    opacity: 1;
-    transform: translateY(-2px) scale(1.005);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
-  .brand-select-modal-overlay,
-  .brand-select-modal-card {
-    animation: none;
-  }
-
   .brand-select-list-item,
   .brand-select-item {
     transition: none;
@@ -1826,11 +1791,11 @@ body.motor-disable-hover .brand-flow-chip:hover {
   }
 
   .brand-select-modal-overlay {
-    padding: 74px 10px 14px;
+    padding: 12px;
   }
 
   .brand-select-modal-card {
-    max-height: calc(100vh - 78px);
+    max-height: min(92vh, 920px);
     border-radius: 14px;
   }
 

@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
+import { modalOverlayClass, modalPanelClass } from '../../../components/AnimatedModal/AnimatedModal';
 import './Newcar.css';
 import {
   BRAND_MODEL_VARIANT_DUMMY_DATA,
@@ -163,7 +164,8 @@ function Newcar({
   onBackToVehicleCheck,
   onContinue,
   vehicleType = 'car',
-  selectedCategory = 'motor-car'
+  selectedCategory = 'motor-car',
+  motionClosing = false,
 }) {
   const BIKE_FUEL_CARD_OPTIONS = [
     { value: 'Petrol', tone: 'is-petrol', icon: <FuelDropGlyph /> },
@@ -569,7 +571,7 @@ function Newcar({
 
   return (
     <section
-      className="new-car-overlay"
+      className={modalOverlayClass(motionClosing, 'new-car-overlay')}
       role="dialog"
       aria-modal="true"
       aria-label={`New ${vehicleTypeLower} details form`}
@@ -577,7 +579,7 @@ function Newcar({
       data-motor-selected-category={selectedCategory}
       data-motor-vehicle-type={vehicleType}
     >
-      <section className="new-car-modal">
+      <section className={modalPanelClass(motionClosing, 'new-car-modal')}>
         <div className="new-car-left-pane">
           <header className="new-car-left-header">
             <button type="button" className="new-car-top-back-btn" onClick={handleBack} aria-label="Go back">

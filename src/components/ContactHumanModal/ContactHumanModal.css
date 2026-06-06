@@ -7,19 +7,33 @@
   -webkit-backdrop-filter: blur(2px) saturate(1.05);
   display: flex;
   justify-content: center;
-  align-items: flex-start;
-  padding: 64px 16px 20px;
-  overflow-y: auto;
+  align-items: center;
+  padding: 16px;
+  overflow: hidden;
+  box-sizing: border-box;
 }
 
 .contact-human-modal__card {
   position: relative;
   width: min(1120px, 100%);
+  max-height: min(92vh, 920px);
   border-radius: 18px;
-  background: #eef3f8;
-  border: 1px solid #dce6ef;
-  box-shadow: 0 24px 48px rgba(15, 23, 42, 0.2);
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.contact-human-modal__grid {
+  display: grid;
+  grid-template-columns: minmax(320px, 1.1fr) minmax(280px, 1fr);
+  align-items: start;
+  gap: 20px;
+  padding: 14px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  min-height: 0;
+  flex: 1;
 }
 
 .contact-human-modal__close {
@@ -32,15 +46,7 @@
   font-size: 28px;
   line-height: 1;
   cursor: pointer;
-  z-index: 2;
-}
-
-.contact-human-modal__grid {
-  display: grid;
-  grid-template-columns: minmax(320px, 1.1fr) minmax(280px, 1fr);
-  align-items: start;
-  gap: 20px;
-  padding: 14px;
+  z-index: 4;
 }
 
 .contact-human-modal__form-card,
@@ -254,7 +260,7 @@
 
 @media (max-width: 640px) {
   .contact-human-modal__overlay {
-    padding: 48px 8px 14px;
+    padding: 12px;
   }
 
   .contact-human-modal__row-two {

@@ -712,33 +712,32 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 96px 14px 22px;
+  padding: 16px;
   z-index: 3000;
+  overflow: hidden;
+  box-sizing: border-box;
 }
 
 .business-popup-sheet {
   width: min(100%, 560px);
-  background: #ffffff;
-  border: 1px solid #dbe5f2;
   border-radius: 20px;
-  box-shadow: 0 20px 48px rgba(15, 23, 42, 0.24);
   padding: 20px 16px 14px;
   position: relative;
-  max-height: calc(100dvh - 118px);
-  overflow-y: auto;
-  animation: businessPopupRise 260ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  max-height: min(92vh, 920px);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
   text-align: left;
 }
 
-@keyframes businessPopupRise {
-  from {
-    opacity: 0;
-    transform: translateY(56px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+.business-popup-form {
+  display: grid;
+  gap: 12px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  min-height: 0;
+  flex: 1;
 }
 
 .business-popup-close {
@@ -790,11 +789,6 @@
   text-align: left;
   color: #6a7488;
   font-size: var(--font-size-14);
-}
-
-.business-popup-form {
-  display: grid;
-  gap: 12px;
 }
 
 .business-popup-form label {
@@ -1016,11 +1010,11 @@
   }
 
   .business-popup-backdrop {
-    align-items: flex-end;
-    padding: 80px 12px 12px;
+    align-items: center;
+    padding: 12px;
   }
 
   .business-popup-sheet {
-    max-height: calc(100dvh - 96px);
+    max-height: min(92vh, 920px);
   }
 }

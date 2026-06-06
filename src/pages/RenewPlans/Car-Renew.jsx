@@ -1,12 +1,24 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import DropdownChevron from '../../components/Dropdown/DropdownChevron';
 import InsuranceFaqAccordion from '../../components/Faq/InsuranceFaqAccordion';
 import ContactHumanModal from '../../components/ContactHumanModal/ContactHumanModal';
+import AnimatedModal from '../../components/AnimatedModal/AnimatedModal';
 import Footer from '../../components/Footer/Footer';
 import WithoutNumber from '../Motor/Withoutnumber/WithoutNumber';
 import { carRenewFaqItems, carRenewFaqSection, carRenewSupportCard } from '../../data/productContent';
 import carRenewHeroImage from '../../assets/images/car-renew-hero.png';
+import renewStepEnterDetails from '../../assets/images/renew-process/enter-vehicle-details.png';
+import renewStepComparePlans from '../../assets/images/renew-process/compare-renewal-plans.png';
+import renewStepSelectAddons from '../../assets/images/renew-process/select-addons.png';
+import renewStepSecurePayment from '../../assets/images/renew-process/make-secure-payment.png';
+import renewStepReceivePolicy from '../../assets/images/renew-process/receive-policy-instantly.png';
+import renewWhyUsInstantRenewal from '../../assets/images/renew-why-us/instant-policy-renewal.png';
+import renewWhyUsBestPrice from '../../assets/images/renew-why-us/best-price-comparison.png';
+import renewWhyUsTrustedPartners from '../../assets/images/renew-why-us/trusted-insurance-partners.png';
+import renewWhyUsClaimSupport from '../../assets/images/renew-why-us/claim-assistance-support.png';
+import renewWhyUsSecurePayments from '../../assets/images/renew-why-us/secure-payments.png';
+import renewWhyUsExpertGuidance from '../../assets/images/renew-why-us/expert-guidance.png';
 import './Car-Renew.css';
 
 const RENEW_HIGHLIGHTS = [
@@ -130,37 +142,43 @@ const RENEW_WHY_US = [
     id: 'instant-renewal',
     title: 'Instant Policy Renewal',
     description: 'Renew in minutes with zero hassle.',
-    icon: 'bolt',
+    image: renewWhyUsInstantRenewal,
+    imageAlt: 'Instant policy renewal',
   },
   {
     id: 'price-comparison',
     title: 'Best Price Comparison',
     description: 'Compare quotes from top insurers side by side.',
-    icon: 'star',
+    image: renewWhyUsBestPrice,
+    imageAlt: 'Best price comparison',
   },
   {
     id: 'trusted-partners',
     title: 'Trusted Insurance Partners',
     description: "Tie-ups with India's most reliable insurers.",
-    icon: 'shield-check',
+    image: renewWhyUsTrustedPartners,
+    imageAlt: 'Trusted insurance partners',
   },
   {
     id: 'claim-support',
     title: 'Claim Assistance Support',
     description: 'Dedicated support from filing to settlement.',
-    icon: 'headset',
+    image: renewWhyUsClaimSupport,
+    imageAlt: 'Claim assistance support',
   },
   {
     id: 'secure-payments',
     title: 'Secure Payments',
     description: 'Bank-grade encryption on every transaction.',
-    icon: 'lock',
+    image: renewWhyUsSecurePayments,
+    imageAlt: 'Secure payments',
   },
   {
     id: 'expert-guidance',
     title: 'Expert Guidance',
     description: 'Talk to certified advisors anytime you need.',
-    icon: 'award',
+    image: renewWhyUsExpertGuidance,
+    imageAlt: 'Expert guidance',
   },
 ];
 
@@ -170,35 +188,40 @@ const RENEW_STEPS = [
     step: 1,
     title: 'Enter Vehicle Details',
     description: 'Share your car number and basic info.',
-    icon: 'clipboard',
+    image: renewStepEnterDetails,
+    imageAlt: 'Enter vehicle details',
   },
   {
     id: 'compare-plans',
     step: 2,
     title: 'Compare Renewal Plans',
     description: 'Browse plans from top trusted insurers.',
-    icon: 'search',
+    image: renewStepComparePlans,
+    imageAlt: 'Compare renewal plans',
   },
   {
     id: 'select-addons',
     step: 3,
     title: 'Select Add-ons',
     description: 'Pick the right cover and customise add-ons.',
-    icon: 'list',
+    image: renewStepSelectAddons,
+    imageAlt: 'Select add-ons',
   },
   {
     id: 'secure-payment',
     step: 4,
     title: 'Make Secure Payment',
     description: 'Pay securely using your preferred method.',
-    icon: 'card',
+    image: renewStepSecurePayment,
+    imageAlt: 'Make secure payment',
   },
   {
     id: 'receive-policy',
     step: 5,
     title: 'Receive Policy Instantly',
     description: 'Get your renewed policy in your inbox.',
-    icon: 'document',
+    image: renewStepReceivePolicy,
+    imageAlt: 'Receive policy instantly',
   },
 ];
 
@@ -367,119 +390,6 @@ function RenewAddonIcon({ name }) {
   );
 
   return icons[name] || defaultIcon;
-}
-
-function RenewWhyUsIcon({ name }) {
-  const props = { viewBox: '0 0 24 24', width: 20, height: 20, 'aria-hidden': true, focusable: 'false' };
-  if (name === 'star') {
-    return (
-      <svg {...props}>
-        <path
-          d="M12 4.2 14.1 9.5l5.7.5-4.3 3.7 1.3 5.6L12 16.8 7.2 19.3l1.3-5.6-4.3-3.7 5.7-.5L12 4.2Z"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1.75"
-          strokeLinejoin="round"
-        />
-      </svg>
-    );
-  }
-  if (name === 'shield-check') {
-    return (
-      <svg {...props}>
-        <path d="M12 3 5 6.5v5c0 4.1 2.8 7.3 7 8.5 4.2-1.2 7-4.4 7-8.5v-5L12 3Z" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinejoin="round" />
-        <path d="m9.2 11.8 1.9 1.9 3.6-3.8" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-    );
-  }
-  if (name === 'headset') {
-    return (
-      <svg {...props}>
-        <path d="M4 14v-2a8 8 0 0 1 16 0v2" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" />
-        <rect x="3" y="14" width="4" height="6" rx="1.5" fill="none" stroke="currentColor" strokeWidth="1.75" />
-        <rect x="17" y="14" width="4" height="6" rx="1.5" fill="none" stroke="currentColor" strokeWidth="1.75" />
-      </svg>
-    );
-  }
-  if (name === 'lock') {
-    return (
-      <svg {...props}>
-        <rect x="5" y="11" width="14" height="10" rx="2" fill="none" stroke="currentColor" strokeWidth="1.75" />
-        <path d="M8 11V8a4 4 0 0 1 8 0v3" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" />
-      </svg>
-    );
-  }
-  if (name === 'award') {
-    return (
-      <svg {...props}>
-        <circle cx="12" cy="9" r="4" fill="none" stroke="currentColor" strokeWidth="1.75" />
-        <path d="M8.8 13 7 21l5-2.6 5 2.6-1.8-8" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-    );
-  }
-  return (
-    <svg {...props}>
-      <path d="M11 2 5.3 12H11l-1 10 8.7-12H13l1-8Z" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
-}
-
-function RenewStepIcon({ name }) {
-  const props = { viewBox: '0 0 24 24', width: 22, height: 22, 'aria-hidden': true, focusable: 'false' };
-  if (name === 'search') {
-    return (
-      <svg {...props}>
-        <circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" strokeWidth="1.75" />
-        <path d="M16 16l4 4" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" />
-      </svg>
-    );
-  }
-  if (name === 'list') {
-    return (
-      <svg {...props}>
-        <path d="M8 7h12M8 12h12M8 17h12" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" />
-        <circle cx="5" cy="7" r="1.1" fill="currentColor" />
-        <circle cx="5" cy="12" r="1.1" fill="currentColor" />
-        <circle cx="5" cy="17" r="1.1" fill="currentColor" />
-      </svg>
-    );
-  }
-  if (name === 'card') {
-    return (
-      <svg {...props}>
-        <rect x="3" y="6" width="18" height="12" rx="2" fill="none" stroke="currentColor" strokeWidth="1.75" />
-        <path d="M3 10h18" fill="none" stroke="currentColor" strokeWidth="1.75" />
-        <path d="M7 15h4" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" />
-      </svg>
-    );
-  }
-  if (name === 'document') {
-    return (
-      <svg {...props}>
-        <path
-          d="M8 4h8l2 2v14H6V4h2Z"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1.75"
-          strokeLinejoin="round"
-        />
-        <path d="M14 4v4h4M10 13h4M10 16h4" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" />
-      </svg>
-    );
-  }
-  return (
-    <svg {...props}>
-      <path
-        d="M9 4h6M10 2h4v3h-4zM7 5h10a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1Z"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.75"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path d="M9 10h6M9 13h4" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" />
-    </svg>
-  );
 }
 
 function RenewPricingIcon({ name }) {
@@ -658,26 +568,6 @@ function CarRenew() {
       window.setTimeout(() => input.focus(), 400);
     }
   };
-
-  useEffect(() => {
-    if (!isWithoutCarNumberOpen) {
-      return undefined;
-    }
-    const previousBodyOverflow = document.body.style.overflow;
-    document.body.style.overflow = 'hidden';
-
-    const handleEscClose = (event) => {
-      if (event.key === 'Escape') {
-        setIsWithoutCarNumberOpen(false);
-      }
-    };
-
-    window.addEventListener('keydown', handleEscClose);
-    return () => {
-      document.body.style.overflow = previousBodyOverflow;
-      window.removeEventListener('keydown', handleEscClose);
-    };
-  }, [isWithoutCarNumberOpen]);
 
   return (
     <div className="renew-plans-page">
@@ -1029,7 +919,12 @@ function CarRenew() {
                   <article className="car-renew-process-card car-renew-process-card--float">
                     <div className="car-renew-process-card__icon-wrap">
                       <span className="car-renew-process-card__icon" aria-hidden="true">
-                        <RenewStepIcon name={step.icon} />
+                        <img
+                          src={step.image}
+                          alt=""
+                          className="car-renew-process-card__icon-img"
+                          loading="lazy"
+                        />
                       </span>
                       <span className="car-renew-process-card__step">{step.step}</span>
                     </div>
@@ -1058,8 +953,16 @@ function CarRenew() {
             {RENEW_WHY_US.map((item) => (
               <li key={item.id}>
                 <article className="car-renew-why-us-card">
-                  <span className="car-renew-why-us-card__icon" aria-hidden="true">
-                    <RenewWhyUsIcon name={item.icon} />
+                  <span
+                    className={`car-renew-why-us-card__icon${item.image ? ' car-renew-why-us-card__icon--image' : ' car-renew-why-us-card__icon--svg'}`}
+                    aria-hidden="true"
+                  >
+                    <img
+                      src={item.image}
+                      alt=""
+                      className="car-renew-why-us-card__icon-img"
+                      loading="lazy"
+                    />
                   </span>
                   <h3 className="car-renew-why-us-card__title">{item.title}</h3>
                   <p className="car-renew-why-us-card__text">{item.description}</p>
@@ -1101,15 +1004,15 @@ function CarRenew() {
         </div>
       </section>
 
-      {isWithoutCarNumberOpen && (
-        <div
-          className="car-renew-without-number-overlay"
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby="car-renew-without-number-title"
-          onClick={() => setIsWithoutCarNumberOpen(false)}
-        >
-          <section className="car-renew-without-number-modal" onClick={(event) => event.stopPropagation()}>
+      <AnimatedModal
+        isOpen={isWithoutCarNumberOpen}
+        onClose={() => setIsWithoutCarNumberOpen(false)}
+        overlayClassName="car-renew-without-number-overlay"
+        panelClassName="car-renew-without-number-modal"
+        ariaLabelledby="car-renew-without-number-title"
+      >
+        {({ requestClose }) => (
+          <>
             <header className="car-renew-without-number-modal__header">
               <div>
                 <h3 id="car-renew-without-number-title">Continue without car number</h3>
@@ -1118,7 +1021,7 @@ function CarRenew() {
               <button
                 type="button"
                 className="car-renew-without-number-modal__close"
-                onClick={() => setIsWithoutCarNumberOpen(false)}
+                onClick={requestClose}
                 aria-label="Close"
               >
                 ×
@@ -1128,13 +1031,13 @@ function CarRenew() {
               <WithoutNumber
                 isModal
                 selectedCategory="motor-car"
-                onBackToVehicleCheck={() => setIsWithoutCarNumberOpen(false)}
-                onContinue={() => setIsWithoutCarNumberOpen(false)}
+                onBackToVehicleCheck={requestClose}
+                onContinue={requestClose}
               />
             </div>
-          </section>
-        </div>
-      )}
+          </>
+        )}
+      </AnimatedModal>
 
       <ContactHumanModal
         isOpen={isTalkToHumanOpen}

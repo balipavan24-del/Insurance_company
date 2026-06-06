@@ -1,5 +1,25 @@
 .motor-plans-view {
   width: min(520px, 100%);
+  text-align: left;
+}
+
+.motor-plans-header {
+  text-align: left;
+}
+
+.motor-plans-header h1 {
+  margin: 0;
+  color: #0f172a;
+  font-size: clamp(22px, 3vw, 30px);
+  line-height: 1.1;
+  text-align: left;
+}
+
+.motor-plans-header p {
+  margin: 4px 0 0;
+  color: #5f7590;
+  font-size: 14px;
+  text-align: left;
 }
 
 .motor-plans-back-link {
@@ -19,19 +39,6 @@
 .motor-yes-no-btn:focus-visible {
   outline: 2px solid #93c5fd;
   outline-offset: 2px;
-}
-
-.motor-plans-header h1 {
-  margin: 0;
-  color: #0f172a;
-  font-size: clamp(22px, 3vw, 30px);
-  line-height: 1.1;
-}
-
-.motor-plans-header p {
-  margin: 4px 0 0;
-  color: #5f7590;
-  font-size: 14px;
 }
 
 .motor-steps {

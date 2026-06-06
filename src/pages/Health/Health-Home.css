@@ -1869,49 +1869,23 @@
   inset: 0;
   z-index: 70;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
-  padding: 100px 16px 20px calc(20px + env(safe-area-inset-bottom, 0px));
+  padding: 16px;
   background: rgba(15, 23, 42, 0.42);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
-  animation: health-quote-popup-fade 0.2s ease-out;
-  overflow-y: auto;
-}
-
-@keyframes health-quote-popup-fade {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+  overflow: hidden;
+  box-sizing: border-box;
 }
 
 .health-quote-popup-shell {
   width: min(520px, 100%);
-  max-height: min(92vh, 900px);
+  max-height: min(92vh, 920px);
   display: flex;
   flex-direction: column;
   overflow: hidden;
   border-radius: 18px;
-  background: #ffffff;
-  border: 1px solid rgba(226, 232, 240, 0.95);
-  box-shadow:
-    0 25px 50px rgba(15, 23, 42, 0.12),
-    0 10px 25px rgba(15, 23, 42, 0.08);
-  animation: health-quote-popup-rise 0.22s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-@keyframes health-quote-popup-rise {
-  from {
-    opacity: 0;
-    transform: translateY(100vh);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
 
 .health-quote-popup-header {
@@ -2023,6 +1997,7 @@
   flex: 1;
   min-height: 0;
   overflow-y: auto;
+  overflow-x: hidden;
   padding: 8px 22px 26px;
   background: #ffffff;
 }
@@ -2129,15 +2104,14 @@
 
 @media (max-width: 640px) {
   .health-quote-popup-overlay {
-    align-items: flex-end;
-    padding: 0;
+    align-items: center;
+    padding: 12px;
   }
 
   .health-quote-popup-shell {
     width: 100%;
-    max-height: 94vh;
-    border-radius: 20px 20px 0 0;
-    animation: health-quote-popup-sheet 0.26s cubic-bezier(0.22, 1, 0.36, 1);
+    max-height: min(92vh, 920px);
+    border-radius: 18px;
   }
 
   .health-quote-popup-body {
@@ -2150,16 +2124,5 @@
 
   .health-quote-popup-header--step1 {
     padding: 20px 18px 16px;
-  }
-
-  @keyframes health-quote-popup-sheet {
-    from {
-      opacity: 0;
-      transform: translateY(100%);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
   }
 }

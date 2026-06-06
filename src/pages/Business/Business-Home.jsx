@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import './Business-Home.css';
 import Footer from '../../components/Footer/Footer';
+import { modalOverlayClass, modalPanelClass, useAnimatedModal } from '../../components/AnimatedModal/AnimatedModal';
 import DropdownChevron from '../../components/Dropdown/DropdownChevron';
 import InsuranceDetailPanel from '../../components/DetailPanel/InsuranceDetailPanel';
 import InsuranceFaqAccordion from '../../components/Faq/InsuranceFaqAccordion';
@@ -240,6 +241,7 @@ function BusinessHome({
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [selectedCoverageId, setSelectedCoverageId] = useState('');
   const [isQuotePopupOpen, setIsQuotePopupOpen] = useState(false);
+  const quoteModalMotion = useAnimatedModal(isQuotePopupOpen);
   const dropdownRef = useRef(null);
 
   const coverageActionMap = useMemo(
@@ -469,14 +471,14 @@ function BusinessHome({
 
       <Footer />
 
-      {isQuotePopupOpen && (
+      {quoteModalMotion.visible && (
         <div
-          className="business-popup-backdrop"
+          className={modalOverlayClass(quoteModalMotion.closing, 'business-popup-backdrop')}
           role="presentation"
           onClick={() => setIsQuotePopupOpen(false)}
         >
           <section
-            className="business-popup-sheet"
+            className={modalPanelClass(quoteModalMotion.closing, 'business-popup-sheet')}
             role="dialog"
             aria-modal="true"
             aria-labelledby="business-popup-title"

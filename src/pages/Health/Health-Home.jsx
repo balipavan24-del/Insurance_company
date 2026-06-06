@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import Footer from '../../components/Footer/Footer';
 import InsuranceFaqAccordion from '../../components/Faq/InsuranceFaqAccordion';
 import { healthInsuranceFaqItems } from '../../data/productContent';
+import { modalOverlayClass, modalPanelClass, useAnimatedModal } from '../../components/AnimatedModal/AnimatedModal';
 import { sanitizePhoneNumber, validateHealthContactDetails } from '../../utils/validations/leadValidation';
 
 const healthImage = (name) => `${import.meta.env.BASE_URL}images/health/${name}`;
@@ -571,6 +572,7 @@ const HEALTH_EXCLUSION_ITEMS = [
 
 function HealthHome({ onBackHome }) {
   const [healthQuotePopupOpen, setHealthQuotePopupOpen] = useState(false);
+  const healthQuoteModalMotion = useAnimatedModal(healthQuotePopupOpen);
   const [activeStep, setActiveStep] = useState(1);
   const [selfEnabled, setSelfEnabled] = useState(false);
   const [selfGender, setSelfGender] = useState('Male');
@@ -596,7 +598,7 @@ function HealthHome({ onBackHome }) {
   const [otherMedicalNotes, setOtherMedicalNotes] = useState('');
 
   useEffect(() => {
-    if (!healthQuotePopupOpen) {
+    if (!healthQuoteModalMotion.visible) {
       return undefined;
     }
     const onKeyDown = (event) => {
@@ -611,7 +613,7 @@ function HealthHome({ onBackHome }) {
       document.body.style.overflow = prevOverflow;
       window.removeEventListener('keydown', onKeyDown);
     };
-  }, [healthQuotePopupOpen]);
+  }, [healthQuoteModalMotion.visible]);
 
   const childrenCountLabel = useMemo(
     () => `${children.length} added`,
@@ -1387,15 +1389,18 @@ function HealthHome({ onBackHome }) {
         </div>
       </div>
 
-      {healthQuotePopupOpen ? (
+      {healthQuoteModalMotion.visible ? (
         <div
-          className="health-quote-popup-overlay"
+          className={modalOverlayClass(healthQuoteModalMotion.closing, 'health-quote-popup-overlay')}
           role="dialog"
           aria-modal="true"
           aria-labelledby="health-quote-popup-title"
           onClick={closeHealthQuotePopup}
         >
-          <div className="health-quote-popup-shell" onClick={(event) => event.stopPropagation()}>
+          <div
+            className={modalPanelClass(healthQuoteModalMotion.closing, 'health-quote-popup-shell')}
+            onClick={(event) => event.stopPropagation()}
+          >
             <header
               className={`health-quote-popup-header${
                 activeStep === 1 ? ' health-quote-popup-header--step1' : ''
