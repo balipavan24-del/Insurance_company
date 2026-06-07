@@ -12,7 +12,7 @@ src/
 ├── components/      # Reusable UI (Navbar, Footer, ProductCard, …)
 ├── pages/           # Full screens per route (Motor, Health, Landing, …)
 ├── data/            # Static copy & FAQ content
-├── utils/           # validations, media, api helpers
+├── utils/           # validations, media helpers
 ├── App.jsx          # Routes & navigation
 └── main.jsx         # App entry
 ```
@@ -27,6 +27,6 @@ npm run build
 
 ## Environment
 
-Copy `.env.example` to `.env` and set `VITE_API_BASE_URL` when the backend is ready.
+Copy `.env.example` to `.env` when needed.
 
-See `BACKEND_DEVELOPER_GUIDE.md` for API integration notes.
+Frontend validation rules for the backend team: `src/utils/validations/leadValidation.js`

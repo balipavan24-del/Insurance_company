@@ -1,8 +1,6 @@
 import { useState } from 'react';
 import {
-  buildSignupApiPayload,
   getSignupPasswordRuleResults,
-  SIGNUP_PASSWORD_RULES,
   validateSignupDetails,
 } from '../../utils/validations/leadValidation';
 import BrandLogo from '../../components/BrandLogo/BrandLogo';
@@ -46,7 +44,6 @@ function PasswordVisibilityToggle({ visible, onToggle }) {
 }
 
 function Signup({ onClose, onAccountCreated }) {
-  const [createdAccounts, setCreatedAccounts] = useState([]);
   const [showPassword, setShowPassword] = useState(false);
   const [password, setPassword] = useState('');
   const passwordRuleResults = getSignupPasswordRuleResults(password);
@@ -56,58 +53,18 @@ function Signup({ onClose, onAccountCreated }) {
     const form = event.currentTarget;
     const formData = new FormData(form);
 
-    const payload = buildSignupApiPayload({
+    const validationErrors = validateSignupDetails({
       fullName: formData.get('fullName'),
       mobileNumber: formData.get('mobileNumber'),
       email: formData.get('emailAddress'),
       password: formData.get('password'),
     });
 
-    const validationErrors = validateSignupDetails(payload);
-
-    // Demo for backend team: open DevTools → Console (F12), submit the form.
-    console.group('[InsureEase Signup] JS validation (teaching example)');
-    console.log('Step 1 — Form values (password hidden):', {
-      fullName: payload.fullName,
-      mobileNumber: payload.mobileNumber,
-      email: payload.email,
-      password: '[hidden]',
-    });
-    console.log(
-      'Step 2 — Password constraints (each must be true):',
-      getSignupPasswordRuleResults(payload.password),
-    );
-    console.log(
-      'Step 2b — Rule definitions (copy to Spring Boot):',
-      SIGNUP_PASSWORD_RULES.map(({ id, label }) => ({ id, label })),
-    );
-    console.log('Step 3 — validateSignupDetails() errors ([] = pass):', validationErrors);
-
     if (validationErrors.length > 0) {
-      console.warn('Step 4 — Result: FAILED (do not call API)');
-      console.groupEnd();
       window.alert(validationErrors.join('\n'));
       return;
     }
 
-    console.log('Step 4 — Result: PASSED');
-    console.log('Step 5 — JSON for Spring Boot POST /api/v1/auth/create-account:', {
-      fullName: payload.fullName,
-      mobileNumber: payload.mobileNumber,
-      email: payload.email,
-      password: '[send in body — do not log in production]',
-    });
-    console.groupEnd();
-
-    // Dummy record storage until backend API is connected.
-    const dummyUser = {
-      id: `dummy-user-${createdAccounts.length + 1}`,
-      ...payload,
-      createdAt: new Date().toISOString(),
-      source: 'create-account-form',
-    };
-
-    setCreatedAccounts((prev) => [...prev, dummyUser]);
     form.reset();
     setPassword('');
     setShowPassword(false);
@@ -121,31 +78,22 @@ function Signup({ onClose, onAccountCreated }) {
       </div>
 
       <header className="auth-header">
-        <>
-          <h1 id="signup-title">Create your signup account</h1>
-          <p>Get started with InsureEase</p>
-        </>
+        <h1 id="signup-title">Create your signup account</h1>
+        <p>Get started with InsureEase</p>
       </header>
 
-      <section
-        className="auth-card"
-        aria-labelledby="signup-title"
-        data-form-id="signup-form"
-        data-login-enabled="false"
-        data-created-count={createdAccounts.length}
-      >
+      <section className="auth-card" aria-labelledby="signup-title">
         <button type="button" className="auth-close-btn" aria-label="Back to home" onClick={onClose}>
           x
         </button>
 
-        <form className="auth-form" onSubmit={handleCreateAccount} data-api-endpoint="/api/v1/auth/create-account">
+        <form className="auth-form" onSubmit={handleCreateAccount}>
           <label htmlFor="fullName">Full Name</label>
           <input
             id="fullName"
             name="fullName"
             type="text"
             placeholder="Enter your name"
-            data-api-field="fullName"
             required
           />
 
@@ -155,7 +103,6 @@ function Signup({ onClose, onAccountCreated }) {
             name="mobileNumber"
             type="tel"
             placeholder="Enter mobile number"
-            data-api-field="mobileNumber"
             required
             pattern="[0-9]{10}"
             title="Please enter a valid 10-digit mobile number"
@@ -169,7 +116,6 @@ function Signup({ onClose, onAccountCreated }) {
             name="emailAddress"
             type="email"
             placeholder="Enter email address"
-            data-api-field="email"
             required
           />
 
@@ -182,7 +128,6 @@ function Signup({ onClose, onAccountCreated }) {
               name="password"
               type={showPassword ? 'text' : 'password'}
               placeholder="e.g. Secure@123"
-              data-api-field="password"
               minLength={8}
               required
               autoComplete="new-password"

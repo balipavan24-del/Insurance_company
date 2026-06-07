@@ -1,5 +1,11 @@
 import { useState } from 'react';
 import BrandLogo from '../../components/BrandLogo/BrandLogo';
+import {
+  DEMO_LOGIN_OTP,
+  DEMO_LOGIN_PASSWORD,
+  validateOtpMobileNumber,
+  validateOtpVerificationDetails,
+} from '../../utils/validations/leadValidation';
 import './Login.css';
 
 function Login({ onClose, onGuestLogin, onSignupClick }) {
@@ -10,27 +16,14 @@ function Login({ onClose, onGuestLogin, onSignupClick }) {
   const [passwordError, setPasswordError] = useState(false);
   const [mobileNumber, setMobileNumber] = useState('');
   const [otpCode, setOtpCode] = useState('');
-  const [authStep, setAuthStep] = useState('mobile');
-  const [showOtpError, setShowOtpError] = useState(false);
+  const [otpSent, setOtpSent] = useState(false);
+  const [otpErrorMessage, setOtpErrorMessage] = useState('');
 
   const sanitizedUsername = username.trim();
   const sanitizedMobile = mobileNumber.replace(/\D/g, '').slice(0, 10);
-  const sanitizedOtp = otpCode.replace(/\D/g, '').slice(0, 4);
   const canLoginWithPassword = sanitizedUsername.length > 0 && password.length >= 6;
   const canSendOtp = sanitizedMobile.length === 10;
-  const canVerifyOtp = sanitizedOtp.length === 4;
   const maskedMobile = sanitizedMobile ? `+91 ${sanitizedMobile}` : '';
-
-  const switchToPasswordMode = () => {
-    setLoginMode('password');
-    setPasswordError(false);
-  };
-
-  const switchToOtpMode = () => {
-    setLoginMode('otp');
-    setAuthStep('mobile');
-    setShowOtpError(false);
-  };
 
   const handlePasswordLogin = (event) => {
     event.preventDefault();
@@ -38,8 +31,7 @@ function Login({ onClose, onGuestLogin, onSignupClick }) {
       return;
     }
 
-    const isDemoPasswordValid = password === 'password123';
-    if (isDemoPasswordValid) {
+    if (password === DEMO_LOGIN_PASSWORD) {
       onClose();
       return;
     }
@@ -47,28 +39,47 @@ function Login({ onClose, onGuestLogin, onSignupClick }) {
     setPasswordError(true);
   };
 
-  const handleSendOtp = (event) => {
-    event.preventDefault();
-    if (!canSendOtp) {
+  const handleSendOtp = () => {
+    const mobileErrors = validateOtpMobileNumber(mobileNumber);
+    if (mobileErrors.length > 0) {
+      setOtpErrorMessage(mobileErrors[0]);
       return;
     }
-    setAuthStep('otp');
-    setShowOtpError(false);
+
+    setOtpSent(true);
+    setOtpErrorMessage('');
     setOtpCode('');
+  };
+
+  const handleMobileChange = (event) => {
+    setMobileNumber(event.target.value);
+    if (otpSent) {
+      setOtpSent(false);
+      setOtpCode('');
+    }
+    if (otpErrorMessage) {
+      setOtpErrorMessage('');
+    }
   };
 
   const handleVerifyOtp = (event) => {
     event.preventDefault();
-    if (!canVerifyOtp) {
+
+    const validationErrors = validateOtpVerificationDetails({ otpCode, otpSent });
+    if (validationErrors.length > 0) {
+      window.alert('Enter OTP');
       return;
     }
 
-    if (sanitizedOtp === '1234') {
-      onClose();
+    const otpDigits = otpCode.replace(/\D/g, '').slice(0, 4);
+
+    if (otpDigits !== DEMO_LOGIN_OTP) {
+      setOtpErrorMessage('Invalid OTP. Please try again.');
       return;
     }
 
-    setShowOtpError(true);
+    setOtpErrorMessage('');
+    onClose();
   };
 
   return (
@@ -82,21 +93,22 @@ function Login({ onClose, onGuestLogin, onSignupClick }) {
       </header>
 
       <section className="login-card" aria-labelledby="login-page-title">
-        <button
-          type="button"
-          className="login-close-btn"
-          aria-label="Back to home"
-          onClick={onClose}
-        >
-          x
-        </button>
+        <div className="login-card__top">
+          <button type="button" className="login-close-btn" aria-label="Back to home" onClick={onClose}>
+            ×
+          </button>
+        </div>
+
         <div className="login-mode-switch" role="tablist" aria-label="Login methods">
           <button
             type="button"
             role="tab"
             aria-selected={loginMode === 'password'}
             className={`login-mode-btn${loginMode === 'password' ? ' is-active' : ''}`}
-            onClick={switchToPasswordMode}
+            onClick={() => {
+              setLoginMode('password');
+              setPasswordError(false);
+            }}
           >
             Username + Password
           </button>
@@ -105,7 +117,12 @@ function Login({ onClose, onGuestLogin, onSignupClick }) {
             role="tab"
             aria-selected={loginMode === 'otp'}
             className={`login-mode-btn${loginMode === 'otp' ? ' is-active' : ''}`}
-            onClick={switchToOtpMode}
+            onClick={() => {
+              setLoginMode('otp');
+              setOtpSent(false);
+              setOtpErrorMessage('');
+              setOtpCode('');
+            }}
           >
             Mobile + OTP
           </button>
@@ -158,16 +175,16 @@ function Login({ onClose, onGuestLogin, onSignupClick }) {
                 <button
                   type="button"
                   className="password-visibility-btn"
-                  onClick={() => setIsPasswordVisible((prevState) => !prevState)}
+                  onClick={() => setIsPasswordVisible((visible) => !visible)}
                   aria-label={isPasswordVisible ? 'Hide password' : 'Show password'}
                 >
                   {isPasswordVisible ? 'Hide' : 'Show'}
                 </button>
               </div>
 
-              <p className={`otp-hint${passwordError ? ' is-error' : ''}`}>
-                {passwordError ? 'Invalid password. Use password123 for demo' : 'Use password: password123 for demo'}
-              </p>
+              {passwordError && (
+                <p className="otp-hint is-error">Invalid password. Please try again.</p>
+              )}
 
               <button type="submit" className="otp-btn" disabled={!canLoginWithPassword}>
                 Login
@@ -176,49 +193,41 @@ function Login({ onClose, onGuestLogin, onSignupClick }) {
           </>
         ) : (
           <>
-            {authStep === 'mobile' ? (
-              <>
-                <h2 id="login-page-title">Login with Mobile OTP</h2>
+            <h2 id="login-page-title">Login with Mobile OTP</h2>
+            <form className="login-form otp-form" onSubmit={handleVerifyOtp}>
+              <div className="login-mobile-otp-row">
+                <div className="mobile-input-wrap login-mobile-otp-row__input">
+                  <span className="mobile-input-icon" aria-hidden="true" />
+                  <input
+                    id="mobileNumber"
+                    name="mobileNumber"
+                    type="tel"
+                    placeholder="Enter your mobile number"
+                    inputMode="numeric"
+                    autoComplete="tel"
+                    aria-label="Mobile number"
+                    value={mobileNumber}
+                    onChange={handleMobileChange}
+                    required
+                  />
+                </div>
 
-                <form className="login-form" onSubmit={handleSendOtp}>
-                  <div className="mobile-input-wrap">
-                    <span className="mobile-input-icon" aria-hidden="true" />
-                    <input
-                      id="mobileNumber"
-                      name="mobileNumber"
-                      type="tel"
-                      placeholder="Enter your mobile number"
-                      inputMode="numeric"
-                      autoComplete="tel"
-                      value={mobileNumber}
-                      onChange={(event) => setMobileNumber(event.target.value)}
-                      required
-                    />
-                  </div>
-
-                  <button type="submit" className="otp-btn" disabled={!canSendOtp}>
+                {!otpSent && (
+                  <button
+                    type="button"
+                    className="otp-send-btn login-mobile-otp-row__btn"
+                    onClick={handleSendOtp}
+                    disabled={!canSendOtp}
+                  >
                     Send OTP
                   </button>
-                </form>
-              </>
-            ) : (
-              <form className="login-form otp-form" onSubmit={handleVerifyOtp}>
-                <button
-                  type="button"
-                  className="change-number-btn"
-                  onClick={() => {
-                    setAuthStep('mobile');
-                    setShowOtpError(false);
-                    setOtpCode('');
-                  }}
-                >
-                  &larr; Change number
-                </button>
+                )}
+              </div>
 
-                <p className="otp-sent-text">OTP sent to {maskedMobile}</p>
+              {otpSent && <p className="otp-sent-text">OTP sent to {maskedMobile}</p>}
 
-                <label htmlFor="otpCode" className="otp-label">Enter OTP</label>
-                <div className="mobile-input-wrap otp-input-wrap">
+              <div className="login-mobile-otp-row">
+                <div className="mobile-input-wrap otp-input-wrap login-mobile-otp-row__input">
                   <span className="otp-input-icon" aria-hidden="true">
                     <svg viewBox="0 0 24 24">
                       <path
@@ -234,25 +243,36 @@ function Login({ onClose, onGuestLogin, onSignupClick }) {
                     placeholder="Enter 4 digit OTP"
                     inputMode="numeric"
                     autoComplete="one-time-code"
+                    aria-label="Enter OTP"
                     value={otpCode}
                     onChange={(event) => {
                       setOtpCode(event.target.value.replace(/\D/g, '').slice(0, 4));
-                      if (showOtpError) {
-                        setShowOtpError(false);
+                      if (otpErrorMessage) {
+                        setOtpErrorMessage('');
                       }
                     }}
                     required
                   />
                 </div>
-                <p className={`otp-hint${showOtpError ? ' is-error' : ''}`}>
-                  {showOtpError ? 'Invalid OTP. Use 1234 for demo' : 'Use OTP: 1234 for demo'}
-                </p>
 
-                <button type="submit" className="otp-btn" disabled={!canVerifyOtp}>
-                  Verify &amp; Login
-                </button>
-              </form>
-            )}
+                {otpSent && (
+                  <button
+                    type="button"
+                    className="otp-send-btn login-mobile-otp-row__btn"
+                    onClick={handleSendOtp}
+                    disabled={!canSendOtp}
+                  >
+                    Resend OTP
+                  </button>
+                )}
+              </div>
+
+              {otpErrorMessage && <p className="otp-hint is-error">{otpErrorMessage}</p>}
+
+              <button type="submit" className="otp-btn otp-verify-btn">
+                Verify &amp; Login
+              </button>
+            </form>
           </>
         )}
 

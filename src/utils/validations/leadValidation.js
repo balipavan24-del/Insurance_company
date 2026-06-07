@@ -76,7 +76,7 @@ export const validateBusinessLeadDetails = ({ fullName, mobileNumber }) => {
   return validationErrors;
 };
 
-/** Password rules for signup — mirror in Spring Boot (@Pattern / custom validator) */
+/** Signup password rules — shown in UI; backend team can mirror the same rules */
 export const SIGNUP_PASSWORD_RULES = [
   {
     id: 'minLength',
@@ -105,7 +105,7 @@ export const SIGNUP_PASSWORD_RULES = [
   },
 ];
 
-/** For UI + console demo: which rules pass */
+/** For signup UI password rule checklist */
 export const getSignupPasswordRuleResults = (password) =>
   SIGNUP_PASSWORD_RULES.map((rule) => ({
     id: rule.id,
@@ -123,7 +123,6 @@ export const validateSignupPassword = (password) => {
   return validationErrors;
 };
 
-/** Signup / create-account — mirror these rules in Spring Boot */
 export const validateSignupDetails = ({ fullName, mobileNumber, email, password }) => {
   const validationErrors = [];
   const trimmedName = String(fullName ?? '').trim();
@@ -147,13 +146,36 @@ export const validateSignupDetails = ({ fullName, mobileNumber, email, password 
   return validationErrors;
 };
 
-/** Normalized payload for API (same shape backend should accept) */
-export const buildSignupApiPayload = ({ fullName, mobileNumber, email, password }) => ({
-  fullName: String(fullName ?? '').trim(),
-  mobileNumber: sanitizePhoneNumber(mobileNumber),
-  email: String(email ?? '').trim(),
-  password: String(password ?? ''),
-});
+/** Demo login — remove when real auth API is connected */
+export const DEMO_LOGIN_PASSWORD = 'password123';
+export const DEMO_LOGIN_OTP = '1234';
+
+export const validateOtpMobileNumber = (mobileNumber) => {
+  const validationErrors = [];
+  const mobileDigitsOnly = sanitizePhoneNumber(mobileNumber);
+
+  if (mobileDigitsOnly.length !== 10) {
+    validationErrors.push('Please enter a valid 10-digit mobile number.');
+  }
+
+  return validationErrors;
+};
+
+export const validateOtpVerificationDetails = ({ otpCode, otpSent }) => {
+  const validationErrors = [];
+  const otpDigitsOnly = String(otpCode ?? '').replace(/\D/g, '');
+
+  if (!otpSent) {
+    validationErrors.push('Please send OTP to your mobile number first.');
+    return validationErrors;
+  }
+
+  if (otpDigitsOnly.length !== 4) {
+    validationErrors.push('Please enter the 4-digit OTP.');
+  }
+
+  return validationErrors;
+};
 
 export const validateCargoLeadDetails = ({
   fullName,
