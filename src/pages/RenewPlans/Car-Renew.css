@@ -335,6 +335,13 @@
   color: transparent;
 }
 
+.car-renew-hero__title-accent {
+  background: linear-gradient(90deg, #2e88c7 0%, #4f46e5 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
 .car-renew-hero__subtitle {
   margin: 0;
   color: #475569;
@@ -372,6 +379,49 @@
   height: 100%;
   object-fit: cover;
   object-position: center center;
+}
+
+.renew-plans-page--three-wheeler .car-renew-hero__visual {
+  aspect-ratio: 30 / 17;
+  width: min(680px, 100%);
+  min-height: clamp(238px, 32vw, 374px);
+  height: auto;
+  max-height: none;
+  margin-top: 20px;
+}
+
+.renew-plans-page--three-wheeler .car-renew-hero__visual-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+}
+
+.renew-plans-page--three-wheeler .car-renew-overview__title {
+  max-width: none;
+}
+
+.renew-plans-page--three-wheeler .car-renew-overview__title-line,
+.renew-plans-page--three-wheeler .car-renew-benefits__title-line {
+  white-space: normal;
+}
+
+.renew-plans-page--three-wheeler .car-renew-overview__title-line--single {
+  white-space: nowrap;
+}
+
+.renew-plans-page--three-wheeler .car-renew-benefits__title-line--single {
+  white-space: nowrap;
+}
+
+.renew-plans-page--three-wheeler .car-renew-form-card__title {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.renew-plans-page--three-wheeler .car-renew-form-card__title-line {
+  display: block;
 }
 
 .car-renew-form-card {

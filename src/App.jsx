@@ -21,6 +21,7 @@ import ContactUs from './pages/Contact/ContactUs';
 import InsuranceBasics from './pages/InsuranceBasics/InsuranceBasics';
 import CarRenew from './pages/RenewPlans/Car-Renew';
 import BikeRenew from './pages/RenewPlans/Bike-Renew';
+import ThreeWheelerRenew from './pages/RenewPlans/Three-Wheeler-Renew';
 import iconLandingMotor from './assets/icons/landing-motor.png';
 import iconLandingHealth from './assets/icons/landing-health.png';
 import iconLandingTerm from './assets/icons/landing-term.png';
@@ -170,7 +171,7 @@ function App() {
     }
 
     if (optionId === 'renewal-motor-three-wheeler') {
-      navigate('/motor-insurance/three-wheeler?flow=renewal');
+      navigate('/renew-plans/three-wheeler');
       return;
     }
 
@@ -598,6 +599,14 @@ function App() {
             element={(
               <div className="app-screen app-screen--renew-plans">
                 <BikeRenew />
+              </div>
+            )}
+          />
+          <Route
+            path="/renew-plans/three-wheeler"
+            element={(
+              <div className="app-screen app-screen--renew-plans">
+                <ThreeWheelerRenew />
               </div>
             )}
           />

@@ -27,6 +27,6 @@ npm run build
 
 ## Environment
 
-Copy `.env.example` to `.env` when needed.
+Copy `.env.example` to `.env` when the backend is ready.
 
-Frontend validation rules for the backend team: `src/utils/validations/leadValidation.js`
+Frontend validation (mirror on server later): `src/utils/validations/leadValidation.js`

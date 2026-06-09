@@ -315,6 +315,53 @@ export const bikeRenewSupportCard = {
   expertHref: '/contact-us?topic=bike-renewal',
 };
 
+export const threeWheelerRenewFaqSection = {
+  title: 'Frequently Asked Questions',
+  subtitle: 'Answers about expired three-wheeler policies, online renewal, NCB, documents, and switching insurers.',
+  buttonLabel: 'View More FAQs →',
+};
+
+export const threeWheelerRenewFaqItems = [
+  {
+    id: 'expired-three-wheeler-policy-impact',
+    question: 'What happens if my three-wheeler insurance expires?',
+    answer:
+      'Your auto-rickshaw or three-wheeler becomes legally non-compliant and you lose financial protection. You may also need a vehicle inspection before renewal.',
+  },
+  {
+    id: 'renew-expired-three-wheeler-online',
+    question: 'Can I renew expired three-wheeler insurance online?',
+    answer:
+      'Yes, you can renew an expired policy online. Some insurers may require inspection if the policy has been expired for a long time.',
+  },
+  {
+    id: 'three-wheeler-ncb-after-expiry',
+    question: 'Will I lose my No Claim Bonus on my three-wheeler?',
+    answer:
+      'If you renew within 90 days of expiry, your accumulated NCB is generally retained. Beyond that, NCB benefits may be forfeited.',
+  },
+  {
+    id: 'three-wheeler-renewal-documents',
+    question: 'What documents are required for three-wheeler renewal?',
+    answer:
+      'Usually your existing policy, RC copy, and basic owner KYC details are sufficient for online renewal.',
+  },
+  {
+    id: 'switch-three-wheeler-insurer-renewal',
+    question: 'Can I switch insurers during three-wheeler renewal?',
+    answer:
+      'Absolutely. Renewal is a great time to compare insurers and switch to a better plan while retaining your NCB.',
+  },
+];
+
+export const threeWheelerRenewSupportCard = {
+  title: 'Stay on the Road Without Interruptions',
+  subtitle: 'Renew your three-wheeler insurance instantly and keep every trip protected.',
+  primaryCta: 'Renew Your Policy',
+  secondaryCta: 'Talk to an Expert',
+  expertHref: '/contact-us?topic=three-wheeler-renewal',
+};
+
 export const insuranceBasicsQuickSection = {
   eyebrow: 'Foundations',
   title: 'Quick Insurance',

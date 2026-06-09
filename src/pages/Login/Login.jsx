@@ -131,16 +131,15 @@ function Login({ onClose, onGuestLogin, onSignupClick }) {
         {loginMode === 'password' ? (
           <>
             <h2 id="login-page-title">Login with Email/Mobile</h2>
-            <form className="login-form" onSubmit={handlePasswordLogin}>
+            <form className="login-form login-form--password" onSubmit={handlePasswordLogin}>
+              <label className="login-field-label" htmlFor="username">
+                Email/Mobile
+              </label>
               <div className="mobile-input-wrap">
-                <span className="login-user-icon" aria-hidden="true">
-                  @
-                </span>
                 <input
                   id="username"
                   name="username"
                   type="text"
-                  placeholder="Enter email id or mobile number"
                   autoComplete="username"
                   value={username}
                   onChange={(event) => {
@@ -153,15 +152,14 @@ function Login({ onClose, onGuestLogin, onSignupClick }) {
                 />
               </div>
 
+              <label className="login-field-label" htmlFor="password">
+                Password
+              </label>
               <div className="mobile-input-wrap">
-                <span className="login-user-icon" aria-hidden="true">
-                  *
-                </span>
                 <input
                   id="password"
                   name="password"
                   type={isPasswordVisible ? 'text' : 'password'}
-                  placeholder="Enter password"
                   autoComplete="current-password"
                   value={password}
                   onChange={(event) => {
