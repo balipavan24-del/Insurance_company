@@ -1,11 +1,13 @@
 import { startTransition, useEffect, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import DropdownChevron from '../Dropdown/DropdownChevron';
-import BusinessInsuranceMegaMenu from './BusinessInsuranceMegaMenu';
-import CargoInsuranceMegaMenu from './CargoInsuranceMegaMenu';
-import HealthInsuranceMegaMenu from './HealthInsuranceMegaMenu';
-import MotorInsuranceMegaMenu from './MotorInsuranceMegaMenu';
-import RenewalPlansMegaMenu from './RenewalPlansMegaMenu';
+import {
+  BusinessInsuranceMegaMenu,
+  CargoInsuranceMegaMenu,
+  HealthInsuranceMegaMenu,
+  MotorInsuranceMegaMenu,
+  RenewalPlansMegaMenu,
+} from './NavbarMegaMenus';
 import BrandLogo from '../BrandLogo/BrandLogo';
 import './Navbar.css';
 

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   getSignupPasswordRuleResults,
   validateSignupDetails,
@@ -43,7 +44,8 @@ function PasswordVisibilityToggle({ visible, onToggle }) {
   );
 }
 
-function Signup({ onClose, onAccountCreated }) {
+function Signup({ onClose }) {
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [password, setPassword] = useState('');
   const passwordRuleResults = getSignupPasswordRuleResults(password);
@@ -68,7 +70,7 @@ function Signup({ onClose, onAccountCreated }) {
     form.reset();
     setPassword('');
     setShowPassword(false);
-    onAccountCreated();
+    navigate('/', { state: { accountCreated: true } });
   };
 
   return (

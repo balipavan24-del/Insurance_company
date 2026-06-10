@@ -1,5 +1,9 @@
+import { useEffect, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import './Landing-Page.css';
 import { INSURANCE_VIDEO_01 } from '../../utils/media';
+import { INSURANCE_OPTIONS } from './landingData';
+import { navigateInsuranceCard } from './landingNavigation';
 import ScrollReveal, { revealInView, revealOnScroll } from '../../components/Animations/ScrollReveal';
 import Footer from '../../components/Footer/Footer';
 import ProductCard from '../../components/ProductCard/ProductCard';
@@ -72,8 +76,32 @@ const HOW_IT_WORKS_STEPS = [
   },
 ];
 
-function LandingPage({ insuranceOptions = [], onInsuranceCardClick, showHomeSnackbar }) {
-  const cards = Array.isArray(insuranceOptions) ? insuranceOptions : [];
+function LandingPage() {
+  const navigate = useNavigate();
+  const location = useLocation();
+  const [showHomeSnackbar, setShowHomeSnackbar] = useState(false);
+
+  useEffect(() => {
+    if (!location.state?.accountCreated) {
+      return;
+    }
+
+    setShowHomeSnackbar(true);
+    navigate(location.pathname, { replace: true, state: {} });
+  }, [location.state?.accountCreated, location.pathname, navigate]);
+
+  useEffect(() => {
+    if (!showHomeSnackbar) {
+      return undefined;
+    }
+
+    const timerId = window.setTimeout(() => setShowHomeSnackbar(false), 3000);
+    return () => window.clearTimeout(timerId);
+  }, [showHomeSnackbar]);
+
+  const handleInsuranceCardClick = (optionId) => {
+    navigateInsuranceCard(navigate, optionId);
+  };
 
   return (
     <div className="landing-page">
@@ -97,7 +125,7 @@ function LandingPage({ insuranceOptions = [], onInsuranceCardClick, showHomeSnac
           >
             <h2>What would you like to insure?</h2>
             <div className="insurance-grid">
-              {cards.map((item) => (
+              {INSURANCE_OPTIONS.map((item) => (
                 <ProductCard
                   key={item.id}
                   id={item.id}
@@ -105,7 +133,7 @@ function LandingPage({ insuranceOptions = [], onInsuranceCardClick, showHomeSnac
                   subtitle={item.subtitle}
                   iconSrc={item.iconSrc}
                   popular={item.popular}
-                  onCardClick={onInsuranceCardClick}
+                  onCardClick={handleInsuranceCardClick}
                 />
               ))}
             </div>

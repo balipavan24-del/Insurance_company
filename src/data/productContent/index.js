@@ -362,6 +362,53 @@ export const threeWheelerRenewSupportCard = {
   expertHref: '/contact-us?topic=three-wheeler-renewal',
 };
 
+export const commercialVehicleRenewFaqSection = {
+  title: 'Frequently Asked Questions',
+  subtitle: 'Answers about expired commercial vehicle policies, online renewal, NCB, documents, and switching insurers.',
+  buttonLabel: 'View More FAQs →',
+};
+
+export const commercialVehicleRenewFaqItems = [
+  {
+    id: 'expired-commercial-policy-impact',
+    question: 'What happens if my commercial vehicle insurance expires?',
+    answer:
+      'Your truck, van, or fleet vehicle becomes legally non-compliant and you lose financial protection. You may also need a vehicle inspection before renewal.',
+  },
+  {
+    id: 'renew-expired-commercial-online',
+    question: 'Can I renew expired commercial vehicle insurance online?',
+    answer:
+      'Yes, you can renew an expired policy online. Some insurers may require inspection if the policy has been expired for a long time.',
+  },
+  {
+    id: 'commercial-ncb-after-expiry',
+    question: 'Will I lose my No Claim Bonus on my commercial vehicle?',
+    answer:
+      'If you renew within 90 days of expiry, your accumulated NCB is generally retained. Beyond that, NCB benefits may be forfeited.',
+  },
+  {
+    id: 'commercial-renewal-documents',
+    question: 'What documents are required for commercial vehicle renewal?',
+    answer:
+      'Usually your existing policy, RC copy, fitness certificate, and basic owner KYC details are sufficient for online renewal.',
+  },
+  {
+    id: 'switch-commercial-insurer-renewal',
+    question: 'Can I switch insurers during commercial vehicle renewal?',
+    answer:
+      'Absolutely. Renewal is a great time to compare insurers and switch to a better plan while retaining your NCB.',
+  },
+];
+
+export const commercialVehicleRenewSupportCard = {
+  title: 'Keep Your Business Moving Without Interruptions',
+  subtitle: 'Renew your commercial vehicle insurance instantly and protect every delivery and route.',
+  primaryCta: 'Renew Your Policy',
+  secondaryCta: 'Talk to an Expert',
+  expertHref: '/contact-us?topic=commercial-vehicle-renewal',
+};
+
 export const insuranceBasicsQuickSection = {
   eyebrow: 'Foundations',
   title: 'Quick Insurance',

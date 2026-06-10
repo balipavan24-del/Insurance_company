@@ -1,0 +1,762 @@
+/**
+ * NavbarMegaMenus.css
+ * All navbar dropdown panel styles in one file.
+ *
+ * Structure:
+ *   1. Shared layout (all mega menus use the same structure)
+ *   2. Per-menu color themes (motor, health, business, cargo, renewal)
+ *   3. Renewal-only footer + mobile layout
+ *   4. Shared desktop / mobile breakpoints
+ */
+
+/* -------------------------------------------------------------------------- */
+/* 1. SHARED — panel shell, body grid, promo, links, mobile/desktop toggle    */
+/* -------------------------------------------------------------------------- */
+
+.motor-mega-menu,
+.health-mega-menu,
+.business-mega-menu,
+.cargo-mega-menu,
+.renewal-mega-menu {
+  border: 1px solid #e2e8f0;
+  border-radius: 18px;
+  background: #ffffff;
+  box-shadow: 0 24px 48px rgba(15, 23, 42, 0.14);
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+  overflow: hidden;
+  text-align: left;
+}
+
+.motor-mega-menu.is-open,
+.health-mega-menu.is-open,
+.business-mega-menu.is-open,
+.cargo-mega-menu.is-open,
+.renewal-mega-menu.is-open {
+  opacity: 1;
+  pointer-events: auto;
+  visibility: visible;
+}
+
+.motor-mega-menu__body,
+.health-mega-menu__body,
+.business-mega-menu__body,
+.cargo-mega-menu__body,
+.renewal-mega-menu__body {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1.95fr);
+  gap: 0;
+}
+
+.motor-mega-menu__promo,
+.health-mega-menu__promo,
+.business-mega-menu__promo,
+.cargo-mega-menu__promo,
+.renewal-mega-menu__promo {
+  padding: 28px 26px 24px;
+  border-right: 1px solid #edf2f7;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.motor-mega-menu__tag,
+.health-mega-menu__tag,
+.business-mega-menu__tag,
+.cargo-mega-menu__tag,
+.renewal-mega-menu__tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  color: #2e88c7;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.motor-mega-menu__tag-icon,
+.health-mega-menu__tag-icon,
+.business-mega-menu__tag-icon,
+.cargo-mega-menu__tag-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+.renewal-mega-menu__tag-icon {
+  font-size: 13px;
+  line-height: 1;
+}
+
+.motor-mega-menu__promo-title,
+.health-mega-menu__promo-title,
+.business-mega-menu__promo-title,
+.cargo-mega-menu__promo-title,
+.renewal-mega-menu__promo-title {
+  margin: 18px 0 10px;
+  font-size: 22px;
+  line-height: 1.25;
+  font-weight: 700;
+  color: #0f172a;
+  letter-spacing: -0.02em;
+  text-align: left;
+  width: 100%;
+  align-self: stretch;
+}
+
+.motor-mega-menu__promo-text,
+.health-mega-menu__promo-text,
+.business-mega-menu__promo-text,
+.cargo-mega-menu__promo-text,
+.renewal-mega-menu__promo-text {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.55;
+  color: #64748b;
+  max-width: 34ch;
+  text-align: left;
+  align-self: flex-start;
+}
+
+.motor-mega-menu__instant-card,
+.health-mega-menu__instant-card,
+.business-mega-menu__instant-card,
+.cargo-mega-menu__instant-card,
+.renewal-mega-menu__instant-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 22px;
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: #ffffff;
+  border: 1px solid #e8eef4;
+  box-shadow: 0 8px 20px rgba(46, 136, 199, 0.08);
+  text-align: left;
+  align-self: stretch;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.motor-mega-menu__instant-icon,
+.health-mega-menu__instant-icon,
+.business-mega-menu__instant-icon,
+.cargo-mega-menu__instant-icon,
+.renewal-mega-menu__instant-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-size: 18px;
+  flex: 0 0 auto;
+}
+
+.motor-mega-menu__instant-card strong,
+.health-mega-menu__instant-card strong,
+.business-mega-menu__instant-card strong,
+.cargo-mega-menu__instant-card strong,
+.renewal-mega-menu__instant-card strong {
+  display: block;
+  font-size: 14px;
+  color: #0f172a;
+}
+
+.motor-mega-menu__instant-card small,
+.health-mega-menu__instant-card small,
+.business-mega-menu__instant-card small,
+.cargo-mega-menu__instant-card small,
+.renewal-mega-menu__instant-card small {
+  display: block;
+  margin-top: 2px;
+  font-size: 12px;
+  color: #64748b;
+}
+
+.motor-mega-menu__columns,
+.health-mega-menu__columns,
+.business-mega-menu__columns,
+.cargo-mega-menu__columns,
+.renewal-mega-menu__columns {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  padding: 20px 18px 20px;
+}
+
+.renewal-mega-menu__columns {
+  padding-bottom: 18px;
+}
+
+.motor-mega-menu__column,
+.health-mega-menu__column,
+.business-mega-menu__column,
+.cargo-mega-menu__column,
+.renewal-mega-menu__column {
+  border-radius: 14px;
+  padding: 16px 14px 14px;
+}
+
+.motor-mega-menu__column-title,
+.health-mega-menu__column-title,
+.business-mega-menu__column-title,
+.cargo-mega-menu__column-title,
+.renewal-mega-menu__column-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 12px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.motor-mega-menu__column-icon,
+.health-mega-menu__column-icon,
+.business-mega-menu__column-icon,
+.cargo-mega-menu__column-icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  background: #ffffff;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.06);
+}
+
+.renewal-mega-menu__column-icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+}
+
+.motor-mega-menu__links,
+.health-mega-menu__links,
+.business-mega-menu__links,
+.cargo-mega-menu__links,
+.renewal-mega-menu__links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.motor-mega-menu__links > li + li,
+.health-mega-menu__links > li + li,
+.business-mega-menu__links > li + li,
+.cargo-mega-menu__links > li + li,
+.renewal-mega-menu__links > li + li {
+  margin-top: 4px;
+}
+
+.motor-mega-menu__link,
+.health-mega-menu__link,
+.business-mega-menu__link,
+.cargo-mega-menu__link,
+.renewal-mega-menu__link {
+  width: 100%;
+  text-align: left;
+  border: none;
+  background: transparent;
+  padding: 8px 10px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #334155;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  transition:
+    background-color 0.18s ease,
+    color 0.18s ease,
+    padding-right 0.18s ease;
+}
+
+.motor-mega-menu__link::after,
+.health-mega-menu__link::after,
+.business-mega-menu__link::after,
+.cargo-mega-menu__link::after,
+.renewal-mega-menu__link::after {
+  content: '→';
+  flex: 0 0 auto;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1;
+  color: #2e88c7;
+  opacity: 0;
+  transform: translateX(-6px);
+  transition: opacity 0.18s ease, transform 0.18s ease;
+}
+
+.motor-mega-menu__link:hover,
+.motor-mega-menu__link:focus-visible,
+.health-mega-menu__link:hover,
+.health-mega-menu__link:focus-visible,
+.business-mega-menu__link:hover,
+.business-mega-menu__link:focus-visible,
+.cargo-mega-menu__link:hover,
+.cargo-mega-menu__link:focus-visible,
+.renewal-mega-menu__link:hover,
+.renewal-mega-menu__link:focus-visible {
+  background: rgba(255, 255, 255, 0.72);
+  color: #2e88c7;
+}
+
+.motor-mega-menu__link:hover::after,
+.motor-mega-menu__link:focus-visible::after,
+.health-mega-menu__link:hover::after,
+.health-mega-menu__link:focus-visible::after,
+.business-mega-menu__link:hover::after,
+.business-mega-menu__link:focus-visible::after,
+.cargo-mega-menu__link:hover::after,
+.cargo-mega-menu__link:focus-visible::after,
+.renewal-mega-menu__link:hover::after,
+.renewal-mega-menu__link:focus-visible::after {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* -------------------------------------------------------------------------- */
+/* 2. MOTOR — promo gradient, column colors, instant icon                     */
+/* -------------------------------------------------------------------------- */
+
+.motor-mega-menu__promo {
+  background: linear-gradient(160deg, #eef6ff 0%, #f5f0ff 45%, #ffffff 100%);
+}
+
+.motor-mega-menu__tag {
+  background: #e8f2ff;
+}
+
+.motor-mega-menu__instant-icon {
+  background: linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%);
+}
+
+.motor-mega-menu__column--vehicles { background: #f0f7ff; }
+.motor-mega-menu__column--addons,
+.motor-mega-menu__column--tools { background: #f5f3ff; }
+
+.motor-mega-menu__column-icon--vehicles { color: #2563eb; }
+.motor-mega-menu__column-icon--addons { color: #7c3aed; }
+.motor-mega-menu__column-icon--tools { color: #4f46e5; }
+
+/* -------------------------------------------------------------------------- */
+/* 3. HEALTH — promo gradient, column colors, instant icon                     */
+/* -------------------------------------------------------------------------- */
+
+.health-mega-menu__promo {
+  background: linear-gradient(160deg, #eef8ff 0%, #edf7f5 45%, #ffffff 100%);
+}
+
+.health-mega-menu__tag {
+  background: #e6f4ff;
+}
+
+.health-mega-menu__instant-icon {
+  background: linear-gradient(135deg, #0ea5e9 0%, #2563eb 100%);
+}
+
+.health-mega-menu__column--family { background: #edf9f7; }
+.health-mega-menu__column--specialised { background: #f3f0ff; }
+.health-mega-menu__column--browse { background: #ece8ff; }
+
+.health-mega-menu__column-icon--family { color: #0d9488; }
+.health-mega-menu__column-icon--specialised { color: #7c3aed; }
+.health-mega-menu__column-icon--browse { color: #6366f1; }
+
+/* -------------------------------------------------------------------------- */
+/* 4. BUSINESS — promo gradient, column colors, instant icon                  */
+/* -------------------------------------------------------------------------- */
+
+.business-mega-menu__promo {
+  background: linear-gradient(160deg, #eef6ff 0%, #f5f0ff 45%, #ffffff 100%);
+}
+
+.business-mega-menu__tag {
+  background: #e8f2ff;
+}
+
+.business-mega-menu__instant-icon {
+  background: linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%);
+}
+
+.business-mega-menu__column--property { background: #f0f7ff; }
+.business-mega-menu__column--assets { background: #f3f0ff; }
+.business-mega-menu__column--tools { background: #ece8ff; }
+
+.business-mega-menu__column-icon--property { color: #2563eb; }
+.business-mega-menu__column-icon--assets { color: #7c3aed; }
+.business-mega-menu__column-icon--tools { color: #4f46e5; }
+
+/* -------------------------------------------------------------------------- */
+/* 5. CARGO — promo gradient, column colors, instant icon                     */
+/* -------------------------------------------------------------------------- */
+
+.cargo-mega-menu__promo {
+  background: linear-gradient(160deg, #eef6ff 0%, #edf7f5 45%, #ffffff 100%);
+}
+
+.cargo-mega-menu__tag {
+  background: #e6f4ff;
+}
+
+.cargo-mega-menu__instant-icon {
+  background: linear-gradient(135deg, #0ea5e9 0%, #6366f1 100%);
+}
+
+.cargo-mega-menu__column--mode { background: #f0f7ff; }
+.cargo-mega-menu__column--coverage { background: #f3f0ff; }
+.cargo-mega-menu__column--started { background: #ece8ff; }
+
+.cargo-mega-menu__column-icon--mode { color: #2563eb; }
+.cargo-mega-menu__column-icon--coverage { color: #7c3aed; }
+.cargo-mega-menu__column-icon--started { color: #4f46e5; }
+
+/* -------------------------------------------------------------------------- */
+/* 6. RENEWAL — promo gradient, column colors, footer, quick actions           */
+/* -------------------------------------------------------------------------- */
+
+.renewal-mega-menu__promo {
+  background: linear-gradient(160deg, #eef6ff 0%, #f8fbff 55%, #ffffff 100%);
+}
+
+.renewal-mega-menu__tag {
+  background: #e8f2ff;
+}
+
+.renewal-mega-menu__instant-icon {
+  background: linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%);
+}
+
+.renewal-mega-menu__column--motor { background: #f0f7ff; }
+.renewal-mega-menu__column--health { background: #fdf2f8; }
+.renewal-mega-menu__column--life { background: #f5f3ff; }
+
+.renewal-mega-menu__column-icon--motor {
+  background: #dbeafe;
+  color: #2563eb;
+}
+
+.renewal-mega-menu__column-icon--health {
+  background: #fce7f3;
+  color: #db2777;
+}
+
+.renewal-mega-menu__column-icon--life {
+  background: #ede9fe;
+  color: #7c3aed;
+}
+
+.renewal-mega-menu__footer {
+  border-top: 1px solid #edf2f7;
+  padding: 14px 22px 16px;
+  background: #fafbfd;
+  text-align: left !important;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.renewal-mega-menu__footer-label {
+  margin: 0 0 10px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #94a3b8;
+  text-align: left !important;
+  width: 100%;
+}
+
+.renewal-mega-menu__actions {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 10px 18px;
+}
+
+.renewal-mega-menu__actions > li {
+  text-align: left;
+}
+
+.renewal-mega-menu__action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+  border: none;
+  background: transparent;
+  padding: 6px 4px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #334155;
+  cursor: pointer;
+  transition: color 0.18s ease;
+  text-align: left;
+}
+
+.renewal-mega-menu__action:hover {
+  color: #0066ff;
+}
+
+.renewal-mega-menu__action-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #475569;
+}
+
+/* Renewal mobile: reorder promo → quick actions → columns */
+.renewal-mega-menu--mobile.is-open {
+  display: flex;
+  flex-direction: column;
+}
+
+.renewal-mega-menu--mobile .renewal-mega-menu__body {
+  display: contents;
+}
+
+.renewal-mega-menu--mobile .renewal-mega-menu__promo {
+  order: 1;
+  border-right: none;
+  border-bottom: 1px solid #edf2f7;
+  padding: 16px 14px 14px;
+}
+
+.renewal-mega-menu--mobile .renewal-mega-menu__promo-title {
+  margin-top: 12px;
+  font-size: 18px;
+}
+
+.renewal-mega-menu--mobile .renewal-mega-menu__promo-text {
+  max-width: none;
+}
+
+.renewal-mega-menu--mobile .renewal-mega-menu__instant-card {
+  margin-top: 14px;
+}
+
+.renewal-mega-menu--mobile .renewal-mega-menu__footer {
+  order: 2;
+  border-top: none;
+  border-bottom: 1px solid #edf2f7;
+  padding: 12px 14px 14px;
+  background: #f8fbff;
+}
+
+.renewal-mega-menu--mobile .renewal-mega-menu__footer-label {
+  margin-bottom: 8px;
+  font-size: 12px;
+}
+
+.renewal-mega-menu--mobile .renewal-mega-menu__actions {
+  flex-direction: column;
+  align-items: stretch;
+  gap: 6px;
+}
+
+.renewal-mega-menu--mobile .renewal-mega-menu__actions > li {
+  width: 100%;
+}
+
+.renewal-mega-menu--mobile .renewal-mega-menu__action {
+  width: 100%;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  box-sizing: border-box;
+}
+
+.renewal-mega-menu--mobile .renewal-mega-menu__action:hover {
+  background: #f1f6ff;
+}
+
+.renewal-mega-menu--mobile .renewal-mega-menu__columns {
+  order: 3;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  padding: 12px 14px 14px;
+}
+
+.renewal-mega-menu--mobile .renewal-mega-menu__column--life {
+  grid-column: 1 / -1;
+}
+
+.renewal-mega-menu--mobile .renewal-mega-menu__column {
+  min-width: 0;
+  padding: 12px 10px 10px;
+}
+
+.renewal-mega-menu--mobile .renewal-mega-menu__column-title {
+  font-size: 13px;
+  margin-bottom: 8px;
+}
+
+.renewal-mega-menu--mobile .renewal-mega-menu__link {
+  padding: 7px 8px;
+  font-size: 13px;
+}
+
+/* -------------------------------------------------------------------------- */
+/* 7. SHARED — mobile inline panel + desktop floating panel                   */
+/* -------------------------------------------------------------------------- */
+
+.motor-mega-menu--mobile,
+.health-mega-menu--mobile,
+.business-mega-menu--mobile,
+.cargo-mega-menu--mobile,
+.renewal-mega-menu--mobile {
+  position: static;
+  width: 100%;
+  max-width: 100%;
+  transform: none;
+  opacity: 1;
+  pointer-events: auto;
+  margin-top: 6px;
+  box-shadow: none;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  display: none;
+  box-sizing: border-box;
+}
+
+.motor-mega-menu--mobile.is-open,
+.health-mega-menu--mobile.is-open,
+.business-mega-menu--mobile.is-open,
+.cargo-mega-menu--mobile.is-open {
+  display: block;
+}
+
+@media (max-width: 1279px) {
+  .motor-mega-menu--mobile .motor-mega-menu__body,
+  .motor-mega-menu--mobile .motor-mega-menu__promo,
+  .motor-mega-menu--mobile .motor-mega-menu__columns,
+  .motor-mega-menu--mobile .motor-mega-menu__column,
+  .health-mega-menu--mobile .health-mega-menu__body,
+  .health-mega-menu--mobile .health-mega-menu__promo,
+  .health-mega-menu--mobile .health-mega-menu__columns,
+  .health-mega-menu--mobile .health-mega-menu__column,
+  .business-mega-menu--mobile .business-mega-menu__body,
+  .business-mega-menu--mobile .business-mega-menu__promo,
+  .business-mega-menu--mobile .business-mega-menu__columns,
+  .business-mega-menu--mobile .business-mega-menu__column,
+  .cargo-mega-menu--mobile .cargo-mega-menu__body,
+  .cargo-mega-menu--mobile .cargo-mega-menu__promo,
+  .cargo-mega-menu--mobile .cargo-mega-menu__columns,
+  .cargo-mega-menu--mobile .cargo-mega-menu__column {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .motor-mega-menu--mobile .motor-mega-menu__instant-card,
+  .health-mega-menu--mobile .health-mega-menu__instant-card,
+  .business-mega-menu--mobile .business-mega-menu__instant-card,
+  .cargo-mega-menu--mobile .cargo-mega-menu__instant-card {
+    align-self: stretch;
+  }
+}
+
+.motor-mega-menu--mobile .motor-mega-menu__body,
+.health-mega-menu--mobile .health-mega-menu__body,
+.business-mega-menu--mobile .business-mega-menu__body,
+.cargo-mega-menu--mobile .cargo-mega-menu__body {
+  grid-template-columns: 1fr;
+}
+
+.motor-mega-menu--mobile .motor-mega-menu__promo,
+.health-mega-menu--mobile .health-mega-menu__promo,
+.business-mega-menu--mobile .business-mega-menu__promo,
+.cargo-mega-menu--mobile .cargo-mega-menu__promo {
+  border-right: none;
+  border-bottom: 1px solid #edf2f7;
+}
+
+.motor-mega-menu--mobile .motor-mega-menu__columns,
+.health-mega-menu--mobile .health-mega-menu__columns,
+.business-mega-menu--mobile .business-mega-menu__columns,
+.cargo-mega-menu--mobile .cargo-mega-menu__columns {
+  grid-template-columns: 1fr;
+}
+
+.motor-mega-menu--desktop,
+.health-mega-menu--desktop,
+.business-mega-menu--desktop,
+.cargo-mega-menu--desktop,
+.renewal-mega-menu--desktop {
+  display: block;
+}
+
+@media (max-width: 1279px) {
+  .motor-mega-menu--desktop,
+  .health-mega-menu--desktop,
+  .business-mega-menu--desktop,
+  .cargo-mega-menu--desktop,
+  .renewal-mega-menu--desktop {
+    display: none !important;
+  }
+}
+
+@media (min-width: 1280px) {
+  .motor-mega-menu--desktop,
+  .health-mega-menu--desktop,
+  .business-mega-menu--desktop,
+  .cargo-mega-menu--desktop,
+  .renewal-mega-menu--desktop {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    z-index: 1600;
+    width: min(1040px, calc(100vw - 32px));
+  }
+
+  .motor-mega-menu--mobile,
+  .health-mega-menu--mobile,
+  .business-mega-menu--mobile,
+  .cargo-mega-menu--mobile,
+  .renewal-mega-menu--mobile {
+    display: none !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .motor-mega-menu,
+  .motor-mega-menu--desktop,
+  .health-mega-menu,
+  .health-mega-menu--desktop,
+  .business-mega-menu,
+  .business-mega-menu--desktop,
+  .cargo-mega-menu,
+  .cargo-mega-menu--desktop,
+  .renewal-mega-menu,
+  .renewal-mega-menu--desktop {
+    transition: none;
+  }
+}
