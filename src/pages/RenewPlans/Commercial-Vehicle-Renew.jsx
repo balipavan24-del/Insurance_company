@@ -7,7 +7,7 @@ import AnimatedModal from '../../components/AnimatedModal/AnimatedModal';
 import Footer from '../../components/Footer/Footer';
 import WithoutNumber from '../Motor/Withoutnumber/WithoutNumber';
 import { commercialVehicleRenewFaqItems, commercialVehicleRenewFaqSection, commercialVehicleRenewSupportCard } from '../../data/productContent';
-import commercialVehicleRenewHeroImage from '../../assets/images/commercial-vehicle-renew-hero.png';
+import commercialVehicleRenewHeroImage from '../../assets/images/commercial-vehicle-renew-hero.webp';
 import renewStepEnterDetails from '../../assets/images/renew-process/enter-vehicle-details.png';
 import renewStepComparePlans from '../../assets/images/renew-process/compare-renewal-plans.png';
 import renewStepSelectAddons from '../../assets/images/renew-process/select-addons.png';
@@ -32,7 +32,7 @@ const RENEW_BENEFITS = [
   {
     id: 'continuous-coverage',
     title: 'Continuous Coverage',
-    description: 'Avoid coverage gaps and stay financially protected on every ride.',
+    description: 'Avoid coverage gaps and stay financially protected on every route.',
     icon: 'shield',
   },
   {
@@ -579,9 +579,9 @@ function CommercialVehicleRenew() {
             </Link>
             <span className="car-renew-hero__tag">Commercial Vehicle Insurance Renewal</span>
             <h1 id="commercial-vehicle-renew-heading" className="car-renew-hero__title">
-              <span className="car-renew-hero__title-line">Renew Your Commercial</span>
+              <span className="car-renew-hero__title-line">Renew Your Commercial Vehicle</span>
               <span className="car-renew-hero__title-line">
-                Vehicle Insurance{' '}
+                Insurance{' '}
                 <span className="car-renew-hero__title-accent">in Minutes</span>
               </span>
             </h1>
@@ -668,9 +668,8 @@ function CommercialVehicleRenew() {
               Overview
             </p>
             <h2 id="car-renew-overview-heading" className="car-renew-overview__title">
-              <span className="car-renew-overview__title-line">What is Commercial Vehicle</span>
+              <span className="car-renew-overview__title-line">What is Commercial Vehicle Insurance</span>
               <span className="car-renew-overview__title-line car-renew-overview__title-line--single">
-                <span className="car-renew-overview__title-accent">Insurance</span>{' '}
                 <span className="car-renew-overview__title-accent">Renewal?</span>
               </span>
             </h2>
@@ -693,7 +692,7 @@ function CommercialVehicleRenew() {
           </p>
           <h2 id="car-renew-benefits-heading" className="car-renew-benefits__title">
             <span className="car-renew-benefits__title-line">
-              Why Should You Renew Your Commercial Vehicle
+              Why Should You Renew Commercial Vehicle
             </span>
             <span className="car-renew-benefits__title-line car-renew-benefits__title-line--single">
               <span className="car-renew-benefits__title-accent">Insurance on Time?</span>

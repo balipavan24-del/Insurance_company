@@ -467,6 +467,14 @@
   display: block;
 }
 
+.renew-plans-page--commercial-vehicle .car-renew-hero__title-line {
+  white-space: normal;
+}
+
+.renew-plans-page--commercial-vehicle .car-renew-hero__title-line:first-child {
+  white-space: nowrap;
+}
+
 .car-renew-form-card {
   background: #ffffff;
   border: 1px solid #e2e8f0;
