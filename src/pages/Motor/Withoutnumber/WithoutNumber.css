@@ -158,12 +158,28 @@
 }
 
 .motor-vehicle-summary {
+  display: flex;
+  align-items: center;
+  gap: 10px;
   border-radius: 10px;
-  background: #f1f5f9;
-  color: #475569;
-  font-size: 13px;
-  padding: 9px 12px;
-  margin-bottom: 8px;
+  background: #e8f3ff;
+  color: #334155;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 12px 14px;
+  margin-bottom: 14px;
+}
+
+.motor-vehicle-summary__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #2f80ed;
+  flex-shrink: 0;
+}
+
+.motor-vehicle-summary__text {
+  line-height: 1.35;
 }
 
 .motor-plan-form {
@@ -196,12 +212,26 @@
   padding-left: 4px;
 }
 
+.motor-plan-vehicle-type-fixed {
+  margin: 0 0 12px;
+  padding: 10px 14px;
+  border: 1px solid #d4deea;
+  border-radius: 10px;
+  background: #f1f5f9;
+  color: #0f172a;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: left;
+  width: 100%;
+  box-sizing: border-box;
+}
+
 .motor-plan-form select {
   border: 1px solid #d4deea;
   border-radius: 10px;
   background: #f8fafc;
   color: #334155;
-  height: 36px;
+  height: 44px;
   padding: 0 42px 0 16px;
   font-size: 13px;
   outline: none;
@@ -221,9 +251,28 @@
   box-shadow: 0 0 0 3px rgba(47, 128, 237, 0.12);
 }
 
+.motor-plan-form select.motor-select--placeholder {
+  color: #94a3b8;
+}
+
 .motor-plan-form select.motor-form-field-error {
   border-color: #dc2626;
   box-shadow: 0 0 0 1px rgba(220, 38, 38, 0.12);
+}
+
+.motor-date-field-wrap {
+  position: relative;
+  width: 100%;
+}
+
+.motor-date-placeholder {
+  position: absolute;
+  left: 38px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #94a3b8;
+  font-size: 13px;
+  pointer-events: none;
 }
 
 .motor-date-input {
@@ -231,7 +280,7 @@
   border-radius: 10px;
   background: #f8fafc;
   color: #334155;
-  height: 36px;
+  height: 44px;
   padding: 0 12px 0 38px;
   font-size: 13px;
   outline: none;
@@ -241,6 +290,10 @@
   background-repeat: no-repeat;
   background-position: 12px center;
   background-size: 15px;
+}
+
+.motor-date-input.is-empty::-webkit-datetime-edit {
+  color: transparent;
 }
 
 .motor-date-input:focus {

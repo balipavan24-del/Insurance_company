@@ -34,7 +34,7 @@ function Footer() {
     'Cheapest Insurance',
   ];
   const footerRouteMap = {
-    'Motor Insurance': '/motor-insurance/car',
+    'Motor Insurance': '/motor-insurance',
     'Health Insurance': '/health-insurance',
     'Term Insurance': '/term-insurance',
     'Business Insurance': '/business-insurance',

@@ -1,6 +1,6 @@
 /**
- * NavbarMegaMenus.css
- * All navbar dropdown panel styles in one file.
+ * NavDropdown.css
+ * Dropdown panel styles (Motor, Health, Business, Cargo, Renew).
  *
  * Structure:
  *   1. Shared layout (all mega menus use the same structure)
@@ -275,6 +275,7 @@
   font-weight: 500;
   color: #334155;
   cursor: pointer;
+  text-decoration: none;
   display: inline-flex;
   align-items: center;
   justify-content: space-between;
@@ -511,6 +512,7 @@
   font-weight: 600;
   color: #334155;
   cursor: pointer;
+  text-decoration: none;
   transition: color 0.18s ease;
   text-align: left;
 }

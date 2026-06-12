@@ -498,7 +498,7 @@ export const insuranceBasicsTypesCards = [
       'Protection for cars, bikes, and commercial vehicles against accidents, theft, and damages.',
     tone: 'blue',
     icon: 'motor',
-    href: '/motor-insurance/car',
+    href: '/motor-insurance',
     cta: 'Explore plans',
   },
   {

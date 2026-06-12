@@ -1,20 +1,31 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import motorHeroImage from '../../assets/images/Motor-Hero.webp';
-import bikeInsuranceHeroImage from '../../assets/images/bike-insurance-hero.png';
-import motorIconTwoWheeler from '../../assets/icons/Motor-TwoWheeler.webp';
-import motorIconThreeWheeler from '../../assets/icons/Motor-ThreeWheeler.webp';
-import motorIconFourWheeler from '../../assets/icons/Motor-FourWheeler.webp';
-import motorIconCommercial from '../../assets/icons/Motor-Commercial.webp';
-import Footer from '../../components/Footer/Footer';
-import { modalOverlayClass, modalPanelClass, useAnimatedModal } from '../../components/AnimatedModal/AnimatedModal';
-import InsuranceFaqAccordion from '../../components/Faq/InsuranceFaqAccordion';
-import { motorInsuranceFaqItems } from '../../data/productContent';
-import './VehicleInsurance.css';
-import { SearchIcon } from './MotorIcons';
-import { getPolicyCardFromVehicleNumber } from './MotorPolicyDummyData';
-import WithoutNumber from './Withoutnumber/WithoutNumber';
-import Newcar from './Newcar/Newcar';
+import motorHeroImage from '../../../assets/images/Motor-Hero.webp';
+import bikeInsuranceHeroImage from '../../../assets/images/bike-insurance-hero.png';
+import carInsuranceHeroImage from '../../../assets/images/car-insurance-hero.png';
+import threeWheelerHeroImage from '../../../assets/images/three-wheeler-renew-hero.png';
+import commercialVehicleHeroImage from '../../../assets/images/commercial-vehicle-renew-hero.webp';
+import motorIconTwoWheeler from '../../../assets/icons/Motor-TwoWheeler.webp';
+import motorIconThreeWheeler from '../../../assets/icons/Motor-ThreeWheeler.webp';
+import motorIconFourWheeler from '../../../assets/icons/Motor-FourWheeler.webp';
+import motorIconCommercial from '../../../assets/icons/Motor-Commercial.webp';
+import Footer from '../../../components/Footer/Footer';
+import { modalOverlayClass, modalPanelClass, useAnimatedModal } from '../../../components/AnimatedModal/AnimatedModal';
+import InsuranceFaqAccordion from '../../../components/Faq/InsuranceFaqAccordion';
+import { motorInsuranceFaqItems } from '../../../data/productContent';
+import './MotorInsurance.css';
+import { getPolicyCardFromVehicleNumber } from './motorDummyData';
+
+function SearchIcon() {
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <circle cx="10.5" cy="10.5" r="5.5" />
+      <path d="M14.6 14.6L19 19" />
+    </svg>
+  );
+}
+import WithoutNumber from '../Withoutnumber/WithoutNumber';
+import NewVehicle, { getNewVehicleCategoryLabel } from '../NewVehicle/NewVehicle';
 
 /** True in dev, or on any build when URL has ?motorDebug=1 or ?debug=motor */
 const isMotorConsoleDebug = () => {
@@ -36,6 +47,9 @@ const logMotorQuoteLead = (eventLabel, payload) => {
 };
 
 const normalizeMotorCategory = (categoryId) => {
+  if (!categoryId) {
+    return null;
+  }
   switch (categoryId) {
     case 'motor-bike':
     case 'motor-three-wheeler':
@@ -45,37 +59,7 @@ const normalizeMotorCategory = (categoryId) => {
     case 'motor-four-wheeler':
       return 'motor-car';
     default:
-      return 'motor-car';
-  }
-};
-
-const getCategoryDetails = (categoryId) => {
-  switch (normalizeMotorCategory(categoryId)) {
-    case 'motor-bike':
-      return {
-        inputId: 'bikeVehicleNumber',
-        placeholder: 'AP09BK1234',
-        hint: 'Try: AP09BK1234 (Active) • AP09BX1234 (Expired) • AP09BS1234 (Expiring Soon)'
-      };
-    case 'motor-three-wheeler':
-      return {
-        inputId: 'threeWheelerVehicleNumber',
-        placeholder: 'AP09TW1234',
-        hint: 'Try: AP09TW1234 (Active) • AP09TE1234 (Expired) • AP09TS1234 (Expiring Soon)'
-      };
-    case 'motor-commercial-vehicle':
-      return {
-        inputId: 'commercialVehicleNumber',
-        placeholder: 'AP09CV1234',
-        hint: 'Try: AP09CV1234 (Active) • AP09CE1234 (Expired) • AP09CS1234 (Expiring Soon)'
-      };
-    case 'motor-car':
-    default:
-      return {
-        inputId: 'carVehicleNumber',
-        placeholder: 'AP09AB1234',
-        hint: 'Try: AP09AB1234 (Active) • AP09EX1234 (Expired) • AP09SO1234 (Expiring Soon)'
-      };
+      return null;
   }
 };
 
@@ -108,20 +92,70 @@ const MOTOR_CATEGORY_ROUTES = {
 
 const MOTOR_CATEGORY_NAV_ITEMS = [
   { id: 'motor-bike', ariaLabel: 'Bike or scooter insurance' },
-  { id: 'motor-three-wheeler', ariaLabel: 'Auto rickshaw insurance' },
   { id: 'motor-car', ariaLabel: 'Private car insurance' },
+  { id: 'motor-three-wheeler', ariaLabel: 'Auto rickshaw insurance' },
   { id: 'motor-commercial-vehicle', ariaLabel: 'Business vehicle insurance' },
 ];
 
+// Right panel form stays the same for every category (only hero changes on icon click)
+const MOTOR_QUOTE_FORM = {
+  inputId: 'vehicleNumber',
+  placeholder: 'AP09AB1234',
+  hint: 'Try: AP09AB1234 (Active) • AP09EX1234 (Expired) • AP09SO1234 (Expiring Soon)',
+};
+
+// Hero content per category — update text/images here when you share screenshots
+const getMotorHero = (categoryId) => {
+  switch (normalizeMotorCategory(categoryId)) {
+    case 'motor-bike':
+      return {
+        badge: 'Bike Insurance',
+        titleLine1: 'Ride Worry Free,',
+        titleLine2: 'Stay Covered',
+        image: bikeInsuranceHeroImage,
+        imageAlt: 'Bike insurance illustration',
+        pageClass: 'motor-page--bike',
+      };
+    case 'motor-car':
+      return {
+        badge: 'Car Insurance',
+        titleLine1: 'Drive with Confidence,',
+        titleLine2: 'Stay Protected',
+        image: carInsuranceHeroImage,
+        imageAlt: 'Car insurance illustration',
+        pageClass: '',
+      };
+    case 'motor-three-wheeler':
+      return {
+        badge: 'Three Wheeler Insurance',
+        titleLine1: 'Protect Your Three Wheeler',
+        titleLine2: 'Business.',
+        image: threeWheelerHeroImage,
+        imageAlt: 'Three wheeler insurance illustration',
+        pageClass: '',
+      };
+    case 'motor-commercial-vehicle':
+      return {
+        badge: 'Commercial Vehicle Insurance',
+        titleLine1: 'Keep Your Business Moving',
+        titleLine2: 'Without Risk.',
+        image: commercialVehicleHeroImage,
+        imageAlt: 'Commercial vehicle insurance illustration',
+        pageClass: '',
+      };
+    default:
+      return {
+        badge: 'Motor Insurance',
+        titleLine1: 'Drive with Confidence,',
+        titleLine2: 'Stay Protected',
+        image: motorHeroImage,
+        imageAlt: 'Motor insurance illustration',
+        pageClass: '',
+      };
+  }
+};
+
 const MOTOR_OFFERINGS_TABS = [
-  {
-    id: 'motor-car',
-    label: 'Four Wheeler Insurance',
-    title: 'Four Wheeler Insurance',
-    iconVariant: 'car',
-    description:
-      'Four wheeler insurance protects your car against accidents, damages, and theft. It also covers third-party liabilities as per legal requirements. This ensures financial protection for both your vehicle and others on the road. It is essential for safe and responsible driving.'
-  },
   {
     id: 'motor-bike',
     label: 'Two Wheeler Insurance',
@@ -129,6 +163,14 @@ const MOTOR_OFFERINGS_TABS = [
     iconVariant: 'bike',
     description:
       'Two wheeler insurance covers bikes and scooters against accidents, theft, and damages. It provides financial protection for repairs and third-party liabilities. This is important for everyday riders and long-distance travelers. It ensures peace of mind on every ride.'
+  },
+  {
+    id: 'motor-car',
+    label: 'Four Wheeler Insurance',
+    title: 'Four Wheeler Insurance',
+    iconVariant: 'car',
+    description:
+      'Four wheeler insurance protects your car against accidents, damages, and theft. It also covers third-party liabilities as per legal requirements. This ensures financial protection for both your vehicle and others on the road. It is essential for safe and responsible driving.'
   },
   {
     id: 'motor-three-wheeler',
@@ -398,7 +440,7 @@ const MOTOR_INCLUSIONS_ITEMS = [
   }
 ];
 
-function MotorInsurance({ onBackHome, selectedCategory = 'motor-car' }) {
+function MotorInsurance({ onBackHome, selectedCategory = null }) {
   const navigate = useNavigate();
   const brandSearchInputRef = useRef(null);
   const modelSearchInputRef = useRef(null);
@@ -427,13 +469,8 @@ function MotorInsurance({ onBackHome, selectedCategory = 'motor-car' }) {
   const [rcScanError, setRcScanError] = useState('');
   const [motorOfferingsTab, setMotorOfferingsTab] = useState('motor-car');
   const activeCategoryId = normalizeMotorCategory(selectedCategory);
-  const categoryDetails = useMemo(() => getCategoryDetails(activeCategoryId), [activeCategoryId]);
-  const heroImage = activeCategoryId === 'motor-bike' ? bikeInsuranceHeroImage : motorHeroImage;
-  const heroImageAlt = activeCategoryId === 'motor-bike'
-    ? 'Bike insurance protection illustration'
-    : 'Motor insurance illustration';
-  const newVehicleType = activeCategoryId === 'motor-bike' ? 'bike' : 'car';
-  const newVehicleTypeLabel = newVehicleType === 'bike' ? 'Bike' : 'Car';
+  const hero = getMotorHero(activeCategoryId);
+  const newVehicleTypeLabel = getNewVehicleCategoryLabel(activeCategoryId);
   const normalizedVehicleNumber = vehicleNumber.toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 10);
   const indianVehicleNumberRegex = /^[A-Z]{2}\d{1,2}[A-Z]{1,3}\d{4}$/;
   const isCheckEnabled = normalizedVehicleNumber.length >= 8;
@@ -467,25 +504,6 @@ function MotorInsurance({ onBackHome, selectedCategory = 'motor-car' }) {
     () => MOTOR_OFFERINGS_TABS.find((tab) => tab.id === motorOfferingsTab) ?? MOTOR_OFFERINGS_TABS[0],
     [motorOfferingsTab]
   );
-
-  useEffect(() => {
-    setPolicyCard(null);
-    setVehicleNumber('');
-    setHasInputError(false);
-    setIsWithoutVehicleFlow(false);
-    setIsNewCarFlow(false);
-    setIsBrandSelectionOpen(false);
-    setIsModelSelectionOpen(false);
-    setIsVariantSelectionOpen(false);
-    setBrandSearchQuery('');
-    setModelSearchQuery('');
-    setVariantSearchQuery('');
-    setSelectedBrand('');
-    setSelectedModel('');
-    setRcScanRecords([]);
-    setIsRcScanning(false);
-    setRcScanError('');
-  }, [activeCategoryId]);
 
   useEffect(() => {
     if (import.meta.env.DEV) {
@@ -634,7 +652,7 @@ function MotorInsurance({ onBackHome, selectedCategory = 'motor-car' }) {
   };
 
   return (
-    <main className={`motor-page page-section page-section--hero${activeCategoryId === 'motor-bike' ? ' motor-page--bike' : ''}`}>
+    <main className={`motor-page page-section page-section--hero${hero.pageClass ? ` ${hero.pageClass}` : ''}`}>
       <section className="motor-wrap page-section-container">
           <>
           <div
@@ -669,18 +687,18 @@ function MotorInsurance({ onBackHome, selectedCategory = 'motor-car' }) {
                   <div className="motor-hero-block">
                     <div className="motor-hero-badge">
                       <span aria-hidden="true">+</span>
-                      Motor Insurance
+                      {hero.badge}
                     </div>
 
                     <h1 id="motor-intro-title" className="motor-hero-heading">
-                      <span className="motor-hero-heading-line">Drive with Confidence,</span>
-                      <span className="motor-hero-heading-line motor-hero-heading-line--gradient">Stay Protected</span>
+                      <span className="motor-hero-heading-line">{hero.titleLine1}</span>
+                      <span className="motor-hero-heading-line motor-hero-heading-line--gradient">{hero.titleLine2}</span>
                     </h1>
 
                     <div className="motor-image-placeholder">
                       <img
-                        src={heroImage}
-                        alt={heroImageAlt}
+                        src={hero.image}
+                        alt={hero.imageAlt}
                         className="motor-hero-image"
                         decoding="async"
                         fetchPriority="high"
@@ -715,17 +733,17 @@ function MotorInsurance({ onBackHome, selectedCategory = 'motor-car' }) {
 
                 <section className="motor-form-card">
                   <form onSubmit={handleSubmit}>
-                    <label htmlFor={categoryDetails.inputId} className="motor-form-label">
+                    <label htmlFor={MOTOR_QUOTE_FORM.inputId} className="motor-form-label">
                       Enter Vehicle Number
                     </label>
                     <div className="motor-input-row">
                       <input
-                        id={categoryDetails.inputId}
-                        name={categoryDetails.inputId}
+                        id={MOTOR_QUOTE_FORM.inputId}
+                        name={MOTOR_QUOTE_FORM.inputId}
                         type="text"
                         value={vehicleNumber}
                         onChange={handleVehicleNumberChange}
-                        placeholder={hasInputError ? 'Enter correct number' : `E.G. ${categoryDetails.placeholder}`}
+                        placeholder={hasInputError ? 'Enter correct number' : `E.G. ${MOTOR_QUOTE_FORM.placeholder}`}
                         autoComplete="off"
                         required
                         aria-invalid={hasInputError}
@@ -734,7 +752,7 @@ function MotorInsurance({ onBackHome, selectedCategory = 'motor-car' }) {
                         <span className="motor-search-icon" aria-hidden="true"><SearchIcon /></span> Check
                       </button>
                     </div>
-                    <p className="motor-form-hint">{categoryDetails.hint}</p>
+                    <p className="motor-form-hint">{MOTOR_QUOTE_FORM.hint}</p>
                   </form>
 
                   <div className="motor-rc-scan-block">
@@ -784,7 +802,9 @@ function MotorInsurance({ onBackHome, selectedCategory = 'motor-car' }) {
                 >
                   <span className="motor-brand-new-car-icon" aria-hidden="true">✧</span>
                   <span className="motor-brand-new-car-content">
-                    <span className="motor-brand-new-car-title">Bought a Brand New {newVehicleTypeLabel}?</span>
+                    <span className="motor-brand-new-car-title">
+                      Bought a Brand New {newVehicleTypeLabel}?
+                    </span>
                     <span className="motor-brand-new-car-subtitle">Get insurance for your new vehicle in minutes</span>
                   </span>
                   <span className="motor-brand-new-car-arrow" aria-hidden="true">→</span>
@@ -1231,8 +1251,9 @@ function MotorInsurance({ onBackHome, selectedCategory = 'motor-car' }) {
                 </header>
                 <div className="motor-without-number-modal__body">
                   <WithoutNumber
+                    key={activeCategoryId || 'motor-car'}
                     isModal
-                    selectedCategory={selectedCategory}
+                    selectedCategory={activeCategoryId || 'motor-car'}
                     onBackToVehicleCheck={() => setIsWithoutVehicleFlow(false)}
                     onContinue={({ vehicle, insurance }) => {
                       logMotorQuoteLead('Continue without vehicle number — View Plans', {
@@ -1252,19 +1273,17 @@ function MotorInsurance({ onBackHome, selectedCategory = 'motor-car' }) {
           )}
 
           {newCarModalMotion.visible && (
-            <Newcar
-              selectedCategory={activeCategoryId}
-              vehicleType={newVehicleType}
+            <NewVehicle
+              selectedCategory={activeCategoryId || 'motor-car'}
               motionClosing={newCarModalMotion.closing}
               onBackToVehicleCheck={() => setIsNewCarFlow(false)}
-              onContinue={(newCarFormDetails) => {
+              onContinue={(newVehicleDetails) => {
                 logMotorQuoteLead('Brand new vehicle — View Plans (no plate yet)', {
-                  flow: 'brand-new-vehicle-without-number',
+                  flow: 'brand-new-vehicle',
                   selectedCategory: activeCategoryId,
-                  vehicleType: newVehicleType,
                   vehicleNumber: null,
                   continuedWithoutVehicleNumber: true,
-                  newCarDetails: newCarFormDetails
+                  newVehicleDetails,
                 });
                 setIsNewCarFlow(false);
               }}

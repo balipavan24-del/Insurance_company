@@ -19,7 +19,8 @@ import CarRenew from '../pages/RenewPlans/Car-Renew';
 import BikeRenew from '../pages/RenewPlans/Bike-Renew';
 import ThreeWheelerRenew from '../pages/RenewPlans/Three-Wheeler-Renew';
 import CommercialVehicleRenew from '../pages/RenewPlans/Commercial-Vehicle-Renew';
-import MotorInsuranceRoute from '../pages/Motor/MotorInsuranceRoute';
+import MotorInsuranceRoute from '../pages/Motor/MotorHome/MotorInsuranceRoute';
+import MotorHome from '../pages/Motor/MotorHome/MotorInsurance';
 
 function AppRoutes() {
   const navigate = useNavigate();
@@ -47,7 +48,14 @@ function AppRoutes() {
           </div>
         )}
       />
-      <Route path="/motor-insurance" element={<Navigate to="/motor-insurance/car" replace />} />
+      <Route
+        path="/motor-insurance"
+        element={(
+          <div className="app-screen app-screen--motor-insurance">
+            <MotorHome onBackHome={() => navigate('/')} />
+          </div>
+        )}
+      />
       <Route
         path="/motor-insurance/:category"
         element={(

@@ -1,8 +1,8 @@
-import { getMotorRouteFromCategory } from '../Motor/motorRoutes';
+import { getMotorRouteFromCategory } from '../Motor/MotorHome/motorRoutes';
 
 export const navigateInsuranceCard = (navigate, optionId) => {
   if (optionId === 'motor-insurance') {
-    navigate(getMotorRouteFromCategory('motor-car'));
+    navigate(getMotorRouteFromCategory());
     return;
   }
 

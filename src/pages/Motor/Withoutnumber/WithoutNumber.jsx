@@ -1,28 +1,25 @@
 import { useMemo, useState } from 'react';
-import { GUEST_DUMMY_DATA, getGuestCategoryDummyData } from '../GuestDummyData';
+import {
+  GUEST_FLOW_UI,
+  getGuestCategoryDummyData,
+  MOTOR_GUEST_INSURANCE_EMPTY,
+  MOTOR_GUEST_VEHICLE_REQUIRED_FIELDS,
+} from '../MotorHome/motorDummyData';
 import './WithoutNumber.css';
 
 function WithoutNumber({ selectedCategory = 'motor-car', onBackToVehicleCheck, onContinue, isModal = false }) {
-  const requiredVehicleFields = ['brand', 'model', 'variant', 'registrationYear', 'registrationCity'];
-  const withoutNumberSteps = GUEST_DUMMY_DATA.steps.filter((step) => step.id !== 3);
-  const initialCategoryDummyData = useMemo(
-    () => getGuestCategoryDummyData(selectedCategory),
-    [selectedCategory]
-  );
-  const [planVehicleType, setPlanVehicleType] = useState(initialCategoryDummyData.vehicleTypeId);
+  // Matches the motor page icon user clicked (car, bike, three wheeler, commercial)
+  const defaultVehicleType = selectedCategory || 'motor-car';
+
+  const withoutNumberSteps = GUEST_FLOW_UI.steps.filter((step) => step.id !== 3);
   const categoryDummyData = useMemo(
-    () => getGuestCategoryDummyData(planVehicleType),
-    [planVehicleType]
+    () => getGuestCategoryDummyData(defaultVehicleType),
+    [defaultVehicleType]
   );
-  const [planForm, setPlanForm] = useState(initialCategoryDummyData.defaultFormValues);
+  const [planForm, setPlanForm] = useState(categoryDummyData.defaultFormValues);
   const [currentStep, setCurrentStep] = useState(1);
   const [vehicleDetailsErrors, setVehicleDetailsErrors] = useState({});
-  const [insuranceForm, setInsuranceForm] = useState({
-    previousPolicyExpiryDate: GUEST_DUMMY_DATA.insuranceDetails.defaultPreviousPolicyExpiryDate,
-    previousInsurer: GUEST_DUMMY_DATA.insuranceDetails.defaultPreviousInsurer,
-    hadClaimLastYear: GUEST_DUMMY_DATA.insuranceDetails.defaultHadClaimLastYear,
-    ownershipChangedLast12Months: GUEST_DUMMY_DATA.insuranceDetails.defaultOwnershipChangedLast12Months
-  });
+  const [insuranceForm, setInsuranceForm] = useState({ ...MOTOR_GUEST_INSURANCE_EMPTY });
 
   const closeActiveDropdown = () => {
     if (document.activeElement instanceof HTMLElement) {
@@ -50,7 +47,7 @@ function WithoutNumber({ selectedCategory = 'motor-car', onBackToVehicleCheck, o
   };
 
   const handleVehicleDetailsContinue = () => {
-    const nextErrors = requiredVehicleFields.reduce((acc, field) => {
+    const nextErrors = MOTOR_GUEST_VEHICLE_REQUIRED_FIELDS.reduce((acc, field) => {
       if (!String(planForm[field] || '').trim()) {
         acc[field] = 'Please fill this field.';
       }
@@ -86,7 +83,7 @@ function WithoutNumber({ selectedCategory = 'motor-car', onBackToVehicleCheck, o
     <section
       className={`motor-plans-view${isModal ? ' motor-plans-view--modal' : ''}`}
       data-motor-flow="without-vehicle-number"
-      data-motor-selected-category={selectedCategory}
+      data-motor-selected-category={defaultVehicleType}
     >
       {!isModal && (
         <button
@@ -99,8 +96,8 @@ function WithoutNumber({ selectedCategory = 'motor-car', onBackToVehicleCheck, o
       )}
 
       <header className="motor-plans-header">
-        <h1>{GUEST_DUMMY_DATA.titles.heading}</h1>
-        <p>{GUEST_DUMMY_DATA.titles.subtitle}</p>
+        <h1>{GUEST_FLOW_UI.titles.heading}</h1>
+        <p>{GUEST_FLOW_UI.titles.subtitle}</p>
       </header>
 
       <section className="motor-steps" aria-label="Form progress">
@@ -123,27 +120,12 @@ function WithoutNumber({ selectedCategory = 'motor-car', onBackToVehicleCheck, o
       <section className="motor-plan-card">
         {currentStep === 1 && (
           <div className="guest-screen guest-screen--vehicle-details">
-            <h2>{GUEST_DUMMY_DATA.titles.cardHeading}</h2>
+            <h2>{GUEST_FLOW_UI.titles.cardHeading}</h2>
             <form className="motor-plan-form" onSubmit={(event) => event.preventDefault()}>
-              <label htmlFor="planVehicleType" className="motor-plan-label">Vehicle Type</label>
-              <select
-                id="planVehicleType"
-                name="vehicleType"
-                value={planVehicleType}
-                onChange={(event) => {
-                  const nextType = event.target.value;
-                  const nextCategoryData = getGuestCategoryDummyData(nextType);
-                  setPlanVehicleType(nextType);
-                  setPlanForm(nextCategoryData.defaultFormValues);
-                  setVehicleDetailsErrors({});
-                }}
-              >
-                {GUEST_DUMMY_DATA.vehicleTypeOptions.map((vehicleTypeOption) => (
-                  <option key={vehicleTypeOption.id} value={vehicleTypeOption.id}>
-                    {vehicleTypeOption.label}
-                  </option>
-                ))}
-              </select>
+              <p className="motor-plan-label">Vehicle Type</p>
+              <p className="motor-plan-vehicle-type-fixed" aria-live="polite">
+                {categoryDummyData.vehicleTypeLabel}
+              </p>
 
               <label htmlFor="planBrand" className="motor-plan-label">Brand</label>
               <select
@@ -230,24 +212,45 @@ function WithoutNumber({ selectedCategory = 'motor-car', onBackToVehicleCheck, o
         {currentStep === 2 && (
           <div className="guest-screen guest-screen--insurance-details">
             <div className="motor-plan-card-header">
-              <h2>{GUEST_DUMMY_DATA.titles.insuranceCardHeading}</h2>
+              <h2>{GUEST_FLOW_UI.titles.insuranceCardHeading}</h2>
               <button type="button" className="motor-edit-vehicle-btn" onClick={() => setCurrentStep(1)}>
                 Edit Vehicle
               </button>
             </div>
 
-            <div className="motor-vehicle-summary">{vehicleSummary}</div>
+            <div className="motor-vehicle-summary" aria-label="Selected vehicle">
+              <span className="motor-vehicle-summary__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" width="18" height="18" focusable="false">
+                  <path
+                    d="M5 11h14M7 16h2M15 16h2M6.5 11 7.8 8.5h8.4L17.5 11"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.6"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                  <circle cx="8.5" cy="16" r="1.2" fill="currentColor" />
+                  <circle cx="15.5" cy="16" r="1.2" fill="currentColor" />
+                </svg>
+              </span>
+              <span className="motor-vehicle-summary__text">{vehicleSummary}</span>
+            </div>
 
             <form className="motor-plan-form motor-insurance-form">
               <label htmlFor="previousPolicyExpiryDate" className="motor-plan-label">Previous Policy Expiry Date</label>
-              <input
-                id="previousPolicyExpiryDate"
-                name="previousPolicyExpiryDate"
-                type="date"
-                className="motor-date-input"
-                value={insuranceForm.previousPolicyExpiryDate}
-                onChange={handleInsuranceFieldChange}
-              />
+              <div className="motor-date-field-wrap">
+                <input
+                  id="previousPolicyExpiryDate"
+                  name="previousPolicyExpiryDate"
+                  type="date"
+                  className={`motor-date-input${insuranceForm.previousPolicyExpiryDate ? '' : ' is-empty'}`}
+                  value={insuranceForm.previousPolicyExpiryDate}
+                  onChange={handleInsuranceFieldChange}
+                />
+                {!insuranceForm.previousPolicyExpiryDate && (
+                  <span className="motor-date-placeholder" aria-hidden="true">Select date</span>
+                )}
+              </div>
 
               <label htmlFor="previousInsurer" className="motor-plan-label">
                 Previous Insurer <span className="motor-optional-text">(optional)</span>
@@ -255,11 +258,13 @@ function WithoutNumber({ selectedCategory = 'motor-car', onBackToVehicleCheck, o
               <select
                 id="previousInsurer"
                 name="previousInsurer"
+                className={insuranceForm.previousInsurer ? '' : 'motor-select--placeholder'}
                 value={insuranceForm.previousInsurer}
                 onChange={handleInsuranceFieldChange}
               >
-                {GUEST_DUMMY_DATA.insuranceDetails.previousInsurerOptions.map((insurer) => (
-                  <option key={insurer}>{insurer}</option>
+                <option value="">Select insurer</option>
+                {categoryDummyData.insurers.map((insurer) => (
+                  <option key={insurer} value={insurer}>{insurer}</option>
                 ))}
               </select>
 
@@ -285,28 +290,6 @@ function WithoutNumber({ selectedCategory = 'motor-car', onBackToVehicleCheck, o
                 </button>
               </div>
 
-              <label className="motor-plan-label" id="motor-guest-ownership-label">Has ownership changed in last 12 months?</label>
-              <div className="motor-yes-no-row" role="group" aria-labelledby="motor-guest-ownership-label">
-                <button
-                  type="button"
-                  className={`motor-yes-no-btn${insuranceForm.ownershipChangedLast12Months === 'yes' ? ' is-active' : ''}`}
-                  aria-pressed={insuranceForm.ownershipChangedLast12Months === 'yes'}
-                  aria-label="Ownership changed in last 12 months: Yes"
-                  onClick={() => handleInsuranceToggleChange('ownershipChangedLast12Months', 'yes')}
-                >
-                  Yes
-                </button>
-                <button
-                  type="button"
-                  className={`motor-yes-no-btn${insuranceForm.ownershipChangedLast12Months === 'no' ? ' is-active' : ''}`}
-                  aria-pressed={insuranceForm.ownershipChangedLast12Months === 'no'}
-                  aria-label="Ownership changed in last 12 months: No"
-                  onClick={() => handleInsuranceToggleChange('ownershipChangedLast12Months', 'no')}
-                >
-                  No
-                </button>
-              </div>
-
               <div className="motor-insurance-action-row">
                 <button type="button" className="motor-back-step-btn" onClick={() => setCurrentStep(1)}>
                   ← Back
@@ -316,7 +299,14 @@ function WithoutNumber({ selectedCategory = 'motor-car', onBackToVehicleCheck, o
                   className="motor-plan-continue-btn"
                   onClick={() => {
                     closeActiveDropdown();
-                    onContinue?.({ vehicle: planForm, insurance: insuranceForm });
+                    onContinue?.({
+                      vehicle: {
+                        ...planForm,
+                        vehicleType: defaultVehicleType,
+                        vehicleTypeLabel: categoryDummyData.vehicleTypeLabel,
+                      },
+                      insurance: insuranceForm,
+                    });
                   }}
                 >
                   View Plans <span aria-hidden="true">→</span>

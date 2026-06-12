@@ -48,10 +48,16 @@
 button.brand,
 button.brand:hover,
 button.brand:focus-visible,
-button.brand:active {
+button.brand:active,
+a.brand,
+a.brand:hover,
+a.brand:focus-visible,
+a.brand:active {
   transform: none;
   box-shadow: none;
   background: transparent;
+  text-decoration: none;
+  color: inherit;
 }
 
 .brand-text {
@@ -102,6 +108,7 @@ button.brand:active {
   border-radius: 999px;
   padding: 10px 14px;
   text-align: left;
+  text-decoration: none;
   transition: color 0.2s ease;
 }
 

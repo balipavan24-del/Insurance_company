@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 import './App.css';
-import AppNavbar from './components/Navbar/AppNavbar';
+import Navbar from './components/Navbar/Navbar';
 import { useAppScrollEffects } from './hooks/useAppScrollEffects';
 import AppRoutes from './routes/AppRoutes';
 import { shouldShowNavbar } from './utils/navigation/showNavbar';
@@ -14,7 +14,7 @@ function App() {
 
   return (
     <div className="main-wrapper">
-      {shouldShowNavbar(location.pathname) && <AppNavbar />}
+      {shouldShowNavbar(location.pathname) && <Navbar />}
 
       <div ref={appContentRef} className="app-content-offset">
         <AppRoutes key={location.pathname} />

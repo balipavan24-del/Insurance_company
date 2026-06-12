@@ -17,7 +17,12 @@ export const getMotorCategoryFromSlug = (slug) => {
   return MOTOR_SLUG_TO_CATEGORY[slug] || null;
 };
 
-export const getMotorRouteFromCategory = (categoryId = 'motor-car') => {
-  const slug = MOTOR_CATEGORY_SLUGS[categoryId] || MOTOR_CATEGORY_SLUGS['motor-car'];
-  return `/motor-insurance/${slug}`;
+export const MOTOR_HOME_ROUTE = '/motor-insurance';
+
+export const getMotorRouteFromCategory = (categoryId) => {
+  if (!categoryId) {
+    return MOTOR_HOME_ROUTE;
+  }
+  const slug = MOTOR_CATEGORY_SLUGS[categoryId];
+  return slug ? `/motor-insurance/${slug}` : MOTOR_HOME_ROUTE;
 };
