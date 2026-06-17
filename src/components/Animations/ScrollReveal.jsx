@@ -1,15 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
 
-/** Hero / above-the-fold — animates when the block is on screen at load */
-export const revealInView = {
-  threshold: 0.12,
-  rootMargin: '0px',
-};
-
-/** Sections below the fold — animates only after scrolling into the viewport */
-export const revealOnScroll = {
-  threshold: 0.22,
-  rootMargin: '0px 0px -14% 0px',
+const SCROLL_MODES = {
+  /** Hero / top of page — animates as soon as it appears */
+  hero: { threshold: 0.12, rootMargin: '0px' },
+  /** Normal sections — animates when user scrolls them into view */
+  section: { threshold: 0.22, rootMargin: '0px 0px -14% 0px' },
 };
 
 function ScrollReveal({
@@ -17,54 +12,41 @@ function ScrollReveal({
   className = '',
   children,
   delay = 0,
-  once = true,
-  threshold = revealOnScroll.threshold,
-  rootMargin = revealOnScroll.rootMargin,
+  mode = 'section',
   style,
   ...rest
 }) {
   const ref = useRef(null);
   const [visible, setVisible] = useState(false);
+  const { threshold, rootMargin } = SCROLL_MODES[mode] ?? SCROLL_MODES.section;
 
   useEffect(() => {
     const node = ref.current;
-    if (!node) return undefined;
+    if (!node) {
+      return undefined;
+    }
 
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       setVisible(true);
       return undefined;
     }
 
-    let frameId = 0;
-
     const observer = new IntersectionObserver(
       (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            cancelAnimationFrame(frameId);
-            frameId = requestAnimationFrame(() => {
-              setVisible(true);
-            });
-            if (once) observer.disconnect();
-          } else if (!once) {
-            setVisible(false);
-          }
-        });
+        if (entries.some((entry) => entry.isIntersecting)) {
+          setVisible(true);
+          observer.disconnect();
+        }
       },
       { threshold, rootMargin },
     );
 
     observer.observe(node);
-    return () => {
-      cancelAnimationFrame(frameId);
-      observer.disconnect();
-    };
-  }, [once, threshold, rootMargin]);
+    return () => observer.disconnect();
+  }, [threshold, rootMargin]);
 
   const mergedStyle =
-    delay > 0
-      ? { ...style, '--scroll-reveal-delay': `${delay}ms` }
-      : style;
+    delay > 0 ? { ...style, '--scroll-reveal-delay': `${delay}ms` } : style;
 
   const classes = ['scroll-reveal', visible && 'is-visible', className]
     .filter(Boolean)

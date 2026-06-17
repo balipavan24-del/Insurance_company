@@ -64,37 +64,154 @@ a.brand:active {
   letter-spacing: -0.02em;
 }
 
-.mobile-more-btn {
+.menu-btn {
   display: none;
 }
 
-.nav-right {
+.nav-end {
   position: relative;
   flex: 0 0 auto;
   z-index: 2;
 }
 
+/* ==========================================================================
+   NAV ITEMS — row layout (Motor, Health, Business… in one line)
+   ========================================================================== */
+
 .nav-menu {
   display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
   list-style: none;
   margin: 0;
   padding: 0;
   gap: 8px;
-  align-items: center;
-}
-
-.nav-link-item {
-  padding: 0;
-  position: relative;
-  flex: 0 0 auto;
   min-width: 0;
 }
 
-.nav-link-item--mega {
+.nav-item {
+  display: flex;
+  align-items: center;
+  flex: 0 0 auto;
+  padding: 0;
+  position: relative;
+  min-width: 0;
+}
+
+.nav-item--mega {
   position: static;
 }
 
-.nav-label {
+/* Dropdown panel — sits under each .nav-item (not inside NavDropdown.css) */
+.motor-mega-menu--mobile,
+.health-mega-menu--mobile,
+.business-mega-menu--mobile,
+.cargo-mega-menu--mobile,
+.renewal-mega-menu--mobile {
+  position: static;
+  width: 100%;
+  max-width: 100%;
+  transform: none;
+  opacity: 1;
+  pointer-events: auto;
+  margin-top: 6px;
+  box-shadow: none;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  display: none;
+  box-sizing: border-box;
+}
+
+.motor-mega-menu--mobile.is-open,
+.health-mega-menu--mobile.is-open,
+.business-mega-menu--mobile.is-open,
+.cargo-mega-menu--mobile.is-open,
+.renewal-mega-menu--mobile.is-open {
+  display: block;
+}
+
+.motor-mega-menu--desktop,
+.health-mega-menu--desktop,
+.business-mega-menu--desktop,
+.cargo-mega-menu--desktop,
+.renewal-mega-menu--desktop {
+  display: block;
+}
+
+@media (max-width: 1279px) {
+  .nav-item .motor-mega-menu--mobile,
+  .nav-item .health-mega-menu--mobile,
+  .nav-item .business-mega-menu--mobile,
+  .nav-item .cargo-mega-menu--mobile,
+  .nav-item .renewal-mega-menu--mobile {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    text-align: left;
+  }
+
+  .motor-mega-menu--mobile .motor-mega-menu__body,
+  .motor-mega-menu--mobile .motor-mega-menu__promo,
+  .motor-mega-menu--mobile .motor-mega-menu__columns,
+  .motor-mega-menu--mobile .motor-mega-menu__column,
+  .health-mega-menu--mobile .health-mega-menu__body,
+  .health-mega-menu--mobile .health-mega-menu__promo,
+  .health-mega-menu--mobile .health-mega-menu__columns,
+  .health-mega-menu--mobile .health-mega-menu__column,
+  .business-mega-menu--mobile .business-mega-menu__body,
+  .business-mega-menu--mobile .business-mega-menu__promo,
+  .business-mega-menu--mobile .business-mega-menu__columns,
+  .business-mega-menu--mobile .business-mega-menu__column,
+  .cargo-mega-menu--mobile .cargo-mega-menu__body,
+  .cargo-mega-menu--mobile .cargo-mega-menu__promo,
+  .cargo-mega-menu--mobile .cargo-mega-menu__columns,
+  .cargo-mega-menu--mobile .cargo-mega-menu__column {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .motor-mega-menu--mobile .motor-mega-menu__instant-card,
+  .health-mega-menu--mobile .health-mega-menu__instant-card,
+  .business-mega-menu--mobile .business-mega-menu__instant-card,
+  .cargo-mega-menu--mobile .cargo-mega-menu__instant-card {
+    align-self: stretch;
+  }
+
+  .motor-mega-menu--desktop,
+  .health-mega-menu--desktop,
+  .business-mega-menu--desktop,
+  .cargo-mega-menu--desktop,
+  .renewal-mega-menu--desktop {
+    display: none !important;
+  }
+}
+
+@media (min-width: 1280px) {
+  .motor-mega-menu--desktop,
+  .health-mega-menu--desktop,
+  .business-mega-menu--desktop,
+  .cargo-mega-menu--desktop,
+  .renewal-mega-menu--desktop {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    z-index: 1600;
+    width: min(1040px, calc(100vw - 32px));
+  }
+
+  .motor-mega-menu--mobile,
+  .health-mega-menu--mobile,
+  .business-mega-menu--mobile,
+  .cargo-mega-menu--mobile,
+  .renewal-mega-menu--mobile {
+    display: none !important;
+  }
+}
+
+.nav-text {
   display: inline-flex;
   align-items: center;
   gap: 6px;
@@ -112,40 +229,40 @@ a.brand:active {
   transition: color 0.2s ease;
 }
 
-.nav-label:hover {
+.nav-text:hover {
   color: var(--nav-accent);
   background: transparent;
 }
 
-.nav-label:hover .dropdown-arrow {
+.nav-text:hover .dropdown-arrow {
   color: var(--nav-accent);
 }
 
-.nav-label:focus-visible {
+.nav-text:focus-visible {
   outline: 2px solid #93c5fd;
   outline-offset: 2px;
 }
 
-.nav-label--inactive {
+.nav-text--inactive {
   cursor: default;
   pointer-events: none;
   user-select: none;
 }
 
-.nav-label--inactive:hover {
+.nav-text--inactive:hover {
   color: #374151;
 }
 
-.nav-dropdown-trigger {
+.nav-btn {
   padding-right: 10px;
 }
 
-.dropdown-open .nav-dropdown-trigger {
+.nav-item.is-open .nav-btn {
   color: var(--nav-accent);
   background: transparent;
 }
 
-.dropdown-open .nav-dropdown-trigger .dropdown-arrow {
+.nav-item.is-open .nav-btn .dropdown-arrow {
   color: var(--nav-accent);
 }
 
@@ -222,7 +339,7 @@ a.brand:active {
   padding-left: 18px;
 }
 
-.nav-login-btn {
+.login-btn {
   flex: 0 0 auto;
   padding: 11px 28px;
   background: linear-gradient(90deg, #2e88c7 0%, #4f46e5 100%);
@@ -235,23 +352,23 @@ a.brand:active {
   transition: background-color 0.22s ease, color 0.22s ease, transform 0.22s ease, box-shadow 0.22s ease;
 }
 
-.nav-login-btn:hover {
+.login-btn:hover {
   background: linear-gradient(90deg, #2e88c7 0%, #4f46e5 100%);
   color: #ffffff;
   transform: translateY(-1px);
   box-shadow: 0 8px 18px rgba(79, 70, 229, 0.28);
 }
 
-.nav-login-btn:focus-visible {
+.login-btn:focus-visible {
   outline: 2px solid #93c5fd;
   outline-offset: 2px;
 }
 
-.login-item {
+.nav-login {
   margin-left: 8px;
 }
 
-.mobile-only {
+.mob {
   display: none;
 }
 
@@ -270,11 +387,11 @@ a.brand:active {
     position: sticky;
   }
 
-  .nav-link-item:not(.nav-link-item--mega) {
+  .nav-item:not(.nav-item--mega) {
     position: relative;
   }
 
-  .nav-link-item--mega {
+  .nav-item--mega {
     position: static;
   }
 
@@ -298,28 +415,29 @@ a.brand:active {
     width: 100%;
     max-width: 100%;
     min-width: 0;
-    flex-wrap: wrap;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
     justify-content: center;
-    row-gap: 6px;
     column-gap: clamp(4px, 0.6vw, 10px);
   }
 
-  .nav-right {
+  .nav-end {
     grid-column: 3;
     justify-self: end;
   }
 
-  .mobile-more-btn {
+  .menu-btn {
     display: none;
   }
 
-  .nav-label {
+  .nav-text {
     padding: 10px clamp(8px, 0.85vw, 14px);
     font-size: clamp(13px, 0.35vw + 12px, 14px);
     font-weight: 550;
   }
 
-  .nav-login-btn {
+  .login-btn {
     padding: 11px clamp(18px, 1.8vw, 28px);
   }
 
@@ -402,11 +520,11 @@ a.brand:active {
     line-height: 1.1;
   }
 
-  .desktop-only {
+  .desk {
     display: none;
   }
 
-  .mobile-more-btn {
+  .menu-btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -426,7 +544,7 @@ a.brand:active {
     padding: 0;
   }
 
-  .hamburger-icon {
+  .menu-icon {
     transform: translateY(-1px);
   }
 
@@ -461,16 +579,16 @@ a.brand:active {
     -webkit-overflow-scrolling: touch;
   }
 
-  .nav-link-item {
+  .nav-item {
     width: 100%;
     text-align: left;
   }
 
-  .nav-link-item--mega {
+  .nav-item--mega {
     position: relative;
   }
 
-  .nav-label {
+  .nav-text {
     width: 100%;
     display: flex;
     justify-content: flex-start;
@@ -483,7 +601,7 @@ a.brand:active {
     box-sizing: border-box;
   }
 
-  .nav-dropdown-trigger {
+  .nav-btn {
     justify-content: space-between;
   }
 
@@ -517,32 +635,20 @@ a.brand:active {
     text-align: left;
   }
 
-  .login-item {
+  .nav-login {
     margin-left: 0;
     padding-top: 8px;
     border-top: 1px solid #e2e8f0;
   }
 
-  .mobile-only {
+  .mob {
     display: block;
   }
 
-  .nav-login-btn {
+  .login-btn {
     width: 100%;
     text-align: center;
     padding: 11px 16px;
-  }
-
-  /* Mobile mega-menus inside drawer — full width */
-  .nav-link-item .motor-mega-menu--mobile,
-  .nav-link-item .health-mega-menu--mobile,
-  .nav-link-item .business-mega-menu--mobile,
-  .nav-link-item .cargo-mega-menu--mobile,
-  .nav-link-item .renewal-mega-menu--mobile {
-    width: 100%;
-    max-width: 100%;
-    box-sizing: border-box;
-    text-align: left;
   }
 
 }
@@ -589,7 +695,7 @@ body.navbar-scroll-lock {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .nav-login-btn,
+  .login-btn,
   .dropdown-menu,
   .dropdown-arrow {
     transition: none;
@@ -603,11 +709,11 @@ body.navbar-scroll-lock {
     transition: none;
   }
 
-  .dropdown-open .dropdown-arrow {
+  .nav-item.is-open .dropdown-arrow {
     transform: none;
   }
 
-  .nav-login-btn:hover {
+  .login-btn:hover {
     transform: none;
   }
 }

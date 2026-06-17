@@ -6,7 +6,7 @@
  *   1. Shared layout (all mega menus use the same structure)
  *   2. Per-menu color themes (motor, health, business, cargo, renewal)
  *   3. Renewal-only footer + mobile layout
- *   4. Shared desktop / mobile breakpoints
+ *   4. Shared desktop / mobile breakpoints (panel position → Navbar.css)
  */
 
 /* -------------------------------------------------------------------------- */
@@ -626,66 +626,6 @@
   font-size: 13px;
 }
 
-/* -------------------------------------------------------------------------- */
-/* 7. SHARED — mobile inline panel + desktop floating panel                   */
-/* -------------------------------------------------------------------------- */
-
-.motor-mega-menu--mobile,
-.health-mega-menu--mobile,
-.business-mega-menu--mobile,
-.cargo-mega-menu--mobile,
-.renewal-mega-menu--mobile {
-  position: static;
-  width: 100%;
-  max-width: 100%;
-  transform: none;
-  opacity: 1;
-  pointer-events: auto;
-  margin-top: 6px;
-  box-shadow: none;
-  border-radius: 12px;
-  border: 1px solid #e2e8f0;
-  display: none;
-  box-sizing: border-box;
-}
-
-.motor-mega-menu--mobile.is-open,
-.health-mega-menu--mobile.is-open,
-.business-mega-menu--mobile.is-open,
-.cargo-mega-menu--mobile.is-open {
-  display: block;
-}
-
-@media (max-width: 1279px) {
-  .motor-mega-menu--mobile .motor-mega-menu__body,
-  .motor-mega-menu--mobile .motor-mega-menu__promo,
-  .motor-mega-menu--mobile .motor-mega-menu__columns,
-  .motor-mega-menu--mobile .motor-mega-menu__column,
-  .health-mega-menu--mobile .health-mega-menu__body,
-  .health-mega-menu--mobile .health-mega-menu__promo,
-  .health-mega-menu--mobile .health-mega-menu__columns,
-  .health-mega-menu--mobile .health-mega-menu__column,
-  .business-mega-menu--mobile .business-mega-menu__body,
-  .business-mega-menu--mobile .business-mega-menu__promo,
-  .business-mega-menu--mobile .business-mega-menu__columns,
-  .business-mega-menu--mobile .business-mega-menu__column,
-  .cargo-mega-menu--mobile .cargo-mega-menu__body,
-  .cargo-mega-menu--mobile .cargo-mega-menu__promo,
-  .cargo-mega-menu--mobile .cargo-mega-menu__columns,
-  .cargo-mega-menu--mobile .cargo-mega-menu__column {
-    width: 100%;
-    max-width: 100%;
-    box-sizing: border-box;
-  }
-
-  .motor-mega-menu--mobile .motor-mega-menu__instant-card,
-  .health-mega-menu--mobile .health-mega-menu__instant-card,
-  .business-mega-menu--mobile .business-mega-menu__instant-card,
-  .cargo-mega-menu--mobile .cargo-mega-menu__instant-card {
-    align-self: stretch;
-  }
-}
-
 .motor-mega-menu--mobile .motor-mega-menu__body,
 .health-mega-menu--mobile .health-mega-menu__body,
 .business-mega-menu--mobile .business-mega-menu__body,
@@ -706,46 +646,6 @@
 .business-mega-menu--mobile .business-mega-menu__columns,
 .cargo-mega-menu--mobile .cargo-mega-menu__columns {
   grid-template-columns: 1fr;
-}
-
-.motor-mega-menu--desktop,
-.health-mega-menu--desktop,
-.business-mega-menu--desktop,
-.cargo-mega-menu--desktop,
-.renewal-mega-menu--desktop {
-  display: block;
-}
-
-@media (max-width: 1279px) {
-  .motor-mega-menu--desktop,
-  .health-mega-menu--desktop,
-  .business-mega-menu--desktop,
-  .cargo-mega-menu--desktop,
-  .renewal-mega-menu--desktop {
-    display: none !important;
-  }
-}
-
-@media (min-width: 1280px) {
-  .motor-mega-menu--desktop,
-  .health-mega-menu--desktop,
-  .business-mega-menu--desktop,
-  .cargo-mega-menu--desktop,
-  .renewal-mega-menu--desktop {
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    z-index: 1600;
-    width: min(1040px, calc(100vw - 32px));
-  }
-
-  .motor-mega-menu--mobile,
-  .health-mega-menu--mobile,
-  .business-mega-menu--mobile,
-  .cargo-mega-menu--mobile,
-  .renewal-mega-menu--mobile {
-    display: none !important;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {

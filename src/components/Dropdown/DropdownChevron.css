@@ -7,7 +7,8 @@
   transition: transform 0.3s ease-out, color 0.2s ease;
 }
 
-.dropdown-open .dropdown-arrow {
+.dropdown-open .dropdown-arrow,
+.nav-item.is-open .dropdown-arrow {
   transform: rotate(180deg);
   color: #2e88c7;
 }
@@ -28,7 +29,8 @@
     transition: none;
   }
 
-  .dropdown-open .dropdown-arrow {
+  .dropdown-open .dropdown-arrow,
+  .nav-item.is-open .dropdown-arrow {
     transform: none;
   }
 }

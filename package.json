@@ -9,6 +9,7 @@
   },
   "scripts": {
     "dev": "vite",
+    "api": "npm start --prefix backend",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"

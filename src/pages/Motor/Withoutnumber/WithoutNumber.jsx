@@ -1,25 +1,90 @@
 import { useMemo, useState } from 'react';
-import {
-  GUEST_FLOW_UI,
-  getGuestCategoryDummyData,
-  MOTOR_GUEST_INSURANCE_EMPTY,
-  MOTOR_GUEST_VEHICLE_REQUIRED_FIELDS,
-} from '../MotorHome/motorDummyData';
 import './WithoutNumber.css';
 
+// Guest flow data — move to API when backend is live
+const CATEGORY_OPTIONS = {
+  'motor-car': {
+    vehicleTypeLabel: 'Car',
+    brands: ['Hyundai', 'Honda', 'Tata', 'Mahindra'],
+    models: ['Venue', 'i20', 'Creta', 'Verna'],
+    variants: ['S+', 'S', 'SX', 'SX(O)'],
+  },
+  'motor-bike': {
+    vehicleTypeLabel: 'Bike',
+    brands: ['Hero', 'Honda', 'Bajaj', 'TVS'],
+    models: ['Splendor Plus', 'Shine', 'Pulsar 150', 'Apache RTR 160'],
+    variants: ['Drum', 'Disc', 'ABS', 'Top'],
+  },
+  'motor-three-wheeler': {
+    vehicleTypeLabel: 'Three Wheeler',
+    brands: ['Bajaj', 'Piaggio', 'Mahindra', 'TVS'],
+    models: ['RE Auto', 'Ape City', 'Alfa', 'King Duramax'],
+    variants: ['Passenger', 'Cargo', 'CNG', 'Diesel'],
+  },
+  'motor-commercial-vehicle': {
+    vehicleTypeLabel: 'Commercial Vehicle',
+    brands: ['Tata', 'Ashok Leyland', 'Eicher', 'Mahindra'],
+    models: ['Ace', 'Dost', 'Pro 2049', 'Bolero Pickup'],
+    variants: ['Mini Truck', 'Pickup', 'CNG', 'Diesel'],
+  },
+};
+
+const REGISTRATION_YEARS = ['2014', '2016', '2018', '2020', '2022'];
+const CITIES = ['Jaipur', 'Hyderabad', 'Bengaluru', 'Chennai'];
+const INSURERS = ['Oriental Insurance', 'HDFC Ergo', 'ICICI Lombard', 'Bajaj Allianz'];
+
+const getGuestCategoryData = (categoryId) => {
+  const categoryData = CATEGORY_OPTIONS[categoryId] || CATEGORY_OPTIONS['motor-car'];
+  const vehicleTypeId = categoryId in CATEGORY_OPTIONS ? categoryId : 'motor-car';
+
+  return {
+    vehicleType: vehicleTypeId,
+    vehicleTypeLabel: categoryData.vehicleTypeLabel,
+    selectOptions: {
+      brand: categoryData.brands,
+      model: categoryData.models,
+      variant: categoryData.variants,
+      registrationYear: REGISTRATION_YEARS,
+      registrationCity: CITIES,
+    },
+    defaultFormValues: {
+      brand: '',
+      model: '',
+      variant: '',
+      registrationYear: '',
+      registrationCity: '',
+    },
+    insurers: INSURERS,
+    titles: {
+      heading: 'Browse Insurance Plans',
+      subtitle: 'Complete the details below to find the best plans for you.',
+      cardHeading: 'Vehicle Details',
+      insuranceCardHeading: 'Insurance Details',
+    },
+    steps: [
+      { id: 1, label: 'Vehicle Details', isActive: true },
+      { id: 2, label: 'Insurance Details', isActive: false },
+    ],
+    vehicleRequiredFields: ['brand', 'model', 'variant', 'registrationYear', 'registrationCity'],
+    defaultInsuranceFormValues: {
+      previousPolicyExpiryDate: '',
+      previousInsurer: '',
+      hadClaimLastYear: '',
+    },
+  };
+};
+
 function WithoutNumber({ selectedCategory = 'motor-car', onBackToVehicleCheck, onContinue, isModal = false }) {
-  // Matches the motor page icon user clicked (car, bike, three wheeler, commercial)
   const defaultVehicleType = selectedCategory || 'motor-car';
 
-  const withoutNumberSteps = GUEST_FLOW_UI.steps.filter((step) => step.id !== 3);
-  const categoryDummyData = useMemo(
-    () => getGuestCategoryDummyData(defaultVehicleType),
+  const guestData = useMemo(
+    () => getGuestCategoryData(defaultVehicleType),
     [defaultVehicleType]
   );
-  const [planForm, setPlanForm] = useState(categoryDummyData.defaultFormValues);
+  const [planForm, setPlanForm] = useState(guestData.defaultFormValues);
   const [currentStep, setCurrentStep] = useState(1);
   const [vehicleDetailsErrors, setVehicleDetailsErrors] = useState({});
-  const [insuranceForm, setInsuranceForm] = useState({ ...MOTOR_GUEST_INSURANCE_EMPTY });
+  const [insuranceForm, setInsuranceForm] = useState({ ...guestData.defaultInsuranceFormValues });
 
   const closeActiveDropdown = () => {
     if (document.activeElement instanceof HTMLElement) {
@@ -47,7 +112,7 @@ function WithoutNumber({ selectedCategory = 'motor-car', onBackToVehicleCheck, o
   };
 
   const handleVehicleDetailsContinue = () => {
-    const nextErrors = MOTOR_GUEST_VEHICLE_REQUIRED_FIELDS.reduce((acc, field) => {
+    const nextErrors = guestData.vehicleRequiredFields.reduce((acc, field) => {
       if (!String(planForm[field] || '').trim()) {
         acc[field] = 'Please fill this field.';
       }
@@ -96,21 +161,21 @@ function WithoutNumber({ selectedCategory = 'motor-car', onBackToVehicleCheck, o
       )}
 
       <header className="motor-plans-header">
-        <h1>{GUEST_FLOW_UI.titles.heading}</h1>
-        <p>{GUEST_FLOW_UI.titles.subtitle}</p>
+        <h1>{guestData.titles.heading}</h1>
+        <p>{guestData.titles.subtitle}</p>
       </header>
 
       <section className="motor-steps" aria-label="Form progress">
-        {withoutNumberSteps.map((step, index) => (
+        {guestData.steps.map((step, index) => (
           <div
             key={step.id}
-            className={`motor-step-wrap${index < withoutNumberSteps.length - 1 ? ' has-line' : ''}`}
+            className={`motor-step-wrap${index < guestData.steps.length - 1 ? ' has-line' : ''}`}
           >
             <div className={`motor-step${step.id === currentStep ? ' is-active' : ''}${step.id < currentStep ? ' is-done' : ''}`}>
               <span>{step.id < currentStep ? '✓' : step.id}</span>
               <p>{step.label}</p>
             </div>
-            {index < withoutNumberSteps.length - 1 && (
+            {index < guestData.steps.length - 1 && (
               <div className={`motor-step-line${step.id < currentStep ? ' is-active' : ''}`} aria-hidden="true" />
             )}
           </div>
@@ -120,11 +185,11 @@ function WithoutNumber({ selectedCategory = 'motor-car', onBackToVehicleCheck, o
       <section className="motor-plan-card">
         {currentStep === 1 && (
           <div className="guest-screen guest-screen--vehicle-details">
-            <h2>{GUEST_FLOW_UI.titles.cardHeading}</h2>
+            <h2>{guestData.titles.cardHeading}</h2>
             <form className="motor-plan-form" onSubmit={(event) => event.preventDefault()}>
               <p className="motor-plan-label">Vehicle Type</p>
               <p className="motor-plan-vehicle-type-fixed" aria-live="polite">
-                {categoryDummyData.vehicleTypeLabel}
+                {guestData.vehicleTypeLabel}
               </p>
 
               <label htmlFor="planBrand" className="motor-plan-label">Brand</label>
@@ -136,7 +201,7 @@ function WithoutNumber({ selectedCategory = 'motor-car', onBackToVehicleCheck, o
                 className={vehicleDetailsErrors.brand ? 'motor-form-field-error' : ''}
               >
                 <option value="">Select</option>
-                {categoryDummyData.selectOptions.brand.map((brand) => (
+                {guestData.selectOptions.brand.map((brand) => (
                   <option key={brand}>{brand}</option>
                 ))}
               </select>
@@ -151,7 +216,7 @@ function WithoutNumber({ selectedCategory = 'motor-car', onBackToVehicleCheck, o
                 className={vehicleDetailsErrors.model ? 'motor-form-field-error' : ''}
               >
                 <option value="">Select</option>
-                {categoryDummyData.selectOptions.model.map((model) => (
+                {guestData.selectOptions.model.map((model) => (
                   <option key={model}>{model}</option>
                 ))}
               </select>
@@ -166,7 +231,7 @@ function WithoutNumber({ selectedCategory = 'motor-car', onBackToVehicleCheck, o
                 className={vehicleDetailsErrors.variant ? 'motor-form-field-error' : ''}
               >
                 <option value="">Select</option>
-                {categoryDummyData.selectOptions.variant.map((variant) => (
+                {guestData.selectOptions.variant.map((variant) => (
                   <option key={variant}>{variant}</option>
                 ))}
               </select>
@@ -181,7 +246,7 @@ function WithoutNumber({ selectedCategory = 'motor-car', onBackToVehicleCheck, o
                 className={vehicleDetailsErrors.registrationYear ? 'motor-form-field-error' : ''}
               >
                 <option value="">Select</option>
-                {categoryDummyData.selectOptions.registrationYear.map((registrationYear) => (
+                {guestData.selectOptions.registrationYear.map((registrationYear) => (
                   <option key={registrationYear}>{registrationYear}</option>
                 ))}
               </select>
@@ -196,7 +261,7 @@ function WithoutNumber({ selectedCategory = 'motor-car', onBackToVehicleCheck, o
                 className={vehicleDetailsErrors.registrationCity ? 'motor-form-field-error' : ''}
               >
                 <option value="">Select</option>
-                {categoryDummyData.selectOptions.registrationCity.map((registrationCity) => (
+                {guestData.selectOptions.registrationCity.map((registrationCity) => (
                   <option key={registrationCity}>{registrationCity}</option>
                 ))}
               </select>
@@ -212,7 +277,7 @@ function WithoutNumber({ selectedCategory = 'motor-car', onBackToVehicleCheck, o
         {currentStep === 2 && (
           <div className="guest-screen guest-screen--insurance-details">
             <div className="motor-plan-card-header">
-              <h2>{GUEST_FLOW_UI.titles.insuranceCardHeading}</h2>
+              <h2>{guestData.titles.insuranceCardHeading}</h2>
               <button type="button" className="motor-edit-vehicle-btn" onClick={() => setCurrentStep(1)}>
                 Edit Vehicle
               </button>
@@ -263,7 +328,7 @@ function WithoutNumber({ selectedCategory = 'motor-car', onBackToVehicleCheck, o
                 onChange={handleInsuranceFieldChange}
               >
                 <option value="">Select insurer</option>
-                {categoryDummyData.insurers.map((insurer) => (
+                {guestData.insurers.map((insurer) => (
                   <option key={insurer} value={insurer}>{insurer}</option>
                 ))}
               </select>
@@ -303,7 +368,7 @@ function WithoutNumber({ selectedCategory = 'motor-car', onBackToVehicleCheck, o
                       vehicle: {
                         ...planForm,
                         vehicleType: defaultVehicleType,
-                        vehicleTypeLabel: categoryDummyData.vehicleTypeLabel,
+                        vehicleTypeLabel: guestData.vehicleTypeLabel,
                       },
                       insurance: insuranceForm,
                     });

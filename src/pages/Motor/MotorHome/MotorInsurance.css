@@ -1562,6 +1562,14 @@
   font-weight: 700;
 }
 
+.policy-vehicle-number {
+  margin: 4px 0 0;
+  color: #64748b;
+  font-size: var(--font-size-13);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
 .policy-status-grid {
   margin-top: 10px;
   display: grid;
@@ -1660,6 +1668,28 @@
 
 .policy-status-card.is-expiring-soon .policy-action-btn {
   background: linear-gradient(90deg, #2e88c7 0%, #4f46e5 100%);
+}
+
+.policy-status-card.is-no-data {
+  border-color: #cbd5e1;
+  background: #f8fafc;
+}
+
+.policy-status-card.is-no-data .policy-status-icon {
+  color: #64748b;
+  border-color: #cbd5e1;
+}
+
+.policy-status-card.is-no-data .policy-action-btn {
+  background: linear-gradient(90deg, #2e88c7 0%, #4f46e5 100%);
+}
+
+.policy-no-data-message {
+  margin: 10px 0 0;
+  color: #475569;
+  font-size: var(--font-size-14);
+  line-height: 1.5;
+  text-align: left;
 }
 
 body.motor-disable-hover .motor-category-link:hover {

@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate, useParams } from 'react-router-dom';
 import motorHeroImage from '../../../assets/images/Motor-Hero.webp';
 import bikeInsuranceHeroImage from '../../../assets/images/bike-insurance-hero.png';
 import carInsuranceHeroImage from '../../../assets/images/car-insurance-hero.png';
@@ -14,7 +14,108 @@ import { modalOverlayClass, modalPanelClass, useAnimatedModal } from '../../../c
 import InsuranceFaqAccordion from '../../../components/Faq/InsuranceFaqAccordion';
 import { motorInsuranceFaqItems } from '../../../data/productContent';
 import './MotorInsurance.css';
-import { getPolicyCardFromVehicleNumber } from './motorDummyData';
+import WithoutNumber from '../Withoutnumber/WithoutNumber';
+import {
+  BoughtNewVehicleCard,
+  BoughtNewVehicleModal,
+  buildNewVehicleLeadPayload,
+  getVehicleType,
+} from '../NewVehicle/NewVehicle';
+import { Validnumber } from './vehicleNumberValidation';
+
+// Local fake policy data (used on Vercel until API is connected).
+// Set VITE_USE_MOTOR_POLICY_API=true in .env to use backend/server.js instead.
+const USE_MOTOR_POLICY_API = import.meta.env.VITE_USE_MOTOR_POLICY_API === 'true';
+const MOTOR_API_BASE_URL = (import.meta.env.VITE_API_BASE_URL || 'http://localhost:4591').replace(/\/$/, '');
+
+const formatPolicyDate = (dateValue) => dateValue.toLocaleDateString('en-GB', {
+  day: '2-digit',
+  month: 'short',
+  year: 'numeric',
+});
+
+const getPolicyDates = (statusType) => {
+  const today = new Date();
+  const startDate = new Date(today);
+  const endDate = new Date(today);
+
+  if (statusType === 'expired') {
+    startDate.setFullYear(today.getFullYear() - 1);
+    endDate.setDate(today.getDate() - 12);
+  } else if (statusType === 'expiringSoon') {
+    startDate.setFullYear(today.getFullYear() - 1);
+    endDate.setDate(today.getDate() + 20);
+  } else {
+    startDate.setFullYear(today.getFullYear() - 1);
+    endDate.setFullYear(today.getFullYear() + 1);
+  }
+
+  return {
+    startDate: formatPolicyDate(startDate),
+    endDate: formatPolicyDate(endDate),
+  };
+};
+
+const vehiclenumber = {
+  AP09AB1234: {
+    vehicleNumber: 'AP09AB1234',
+    title: 'Insurance Found',
+    status: 'active',
+    statusLabel: 'Active',
+    iconSymbol: '✓',
+    ctaLabel: 'Compare Plans',
+    note: 'Renew early to save more.',
+    ...getPolicyDates('active'),
+  },
+  AP09EX1234: {
+    vehicleNumber: 'AP09EX1234',
+    title: 'Insurance Expired',
+    status: 'expired',
+    statusLabel: 'Expired',
+    iconSymbol: '✕',
+    ctaLabel: 'Renew Now',
+    note: 'Renew today to avoid penalties and claim rejection risk.',
+    ...getPolicyDates('expired'),
+  },
+  AP09SO1234: {
+    vehicleNumber: 'AP09SO1234',
+    title: 'Insurance Expiring Soon',
+    status: 'expiringSoon',
+    statusLabel: 'Expiring Soon',
+    iconSymbol: '!',
+    ctaLabel: 'Renew Early',
+    note: 'Renew early to keep your no-claim benefits protected.',
+    ...getPolicyDates('expiringSoon'),
+  },
+};
+
+const lookupLocalVehiclePolicy = (vehicleNumber) => {
+  const key = String(vehicleNumber).toUpperCase();
+  return vehiclenumber[key] ?? null;
+};
+
+const getPolicyCardStatusClass = (status) => {
+  if (status === 'noData') {
+    return 'no-data';
+  }
+  if (status === 'expiringSoon') {
+    return 'expiring-soon';
+  }
+  if (status === 'expired') {
+    return 'expired';
+  }
+  return 'active';
+};
+
+const buildNoDataPolicyCard = (vehicleNumber) => ({
+  vehicleNumber: String(vehicleNumber).toUpperCase(),
+  status: 'noData',
+  title: 'No Data Found',
+  statusLabel: 'No Record',
+  iconSymbol: '—',
+  ctaLabel: 'Get Insurance',
+  note: 'No policy was found for this vehicle number. You can buy a new policy to get covered.',
+});
 
 function SearchIcon() {
   return (
@@ -24,10 +125,6 @@ function SearchIcon() {
     </svg>
   );
 }
-import WithoutNumber from '../Withoutnumber/WithoutNumber';
-import NewVehicle, { getNewVehicleCategoryLabel } from '../NewVehicle/NewVehicle';
-
-/** True in dev, or on any build when URL has ?motorDebug=1 or ?debug=motor */
 const isMotorConsoleDebug = () => {
   if (import.meta.env.DEV) {
     return true;
@@ -83,11 +180,28 @@ const getCategoryIcon = (categoryId) => {
   );
 };
 
+const MOTOR_CATEGORY_SLUGS = {
+  'motor-car': 'car',
+  'motor-bike': 'bike',
+  'motor-three-wheeler': 'three-wheeler',
+  'motor-commercial-vehicle': 'commercial-vehicle',
+};
+
+const MOTOR_HOME_ROUTE = '/motor-insurance';
+
+const getMotorCategoryFromSlug = (slug) => {
+  if (!slug) {
+    return null;
+  }
+  const match = Object.entries(MOTOR_CATEGORY_SLUGS).find(([, value]) => value === slug);
+  return match ? match[0] : null;
+};
+
 const MOTOR_CATEGORY_ROUTES = {
-  'motor-car': '/motor-insurance/car',
-  'motor-bike': '/motor-insurance/bike',
-  'motor-three-wheeler': '/motor-insurance/three-wheeler',
-  'motor-commercial-vehicle': '/motor-insurance/commercial-vehicle'
+  'motor-car': `${MOTOR_HOME_ROUTE}/car`,
+  'motor-bike': `${MOTOR_HOME_ROUTE}/bike`,
+  'motor-three-wheeler': `${MOTOR_HOME_ROUTE}/three-wheeler`,
+  'motor-commercial-vehicle': `${MOTOR_HOME_ROUTE}/commercial-vehicle`,
 };
 
 const MOTOR_CATEGORY_NAV_ITEMS = [
@@ -98,10 +212,16 @@ const MOTOR_CATEGORY_NAV_ITEMS = [
 ];
 
 // Right panel form stays the same for every category (only hero changes on icon click)
+const MOTOR_DEMO_VEHICLE_NUMBERS = [
+  { number: 'AP09AB1234', label: 'Active policy' },
+  { number: 'AP09EX1234', label: 'Expired policy' },
+  { number: 'AP09SO1234', label: 'Expiring soon' },
+];
+
 const MOTOR_QUOTE_FORM = {
   inputId: 'vehicleNumber',
   placeholder: 'AP09AB1234',
-  hint: 'Try: AP09AB1234 (Active) • AP09EX1234 (Expired) • AP09SO1234 (Expiring Soon)',
+  hint: `Try: ${MOTOR_DEMO_VEHICLE_NUMBERS.map((item) => item.number).join(', ')}`,
 };
 
 // Hero content per category — update text/images here when you share screenshots
@@ -439,15 +559,19 @@ const MOTOR_INCLUSIONS_ITEMS = [
     description: 'Covers damage caused by external disturbances or intentional acts.'
   }
 ];
-
-function MotorInsurance({ onBackHome, selectedCategory = null }) {
+/*Motor insurance started*/ 
+function MotorInsurance({ onBackHome }) {
   const navigate = useNavigate();
+  const { category: categorySlug } = useParams();
+  const selectedCategory = categorySlug ? getMotorCategoryFromSlug(categorySlug) : null;
+
   const brandSearchInputRef = useRef(null);
   const modelSearchInputRef = useRef(null);
   const variantSearchInputRef = useRef(null);
   const rcBookFileInputRef = useRef(null);
   const [vehicleNumber, setVehicleNumber] = useState('');
-  const [hasInputError, setHasInputError] = useState(false);
+  const [validatedVehicleNumber, setValidatedVehicleNumber] = useState('');
+  const [vehicleNumberError, setVehicleNumberError] = useState('');
   const [policyCard, setPolicyCard] = useState(null);
   const [isWithoutVehicleFlow, setIsWithoutVehicleFlow] = useState(false);
   const [isNewCarFlow, setIsNewCarFlow] = useState(false);
@@ -470,10 +594,6 @@ function MotorInsurance({ onBackHome, selectedCategory = null }) {
   const [motorOfferingsTab, setMotorOfferingsTab] = useState('motor-car');
   const activeCategoryId = normalizeMotorCategory(selectedCategory);
   const hero = getMotorHero(activeCategoryId);
-  const newVehicleTypeLabel = getNewVehicleCategoryLabel(activeCategoryId);
-  const normalizedVehicleNumber = vehicleNumber.toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 10);
-  const indianVehicleNumberRegex = /^[A-Z]{2}\d{1,2}[A-Z]{1,3}\d{4}$/;
-  const isCheckEnabled = normalizedVehicleNumber.length >= 8;
   const filteredBrands = useMemo(
     () => BRAND_NEW_CAR_BRANDS.filter((brand) => (
       brand.toLowerCase().includes(brandSearchQuery.trim().toLowerCase())
@@ -590,32 +710,60 @@ function MotorInsurance({ onBackHome, selectedCategory = null }) {
 
   const handleCategoryNavigate = (categoryId) => {
     closeSelectionModals();
+    setIsNewCarFlow(false);
     const nextRoute = MOTOR_CATEGORY_ROUTES[categoryId] || MOTOR_CATEGORY_ROUTES['motor-car'];
     navigate(nextRoute);
   };
 
-  const handleVehicleNumberChange = (event) => {
-    const cleanedValue = event.target.value.toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 10);
-    setVehicleNumber(cleanedValue);
-    setPolicyCard(null);
-    if (hasInputError) {
-      setHasInputError(false);
-    }
-  };
-
-  const handleSubmit = (event) => {
+  // onsubmit event handler for enter vechile number feild
+  const handleVehicleNumberSubmit = async (event) => {
     event.preventDefault();
-    if (!isCheckEnabled) {
-      return;
-    }
-    if (!indianVehicleNumberRegex.test(normalizedVehicleNumber)) {
-      setHasInputError(true);
+
+    const enteredInput = (event.currentTarget.elements.vehicleNumber?.value ?? '').trim();
+
+    if (!Validnumber(enteredInput)) {
       setVehicleNumber('');
+      setValidatedVehicleNumber('');
+      setVehicleNumberError('Enter valid number');
       setPolicyCard(null);
       return;
     }
 
-    setPolicyCard(getPolicyCardFromVehicleNumber(normalizedVehicleNumber));
+    setValidatedVehicleNumber(enteredInput);
+    setVehicleNumberError('');
+
+    const storedVehicleNumber = enteredInput;
+
+    if (!USE_MOTOR_POLICY_API) {
+      const policyData = lookupLocalVehiclePolicy(storedVehicleNumber);
+      if (!policyData) {
+        setPolicyCard(buildNoDataPolicyCard(storedVehicleNumber));
+        return;
+      }
+      setPolicyCard(policyData);
+      return;
+    }
+
+    try {
+      const response = await fetch(
+        `${MOTOR_API_BASE_URL}/motor/vehicles/${encodeURIComponent(storedVehicleNumber)}`
+      );
+
+      if (response.status === 404) {
+        setPolicyCard(buildNoDataPolicyCard(storedVehicleNumber));
+        return;
+      }
+
+      if (!response.ok) {
+        setPolicyCard(null);
+        return;
+      }
+
+      const data = await response.json();
+      setPolicyCard(data);
+    } catch {
+      setPolicyCard(null);
+    }
   };
 
   const handleRcBookFileChange = (event) => {
@@ -635,13 +783,7 @@ function MotorInsurance({ onBackHome, selectedCategory = null }) {
           extracted
         };
         setRcScanRecords((previous) => [...previous, record]);
-        const regNorm = extracted.registrationNumber.toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 10);
-        setVehicleNumber(regNorm);
-        setHasInputError(false);
-        setPolicyCard(null);
-        if (indianVehicleNumberRegex.test(regNorm)) {
-          setPolicyCard(getPolicyCardFromVehicleNumber(regNorm));
-        }
+        setVehicleNumber(extracted.registrationNumber || '');
       } catch {
         setRcScanError('Could not read this file. Try a clear photo or PDF.');
       } finally {
@@ -650,6 +792,10 @@ function MotorInsurance({ onBackHome, selectedCategory = null }) {
       }
     }, 900);
   };
+
+  if (categorySlug && !selectedCategory) {
+    return <Navigate to={MOTOR_HOME_ROUTE} replace />;
+  }
 
   return (
     <main className={`motor-page page-section page-section--hero${hero.pageClass ? ` ${hero.pageClass}` : ''}`}>
@@ -730,9 +876,9 @@ function MotorInsurance({ onBackHome, selectedCategory = null }) {
                     </button>
                   ))}
                 </nav>
-
+{/*Motor insurance form started (vehicle number input and check button)*/} 
                 <section className="motor-form-card">
-                  <form onSubmit={handleSubmit}>
+                  <form onSubmit={handleVehicleNumberSubmit}>
                     <label htmlFor={MOTOR_QUOTE_FORM.inputId} className="motor-form-label">
                       Enter Vehicle Number
                     </label>
@@ -742,13 +888,17 @@ function MotorInsurance({ onBackHome, selectedCategory = null }) {
                         name={MOTOR_QUOTE_FORM.inputId}
                         type="text"
                         value={vehicleNumber}
-                        onChange={handleVehicleNumberChange}
-                        placeholder={hasInputError ? 'Enter correct number' : `E.G. ${MOTOR_QUOTE_FORM.placeholder}`}
+                        aria-invalid={vehicleNumberError ? 'true' : undefined}
+                        onChange={(event) => {
+                          setVehicleNumber(event.target.value);
+                          setValidatedVehicleNumber('');
+                          setVehicleNumberError('');
+                          setPolicyCard(null);
+                        }}
+                        placeholder={vehicleNumberError || `E.G. ${MOTOR_QUOTE_FORM.placeholder}`}
                         autoComplete="off"
-                        required
-                        aria-invalid={hasInputError}
                       />
-                      <button type="submit" className="motor-check-btn" disabled={!isCheckEnabled}>
+                      <button type="submit" className="motor-check-btn">
                         <span className="motor-search-icon" aria-hidden="true"><SearchIcon /></span> Check
                       </button>
                     </div>
@@ -791,52 +941,51 @@ function MotorInsurance({ onBackHome, selectedCategory = null }) {
                     </button>
                   </div>
                 </section>
-
-                <button
-                  type="button"
-                  className="motor-brand-new-car-card"
-                  onClick={() => {
+                <BoughtNewVehicleCard
+                  categoryId={activeCategoryId}
+                  onOpen={() => {
                     closeSelectionModals();
                     setIsNewCarFlow(true);
                   }}
-                >
-                  <span className="motor-brand-new-car-icon" aria-hidden="true">✧</span>
-                  <span className="motor-brand-new-car-content">
-                    <span className="motor-brand-new-car-title">
-                      Bought a Brand New {newVehicleTypeLabel}?
-                    </span>
-                    <span className="motor-brand-new-car-subtitle">Get insurance for your new vehicle in minutes</span>
-                  </span>
-                  <span className="motor-brand-new-car-arrow" aria-hidden="true">→</span>
-                </button>
+                />
 
                 {policyCard && (
-                  <section className={`policy-status-card is-${policyCard.statusLabel.toLowerCase().replace(' ', '-')}`}>
+                  <section className={`policy-status-card is-${getPolicyCardStatusClass(policyCard.status)}`}>
                     <div className="policy-status-head">
                       <span className="policy-status-icon" aria-hidden="true">{policyCard.iconSymbol}</span>
-                      <h3>{policyCard.title}</h3>
-                    </div>
-                    <div className="policy-status-grid">
                       <div>
-                        <p className="policy-meta-label">Start Date</p>
-                        <p className="policy-meta-value">{policyCard.startDate}</p>
-                      </div>
-                      <div>
-                        <p className="policy-meta-label">End Date</p>
-                        <p className="policy-meta-value">{policyCard.endDate}</p>
-                      </div>
-                      <div>
-                        <p className="policy-meta-label">Status</p>
-                        <span className="policy-badge">{policyCard.statusLabel}</span>
+                        <h3>{policyCard.title}</h3>
+                        <p className="policy-vehicle-number">{policyCard.vehicleNumber}</p>
                       </div>
                     </div>
+                    {policyCard.status === 'noData' ? (
+                      <p className="policy-no-data-message">
+                        No policy record exists for this vehicle number.
+                      </p>
+                    ) : (
+                      <div className="policy-status-grid">
+                        <div>
+                          <p className="policy-meta-label">Start Date</p>
+                          <p className="policy-meta-value">{policyCard.startDate}</p>
+                        </div>
+                        <div>
+                          <p className="policy-meta-label">End Date</p>
+                          <p className="policy-meta-value">{policyCard.endDate}</p>
+                        </div>
+                        <div>
+                          <p className="policy-meta-label">Status</p>
+                          <span className="policy-badge">{policyCard.statusLabel}</span>
+                        </div>
+                      </div>
+                    )}
                     <button type="button" className="policy-action-btn">{policyCard.ctaLabel}</button>
                     <p className="policy-note">💡 {policyCard.note}</p>
                   </section>
                 )}
+
               </section>
             </div>
-
+          {/*overview section started*/} 
             <section
               className="motor-overview-importance"
               aria-labelledby="motor-overview-heading motor-importance-heading"
@@ -1273,18 +1422,16 @@ function MotorInsurance({ onBackHome, selectedCategory = null }) {
           )}
 
           {newCarModalMotion.visible && (
-            <NewVehicle
-              selectedCategory={activeCategoryId || 'motor-car'}
+            <BoughtNewVehicleModal
+              categoryId={activeCategoryId}
               motionClosing={newCarModalMotion.closing}
               onBackToVehicleCheck={() => setIsNewCarFlow(false)}
-              onContinue={(newVehicleDetails) => {
-                logMotorQuoteLead('Brand new vehicle — View Plans (no plate yet)', {
-                  flow: 'brand-new-vehicle',
-                  selectedCategory: activeCategoryId,
-                  vehicleNumber: null,
-                  continuedWithoutVehicleNumber: true,
-                  newVehicleDetails,
-                });
+              onContinue={(newCarFormDetails) => {
+                logMotorQuoteLead('Brand new vehicle — View Plans (no plate yet)', buildNewVehicleLeadPayload({
+                  categoryId: activeCategoryId,
+                  vehicleType: getVehicleType(activeCategoryId),
+                  formDetails: newCarFormDetails,
+                }));
                 setIsNewCarFlow(false);
               }}
             />

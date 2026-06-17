@@ -1,6 +1,6 @@
 /**
  * One dropdown panel used for Motor, Health, Business, Cargo, Renew.
- * Styling: NavDropdown.css
+ * Styling: NavDropdown.css (panel content) + Navbar.css (nav row + panel position)
  */
 import { Link } from 'react-router-dom';
 import './NavDropdown.css';
