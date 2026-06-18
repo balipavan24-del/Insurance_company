@@ -1634,9 +1634,12 @@ export const getVehicleTypeLabel = (categoryId) => (
   CATEGORY_LABELS[categoryId] || CATEGORY_LABELS['motor-car']
 );
 
-export const getNewVehicleCardTitle = (categoryId) => (
-  `Bought a Brand New ${getVehicleTypeLabel(categoryId)}?`
-);
+export const getNewVehicleCardTitle = (categoryId) => {
+  if (categoryId === 'motor-three-wheeler') {
+    return 'Protect Your New Three Wheeler';
+  }
+  return `Bought a Brand New ${getVehicleTypeLabel(categoryId)}?`;
+};
 
 export const buildNewVehicleLeadPayload = ({ categoryId, vehicleType, formDetails }) => ({
   flow: NEW_VEHICLE_FLOW,
