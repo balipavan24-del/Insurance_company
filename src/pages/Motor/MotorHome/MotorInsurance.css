@@ -767,8 +767,13 @@
   object-position: center center;
 }
 
+.motor-page--bike .motor-hero-block {
+  container-type: inline-size;
+}
+
 .motor-page--bike .motor-image-placeholder {
-  aspect-ratio: 22 / 10;
+  aspect-ratio: unset;
+  height: calc((100cqw * 10) / 22 + 10px);
   margin: 14px 0 16px;
 }
 
@@ -1134,7 +1139,7 @@
   color: #334155;
 }
 
-.motor-brand-new-car-card {
+.motor-brand-new-vehicle-card {
   margin-top: 16px;
   width: 100%;
   box-sizing: border-box;
@@ -1149,7 +1154,7 @@
   text-align: left;
 }
 
-.motor-brand-new-car-icon {
+.motor-brand-new-vehicle-icon {
   width: 34px;
   height: 34px;
   border-radius: 999px;
@@ -1163,27 +1168,27 @@
   flex: 0 0 auto;
 }
 
-.motor-brand-new-car-content {
+.motor-brand-new-vehicle-content {
   min-width: 0;
   display: flex;
   flex-direction: column;
 }
 
-.motor-brand-new-car-title {
+.motor-brand-new-vehicle-title {
   color: #1f2937;
   font-size: calc(var(--font-size-17) + 2px);
   line-height: 1.2;
   font-weight: 700;
 }
 
-.motor-brand-new-car-subtitle {
+.motor-brand-new-vehicle-subtitle {
   margin-top: 3px;
   color: #64748b;
   font-size: calc(var(--font-size-13) + 2px);
   line-height: 1.3;
 }
 
-.motor-brand-new-car-arrow {
+.motor-brand-new-vehicle-arrow {
   margin-left: auto;
   color: #64748b;
   font-size: var(--font-size-18);
@@ -1191,7 +1196,7 @@
   flex: 0 0 auto;
 }
 
-.motor-brand-new-car-card:hover {
+.motor-brand-new-vehicle-card:hover {
   border-color: #cfd9e6;
   box-shadow: 0 8px 20px rgba(15, 23, 42, 0.06);
 }
@@ -1706,7 +1711,7 @@ body.motor-disable-hover .motor-continue-link:hover {
   color: var(--accent);
 }
 
-body.motor-disable-hover .motor-brand-new-car-card:hover {
+body.motor-disable-hover .motor-brand-new-vehicle-card:hover {
   border-color: #dce3ec;
   box-shadow: none;
 }
@@ -1798,11 +1803,11 @@ body.motor-disable-hover .brand-flow-chip:hover {
     font-size: 12px;
   }
 
-  .motor-brand-new-car-title {
+  .motor-brand-new-vehicle-title {
     font-size: 16px;
   }
 
-  .motor-brand-new-car-subtitle {
+  .motor-brand-new-vehicle-subtitle {
     font-size: 14px;
   }
 }
@@ -1873,26 +1878,26 @@ body.motor-disable-hover .brand-flow-chip:hover {
     width: 100%;
   }
 
-  .motor-brand-new-car-card {
+  .motor-brand-new-vehicle-card {
     padding: 12px;
     border-radius: 14px;
   }
 
-  .motor-brand-new-car-icon {
+  .motor-brand-new-vehicle-icon {
     width: 32px;
     height: 32px;
     font-size: 18px;
   }
 
-  .motor-brand-new-car-title {
+  .motor-brand-new-vehicle-title {
     font-size: 15px;
   }
 
-  .motor-brand-new-car-subtitle {
+  .motor-brand-new-vehicle-subtitle {
     font-size: 13px;
   }
 
-  .motor-brand-new-car-arrow {
+  .motor-brand-new-vehicle-arrow {
     font-size: 20px;
   }
 

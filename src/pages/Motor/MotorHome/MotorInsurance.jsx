@@ -15,12 +15,7 @@ import InsuranceFaqAccordion from '../../../components/Faq/InsuranceFaqAccordion
 import { motorInsuranceFaqItems } from '../../../data/productContent';
 import './MotorInsurance.css';
 import WithoutNumber from '../Withoutnumber/WithoutNumber';
-import {
-  BoughtNewVehicleCard,
-  BoughtNewVehicleModal,
-  buildNewVehicleLeadPayload,
-  getVehicleType,
-} from '../NewVehicle/NewVehicle';
+import { Newbike, Newcar, Newthreewheeler, Newcommercial } from '../NewVehicle/NewVehicle';
 import { Validnumber } from './vehicleNumberValidation';
 
 // Local fake policy data (used on Vercel until API is connected).
@@ -239,7 +234,7 @@ const getMotorHero = (categoryId) => {
     case 'motor-car':
       return {
         badge: 'Car Insurance',
-        titleLine1: 'Drive with Confidence,',
+        titleLine1: 'Drive with Confidence',
         titleLine2: 'Stay Protected',
         image: carInsuranceHeroImage,
         imageAlt: 'Car insurance illustration',
@@ -249,7 +244,7 @@ const getMotorHero = (categoryId) => {
       return {
         badge: 'Three Wheeler Insurance',
         titleLine1: 'Protect Your Three Wheeler',
-        titleLine2: 'Business.',
+        titleLine2: 'Business',
         image: threeWheelerHeroImage,
         imageAlt: 'Three wheeler insurance illustration',
         pageClass: '',
@@ -258,7 +253,7 @@ const getMotorHero = (categoryId) => {
       return {
         badge: 'Commercial Vehicle Insurance',
         titleLine1: 'Keep Your Business Moving',
-        titleLine2: 'Without Risk.',
+        titleLine2: 'Without Risk',
         image: commercialVehicleHeroImage,
         imageAlt: 'Commercial vehicle insurance illustration',
         pageClass: '',
@@ -574,7 +569,10 @@ function MotorInsurance({ onBackHome }) {
   const [vehicleNumberError, setVehicleNumberError] = useState('');
   const [policyCard, setPolicyCard] = useState(null);
   const [isWithoutVehicleFlow, setIsWithoutVehicleFlow] = useState(false);
+  const [isNewBikeFlow, setIsNewBikeFlow] = useState(false);
   const [isNewCarFlow, setIsNewCarFlow] = useState(false);
+  const [isNewThreeWheelerFlow, setIsNewThreeWheelerFlow] = useState(false);
+  const [isNewCommercialFlow, setIsNewCommercialFlow] = useState(false);
   const [isBrandSelectionOpen, setIsBrandSelectionOpen] = useState(false);
   const [isModelSelectionOpen, setIsModelSelectionOpen] = useState(false);
   const [isVariantSelectionOpen, setIsVariantSelectionOpen] = useState(false);
@@ -582,7 +580,10 @@ function MotorInsurance({ onBackHome }) {
   const modelModalMotion = useAnimatedModal(isModelSelectionOpen);
   const variantModalMotion = useAnimatedModal(isVariantSelectionOpen);
   const withoutVehicleModalMotion = useAnimatedModal(isWithoutVehicleFlow);
+  const newBikeModalMotion = useAnimatedModal(isNewBikeFlow);
   const newCarModalMotion = useAnimatedModal(isNewCarFlow);
+  const newThreeWheelerModalMotion = useAnimatedModal(isNewThreeWheelerFlow);
+  const newCommercialModalMotion = useAnimatedModal(isNewCommercialFlow);
   const [brandSearchQuery, setBrandSearchQuery] = useState('');
   const [modelSearchQuery, setModelSearchQuery] = useState('');
   const [variantSearchQuery, setVariantSearchQuery] = useState('');
@@ -632,11 +633,14 @@ function MotorInsurance({ onBackHome }) {
   }, []);
 
   useEffect(() => {
-    const isModalOpen = brandModalMotion.visible
-      || modelModalMotion.visible
-      || variantModalMotion.visible
-      || withoutVehicleModalMotion.visible
-      || newCarModalMotion.visible;
+    const isModalOpen = isBrandSelectionOpen
+      || isModelSelectionOpen
+      || isVariantSelectionOpen
+      || isWithoutVehicleFlow
+      || isNewBikeFlow
+      || isNewCarFlow
+      || isNewThreeWheelerFlow
+      || isNewCommercialFlow;
     if (!isModalOpen) {
       return undefined;
     }
@@ -650,6 +654,22 @@ function MotorInsurance({ onBackHome }) {
       }
       if (isWithoutVehicleFlow) {
         setIsWithoutVehicleFlow(false);
+        return;
+      }
+      if (isNewBikeFlow) {
+        setIsNewBikeFlow(false);
+        return;
+      }
+      if (isNewCarFlow) {
+        setIsNewCarFlow(false);
+        return;
+      }
+      if (isNewThreeWheelerFlow) {
+        setIsNewThreeWheelerFlow(false);
+        return;
+      }
+      if (isNewCommercialFlow) {
+        setIsNewCommercialFlow(false);
         return;
       }
       if (isVariantSelectionOpen) {
@@ -681,15 +701,14 @@ function MotorInsurance({ onBackHome }) {
       window.removeEventListener('keydown', handleEscClose);
     };
   }, [
-    brandModalMotion.visible,
-    modelModalMotion.visible,
-    variantModalMotion.visible,
-    withoutVehicleModalMotion.visible,
-    newCarModalMotion.visible,
     isBrandSelectionOpen,
     isModelSelectionOpen,
     isVariantSelectionOpen,
     isWithoutVehicleFlow,
+    isNewBikeFlow,
+    isNewCarFlow,
+    isNewThreeWheelerFlow,
+    isNewCommercialFlow,
   ]);
 
   const closeSelectionModals = () => {
@@ -708,9 +727,26 @@ function MotorInsurance({ onBackHome }) {
     setVariantSearchQuery('');
   };
 
+  useEffect(() => {
+    setIsWithoutVehicleFlow(false);
+    setIsNewBikeFlow(false);
+    setIsNewCarFlow(false);
+    setIsNewThreeWheelerFlow(false);
+    setIsNewCommercialFlow(false);
+    setIsBrandSelectionOpen(false);
+    setIsModelSelectionOpen(false);
+    setIsVariantSelectionOpen(false);
+    setBrandSearchQuery('');
+    setModelSearchQuery('');
+    setVariantSearchQuery('');
+    document.body.style.overflow = '';
+  }, [activeCategoryId]);
+
   const handleCategoryNavigate = (categoryId) => {
     closeSelectionModals();
-    setIsNewCarFlow(false);
+    if (document.activeElement instanceof HTMLElement) {
+      document.activeElement.blur();
+    }
     const nextRoute = MOTOR_CATEGORY_ROUTES[categoryId] || MOTOR_CATEGORY_ROUTES['motor-car'];
     navigate(nextRoute);
   };
@@ -802,8 +838,8 @@ function MotorInsurance({ onBackHome }) {
       <section className="motor-wrap page-section-container">
           <>
           <div
-            className={`motor-screen motor-screen--vehicle-check${isNewCarFlow || isWithoutVehicleFlow ? ' is-behind-modal' : ''}`}
-            aria-hidden={isNewCarFlow || isWithoutVehicleFlow ? true : undefined}
+            className={`motor-screen motor-screen--vehicle-check${isNewBikeFlow || isNewCarFlow || isNewThreeWheelerFlow || isNewCommercialFlow || isWithoutVehicleFlow ? ' is-behind-modal' : ''}`}
+            aria-hidden={isNewBikeFlow || isNewCarFlow || isNewThreeWheelerFlow || isNewCommercialFlow || isWithoutVehicleFlow ? true : undefined}
           >
             <button
               type="button"
@@ -941,13 +977,37 @@ function MotorInsurance({ onBackHome }) {
                     </button>
                   </div>
                 </section>
-                <BoughtNewVehicleCard
-                  categoryId={activeCategoryId}
-                  onOpen={() => {
-                    closeSelectionModals();
-                    setIsNewCarFlow(true);
-                  }}
-                />
+
+                {(activeCategoryId === 'motor-bike' || activeCategoryId === 'motor-car' || activeCategoryId === 'motor-three-wheeler' || activeCategoryId === 'motor-commercial-vehicle') && (
+                  <button
+                    type="button"
+                    className="motor-brand-new-vehicle-card"
+                    onClick={() => {
+                      closeSelectionModals();
+                      if (activeCategoryId === 'motor-bike') {
+                        setIsNewBikeFlow(true);
+                      } else if (activeCategoryId === 'motor-car') {
+                        setIsNewCarFlow(true);
+                      } else if (activeCategoryId === 'motor-three-wheeler') {
+                        setIsNewThreeWheelerFlow(true);
+                      } else {
+                        setIsNewCommercialFlow(true);
+                      }
+                    }}
+                  >
+                    <span className="motor-brand-new-vehicle-icon" aria-hidden="true">✧</span>
+                    <span className="motor-brand-new-vehicle-content">
+                      <span className="motor-brand-new-vehicle-title">
+                        {activeCategoryId === 'motor-bike' && 'Bought a Brand New Bike?'}
+                        {activeCategoryId === 'motor-car' && 'Bought a Brand New Car?'}
+                        {activeCategoryId === 'motor-three-wheeler' && 'Protect your new three wheeler'}
+                        {activeCategoryId === 'motor-commercial-vehicle' && 'Protect your new commercial vehicle'}
+                      </span>
+                      <span className="motor-brand-new-vehicle-subtitle">Get insurance for your new vehicle in minutes</span>
+                    </span>
+                    <span className="motor-brand-new-vehicle-arrow" aria-hidden="true">→</span>
+                  </button>
+                )}
 
                 {policyCard && (
                   <section className={`policy-status-card is-${getPolicyCardStatusClass(policyCard.status)}`}>
@@ -1421,21 +1481,78 @@ function MotorInsurance({ onBackHome }) {
             </div>
           )}
 
-          {newCarModalMotion.visible && (
-            <BoughtNewVehicleModal
-              categoryId={activeCategoryId}
+          {newCommercialModalMotion.visible && activeCategoryId === 'motor-commercial-vehicle' && (
+            <Newcommercial
+              motionClosing={newCommercialModalMotion.closing}
+              onBackToVehicleCheck={() => setIsNewCommercialFlow(false)}
+              onContinue={(formDetails) => {
+                logMotorQuoteLead('Brand new commercial vehicle — View Plans (no plate yet)', {
+                  flow: 'brand-new-vehicle-without-number',
+                  selectedCategory: 'motor-commercial-vehicle',
+                  vehicleType: 'commercial-vehicle',
+                  vehicleNumber: null,
+                  continuedWithoutVehicleNumber: true,
+                  formDetails,
+                });
+                setIsNewCommercialFlow(false);
+              }}
+            />
+          )}
+
+          {newThreeWheelerModalMotion.visible && activeCategoryId === 'motor-three-wheeler' && (
+            <Newthreewheeler
+              motionClosing={newThreeWheelerModalMotion.closing}
+              onBackToVehicleCheck={() => setIsNewThreeWheelerFlow(false)}
+              onContinue={(formDetails) => {
+                logMotorQuoteLead('Brand new three-wheeler — View Plans (no plate yet)', {
+                  flow: 'brand-new-vehicle-without-number',
+                  selectedCategory: 'motor-three-wheeler',
+                  vehicleType: 'three-wheeler',
+                  vehicleNumber: null,
+                  continuedWithoutVehicleNumber: true,
+                  formDetails,
+                });
+                setIsNewThreeWheelerFlow(false);
+              }}
+            />
+          )}
+
+          {newCarModalMotion.visible && activeCategoryId === 'motor-car' && (
+            <Newcar
               motionClosing={newCarModalMotion.closing}
               onBackToVehicleCheck={() => setIsNewCarFlow(false)}
-              onContinue={(newCarFormDetails) => {
-                logMotorQuoteLead('Brand new vehicle — View Plans (no plate yet)', buildNewVehicleLeadPayload({
-                  categoryId: activeCategoryId,
-                  vehicleType: getVehicleType(activeCategoryId),
-                  formDetails: newCarFormDetails,
-                }));
+              onContinue={(formDetails) => {
+                logMotorQuoteLead('Brand new car — View Plans (no plate yet)', {
+                  flow: 'brand-new-vehicle-without-number',
+                  selectedCategory: 'motor-car',
+                  vehicleType: 'car',
+                  vehicleNumber: null,
+                  continuedWithoutVehicleNumber: true,
+                  formDetails,
+                });
                 setIsNewCarFlow(false);
               }}
             />
           )}
+
+          {newBikeModalMotion.visible && activeCategoryId === 'motor-bike' && (
+            <Newbike
+              motionClosing={newBikeModalMotion.closing}
+              onBackToVehicleCheck={() => setIsNewBikeFlow(false)}
+              onContinue={(formDetails) => {
+                logMotorQuoteLead('Brand new bike — View Plans (no plate yet)', {
+                  flow: 'brand-new-vehicle-without-number',
+                  selectedCategory: 'motor-bike',
+                  vehicleType: 'bike',
+                  vehicleNumber: null,
+                  continuedWithoutVehicleNumber: true,
+                  formDetails,
+                });
+                setIsNewBikeFlow(false);
+              }}
+            />
+          )}
+
           </>
       </section>
 

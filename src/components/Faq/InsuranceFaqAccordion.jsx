@@ -1,8 +1,27 @@
 import { useState } from 'react';
 import DropdownChevron from '../Dropdown/DropdownChevron';
 import './InsuranceFaqAccordion.css';
-function InsuranceFaqAccordion({ title, subtitle, items, buttonLabel = 'View More FAQs →' }) {
+
+const DEFAULT_HIDDEN_FAQ_COUNT = 3;
+
+function InsuranceFaqAccordion({
+  title,
+  subtitle,
+  items,
+  buttonLabel = 'View More FAQs →',
+  hiddenCount = DEFAULT_HIDDEN_FAQ_COUNT,
+}) {
   const [openFaqId, setOpenFaqId] = useState('');
+  const [showAllFaqs, setShowAllFaqs] = useState(false);
+
+  const hasMoreFaqs = items.length > hiddenCount;
+  const visibleItems = showAllFaqs || !hasMoreFaqs
+    ? items
+    : items.slice(0, items.length - hiddenCount);
+
+  const handleShowMore = () => {
+    setShowAllFaqs(true);
+  };
 
   return (
     <section id="insurance-faqs" className="business-home-faqs" aria-label="Frequently asked questions">
@@ -14,7 +33,7 @@ function InsuranceFaqAccordion({ title, subtitle, items, buttonLabel = 'View Mor
           </header>
 
           <div className="business-home-faqs__list" role="list" aria-label="Insurance FAQ items">
-            {items.map((item) => (
+            {visibleItems.map((item) => (
               <article
                 key={item.id}
                 className={`business-home-faqs__item business-home-faqs__item--accordion ${openFaqId === item.id ? 'is-open dropdown-open' : ''}`}
@@ -28,7 +47,8 @@ function InsuranceFaqAccordion({ title, subtitle, items, buttonLabel = 'View Mor
                   aria-controls={`business-faq-answer-${item.id}`}
                 >
                   <span>{item.question}</span>
-                  <DropdownChevron className="dropdown-arrow--faq" />                </button>
+                  <DropdownChevron className="dropdown-arrow--faq" />
+                </button>
                 <div
                   id={`business-faq-answer-${item.id}`}
                   className={`business-home-faqs__answer-wrap ${openFaqId === item.id ? 'is-open' : ''}`}
@@ -42,7 +62,16 @@ function InsuranceFaqAccordion({ title, subtitle, items, buttonLabel = 'View Mor
             ))}
           </div>
 
-          <button type="button" className="business-home-faqs__more-btn">{buttonLabel}</button>
+          {hasMoreFaqs && !showAllFaqs && (
+            <button
+              type="button"
+              className="business-home-faqs__more-btn"
+              onClick={handleShowMore}
+              aria-expanded={false}
+            >
+              {buttonLabel}
+            </button>
+          )}
         </div>
       </div>
     </section>

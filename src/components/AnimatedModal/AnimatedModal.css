@@ -75,7 +75,7 @@
   .car-renew-without-number-modal,
   .motor-without-number-modal,
   .brand-select-modal-card,
-  .new-car-modal,
+  .nv-modal,
   .business-popup-sheet,
   .health-quote-popup-shell
 ) {
@@ -93,8 +93,8 @@
   .brand-select-list,
   .health-quote-popup-body,
   .business-popup-form,
-  .new-car-left-pane,
-  .new-car-summary-scroll
+  .nv-left-pane,
+  .nv-summary-scroll
 ) {
   scrollbar-width: none;
   -ms-overflow-style: none;
@@ -109,8 +109,8 @@
   .brand-select-list,
   .health-quote-popup-body,
   .business-popup-form,
-  .new-car-left-pane,
-  .new-car-summary-scroll
+  .nv-left-pane,
+  .nv-summary-scroll
 )::-webkit-scrollbar {
   display: none;
   width: 0;
