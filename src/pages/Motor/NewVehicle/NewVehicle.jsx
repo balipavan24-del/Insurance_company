@@ -684,7 +684,7 @@ function TwoPanelVehicleFlow({
                 return;
               }
               if (field === catalogField) {
-                pickValue(catalogField, value);
+                onOptionPick(value);
                 return;
               }
               onOptionPick(value);
@@ -736,12 +736,7 @@ function TwoPanelVehicleFlow({
         {isCatalogStep && renderSearch(`Search ${currentStep?.fieldLabel?.toLowerCase() || 'brand'}...`)}
         {renderOptionGrid(options, gridField, {
           ...gridProps,
-          pickOnly: true,
         })}
-        <div className="nv-action-row">
-          <button type="button" className="nv-back-btn" onClick={goBack}>Back</button>
-          <button type="button" className="nv-next-btn" onClick={goNext}>Continue</button>
-        </div>
       </>
     );
   };

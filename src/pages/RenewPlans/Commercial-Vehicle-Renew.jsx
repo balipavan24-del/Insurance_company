@@ -19,6 +19,8 @@ import renewWhyUsTrustedPartners from '../../assets/images/renew-why-us/trusted-
 import renewWhyUsClaimSupport from '../../assets/images/renew-why-us/claim-assistance-support.png';
 import renewWhyUsSecurePayments from '../../assets/images/renew-why-us/secure-payments.png';
 import renewWhyUsExpertGuidance from '../../assets/images/renew-why-us/expert-guidance.png';
+import { Validnumber } from '../Motor/MotorHome/vehicleNumberValidation';
+import Renew from '../Motor/Renew_Details/Renew';
 import './Car-Renew.css';
 
 const RENEW_HIGHLIGHTS = [
@@ -559,6 +561,9 @@ function CommercialVehicleRenew() {
   const [openExclusionId, setOpenExclusionId] = useState('');
   const [isWithoutCommercialVehicleNumberOpen, setIsWithoutCommercialVehicleNumberOpen] = useState(false);
   const [isTalkToHumanOpen, setIsTalkToHumanOpen] = useState(false);
+  const [vechileNumber, setVechileNumber] = useState('');
+  const [isRenewOpen, setIsRenewOpen] = useState(false);
+  const [isFormLoading, setIsFormLoading] = useState(false);
 
   const scrollToRenewForm = () => {
     const formCard = document.getElementById('commercial-vehicle-renew-form');
@@ -569,8 +574,38 @@ function CommercialVehicleRenew() {
     }
   };
 
+  const inputHandler = (event) => {
+    setVechileNumber(event.target.value.toUpperCase());
+  };
+
+  const continueHandler = (event) => {
+    event.preventDefault();
+    const entered = vechileNumber.trim().toUpperCase();
+
+    if (!Validnumber(entered)) {
+      setVechileNumber(entered);
+      setIsRenewOpen(false);
+      window.alert(`Invalid vehicle number: ${entered}`);
+      return;
+    }
+
+    setIsFormLoading(true);
+    window.setTimeout(() => {
+      setVechileNumber(entered);
+      setIsRenewOpen(true);
+      setIsFormLoading(false);
+    }, 700);
+  };
+
   return (
     <div className="renew-plans-page renew-plans-page--commercial-vehicle">
+      <div className="renew-pop-content">
+        <Renew
+          open={isRenewOpen}
+          onClose={() => setIsRenewOpen(false)}
+          vechileNumber={vechileNumber}
+        />
+      </div>
       <section className="car-renew-hero page-section page-section--regular page-section-container" aria-labelledby="commercial-vehicle-renew-heading">
         <div className="car-renew-hero__layout">
           <div className="car-renew-hero__content">
@@ -606,20 +641,34 @@ function CommercialVehicleRenew() {
               Enter your registration number to get instant renewal quotes.
             </p>
 
-            <label className="car-renew-form-card__label" htmlFor="commercial-vehicle-reg-no">
-              Commercial Vehicle Registration Number
-            </label>
-            <input
-              id="commercial-vehicle-reg-no"
-              className="car-renew-form-card__input"
-              type="text"
-              placeholder="e.g. MH12AB1234"
-              aria-label="Commercial vehicle registration number"
-            />
+            <form onSubmit={continueHandler}>
+              <label className="car-renew-form-card__label" htmlFor="commercial-vehicle-reg-no">
+                Commercial Vehicle Registration Number
+              </label>
+              <input
+                id="commercial-vehicle-reg-no"
+                className="car-renew-form-card__input"
+                type="text"
+                placeholder="e.g. MH12AB1234"
+                aria-label="Commercial vehicle registration number"
+                name="VechileNumber"
+                value={vechileNumber}
+                onChange={inputHandler}
+              />
 
-            <button type="button" className="car-renew-form-card__primary-btn">
-              Continue →
-            </button>
+              <button
+                type="submit"
+                className="car-renew-form-card__primary-btn"
+                disabled={isFormLoading}
+              >
+                {isFormLoading ? 'Looking up...' : 'Continue →'}
+              </button>
+              <p
+                style={{ fontSize: '0.800rem', color: '#666', marginTop: '0.5rem', gap: '2px', display: 'flex', alignItems: 'center', padding: '5px' }}
+              >
+                try: AP09AB1234, AP09AB1235, AP09AB1236
+              </p>
+            </form>
 
             <p className="car-renew-form-card__divider">OR</p>
 
