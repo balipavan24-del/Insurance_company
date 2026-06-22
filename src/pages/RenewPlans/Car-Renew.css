@@ -101,10 +101,28 @@
 }
 
 .car-renew-without-number-modal__body {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-x: hidden;
   overflow-y: auto;
   overscroll-behavior: contain;
   padding: 16px 18px 20px;
   scrollbar-width: thin;
+  scrollbar-color: #94a3b8 #f1f5f9;
+}
+
+.car-renew-without-number-modal__body::-webkit-scrollbar {
+  width: 8px;
+}
+
+.car-renew-without-number-modal__body::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 999px;
+}
+
+.car-renew-without-number-modal__body::-webkit-scrollbar-thumb {
+  background: #94a3b8;
+  border-radius: 999px;
 }
 
 .car-renew-without-number-modal__body .motor-plans-view--modal {

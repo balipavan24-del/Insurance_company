@@ -225,7 +225,7 @@ const getMotorHero = (categoryId) => {
     case 'motor-bike':
       return {
         badge: 'Bike Insurance',
-        titleLine1: 'Ride Worry Free,',
+        titleLine1: 'Ride Worry Free',
         titleLine2: 'Stay Covered',
         image: bikeInsuranceHeroImage,
         imageAlt: 'Bike insurance illustration',
@@ -247,7 +247,7 @@ const getMotorHero = (categoryId) => {
         titleLine2: 'Business',
         image: threeWheelerHeroImage,
         imageAlt: 'Three wheeler insurance illustration',
-        pageClass: '',
+        pageClass: 'motor-page--three-wheeler',
       };
     case 'motor-commercial-vehicle':
       return {

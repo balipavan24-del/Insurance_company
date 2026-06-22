@@ -87,8 +87,6 @@
 .insureease-modal-scroll,
 .insureease-modal-panel :is(
   .contact-human-modal__grid,
-  .car-renew-without-number-modal__body,
-  .motor-without-number-modal__body,
   .brand-select-grid,
   .brand-select-list,
   .health-quote-popup-body,
@@ -103,8 +101,6 @@
 .insureease-modal-scroll::-webkit-scrollbar,
 .insureease-modal-panel :is(
   .contact-human-modal__grid,
-  .car-renew-without-number-modal__body,
-  .motor-without-number-modal__body,
   .brand-select-grid,
   .brand-select-list,
   .health-quote-popup-body,

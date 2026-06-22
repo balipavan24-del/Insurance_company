@@ -93,10 +93,28 @@
 }
 
 .motor-without-number-modal__body {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow-x: hidden;
   overflow-y: auto;
   overscroll-behavior: contain;
   padding: 16px 18px 20px;
   scrollbar-width: thin;
+  scrollbar-color: #94a3b8 #f1f5f9;
+}
+
+.motor-without-number-modal__body::-webkit-scrollbar {
+  width: 8px;
+}
+
+.motor-without-number-modal__body::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 999px;
+}
+
+.motor-without-number-modal__body::-webkit-scrollbar-thumb {
+  background: #94a3b8;
+  border-radius: 999px;
 }
 
 .motor-without-number-modal__body .motor-plans-view--modal {
@@ -778,6 +796,28 @@
 }
 
 .motor-page--bike .motor-hero-image {
+  object-position: center center;
+}
+
+.motor-page--three-wheeler .motor-hero-block {
+  container-type: inline-size;
+}
+
+.motor-page--three-wheeler .motor-hero-inner {
+  width: 100%;
+  max-width: 44rem;
+}
+
+.motor-page--three-wheeler .motor-image-placeholder {
+  aspect-ratio: unset;
+  width: 100%;
+  max-width: none;
+  height: calc((100cqw * 12) / 22 + 22px);
+  margin: 14px 0 16px;
+}
+
+.motor-page--three-wheeler .motor-hero-image {
+  object-fit: cover;
   object-position: center center;
 }
 
@@ -1759,6 +1799,10 @@ body.motor-disable-hover .brand-flow-chip:hover {
   .motor-image-placeholder,
   .motor-quote-panel {
     max-width: 620px;
+  }
+
+  .motor-page--three-wheeler .motor-image-placeholder {
+    max-width: none;
   }
 
   .motor-quote-panel {
