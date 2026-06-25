@@ -18,7 +18,8 @@
   box-shadow: none;
   border-bottom: 1px solid #e6ecf5;
   padding: 0 var(--nav-inline-padding);
-  overflow: visible;
+  overflow-x: clip;
+  overflow-y: visible;
   text-align: left; /* override #root { text-align: center } */
 }
 
@@ -199,7 +200,7 @@ a.brand:active {
     top: 100%;
     left: 50%;
     z-index: 1600;
-    width: min(1040px, calc(100vw - 32px));
+    width: min(1040px, calc(100% - 32px));
   }
 
   .motor-mega-menu--mobile,
@@ -441,17 +442,17 @@ a.brand:active {
     padding: 11px clamp(18px, 1.8vw, 28px);
   }
 
-  /* Full-width invisible bridge between navbar and centered mega menus */
-  .motor-mega-menu--desktop::before,
-  .health-mega-menu--desktop::before,
-  .business-mega-menu--desktop::before,
-  .cargo-mega-menu--desktop::before,
-  .renewal-mega-menu--desktop::before {
+  /* Hover bridge between navbar and mega menu — scoped to open menus only (100dvw caused page-wide overflow) */
+  .motor-mega-menu--desktop.is-open::before,
+  .health-mega-menu--desktop.is-open::before,
+  .business-mega-menu--desktop.is-open::before,
+  .cargo-mega-menu--desktop.is-open::before,
+  .renewal-mega-menu--desktop.is-open::before {
     content: '';
     position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100vw;
+    left: 0;
+    right: 0;
+    width: auto;
     top: -16px;
     height: 16px;
   }

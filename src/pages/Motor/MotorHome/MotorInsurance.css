@@ -454,23 +454,39 @@
 }
 
 .motor-coverage-icon {
-  width: 48px;
-  height: 48px;
-  border-radius: 12px;
+  width: 57px;
+  height: 57px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  background: transparent;
+  border: none;
+  border-radius: 0;
+}
+
+.motor-coverage-icon-img {
+  width: 57px;
+  height: 57px;
+  display: block;
+  object-fit: contain;
+}
+
+.motor-coverage-icon--comprehensive {
+  background: #ffffff;
+  border-radius: 100px;
+  padding: 4px;
+  box-sizing: border-box;
+}
+
+.motor-coverage-icon--comprehensive .motor-coverage-icon-img {
+  width: 49px;
+  height: 49px;
 }
 
 .motor-coverage-icon svg {
   width: 26px;
   height: 26px;
-}
-
-.motor-coverage-icon--shield {
-  background: #dbeafe;
-  color: #2563eb;
 }
 
 .motor-coverage-badge {
@@ -514,12 +530,6 @@
   background: linear-gradient(125deg, #2563eb 0%, #4f46e5 48%, #7c3aed 100%);
   border: 1px solid rgba(255, 255, 255, 0.12);
   box-shadow: 0 10px 28px rgba(79, 70, 229, 0.28);
-}
-
-.motor-coverage-icon--award {
-  background: rgba(255, 255, 255, 0.22);
-  color: #ffffff;
-  border: 1px solid rgba(255, 255, 255, 0.28);
 }
 
 .motor-coverage-badge--recommended {
@@ -612,26 +622,23 @@
 
 .motor-inclusion-icon-wrap {
   flex: 0 0 auto;
-  width: 48px;
-  height: 48px;
-  border-radius: 14px;
-  background: linear-gradient(
-    180deg,
-    rgba(46, 136, 199, 0.12) 0%,
-    rgba(46, 136, 199, 0.06) 100%
-  );
-  border: 1px solid rgba(46, 136, 199, 0.16);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.75);
-  color: var(--accent);
+  width: 57px;
+  height: 57px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  border-radius: 0;
+  overflow: visible;
 }
 
-.motor-inclusion-svg {
-  width: 24px;
-  height: 24px;
+.motor-inclusion-icon-img {
+  width: 57px;
+  height: 57px;
   display: block;
+  object-fit: contain;
 }
 
 .motor-inclusion-copy {

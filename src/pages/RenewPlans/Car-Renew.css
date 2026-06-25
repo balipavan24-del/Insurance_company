@@ -807,7 +807,6 @@
   padding: 16px 14px 14px;
   text-align: left;
   overflow: hidden;
-  transition: transform 0.24s ease, box-shadow 0.24s ease, border-color 0.24s ease;
 }
 
 .car-renew-benefit-card__blob {
@@ -829,7 +828,23 @@
   color: #2e88c7;
   display: inline-grid;
   place-items: center;
-  transition: background-color 0.24s ease, color 0.24s ease, transform 0.24s ease;
+}
+
+.car-renew-benefit-card__icon--image {
+  width: 53px;
+  height: 53px;
+  background: transparent;
+  border-radius: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.car-renew-benefit-card__icon-img {
+  width: 53px;
+  height: 53px;
+  display: block;
+  object-fit: contain;
 }
 
 .car-renew-benefit-card__index {
@@ -864,18 +879,6 @@
   color: #64748b;
   font-size: 14px;
   line-height: 1.52;
-}
-
-.car-renew-benefit-card:hover {
-  transform: translateY(-4px);
-  border-color: #c7d7ea;
-  box-shadow: 0 14px 30px rgba(15, 23, 42, 0.1);
-}
-
-.car-renew-benefit-card:hover .car-renew-benefit-card__icon {
-  background: linear-gradient(90deg, #2e88c7 0%, #4f46e5 100%);
-  color: #ffffff;
-  transform: scale(1.04);
 }
 
 .car-renew-plan-types {
@@ -988,6 +991,24 @@
 
 .car-renew-plan-card__icon--amber {
   background: linear-gradient(135deg, #f59e0b 0%, #8b5cf6 100%);
+}
+
+.car-renew-plan-card__icon--image {
+  width: 57px;
+  height: 57px;
+  background: transparent;
+  border-radius: 0;
+  box-shadow: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.car-renew-plan-card__icon-img {
+  width: 57px;
+  height: 57px;
+  display: block;
+  object-fit: contain;
 }
 
 .car-renew-plan-card__title {

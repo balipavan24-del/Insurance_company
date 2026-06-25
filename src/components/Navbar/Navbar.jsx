@@ -265,7 +265,7 @@ const NAV_ITEMS = [
           id: 'life',
           title: 'Life Insurance',
           tone: 'life',
-          links: [{ id: 'renewal-term', label: 'Term Insurance', path: '/term-insurance?flow=renewal' }],
+          links: [{ id: 'renewal-term', label: 'Term Insurance', path: '/renew-plans/term' }],
         },
       ],
       footerActions: [

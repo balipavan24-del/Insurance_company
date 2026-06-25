@@ -1,10 +1,41 @@
 .main-wrapper {
   min-height: 100svh;
   width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  overflow-x: hidden;
+  overflow-x: clip;
+  display: flex;
+  flex-direction: column;
 }
 
 .app-content-offset {
   padding-top: 0;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  overflow-x: hidden;
+  overflow-x: clip;
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Every routed page shell — flex children default to min-width:auto which forces horizontal overflow */
+.app-screen,
+.landing-page {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  overflow-x: hidden;
+  overflow-x: clip;
+  flex: 1 1 auto;
+}
+
+.main-wrapper > .navbar-container,
+.main-wrapper > .app-content-offset {
+  min-width: 0;
+  max-width: 100%;
 }
 
 .app-screen--business-insurance {

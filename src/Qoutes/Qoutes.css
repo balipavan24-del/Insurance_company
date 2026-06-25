@@ -1,0 +1,21 @@
+.qoutes-screen {
+  min-height: calc(100vh - 80px);
+  padding: 40px clamp(16px, 4vw, 50px);
+  box-sizing: border-box;
+  text-align: left;
+  background: linear-gradient(180deg, #eef2f7 0%, #f7f9fc 42%, #ffffff 100%);
+}
+
+.qoutes-screen h1 {
+  margin: 0 0 8px;
+  color: #0f172a;
+  font-size: clamp(1.75rem, 3vw, 2.25rem);
+  font-weight: 800;
+}
+
+.qoutes-screen p {
+  margin: 0;
+  color: #64748b;
+  font-size: 15px;
+  line-height: 1.5;
+}

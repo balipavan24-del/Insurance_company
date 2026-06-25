@@ -9,6 +9,14 @@ import motorIconTwoWheeler from '../../../assets/icons/Motor-TwoWheeler.webp';
 import motorIconThreeWheeler from '../../../assets/icons/Motor-ThreeWheeler.webp';
 import motorIconFourWheeler from '../../../assets/icons/Motor-FourWheeler.webp';
 import motorIconCommercial from '../../../assets/icons/Motor-Commercial.webp';
+import motorCoverageAccidentalDamage from '../../../assets/images/motor-coverage/accidental-damage.png';
+import motorCoverageTheftLoss from '../../../assets/images/motor-coverage/theft-loss.png';
+import motorCoverageNaturalDisasters from '../../../assets/images/motor-coverage/natural-disasters.png';
+import motorCoverageFireDamage from '../../../assets/images/motor-coverage/fire-damage.png';
+import motorCoverageThirdPartyLiability from '../../../assets/images/motor-coverage/third-party-liability.png';
+import motorCoverageVandalismRiots from '../../../assets/images/motor-coverage/vandalism-riots.png';
+import motorCoverageThirdPartyInsurance from '../../../assets/images/motor-coverage/third-party-insurance.png';
+import motorCoverageComprehensiveInsurance from '../../../assets/images/motor-coverage/comprehensive-insurance.png';
 import Footer from '../../../components/Footer/Footer';
 import { modalOverlayClass, modalPanelClass, useAnimatedModal } from '../../../components/AnimatedModal/AnimatedModal';
 import InsuranceFaqAccordion from '../../../components/Faq/InsuranceFaqAccordion';
@@ -428,128 +436,40 @@ const BrandCarIcon = () => (
   </svg>
 );
 
-const MotorCoverageShieldIcon = () => (
-  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-    <path
-      fill="currentColor"
-      d="M12 2 4 5v6.09C4 16.14 7.41 20.85 12 22c4.59-1.15 8-5.86 8-10.91V5l-8-3Z"
-    />
-  </svg>
-);
-
-const MotorCoverageAwardIcon = () => (
-  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-    <path
-      fill="currentColor"
-      d="M12 2.2 14.4 9h7.6l-6.1 4.5 2.3 7.3L12 16.3l-6.2 4.5 2.3-7.3L2 9h7.6L12 2.2Zm-5.5 15.3h11v2.5h-11v-2.5Z"
-    />
-  </svg>
-);
-
-function MotorInclusionIcon({ name }) {
-  const svgProps = { viewBox: '0 0 24 24', 'aria-hidden': true, focusable: 'false', className: 'motor-inclusion-svg' };
-  switch (name) {
-    case 'warning':
-      return (
-        <svg {...svgProps}>
-          <path
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.75"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M12 9v4M12 17h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"
-          />
-        </svg>
-      );
-    case 'theft':
-      return (
-        <svg {...svgProps}>
-          <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" strokeWidth="1.75" />
-          <path fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" d="M9 9l6 6M15 9l-6 6" />
-        </svg>
-      );
-    case 'sparkle':
-      return (
-        <svg {...svgProps}>
-          <path
-            fill="currentColor"
-            d="M12 5 13.35 9.2h4.4l-3.55 2.55L15.6 16 12 14.05 8.41 16l1.35-4.25L6.21 9.2h4.4L12 5z"
-          />
-          <circle fill="currentColor" cx="6" cy="10" r="1.15" opacity="0.72" />
-          <circle fill="currentColor" cx="18" cy="12" r="1" opacity="0.72" />
-        </svg>
-      );
-    case 'document':
-      return (
-        <svg {...svgProps}>
-          <path
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.75"
-            strokeLinejoin="round"
-            d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8l-6-6z"
-          />
-          <polyline
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.75"
-            strokeLinejoin="round"
-            points="14 2 14 8 20 8"
-          />
-        </svg>
-      );
-    case 'shield':
-      return (
-        <svg {...svgProps}>
-          <path
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1.75"
-            strokeLinejoin="round"
-            d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"
-          />
-        </svg>
-      );
-    default:
-      return null;
-  }
-}
-
 const MOTOR_INCLUSIONS_ITEMS = [
   {
     id: 'accidental',
-    icon: 'warning',
+    image: motorCoverageAccidentalDamage,
     title: 'Accidental Damage',
     description: 'Covers repair costs due to accidents or collisions.'
   },
   {
     id: 'theft',
-    icon: 'theft',
+    image: motorCoverageTheftLoss,
     title: 'Theft or Loss of Vehicle',
     description: 'Provides compensation if your vehicle is stolen.'
   },
   {
     id: 'natural',
-    icon: 'sparkle',
+    image: motorCoverageNaturalDisasters,
     title: 'Natural Disasters',
     description: 'Covers damage caused by floods, storms, earthquakes, and other natural events.'
   },
   {
     id: 'fire',
-    icon: 'warning',
+    image: motorCoverageFireDamage,
     title: 'Fire Damage',
     description: 'Protects against damage caused by fire or explosions.'
   },
   {
     id: 'third-party',
-    icon: 'document',
+    image: motorCoverageThirdPartyLiability,
     title: 'Third-Party Liability',
     description: 'Covers injury or damage caused to other people or property.'
   },
   {
     id: 'vandalism',
-    icon: 'shield',
+    image: motorCoverageVandalismRiots,
     title: 'Vandalism or Riots',
     description: 'Covers damage caused by external disturbances or intentional acts.'
   }
@@ -1146,8 +1066,15 @@ function MotorInsurance({ onBackHome }) {
               <div className="motor-coverage-wrap">
                 <article className="motor-coverage-card motor-coverage-card--third-party">
                   <div className="motor-coverage-card-top">
-                    <span className="motor-coverage-icon motor-coverage-icon--shield" aria-hidden="true">
-                      <MotorCoverageShieldIcon />
+                    <span className="motor-coverage-icon" aria-hidden="true">
+                      <img
+                        src={motorCoverageThirdPartyInsurance}
+                        alt=""
+                        className="motor-coverage-icon-img"
+                        loading="lazy"
+                        width={57}
+                        height={57}
+                      />
                     </span>
                     <span className="motor-coverage-badge motor-coverage-badge--mandatory">Mandatory</span>
                   </div>
@@ -1160,8 +1087,15 @@ function MotorInsurance({ onBackHome }) {
                 </article>
                 <article className="motor-coverage-card motor-coverage-card--comprehensive">
                   <div className="motor-coverage-card-top">
-                    <span className="motor-coverage-icon motor-coverage-icon--award" aria-hidden="true">
-                      <MotorCoverageAwardIcon />
+                    <span className="motor-coverage-icon motor-coverage-icon--comprehensive" aria-hidden="true">
+                      <img
+                        src={motorCoverageComprehensiveInsurance}
+                        alt=""
+                        className="motor-coverage-icon-img"
+                        loading="lazy"
+                        width={57}
+                        height={57}
+                      />
                     </span>
                     <span className="motor-coverage-badge motor-coverage-badge--recommended">Recommended</span>
                   </div>
@@ -1187,7 +1121,14 @@ function MotorInsurance({ onBackHome }) {
                   {MOTOR_INCLUSIONS_ITEMS.map((item) => (
                     <li key={item.id} className="motor-inclusion-item">
                       <span className="motor-inclusion-icon-wrap" aria-hidden="true">
-                        <MotorInclusionIcon name={item.icon} />
+                        <img
+                          src={item.image}
+                          alt=""
+                          className="motor-inclusion-icon-img"
+                          loading="lazy"
+                          width={57}
+                          height={57}
+                        />
                       </span>
                       <div className="motor-inclusion-copy">
                         <h3 className="motor-inclusion-item-title">{item.title}</h3>

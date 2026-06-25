@@ -9,4 +9,5 @@ export const shouldShowNavbar = (pathname) => (
   || pathname.startsWith('/contact-us')
   || pathname.startsWith('/insurance-basics')
   || pathname.startsWith('/renew-plans')
+  || pathname.startsWith('/quotes')
 );

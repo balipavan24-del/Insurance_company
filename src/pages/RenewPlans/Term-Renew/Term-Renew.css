@@ -1,0 +1,350 @@
+/* Page shell — same tokens as motor renew (.renew-plans-page / .renew-page) */
+.term-renew-page {
+  --renew-band-pad-y: 40px;
+  --renew-band-pad-top: clamp(56px, 5.5vw, 80px);
+  --renew-pad-x: clamp(16px, 4vw, 50px);
+  --renew-content-max: 1320px;
+  min-height: calc(100vh - 80px);
+  background: linear-gradient(180deg, #eef2f7 0%, #f7f9fc 42%, #ffffff 100%);
+  padding: 0;
+  text-align: left;
+}
+
+/* Hero — ref: .car-renew-hero__layout */
+.Hero-Section,
+.term-renew-hero {
+  width: 100%;
+  max-width: min(var(--renew-content-max), 100%);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(320px, 560px);
+  gap: clamp(10px, 1.5vw, 18px);
+  align-items: start;
+  box-sizing: border-box;
+  padding: var(--renew-band-pad-top) var(--renew-pad-x) var(--renew-band-pad-y);
+}
+
+/* Left column — ref: .car-renew-hero__content */
+.Hero-Section-Left {
+  min-width: 0;
+  width: 100%;
+  text-align: left;
+}
+
+/* Badge — ref: .car-renew-hero__tag */
+.Term-renew-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 16px;
+  padding: 7px 14px 7px 12px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #2e88c7 0%, #4f46e5 100%);
+  color: #ffffff;
+  border: 1px solid rgba(79, 70, 229, 0.22);
+  box-shadow: 0 6px 16px rgba(79, 70, 229, 0.22);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+/* Title — ref: .car-renew-hero__title */
+.Hero-Section-Title {
+  margin: 14px 0 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: clamp(1.95rem, 3.1vw, 3.45rem);
+  font-weight: 800;
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  text-align: left;
+}
+
+/* Title line — ref: .car-renew-hero__title-line */
+.Hero-Section-Title-Line {
+  display: block;
+  white-space: nowrap;
+  color: #0f172a;
+}
+
+/* Accent line — ref: .car-renew-hero__title-line--gradient */
+.term-renew-page .Headding-Active {
+  background: linear-gradient(90deg, #2e88c7 0%, #4f46e5 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Subtitle — ref: .car-renew-hero__subtitle */
+.Hero-Section-Subtitle {
+  margin: 0;
+  max-width: 56ch;
+  color: #475569;
+  font-size: clamp(16px, 1.2vw, 24px);
+  line-height: 1.52;
+  font-weight: 400;
+}
+
+/* Image frame — ref: bike renew .car-renew-hero__visual */
+.Hero-Section-Visual {
+  margin-top: 24px;
+  width: min(640px, 100%);
+  aspect-ratio: 22 / 10;
+  min-height: clamp(220px, 28vw, 320px);
+  border-radius: 18px;
+  background: transparent;
+  border: 1px solid rgba(148, 163, 184, 0.28);
+  overflow: hidden;
+  display: block;
+  line-height: 0;
+}
+
+.Hero-Section-Image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+}
+
+/* —— Right policy retrieve card —— */
+.Hero-section-right {
+  width: 100%;
+  max-width: 560px;
+  align-self: start;
+}
+
+.policy-retrieve-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 18px;
+  box-shadow: 0 20px 36px rgba(15, 23, 42, 0.07);
+  padding: clamp(18px, 2.2vw, 24px);
+  box-sizing: border-box;
+}
+
+.policy-retrieve-card__title {
+  margin: 0 0 8px;
+  color: #0f172a;
+  font-size: clamp(1.45rem, 1.6vw, 1.75rem);
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.policy-retrieve-card__subtitle {
+  margin: 0 0 22px;
+  color: #64748b;
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.Retrieve-Your-Policy-Options {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin-bottom: 22px;
+}
+
+.policy-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  min-height: 52px;
+  padding: 12px 14px;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 12px;
+  background: #ffffff;
+  color: #334155;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.2;
+  text-align: center;
+  cursor: pointer;
+  box-sizing: border-box;
+  transform: none;
+}
+
+.policy-number:hover {
+  border-color: #cbd5e1;
+  background: #f8fafc;
+  transform: none;
+}
+
+.policy-number.is-active {
+  border-color: #2e88c7;
+  background: #f0f9ff;
+  color: #0f172a;
+  box-shadow: inset 0 0 0 1px rgba(46, 136, 199, 0.08);
+}
+
+.policy-number__icon {
+  flex: 0 0 auto;
+  width: 18px;
+  height: 18px;
+  color: #64748b;
+}
+
+.policy-number.is-active .policy-number__icon {
+  color: #2e88c7;
+}
+
+.policy-input {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.policy-input__label {
+  margin: 0;
+  color: #0f172a;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.policy-input input {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid #dbe4f0;
+  border-radius: 12px;
+  background: #ffffff;
+  color: #0f172a;
+  font-size: 14px;
+  padding: 14px 16px;
+  outline: none;
+}
+
+.policy-input input::placeholder {
+  color: #94a3b8;
+}
+
+.policy-input input:focus {
+  border-color: #2e88c7;
+  box-shadow: 0 0 0 3px rgba(46, 136, 199, 0.12);
+}
+
+.policy-continue-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  margin-top: 8px;
+  border: 0;
+  border-radius: 12px;
+  padding: 15px 18px;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  background: linear-gradient(90deg, #2e88c7 0%, #4f46e5 52%, #7c3aed 100%);
+  box-shadow: 0 12px 24px rgba(79, 70, 229, 0.28);
+  transform: none;
+}
+
+.policy-continue-button:hover {
+  filter: brightness(1.03);
+  transform: none;
+}
+
+.policy-continue-button__icon {
+  width: 18px;
+  height: 18px;
+}
+
+.policy-secure-note {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin: 18px 0 0;
+  color: #94a3b8;
+  font-size: 12px;
+  line-height: 1.4;
+  text-align: center;
+}
+
+.policy-secure-note__icon {
+  width: 14px;
+  height: 14px;
+  flex: 0 0 auto;
+}
+
+/* —— Below-hero sections: same band padding as motor renew —— */
+.term-renew-section {
+  width: 100%;
+  box-sizing: border-box;
+  padding: var(--renew-band-pad-y) var(--renew-pad-x);
+}
+
+.term-renew-section__inner {
+  width: 100%;
+  max-width: min(var(--renew-content-max), 100%);
+  margin-inline: auto;
+  box-sizing: border-box;
+}
+
+/* Footer + FAQ (when you add them) — ref: .renew-plans-page rules */
+.term-renew-page .landing-footer {
+  margin-top: 0;
+}
+
+.term-renew-page .business-home-faqs {
+  margin-top: 0;
+  padding: 0 0 var(--renew-band-pad-y);
+  box-sizing: border-box;
+  width: 100%;
+  max-width: min(var(--renew-content-max), 100%);
+  margin-inline: auto;
+  padding-inline: var(--renew-pad-x);
+}
+
+.term-renew-page .business-home-faqs .business-coverage-wrap {
+  max-width: 100%;
+  padding-inline: 0;
+}
+
+/* Ref: motor renew hero breakpoints */
+@media (max-width: 980px) {
+  .Hero-Section,
+  .term-renew-hero {
+    grid-template-columns: 1fr;
+    gap: clamp(24px, 4vw, 36px);
+    grid-template-columns: 1fr;
+    gap: clamp(24px, 4vw, 36px);
+    grid-template-columns: 1fr;
+    gap: clamp(24px, 4vw, 36px);
+    grid-template-columns: 1fr;
+    gap: clamp(24px, 4vw, 36px);
+    grid-template-columns: 1fr;
+    gap: clamp(24px, 4vw, 36px);
+  }
+
+  .Hero-section-right {
+    max-width: 560px;
+    justify-self: stretch;
+  }
+}
+
+@media (max-width: 640px) {
+  .Hero-Section-Title {
+    font-size: clamp(1.6rem, 8vw, 2.2rem);
+    letter-spacing: -0.02em;
+  }
+
+  .Hero-Section-Title-Line {
+    white-space: normal;
+  }
+
+  .Hero-Section-Subtitle {
+    font-size: clamp(15px, 4vw, 18px);
+  }
+
+  .Retrieve-Your-Policy-Options {
+    grid-template-columns: 1fr;
+  }
+}

@@ -61,6 +61,23 @@
   box-sizing: border-box;
 }
 
+html {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  overflow-x: clip;
+  -webkit-text-size-adjust: 100%;
+}
+
+img,
+picture,
+video,
+canvas {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
 /* Global micro-interactions for interactive controls across the site */
 a,
 button,
@@ -117,14 +134,19 @@ select:focus-visible {
 
 body {
   margin: 0;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
   background-color: #ffffff;
   font-family: 'Inter', sans-serif;
   overflow-x: hidden;
+  overflow-x: clip;
 }
 
 #root {
   width: 100%;
   max-width: 100%;
+  min-width: 0;
   margin: 0 auto;
   text-align: center;
   /* Removed border-inline: 1px solid var(--border); */
@@ -132,6 +154,16 @@ body {
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
+  overflow-x: hidden;
+  overflow-x: clip;
+  position: relative;
+}
+
+/* Prevent wide grids / nowrap rows from stretching the document */
+main,
+section,
+article {
+  max-width: 100%;
 }
 
 h1, h2 {

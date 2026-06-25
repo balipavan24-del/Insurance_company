@@ -6,7 +6,6 @@ import CargoHome from '../pages/Cargo/Cargo-Home';
 import CargoMerain from '../pages/Cargo/Cargo-Merain';
 import CargoAir from '../pages/Cargo/Cargo-Air';
 import CargoInland from '../pages/Cargo/Cargo-Inland';
-import TermHome from '../pages/Term/Term-Home';
 import BusinessHome from '../pages/Business/Business-Home';
 import BusinessFire from '../pages/Business/Business-Fire';
 import BusinessNatural from '../pages/Business/Business-Natural';
@@ -20,6 +19,9 @@ import BikeRenew from '../pages/RenewPlans/Bike-Renew';
 import ThreeWheelerRenew from '../pages/RenewPlans/Three-Wheeler-Renew';
 import CommercialVehicleRenew from '../pages/RenewPlans/Commercial-Vehicle-Renew';
 import MotorInsurance from '../pages/Motor/MotorHome/MotorInsurance';
+import Qoutes from '../Qoutes/Qoutes';
+import TermRenew from '../pages/RenewPlans/Term-Renew/Term-Renew';
+import TermHome from '../pages/Term/Term-Home';
 
 function AppRoutes() {
   const navigate = useNavigate();
@@ -109,14 +111,6 @@ function AppRoutes() {
         )}
       />
       <Route
-        path="/term-insurance"
-        element={(
-          <div className="app-screen app-screen--term-insurance">
-            <TermHome />
-          </div>
-        )}
-      />
-      <Route
         path="/business-insurance"
         element={(
           <div className="app-screen app-screen--business-insurance">
@@ -194,23 +188,47 @@ function AppRoutes() {
           </div>
         )}
       />
-          <Route
-            path="/renew-plans/three-wheeler"
-            element={(
-              <div className="app-screen app-screen--renew-plans">
-                <ThreeWheelerRenew />
-              </div>
-            )}
-          />
-          <Route
-            path="/renew-plans/commercial-vehicle"
-            element={(
-              <div className="app-screen app-screen--renew-plans">
-                <CommercialVehicleRenew />
-              </div>
-            )}
-          />
-          <Route path="*" element={<Navigate to="/" replace />} />
+      <Route
+        path="/renew-plans/three-wheeler"
+        element={(
+          <div className="app-screen app-screen--renew-plans">
+            <ThreeWheelerRenew />
+          </div>
+        )}
+      />
+      <Route
+        path="/renew-plans/commercial-vehicle"
+        element={(
+          <div className="app-screen app-screen--renew-plans">
+            <CommercialVehicleRenew />
+          </div>
+        )}
+      />
+      <Route
+        path="/quotes"
+        element={(
+          <div className="app-screen app-screen--renew-plans">
+            <Qoutes />
+          </div>
+        )}
+      />
+      <Route
+        path="/term-insurance"
+        element={(
+          <div className="app-screen app-screen--term-insurance">
+            <TermHome />
+          </div>
+        )}
+      />
+      <Route
+        path="/renew-plans/term"
+        element={(
+          <div className="app-screen app-screen--renew-plans">
+            <TermRenew />
+          </div>
+        )}
+      />
+      <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );
 }

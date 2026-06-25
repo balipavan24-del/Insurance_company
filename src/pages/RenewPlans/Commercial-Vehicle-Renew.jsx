@@ -19,6 +19,10 @@ import renewWhyUsTrustedPartners from '../../assets/images/renew-why-us/trusted-
 import renewWhyUsClaimSupport from '../../assets/images/renew-why-us/claim-assistance-support.png';
 import renewWhyUsSecurePayments from '../../assets/images/renew-why-us/secure-payments.png';
 import renewWhyUsExpertGuidance from '../../assets/images/renew-why-us/expert-guidance.png';
+import renewPlanTypeComprehensive from '../../assets/images/renew-plan-types/comprehensive-insurance.png';
+import renewPlanTypeThirdParty from '../../assets/images/renew-plan-types/third-party-insurance.png';
+import renewPlanTypeOwnDamage from '../../assets/images/renew-plan-types/own-damage-cover.png';
+import { renewBenefitImages } from '../../data/renewBenefitImages';
 import { Validnumber } from '../Motor/MotorHome/vehicleNumberValidation';
 import Renew from '../Motor/Renew_Details/Renew';
 import './Car-Renew.css';
@@ -35,37 +39,37 @@ const RENEW_BENEFITS = [
     id: 'continuous-coverage',
     title: 'Continuous Coverage',
     description: 'Avoid coverage gaps and stay financially protected on every route.',
-    icon: 'shield',
+    image: renewBenefitImages['continuous-coverage'],
   },
   {
     id: 'retain-ncb',
     title: 'Retain No Claim Bonus',
     description: 'Keep your accumulated NCB discounts during timely renewals.',
-    icon: 'award',
+    image: renewBenefitImages['retain-ncb'],
   },
   {
     id: 'inspection-delays',
     title: 'Avoid Inspection Delays',
     description: 'Expired policies may require commercial vehicle inspections before activation.',
-    icon: 'clock',
+    image: renewBenefitImages['inspection-delays'],
   },
   {
     id: 'legal-compliance',
     title: 'Legal Compliance',
     description: 'Third-party insurance is mandatory for commercial vehicle owners.',
-    icon: 'scale',
+    image: renewBenefitImages['legal-compliance'],
   },
   {
     id: 'save-money',
     title: 'Save Money',
     description: 'Timely renewals help avoid penalties and higher premiums.',
-    icon: 'wallet',
+    image: renewBenefitImages['save-money'],
   },
   {
     id: 'peace-of-mind',
     title: 'Peace of Mind',
     description: 'Operate confidently knowing your commercial fleet remains protected.',
-    icon: 'smile',
+    image: renewBenefitImages['peace-of-mind'],
   },
 ];
 
@@ -242,18 +246,24 @@ const RENEW_PLAN_TYPES = [
     title: 'Comprehensive Insurance',
     description: 'Covers own damage and third-party liabilities.',
     tone: 'blue',
+    image: renewPlanTypeComprehensive,
+    imageAlt: 'Comprehensive insurance',
   },
   {
     id: 'third-party',
     title: 'Third Party Insurance',
     description: 'Mandatory legal liability coverage.',
     tone: 'pink',
+    image: renewPlanTypeThirdParty,
+    imageAlt: 'Third party insurance',
   },
   {
     id: 'own-damage',
     title: 'Own Damage Cover',
     description: 'Protects your own commercial vehicle against damages.',
     tone: 'amber',
+    image: renewPlanTypeOwnDamage,
+    imageAlt: 'Own damage cover',
   },
 ];
 
@@ -471,15 +481,6 @@ function RenewPricingIcon({ name }) {
   );
 }
 
-function RenewPlanTypeIcon() {
-  return (
-    <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
-      <path d="M12 3 5.4 6.2v5c0 3.9 2.6 7 6.6 8.1 4-1.1 6.6-4.2 6.6-8.1v-5L12 3Z" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinejoin="round" />
-      <path d="m9.3 11.4 1.8 1.8 3.5-3.7" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
-}
-
 function RenewCoverageIcon({ name }) {
   const props = { viewBox: '0 0 24 24', width: 22, height: 22, 'aria-hidden': true, focusable: 'false' };
   if (name === 'lock') {
@@ -666,7 +667,7 @@ function CommercialVehicleRenew() {
               <p
                 style={{ fontSize: '0.800rem', color: '#666', marginTop: '0.5rem', gap: '2px', display: 'flex', alignItems: 'center', padding: '5px' }}
               >
-                try: AP09AB1234, AP09AB1235, AP09AB1236
+                try: AP09AB1237, AP09AB1269
               </p>
             </form>
 
@@ -756,8 +757,15 @@ function CommercialVehicleRenew() {
               <li key={item.id}>
                 <article className="car-renew-benefit-card">
                   <span className="car-renew-benefit-card__blob" aria-hidden="true" />
-                  <span className="car-renew-benefit-card__icon" aria-hidden="true">
-                    <RenewBenefitIcon name={item.icon} />
+                  <span className="car-renew-benefit-card__icon car-renew-benefit-card__icon--image" aria-hidden="true">
+                    <img
+                      src={item.image}
+                      alt=""
+                      className="car-renew-benefit-card__icon-img"
+                      loading="lazy"
+                      width={53}
+                      height={53}
+                    />
                   </span>
                   <span className="car-renew-benefit-card__index">{String(index + 1).padStart(2, '0')}</span>
                   <h3 className="car-renew-benefit-card__title">{item.title}</h3>
@@ -787,8 +795,15 @@ function CommercialVehicleRenew() {
             {RENEW_PLAN_TYPES.map((plan) => (
               <li key={plan.id}>
                 <article className={`car-renew-plan-card car-renew-plan-card--${plan.tone}`}>
-                  <span className={`car-renew-plan-card__icon car-renew-plan-card__icon--${plan.tone}`} aria-hidden="true">
-                    <RenewPlanTypeIcon />
+                  <span className="car-renew-plan-card__icon car-renew-plan-card__icon--image" aria-hidden="true">
+                    <img
+                      src={plan.image}
+                      alt=""
+                      className="car-renew-plan-card__icon-img"
+                      loading="lazy"
+                      width={57}
+                      height={57}
+                    />
                   </span>
                   <h3 className="car-renew-plan-card__title">{plan.title}</h3>
                   <p className="car-renew-plan-card__text">{plan.description}</p>

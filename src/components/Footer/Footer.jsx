@@ -30,6 +30,7 @@ function Footer() {
   const popularSearches = [
     'Car Insurance Renewal',
     'Bike Insurance Renewal',
+    'Term Insurance',
     'Best Insurance Plans',
     'Cheapest Insurance',
   ];
