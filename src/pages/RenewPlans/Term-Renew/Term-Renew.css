@@ -1,13 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
 /* Page shell — same tokens as motor renew (.renew-plans-page / .renew-page) */
 .term-renew-page {
   --renew-band-pad-y: 40px;
   --renew-band-pad-top: clamp(56px, 5.5vw, 80px);
   --renew-pad-x: clamp(16px, 4vw, 50px);
   --renew-content-max: 1320px;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
   min-height: calc(100vh - 80px);
   background: linear-gradient(180deg, #eef2f7 0%, #f7f9fc 42%, #ffffff 100%);
   padding: 0;
   text-align: left;
+}
+
+.term-renew-page .landing-footer {
+  margin-top: 0;
 }
 
 /* Hero — ref: .car-renew-hero__layout */
@@ -49,6 +56,232 @@
   text-transform: none;
 }
 
+.Term-renew-badge--animated {
+  justify-content: center;
+  width: 350px;
+  height: 50px;
+  margin: 0;
+  padding: 0 20px;
+  font-size: 20px;
+  border: 3px solid transparent;
+  background:
+    linear-gradient(90deg, #2e88c7 0%, #4f46e5 100%) padding-box,
+    linear-gradient(90deg, #38bdf8 0%, #4f46e5 35%, #2e88c7 70%, #38bdf8 100%) border-box;
+  background-size: 100% 100%, 220% 100%;
+  box-shadow: 0 8px 16px rgba(79, 70, 229, 0.24);
+  animation: term-renew-badge-stroke 2.4s ease-in-out infinite;
+}
+
+.what-is-term {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: min(var(--renew-content-max), 100%);
+  margin: 0 auto;
+  padding: 40px var(--renew-pad-x) 56px;
+  text-align: center;
+}
+
+.what-is-term__title {
+  margin: 20px 0 16px;
+  font-size: 32px;
+  font-weight: 800;
+  color: #0f172a;
+  line-height: 1.2;
+}
+
+.what-is-term__text {
+  max-width: 720px;
+  margin: 0 auto;
+  font-size: 16px;
+  font-weight: 400;
+  color: #64748b;
+  line-height: 1.55;
+}
+
+/* —— Why Timely Renewal Matters —— */
+.why-renew-your-term-insurance {
+  width: 100%;
+  padding: 56px 24px 64px;
+  background: #e8ecf4;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.term-renew-section__title {
+  margin: 0 0 10px;
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  font-weight: 800;
+  color: #0f172a;
+  line-height: 1.2;
+}
+
+.term-renew-section__title--wide {
+  margin: 0 0 36px;
+}
+
+.term-renew-section__subtitle {
+  margin: 0 0 36px;
+  font-size: 16px;
+  font-weight: 400;
+  color: #64748b;
+  line-height: 1.55;
+}
+
+.term-renew-card-grid {
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  max-width: 1200px;
+}
+
+.term-renew-card {
+  flex: 1 1 220px;
+  max-width: 280px;
+  min-width: 220px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  padding: 24px;
+  border-radius: 16px;
+  background: #ffffff;
+  box-shadow: 0 10px 28px rgba(15, 23, 42, 0.08);
+  box-sizing: border-box;
+}
+
+.term-renew-card__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  margin-bottom: 16px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #2e88c7 0%, #4f46e5 100%);
+  color: #ffffff;
+  font-size: 24px;
+  flex-shrink: 0;
+}
+
+.term-renew-card__title {
+  margin: 0 0 8px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #0f172a;
+  line-height: 1.3;
+}
+
+.term-renew-card__text {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 400;
+  color: #64748b;
+  line-height: 1.55;
+}
+
+/* —— What Happens If You Miss a Renewal —— */
+.term-renew-miss {
+  width: 100%;
+  padding: 56px 24px 64px;
+  background: #ffffff;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.term-renew-miss__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 16px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  background: #fff7ed;
+  border: 1px solid #fed7aa;
+  color: #ea580c;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.term-renew-miss__badge-icon {
+  font-size: 16px;
+}
+
+.term-renew-miss__card {
+  flex: 1 1 220px;
+  max-width: 280px;
+  min-width: 220px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  padding: 24px;
+  border-radius: 16px;
+  background: #fffbf7;
+  border: 1px solid #fed7aa;
+  box-sizing: border-box;
+}
+
+.term-renew-miss__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  margin-bottom: 16px;
+  border-radius: 50%;
+  background: #ffedd5;
+  color: #ea580c;
+  font-size: 22px;
+  flex-shrink: 0;
+}
+
+/* —— Term Revival Process —— */
+.term-revival-process {
+  width: 100%;
+  padding: 56px 24px 64px;
+  background: #e8ecf4;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.term-revival-process__card {
+  position: relative;
+  flex: 1 1 220px;
+  max-width: 280px;
+  min-width: 220px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  padding: 24px;
+  border-radius: 16px;
+  background: #ffffff;
+  box-shadow: 0 10px 28px rgba(15, 23, 42, 0.08);
+  box-sizing: border-box;
+}
+
+.term-revival-process__step-no {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #eef2ff;
+  color: #4f46e5;
+  font-size: 13px;
+  font-weight: 700;
+}
+
 /* Title — ref: .car-renew-hero__title */
 .Hero-Section-Title {
   margin: 14px 0 12px;
@@ -75,16 +308,6 @@
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-}
-
-/* Subtitle — ref: .car-renew-hero__subtitle */
-.Hero-Section-Subtitle {
-  margin: 0;
-  max-width: 56ch;
-  color: #475569;
-  font-size: clamp(16px, 1.2vw, 24px);
-  line-height: 1.52;
-  font-weight: 400;
 }
 
 /* Image frame — ref: bike renew .car-renew-hero__visual */
@@ -227,6 +450,17 @@
   box-shadow: 0 0 0 3px rgba(46, 136, 199, 0.12);
 }
 
+.policy-input input[aria-invalid='true'] {
+  border-color: #dc2626;
+}
+
+.policy-input__error {
+  margin: 0;
+  color: #dc2626;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
 .policy-continue-button {
   display: inline-flex;
   align-items: center;
@@ -274,52 +508,9 @@
   flex: 0 0 auto;
 }
 
-/* —— Below-hero sections: same band padding as motor renew —— */
-.term-renew-section {
-  width: 100%;
-  box-sizing: border-box;
-  padding: var(--renew-band-pad-y) var(--renew-pad-x);
-}
-
-.term-renew-section__inner {
-  width: 100%;
-  max-width: min(var(--renew-content-max), 100%);
-  margin-inline: auto;
-  box-sizing: border-box;
-}
-
-/* Footer + FAQ (when you add them) — ref: .renew-plans-page rules */
-.term-renew-page .landing-footer {
-  margin-top: 0;
-}
-
-.term-renew-page .business-home-faqs {
-  margin-top: 0;
-  padding: 0 0 var(--renew-band-pad-y);
-  box-sizing: border-box;
-  width: 100%;
-  max-width: min(var(--renew-content-max), 100%);
-  margin-inline: auto;
-  padding-inline: var(--renew-pad-x);
-}
-
-.term-renew-page .business-home-faqs .business-coverage-wrap {
-  max-width: 100%;
-  padding-inline: 0;
-}
-
-/* Ref: motor renew hero breakpoints */
 @media (max-width: 980px) {
   .Hero-Section,
   .term-renew-hero {
-    grid-template-columns: 1fr;
-    gap: clamp(24px, 4vw, 36px);
-    grid-template-columns: 1fr;
-    gap: clamp(24px, 4vw, 36px);
-    grid-template-columns: 1fr;
-    gap: clamp(24px, 4vw, 36px);
-    grid-template-columns: 1fr;
-    gap: clamp(24px, 4vw, 36px);
     grid-template-columns: 1fr;
     gap: clamp(24px, 4vw, 36px);
   }
@@ -340,11 +531,1169 @@
     white-space: normal;
   }
 
-  .Hero-Section-Subtitle {
-    font-size: clamp(15px, 4vw, 18px);
-  }
-
   .Retrieve-Your-Policy-Options {
     grid-template-columns: 1fr;
+  }
+}
+
+@keyframes term-renew-badge-stroke {
+  0%,
+  100% {
+    background-position:
+      0 0,
+      0% 50%;
+    box-shadow: 0 8px 16px rgba(79, 70, 229, 0.24);
+  }
+
+  50% {
+    background-position:
+      0 0,
+      100% 50%;
+    box-shadow:
+      0 8px 16px rgba(79, 70, 229, 0.28),
+      0 0 0 2px rgba(56, 189, 248, 0.22);
+  }
+}
+
+/* Term Details popup */
+.term-details-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2250;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  box-sizing: border-box;
+  overflow: hidden;
+  margin: 0;
+  border: none;
+  background-color: rgba(248, 250, 252, 0.58);
+  backdrop-filter: blur(2px) saturate(1.05);
+  -webkit-backdrop-filter: blur(2px) saturate(1.05);
+}
+
+.term-details-panel {
+  position: relative;
+  width: min(620px, 100%);
+  max-height: min(92vh, 920px);
+  overflow: hidden;
+  padding: 22px;
+  border-radius: 20px;
+  border: 2px solid transparent;
+  background:
+    linear-gradient(#ffffff, #ffffff) padding-box,
+    linear-gradient(
+      90deg,
+      #2e88c7 0%,
+      #4f46e5 25%,
+      #6366f1 50%,
+      #8b5cf6 75%,
+      #2e88c7 100%
+    ) border-box;
+  background-size: 100% 100%, 300% 100%;
+  animation: term-details-panel-border-flow 3s linear infinite;
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.14);
+  box-sizing: border-box;
+  text-align: left;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  transform: none;
+}
+
+.term-details-panel:has(.term-details-otp) {
+  width: min(560px, 100%);
+  padding: 24px;
+}
+
+.term-details-panel:has(.term-details-summary) {
+  width: min(720px, calc(100vw - 32px));
+  padding: 24px 28px 28px;
+}
+
+@keyframes term-details-panel-border-flow {
+  0% {
+    background-position: 0 0, 0% 0;
+  }
+
+  100% {
+    background-position: 0 0, 300% 0;
+  }
+}
+
+.term-details-close {
+  all: unset;
+  box-sizing: border-box;
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  color: #64748b;
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+  transform: none;
+}
+
+.term-details-close:hover,
+.term-details-close:focus-visible {
+  transform: none;
+  color: #0f172a;
+}
+
+.term-details-title {
+  all: unset;
+  box-sizing: border-box;
+  display: block;
+  margin: 0 0 10px;
+  padding-right: 36px;
+  color: #0f172a;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+.term-details-text {
+  display: block;
+  margin: 0;
+  width: 100%;
+  color: #64748b;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.5;
+  text-align: left;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+.term-details-input {
+  all: unset;
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  margin-top: 16px;
+  padding: 14px 16px;
+  border-radius: 12px;
+  border: 1px solid #dbe4f0;
+  background-color: #ffffff;
+  color: #0f172a;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.4;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  outline: none;
+  transform: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+.term-details-input::placeholder {
+  color: #94a3b8;
+}
+
+.term-details-input:focus {
+  border-color: #2e88c7;
+  box-shadow: 0 0 0 3px rgba(46, 136, 199, 0.12);
+  transform: none;
+}
+
+.term-details-input:hover {
+  transform: none;
+}
+
+.term-details-content
+{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+}
+
+.term-details-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  margin-top: 20px;
+  border: 0;
+  border-radius: 12px;
+  padding: 15px 18px;
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.2;
+  cursor: pointer;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background: linear-gradient(90deg, #2e88c7 0%, #4f46e5 52%, #7c3aed 100%);
+  box-shadow: 0 12px 24px rgba(79, 70, 229, 0.28);
+  box-sizing: border-box;
+  transform: none;
+  transition: filter 220ms ease, box-shadow 220ms ease;
+}
+
+.term-details-button:hover {
+  filter: brightness(1.03);
+  transform: none;
+}
+
+.term-details-button:focus-visible {
+  outline: 2px solid rgba(46, 136, 199, 0.75);
+  outline-offset: 2px;
+  transform: none;
+}
+
+.term-details-button:active {
+  filter: brightness(0.98);
+  box-shadow: 0 8px 18px rgba(79, 70, 229, 0.22);
+  transform: none;
+}
+
+.term-details-button--secondary {
+  margin-top: 10px;
+  color: #334155;
+  background: #ffffff;
+  border: 1px solid #dbe4f0;
+  box-shadow: none;
+}
+
+.term-details-button--secondary:hover {
+  filter: none;
+  background: #f8fafc;
+  transform: none;
+}
+.term-details-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 14px;
+  width: auto;
+  margin-top: 20px;
+  padding: 18px 24px 20px;
+  border-radius: 12px;
+  border-top: 1px solid #eef2f7;
+  background-color: #f8fafc;
+  box-sizing: border-box;
+}
+
+.term-details-footer__row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+}
+
+.term-details-footer__timer {
+  all: unset;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+  color: #94a3b8;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.4;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+.term-details-footer__resend {
+  all: unset;
+  box-sizing: border-box;
+  color: #64748b;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.4;
+  cursor: pointer;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  transform: none;
+}
+
+.term-details-footer__resend:hover {
+  color: #2e88c7;
+  transform: none;
+}
+
+.term-details-footer__resend:focus-visible {
+  outline: 2px solid rgba(46, 136, 199, 0.75);
+  outline-offset: 2px;
+  transform: none;
+}
+
+.term-details-footer__resend:disabled {
+  color: #cbd5e1;
+  cursor: not-allowed;
+}
+
+.term-details-footer__resend:disabled:hover {
+  color: #cbd5e1;
+  transform: none;
+}
+
+.term-details-footer__timer-placeholder {
+  display: inline-block;
+  min-width: 1px;
+  min-height: 1px;
+}
+
+.term-details-footer__secure {
+  all: unset;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin: 0;
+  color: #94a3b8;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.4;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+.term-details-footer__icon {
+  flex-shrink: 0;
+  width: 14px;
+  height: 14px;
+  color: inherit;
+}
+.term-details-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 10px;
+  width: 100%;
+}
+
+/* OTP step — keep layout separate from summary */
+.term-details-otp {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: 100%;
+  text-align: left;
+}
+
+.term-details-otp .term-details-footer {
+  margin: 20px -24px -24px;
+  border-radius: 0 0 18px 18px;
+}
+
+/* Policy Summary step */
+.term-details-summary {
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  background: #ffffff;
+}
+
+.summary-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  margin: 0 0 20px;
+  padding-top: 4px;
+}
+
+.summary-header-left {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.summary-header-right {
+  flex-shrink: 0;
+  margin-top: 2px;
+  margin-right: 48px;
+}
+
+.summary-title {
+  all: unset;
+  box-sizing: border-box;
+  display: block;
+  margin: 0;
+  padding-right: 8px;
+  color: #0f172a;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+.summary-subtitle {
+  all: unset;
+  box-sizing: border-box;
+  display: block;
+  margin: 0;
+  color: #64748b;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.5;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+.verified {
+  all: unset;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: #ffffff;
+  border: 1px solid #bbf7d0;
+  color: #16a34a;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  transform: none;
+}
+
+.verified svg {
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+}
+
+.summary-body {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  margin: 0 0 22px;
+}
+
+.summary-body-columns {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  width: 100%;
+  margin: 0;
+}
+
+.summary-card {
+  box-sizing: border-box;
+  min-width: 0;
+  padding: 14px 16px;
+  border-radius: 12px;
+  border: 1px solid #eef2f7;
+  background: #ffffff;
+}
+
+.summary-card h6 {
+  all: unset;
+  box-sizing: border-box;
+  display: block;
+  margin: 0 0 6px;
+  color: #94a3b8;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+.summary-card .details {
+  all: unset;
+  box-sizing: border-box;
+  display: block;
+  margin: 0;
+  color: #0f172a;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.4;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  word-break: break-word;
+}
+
+.summary-actions {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.35fr);
+  gap: 12px;
+  width: 100%;
+}
+
+.summary-back-btn,
+.summary-continue-btn {
+  all: unset;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 14px 18px;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.2;
+  cursor: pointer;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  transform: none;
+}
+
+.summary-back-btn {
+  border: 1px solid #e2e8f0;
+  background: #ffffff;
+  color: #0f172a;
+}
+
+.summary-back-btn:hover {
+  border-color: #cbd5e1;
+  background: #ffffff;
+  transform: none;
+}
+
+.summary-continue-btn {
+  gap: 8px;
+  border: 0;
+  color: #ffffff;
+  background: linear-gradient(90deg, #2e88c7 0%, #4f46e5 52%, #7c3aed 100%);
+  box-shadow: 0 12px 24px rgba(79, 70, 229, 0.24);
+}
+
+.summary-continue-btn:hover {
+  filter: brightness(1.03);
+  transform: none;
+}
+
+.summary-continue-btn::after {
+  content: '→';
+  font-size: 16px;
+  line-height: 1;
+}
+
+.summary-back-btn:focus-visible,
+.summary-continue-btn:focus-visible {
+  outline: 2px solid rgba(46, 136, 199, 0.75);
+  outline-offset: 2px;
+  transform: none;
+}
+
+@media (max-width: 480px) {
+  .summary-body-columns {
+    grid-template-columns: 1fr;
+  }
+
+  .summary-actions {
+    grid-template-columns: 1fr;
+  }
+
+  .term-Updates-card-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Optional Updates step */
+.term-details-panel:has(.term-Updates-content) {
+  width: min(720px, calc(100vw - 32px));
+  padding: 24px 28px 28px;
+}
+
+.term-Updates-content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background: #ffffff;
+}
+
+.term-Updates-header {
+  margin: 0 0 20px;
+  padding-top: 4px;
+}
+
+.term-Updates-title {
+  all: unset;
+  box-sizing: border-box;
+  display: block;
+  margin: 0 0 6px;
+  padding-right: 36px;
+  color: #0f172a;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+.term-Updates-subtitle {
+  all: unset;
+  box-sizing: border-box;
+  display: block;
+  margin: 0;
+  color: #64748b;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.5;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+.term-Updates-body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 0 0 22px;
+}
+
+.term-Updates-card-container {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.term-Updates-card {
+  box-sizing: border-box;
+  min-width: 0;
+  padding: 16px;
+  border-radius: 12px;
+  border: 1px solid #eef2f7;
+  background: #ffffff;
+  cursor: pointer;
+  transition: border-color 220ms ease, box-shadow 220ms ease;
+}
+
+.term-Updates-card:hover {
+  border-color: #cbd5e1;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.06);
+}
+
+.term-Updates-card h6 {
+  all: unset;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin: 0;
+  color: #0f172a;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.35;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+.term-Updates-card h6 svg:first-child {
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  color: #64748b;
+}
+
+.term-Updates-card-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.term-Updates-card-icon {
+  flex-shrink: 0;
+  width: 18px;
+  height: 18px;
+  color: #94a3b8;
+}
+/* —— Payment Frequency —— */
+.payment-frequency {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  width: 100%;
+  padding: 56px 24px 64px;
+  background: #ffffff;
+  box-sizing: border-box;
+}
+
+.payment-frequency-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.payment-frequency-content .term-renew-section__subtitle {
+  margin-bottom: 0;
+}
+
+.payment-frequency-options {
+  width: 100%;
+  max-width: 1200px;
+}
+
+.payment-frequency-options-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: stretch;
+  gap: 20px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.payment-frequency-cards {
+  flex: 1 1 220px;
+  min-width: 220px;
+  max-width: 280px;
+  min-height: 168px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  padding: 24px;
+  border: 1px solid #e8edf3;
+  border-radius: 16px;
+  background: #ffffff;
+  box-shadow: none;
+  box-sizing: border-box;
+  cursor: pointer;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+.payment-frequency-cards:hover {
+  border-color: #cbd5e1;
+  background: #f8fafc;
+}
+
+.payment-frequency-cards-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  margin-bottom: 16px;
+  border-radius: 12px;
+  background: #eef4ff;
+  color: #2e88c7;
+  font-size: 24px;
+  flex-shrink: 0;
+}
+
+.payment-frequency-cards span {
+  margin: 0 0 8px;
+  font-size: 16px;
+  font-weight: 700;
+  color: #0f172a;
+  line-height: 1.3;
+}
+
+.payment-frequency-cards p {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 400;
+  color: #64748b;
+  line-height: 1.55;
+}
+
+@media (max-width: 640px) {
+  .payment-frequency-cards {
+    min-width: 100%;
+    max-width: 100%;
+  }
+}
+
+/* —— How Renewal Works —— */
+.how-it-works {
+  width: 100%;
+  padding: 56px 24px 64px;
+  background: #e8ecf4;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.how-it-works .term-renew-section__subtitle {
+  margin-bottom: 36px;
+}
+
+.how-it-works__list {
+  position: relative;
+  list-style: none;
+  margin: 0 auto;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 14px;
+  max-width: 1200px;
+}
+
+.how-it-works__list::before {
+  content: '';
+  position: absolute;
+  left: 6%;
+  right: 6%;
+  top: 48px;
+  height: 2px;
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    rgba(46, 136, 199, 0.15) 0%,
+    rgba(46, 136, 199, 0.55) 50%,
+    rgba(46, 136, 199, 0.15) 100%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+.how-it-works__card {
+  position: relative;
+  z-index: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 24px 16px 22px;
+  border-radius: 16px;
+  background: #ffffff;
+  border: 1px solid rgba(226, 232, 240, 0.95);
+  box-shadow:
+    0 8px 24px rgba(15, 23, 42, 0.07),
+    0 2px 6px rgba(15, 23, 42, 0.04);
+  box-sizing: border-box;
+  animation: how-it-works-float 4.6s ease-in-out infinite;
+  will-change: transform;
+  transition:
+    box-shadow 0.28s ease,
+    border-color 0.28s ease;
+}
+
+.how-it-works__card:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.how-it-works__card:nth-child(2) {
+  animation-delay: 0.35s;
+}
+
+.how-it-works__card:nth-child(3) {
+  animation-delay: 0.7s;
+}
+
+.how-it-works__card:nth-child(4) {
+  animation-delay: 1.05s;
+}
+
+.how-it-works__card:nth-child(5) {
+  animation-delay: 1.4s;
+}
+
+.how-it-works__card:hover {
+  animation-play-state: paused;
+  transform: translate3d(0, -10px, 0);
+  border-color: #c7d7ea;
+  box-shadow:
+    0 18px 40px rgba(15, 23, 42, 0.12),
+    0 6px 14px rgba(79, 70, 229, 0.08);
+}
+
+@keyframes how-it-works-float {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  50% {
+    transform: translate3d(0, -8px, 0);
+  }
+}
+
+.how-it-works__step {
+  position: absolute;
+  top: 18px;
+  left: calc(50% + 18px);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 1.5px solid #c7d7fe;
+  color: #4f46e5;
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1;
+  z-index: 2;
+}
+
+.how-it-works__card .term-renew-card__icon {
+  margin-bottom: 14px;
+}
+
+.how-it-works__card .term-renew-card__title {
+  width: 100%;
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+.how-it-works__card .term-renew-card__text {
+  width: 100%;
+  text-align: center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .how-it-works__card {
+    animation: none;
+    will-change: auto;
+  }
+
+  .how-it-works__card:hover {
+    transform: none;
+  }
+}
+
+@media (max-width: 980px) {
+  .how-it-works__list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+  }
+
+  .how-it-works__list::before {
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .how-it-works__list {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* —— Why Renew Through Us —— */
+.term-renew-why-us {
+  width: 100%;
+  padding: 56px 24px 64px;
+  background: #f8fafc;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.term-renew-why-us__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+  max-width: 1200px;
+}
+
+.term-renew-why-us__card {
+  flex: none;
+  max-width: none;
+  min-width: 0;
+  width: 100%;
+  border: 1px solid rgba(226, 232, 240, 0.95);
+  box-shadow:
+    0 8px 24px rgba(15, 23, 42, 0.06),
+    0 2px 6px rgba(15, 23, 42, 0.04);
+  transition:
+    transform 0.28s ease,
+    box-shadow 0.28s ease,
+    border-color 0.28s ease;
+}
+
+.term-renew-why-us__card:hover {
+  transform: translateY(-6px);
+  border-color: #c7d7ea;
+  box-shadow:
+    0 16px 36px rgba(15, 23, 42, 0.1),
+    0 4px 10px rgba(79, 70, 229, 0.06);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .term-renew-why-us__card {
+    transition: border-color 0.28s ease, box-shadow 0.28s ease;
+  }
+
+  .term-renew-why-us__card:hover {
+    transform: none;
+  }
+}
+
+@media (max-width: 980px) {
+  .term-renew-why-us__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  .term-renew-why-us__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* —— FAQ (shared InsuranceFaqAccordion) —— */
+.term-renew-page .business-home-faqs {
+  margin-top: 0;
+  padding: 0 0 var(--renew-band-pad-y);
+  box-sizing: border-box;
+  width: 100%;
+  max-width: min(var(--renew-content-max), 100%);
+  margin-inline: auto;
+  padding-inline: var(--renew-pad-x);
+}
+
+.term-renew-page .business-home-faqs .business-coverage-wrap {
+  max-width: 100%;
+  padding-inline: 0;
+}
+
+/* —— CTA Banner —— */
+.term-renew-cta {
+  width: 100%;
+  padding: 0;
+}
+
+.term-renew-cta__inner {
+  width: 100%;
+  max-width: min(var(--renew-content-max), 100%);
+  margin: 0 auto;
+  box-sizing: border-box;
+  padding: 0 var(--renew-pad-x) var(--renew-band-pad-y);
+}
+
+.term-renew-cta__banner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  border-radius: clamp(18px, 2.4vw, 28px);
+  padding: clamp(36px, 5vw, 56px) clamp(20px, 4vw, 40px);
+  background: linear-gradient(90deg, #2e88c7 0%, #4f46e5 100%);
+  box-shadow: 0 16px 40px rgba(46, 136, 199, 0.28);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.term-renew-cta__icon {
+  width: 40px;
+  height: 40px;
+  margin-bottom: 16px;
+  color: #ffffff;
+  font-size: 40px;
+  flex-shrink: 0;
+}
+
+.term-renew-cta__title {
+  margin: 0 auto;
+  max-width: 22ch;
+  color: #ffffff;
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+  line-height: 1.2;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.term-renew-cta__subtitle {
+  margin: 14px auto 0;
+  max-width: 52ch;
+  color: rgba(255, 255, 255, 0.94);
+  font-size: clamp(14px, 1.6vw, 17px);
+  line-height: 1.55;
+  font-weight: 400;
+}
+
+.term-renew-cta__actions {
+  margin-top: 28px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+}
+
+.term-renew-cta__btn {
+  min-height: 48px;
+  padding: 0 24px;
+  border-radius: 999px;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  box-sizing: border-box;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background-color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.term-renew-cta__btn svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.term-renew-cta__btn--primary {
+  border: none;
+  background: #ffffff;
+  color: #2e88c7;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.12);
+}
+
+.term-renew-cta__btn--primary:hover {
+  transform: translateY(-1px);
+  background: #f8fafc;
+  box-shadow: 0 10px 24px rgba(15, 23, 42, 0.16);
+}
+
+.term-renew-cta__btn--ghost {
+  border: 1.5px solid rgba(255, 255, 255, 0.92);
+  background: transparent;
+  color: #ffffff;
+}
+
+.term-renew-cta__btn--ghost:hover {
+  transform: translateY(-1px);
+  background: rgba(255, 255, 255, 0.1);
+  border-color: #ffffff;
+}
+
+.term-renew-cta__btn:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .term-renew-cta__btn--primary:hover,
+  .term-renew-cta__btn--ghost:hover {
+    transform: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .term-renew-cta__actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .term-renew-cta__btn {
+    width: 100%;
+    max-width: 320px;
   }
 }

@@ -1,30 +1,35 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import DropdownChevron from '../../components/Dropdown/DropdownChevron';
-import InsuranceFaqAccordion from '../../components/Faq/InsuranceFaqAccordion';
-import ContactHumanModal from '../../components/ContactHumanModal/ContactHumanModal';
-import AnimatedModal from '../../components/AnimatedModal/AnimatedModal';
-import Footer from '../../components/Footer/Footer';
-import WithoutNumber from '../Motor/Withoutnumber/WithoutNumber';
-import { carRenewFaqItems, carRenewFaqSection, carRenewSupportCard } from '../../data/productContent';
-import carRenewHeroImage from '../../assets/images/car-renew-hero.png';
-import renewStepEnterDetails from '../../assets/images/renew-process/enter-vehicle-details.png';
-import renewStepComparePlans from '../../assets/images/renew-process/compare-renewal-plans.png';
-import renewStepSelectAddons from '../../assets/images/renew-process/select-addons.png';
-import renewStepSecurePayment from '../../assets/images/renew-process/make-secure-payment.png';
-import renewStepReceivePolicy from '../../assets/images/renew-process/receive-policy-instantly.png';
-import renewWhyUsInstantRenewal from '../../assets/images/renew-why-us/instant-policy-renewal.png';
-import renewWhyUsBestPrice from '../../assets/images/renew-why-us/best-price-comparison.png';
-import renewWhyUsTrustedPartners from '../../assets/images/renew-why-us/trusted-insurance-partners.png';
-import renewWhyUsClaimSupport from '../../assets/images/renew-why-us/claim-assistance-support.png';
-import renewWhyUsSecurePayments from '../../assets/images/renew-why-us/secure-payments.png';
-import renewWhyUsExpertGuidance from '../../assets/images/renew-why-us/expert-guidance.png';
-import renewPlanTypeComprehensive from '../../assets/images/renew-plan-types/comprehensive-insurance.png';
-import renewPlanTypeThirdParty from '../../assets/images/renew-plan-types/third-party-insurance.png';
-import renewPlanTypeOwnDamage from '../../assets/images/renew-plan-types/own-damage-cover.png';
-import { renewBenefitImages } from '../../data/renewBenefitImages';
-import { Validnumber } from '../Motor/MotorHome/vehicleNumberValidation';
-import Renew from '../Motor/Renew_Details/Renew';
+import DropdownChevron from '../../../components/Dropdown/DropdownChevron';
+import InsuranceFaqAccordion from '../../../components/Faq/InsuranceFaqAccordion';
+import ContactHumanModal from '../../../components/ContactHumanModal/ContactHumanModal';
+import AnimatedModal from '../../../components/AnimatedModal/AnimatedModal';
+import Footer from '../../../components/Footer/Footer';
+import WithoutNumber from '../../Motor/Withoutnumber/WithoutNumber';
+import { carRenewFaqItems, carRenewFaqSection, carRenewSupportCard } from '../../../data/productContent';
+import carRenewHeroImage from '../../../assets/images/car-renew-hero.png';
+import renewStepEnterDetails from '../../../assets/images/renew-process/enter-vehicle-details.png';
+import renewStepComparePlans from '../../../assets/images/renew-process/compare-renewal-plans.png';
+import renewStepSelectAddons from '../../../assets/images/renew-process/select-addons.png';
+import renewStepSecurePayment from '../../../assets/images/renew-process/make-secure-payment.png';
+import renewStepReceivePolicy from '../../../assets/images/renew-process/receive-policy-instantly.png';
+import renewWhyUsInstantRenewal from '../../../assets/images/renew-why-us/instant-policy-renewal.png';
+import renewWhyUsBestPrice from '../../../assets/images/renew-why-us/best-price-comparison.png';
+import renewWhyUsTrustedPartners from '../../../assets/images/renew-why-us/trusted-insurance-partners.png';
+import renewWhyUsClaimSupport from '../../../assets/images/renew-why-us/claim-assistance-support.png';
+import renewWhyUsSecurePayments from '../../../assets/images/renew-why-us/secure-payments.png';
+import renewWhyUsExpertGuidance from '../../../assets/images/renew-why-us/expert-guidance.png';
+import renewPlanTypeComprehensive from '../../../assets/images/renew-plan-types/comprehensive-insurance.png';
+import renewPlanTypeThirdParty from '../../../assets/images/renew-plan-types/third-party-insurance.png';
+import renewPlanTypeOwnDamage from '../../../assets/images/renew-plan-types/own-damage-cover.png';
+import continuousCoverage from '../../../assets/images/renew-benefits/continuous-coverage.png';
+import retainNcb from '../../../assets/images/renew-benefits/retain-ncb.png';
+import avoidInspectionDelays from '../../../assets/images/renew-benefits/avoid-inspection-delays.png';
+import legalCompliance from '../../../assets/images/renew-benefits/legal-compliance.png';
+import saveMoney from '../../../assets/images/renew-benefits/save-money.png';
+import peaceOfMind from '../../../assets/images/renew-benefits/peace-of-mind.png';
+import { Validnumber } from '../../Motor/MotorHome/vehicleNumberValidation';
+import Renew from './Renew_Details/Renew';
 import './Car-Renew.css';
 
 const RENEW_HIGHLIGHTS = [
@@ -39,37 +44,37 @@ const RENEW_BENEFITS = [
     id: 'continuous-coverage',
     title: 'Continuous Coverage',
     description: 'Avoid coverage gaps and stay financially protected.',
-    image: renewBenefitImages['continuous-coverage'],
+    image: continuousCoverage,
   },
   {
     id: 'retain-ncb',
     title: 'Retain No Claim Bonus',
     description: 'Keep your accumulated NCB discounts during timely renewals.',
-    image: renewBenefitImages['retain-ncb'],
+    image: retainNcb,
   },
   {
     id: 'inspection-delays',
     title: 'Avoid Inspection Delays',
     description: 'Expired policies may require vehicle inspections before activation.',
-    image: renewBenefitImages['inspection-delays'],
+    image: avoidInspectionDelays,
   },
   {
     id: 'legal-compliance',
     title: 'Legal Compliance',
     description: 'Third-party insurance is mandatory for vehicle owners.',
-    image: renewBenefitImages['legal-compliance'],
+    image: legalCompliance,
   },
   {
     id: 'save-money',
     title: 'Save Money',
     description: 'Timely renewals help avoid penalties and higher premiums.',
-    image: renewBenefitImages['save-money'],
+    image: saveMoney,
   },
   {
     id: 'peace-of-mind',
     title: 'Peace of Mind',
     description: 'Drive confidently knowing your vehicle remains protected.',
-    image: renewBenefitImages['peace-of-mind'],
+    image: peaceOfMind,
   },
 ];
 

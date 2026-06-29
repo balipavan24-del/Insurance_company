@@ -1,22 +1,10 @@
 import './Cargo-Merain.css';
 import cargoAirLogo from '../../assets/icons/cargo-air-logo.svg';
 import Footer from '../../components/Footer/Footer';
-import { sanitizePhoneNumber, validateCargoLeadDetails } from '../../utils/validations/leadValidation';
 
 function CargoAir({ onBackToCargo }) {
   const handleQuoteSubmit = (event) => {
     event.preventDefault();
-    const formData = new FormData(event.currentTarget);
-    const validationErrors = validateCargoLeadDetails({
-      fullName: formData.get('fullName'),
-      businessName: formData.get('businessName'),
-      mobileNumber: formData.get('mobileNumber'),
-      email: formData.get('email')
-    });
-    if (validationErrors.length > 0) {
-      window.alert(validationErrors.join('\n'));
-      return;
-    }
     window.alert('Thanks! Air cargo quote details captured successfully.');
   };
 
@@ -113,7 +101,9 @@ function CargoAir({ onBackToCargo }) {
                       type="tel"
                       placeholder="10-digit mobile"
                       onChange={(event) => {
-                        event.currentTarget.value = sanitizePhoneNumber(event.currentTarget.value);
+                        event.currentTarget.value = String(event.currentTarget.value ?? '')
+                          .replace(/\D/g, '')
+                          .slice(0, 10);
                       }}
                       required
                     />

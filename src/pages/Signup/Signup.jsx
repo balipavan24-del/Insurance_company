@@ -1,11 +1,22 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import {
-  getSignupPasswordRuleResults,
-  validateSignupDetails,
-} from '../../utils/validations/leadValidation';
 import BrandLogo from '../../components/BrandLogo/BrandLogo';
 import './Signup.css';
+
+const SIGNUP_PASSWORD_RULES = [
+  { id: 'minLength', label: '8+ characters', test: (password) => String(password ?? '').length >= 8 },
+  { id: 'uppercase', label: 'Uppercase A–Z', test: (password) => /[A-Z]/.test(String(password ?? '')) },
+  { id: 'lowercase', label: 'Lowercase a–z', test: (password) => /[a-z]/.test(String(password ?? '')) },
+  { id: 'digit', label: 'Number 0–9', test: (password) => /\d/.test(String(password ?? '')) },
+  { id: 'special', label: 'Special @$!%*?&#', test: (password) => /[@$!%*?&#]/.test(String(password ?? '')) },
+];
+
+const getSignupPasswordRuleResults = (password) =>
+  SIGNUP_PASSWORD_RULES.map((rule) => ({
+    id: rule.id,
+    label: rule.label,
+    passed: rule.test(password),
+  }));
 
 function PasswordVisibilityToggle({ visible, onToggle }) {
   return (
@@ -53,19 +64,6 @@ function Signup({ onClose }) {
   const handleCreateAccount = (event) => {
     event.preventDefault();
     const form = event.currentTarget;
-    const formData = new FormData(form);
-
-    const validationErrors = validateSignupDetails({
-      fullName: formData.get('fullName'),
-      mobileNumber: formData.get('mobileNumber'),
-      email: formData.get('emailAddress'),
-      password: formData.get('password'),
-    });
-
-    if (validationErrors.length > 0) {
-      window.alert(validationErrors.join('\n'));
-      return;
-    }
 
     form.reset();
     setPassword('');

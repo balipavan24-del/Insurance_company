@@ -100,7 +100,7 @@ function Renew({ open, onClose, vechileNumber }) {
   const [fullName, setFullName] = useState('');
   const [mobileNumber, setMobileNumber] = useState('');
   const [city, setCity] = useState('');
-  const [whatsappOptIn, setWhatsappOptIn] = useState(true);
+  const [whatsappOptIn, setWhatsappOptIn] = useState(false);
   const [providerSearch, setProviderSearch] = useState('');
   const [selectedProvider, setSelectedProvider] = useState('');
   const [policyExpired, setPolicyExpired] = useState('');
@@ -117,7 +117,7 @@ function Renew({ open, onClose, vechileNumber }) {
     setFullName('');
     setMobileNumber('');
     setCity('');
-    setWhatsappOptIn(true);
+    setWhatsappOptIn(false);
     setProviderSearch('');
     setSelectedProvider('');
     setPolicyExpired('');

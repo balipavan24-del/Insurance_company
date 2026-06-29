@@ -1,30 +1,35 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import DropdownChevron from '../../components/Dropdown/DropdownChevron';
-import InsuranceFaqAccordion from '../../components/Faq/InsuranceFaqAccordion';
-import ContactHumanModal from '../../components/ContactHumanModal/ContactHumanModal';
-import AnimatedModal from '../../components/AnimatedModal/AnimatedModal';
-import Footer from '../../components/Footer/Footer';
-import WithoutNumber from '../Motor/Withoutnumber/WithoutNumber';
-import { threeWheelerRenewFaqItems, threeWheelerRenewFaqSection, threeWheelerRenewSupportCard } from '../../data/productContent';
-import threeWheelerRenewHeroImage from '../../assets/images/three-wheeler-renew-hero.png';
-import renewStepEnterDetails from '../../assets/images/renew-process/enter-vehicle-details.png';
-import renewStepComparePlans from '../../assets/images/renew-process/compare-renewal-plans.png';
-import renewStepSelectAddons from '../../assets/images/renew-process/select-addons.png';
-import renewStepSecurePayment from '../../assets/images/renew-process/make-secure-payment.png';
-import renewStepReceivePolicy from '../../assets/images/renew-process/receive-policy-instantly.png';
-import renewWhyUsInstantRenewal from '../../assets/images/renew-why-us/instant-policy-renewal.png';
-import renewWhyUsBestPrice from '../../assets/images/renew-why-us/best-price-comparison.png';
-import renewWhyUsTrustedPartners from '../../assets/images/renew-why-us/trusted-insurance-partners.png';
-import renewWhyUsClaimSupport from '../../assets/images/renew-why-us/claim-assistance-support.png';
-import renewWhyUsSecurePayments from '../../assets/images/renew-why-us/secure-payments.png';
-import renewWhyUsExpertGuidance from '../../assets/images/renew-why-us/expert-guidance.png';
-import renewPlanTypeComprehensive from '../../assets/images/renew-plan-types/comprehensive-insurance.png';
-import renewPlanTypeThirdParty from '../../assets/images/renew-plan-types/third-party-insurance.png';
-import renewPlanTypeOwnDamage from '../../assets/images/renew-plan-types/own-damage-cover.png';
-import { renewBenefitImages } from '../../data/renewBenefitImages';
-import { Validnumber } from '../Motor/MotorHome/vehicleNumberValidation';
-import Renew from '../Motor/Renew_Details/Renew';
+import DropdownChevron from '../../../components/Dropdown/DropdownChevron';
+import InsuranceFaqAccordion from '../../../components/Faq/InsuranceFaqAccordion';
+import ContactHumanModal from '../../../components/ContactHumanModal/ContactHumanModal';
+import AnimatedModal from '../../../components/AnimatedModal/AnimatedModal';
+import Footer from '../../../components/Footer/Footer';
+import WithoutNumber from '../../Motor/Withoutnumber/WithoutNumber';
+import { bikeRenewFaqItems, bikeRenewFaqSection, bikeRenewSupportCard } from '../../../data/productContent';
+import bikeRenewHeroImage from '../../../assets/images/bike-renew-hero.png';
+import renewStepEnterDetails from '../../../assets/images/renew-process/enter-vehicle-details.png';
+import renewStepComparePlans from '../../../assets/images/renew-process/compare-renewal-plans.png';
+import renewStepSelectAddons from '../../../assets/images/renew-process/select-addons.png';
+import renewStepSecurePayment from '../../../assets/images/renew-process/make-secure-payment.png';
+import renewStepReceivePolicy from '../../../assets/images/renew-process/receive-policy-instantly.png';
+import renewWhyUsInstantRenewal from '../../../assets/images/renew-why-us/instant-policy-renewal.png';
+import renewWhyUsBestPrice from '../../../assets/images/renew-why-us/best-price-comparison.png';
+import renewWhyUsTrustedPartners from '../../../assets/images/renew-why-us/trusted-insurance-partners.png';
+import renewWhyUsClaimSupport from '../../../assets/images/renew-why-us/claim-assistance-support.png';
+import renewWhyUsSecurePayments from '../../../assets/images/renew-why-us/secure-payments.png';
+import renewWhyUsExpertGuidance from '../../../assets/images/renew-why-us/expert-guidance.png';
+import renewPlanTypeComprehensive from '../../../assets/images/renew-plan-types/comprehensive-insurance.png';
+import renewPlanTypeThirdParty from '../../../assets/images/renew-plan-types/third-party-insurance.png';
+import renewPlanTypeOwnDamage from '../../../assets/images/renew-plan-types/own-damage-cover.png';
+import continuousCoverage from '../../../assets/images/renew-benefits/continuous-coverage.png';
+import retainNcb from '../../../assets/images/renew-benefits/retain-ncb.png';
+import avoidInspectionDelays from '../../../assets/images/renew-benefits/avoid-inspection-delays.png';
+import legalCompliance from '../../../assets/images/renew-benefits/legal-compliance.png';
+import saveMoney from '../../../assets/images/renew-benefits/save-money.png';
+import peaceOfMind from '../../../assets/images/renew-benefits/peace-of-mind.png';
+import { Validnumber } from '../../Motor/MotorHome/vehicleNumberValidation';
+import Renew from './Renew_Details/Renew';
 import './Car-Renew.css';
 
 const RENEW_HIGHLIGHTS = [
@@ -39,37 +44,37 @@ const RENEW_BENEFITS = [
     id: 'continuous-coverage',
     title: 'Continuous Coverage',
     description: 'Avoid coverage gaps and stay financially protected on every ride.',
-    image: renewBenefitImages['continuous-coverage'],
+    image: continuousCoverage,
   },
   {
     id: 'retain-ncb',
     title: 'Retain No Claim Bonus',
     description: 'Keep your accumulated NCB discounts during timely renewals.',
-    image: renewBenefitImages['retain-ncb'],
+    image: retainNcb,
   },
   {
     id: 'inspection-delays',
     title: 'Avoid Inspection Delays',
-    description: 'Expired policies may require three-wheeler inspections before activation.',
-    image: renewBenefitImages['inspection-delays'],
+    description: 'Expired policies may require bike inspections before activation.',
+    image: avoidInspectionDelays,
   },
   {
     id: 'legal-compliance',
     title: 'Legal Compliance',
-    description: 'Third-party insurance is mandatory for three-wheeler owners.',
-    image: renewBenefitImages['legal-compliance'],
+    description: 'Third-party insurance is mandatory for two-wheeler owners.',
+    image: legalCompliance,
   },
   {
     id: 'save-money',
     title: 'Save Money',
     description: 'Timely renewals help avoid penalties and higher premiums.',
-    image: renewBenefitImages['save-money'],
+    image: saveMoney,
   },
   {
     id: 'peace-of-mind',
     title: 'Peace of Mind',
-    description: 'Drive confidently knowing your three-wheeler remains protected.',
-    image: renewBenefitImages['peace-of-mind'],
+    description: 'Ride confidently knowing your bike remains protected.',
+    image: peaceOfMind,
   },
 ];
 
@@ -193,7 +198,7 @@ const RENEW_STEPS = [
     id: 'enter-details',
     step: 1,
     title: 'Enter Vehicle Details',
-    description: 'Share your three-wheeler number and basic info.',
+    description: 'Share your bike number and basic info.',
     image: renewStepEnterDetails,
     imageAlt: 'Enter vehicle details',
   },
@@ -233,7 +238,7 @@ const RENEW_STEPS = [
 
 const RENEW_PRICING_FACTORS = [
   { id: 'vehicle-age', label: 'Vehicle age', icon: 'calendar' },
-  { id: 'three-wheeler-model', label: 'Three wheeler model', icon: 'car' },
+  { id: 'bike-model', label: 'Bike model', icon: 'car' },
   { id: 'city-location', label: 'City / location', icon: 'location' },
   { id: 'claim-history', label: 'Claim history', icon: 'history' },
   { id: 'addons-selected', label: 'Add-ons selected', icon: 'layers' },
@@ -260,7 +265,7 @@ const RENEW_PLAN_TYPES = [
   {
     id: 'own-damage',
     title: 'Own Damage Cover',
-    description: 'Protects your own three-wheeler against damages.',
+    description: 'Protects your own bike against damages.',
     tone: 'amber',
     image: renewPlanTypeOwnDamage,
     imageAlt: 'Own damage cover',
@@ -558,27 +563,25 @@ function RenewCoverageIcon({ name }) {
   );
 }
 
-function ThreeWheelerRenew() {
+function BikeRenew() {
   const [openExclusionId, setOpenExclusionId] = useState('');
-  const [isWithoutThreeWheelerNumberOpen, setIsWithoutThreeWheelerNumberOpen] = useState(false);
+  const [isWithoutBikeNumberOpen, setIsWithoutBikeNumberOpen] = useState(false);
   const [isTalkToHumanOpen, setIsTalkToHumanOpen] = useState(false);
   const [vechileNumber, setVechileNumber] = useState('');
   const [isRenewOpen, setIsRenewOpen] = useState(false);
   const [isFormLoading, setIsFormLoading] = useState(false);
 
   const scrollToRenewForm = () => {
-    const formCard = document.getElementById('three-wheeler-renew-form');
+    const formCard = document.getElementById('bike-renew-form');
     formCard?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    const input = document.getElementById('three-wheeler-reg-no');
+    const input = document.getElementById('bike-reg-no');
     if (input instanceof HTMLInputElement) {
       window.setTimeout(() => input.focus(), 400);
     }
   };
-
   const inputHandler = (event) => {
     setVechileNumber(event.target.value.toUpperCase());
   };
-
   const continueHandler = (event) => {
     event.preventDefault();
     const entered = vechileNumber.trim().toUpperCase();
@@ -586,6 +589,7 @@ function ThreeWheelerRenew() {
     if (!Validnumber(entered)) {
       setVechileNumber(entered);
       setIsRenewOpen(false);
+      console.log(`Invalid vehicle number:${entered}`);
       window.alert(`Invalid vehicle number: ${entered}`);
       return;
     }
@@ -593,13 +597,14 @@ function ThreeWheelerRenew() {
     setIsFormLoading(true);
     window.setTimeout(() => {
       setVechileNumber(entered);
+      console.log(`Valid vehicle number:${entered}`);
       setIsRenewOpen(true);
       setIsFormLoading(false);
     }, 700);
   };
 
   return (
-    <div className="renew-plans-page renew-plans-page--three-wheeler">
+    <div className="renew-page renew-page--bike">
       <div className="renew-pop-content">
         <Renew
           open={isRenewOpen}
@@ -607,24 +612,21 @@ function ThreeWheelerRenew() {
           vechileNumber={vechileNumber}
         />
       </div>
-      <section className="car-renew-hero page-section page-section--regular page-section-container" aria-labelledby="three-wheeler-renew-heading">
+      <section className="car-renew-hero page-section page-section--regular page-section-container" aria-labelledby="bike-renew-heading">
         <div className="car-renew-hero__layout">
           <div className="car-renew-hero__content">
             <Link className="car-renew-hero__back-link" to="/">
               ← Back to Home
             </Link>
-            <span className="car-renew-hero__tag">Three Wheeler Insurance Renewal</span>
-            <h1 id="three-wheeler-renew-heading" className="car-renew-hero__title">
-              <span className="car-renew-hero__title-line">Renew Your Three Wheeler</span>
-              <span className="car-renew-hero__title-line">
-                Insurance{' '}
-                <span className="car-renew-hero__title-accent">in Minutes</span>
-              </span>
+            <span className="car-renew-hero__tag">Bike Insurance Renewal</span>
+            <h1 id="bike-renew-heading" className="car-renew-hero__title">
+              <span className="car-renew-hero__title-line">Renew Your Bike Insurance</span>
+              <span className="car-renew-hero__title-line car-renew-hero__title-line--gradient">in Minutes</span>
             </h1>
             <div className="car-renew-hero__visual">
               <img
-                src={threeWheelerRenewHeroImage}
-                alt="Three wheeler insurance protection overview"
+                src={bikeRenewHeroImage}
+                alt="Bike insurance protection overview"
                 className="car-renew-hero__visual-img"
                 loading="lazy"
               />
@@ -632,26 +634,23 @@ function ThreeWheelerRenew() {
 
           </div>
 
-          <aside id="three-wheeler-renew-form" className="car-renew-form-card" aria-label="Three wheeler renewal form">
+          <aside id="bike-renew-form" className="car-renew-form-card" aria-label="Bike renewal form">
             <span className="car-renew-form-card__chip">Renew in under 2 minutes</span>
-            <h2 className="car-renew-form-card__title">
-              <span className="car-renew-form-card__title-line">Renew Your Three Wheeler</span>
-              <span className="car-renew-form-card__title-line">Insurance</span>
-            </h2>
+            <h2 className="car-renew-form-card__title">Renew Your Bike Insurance</h2>
             <p className="car-renew-form-card__copy">
               Enter your registration number to get instant renewal quotes.
             </p>
 
             <form onSubmit={continueHandler}>
-              <label className="car-renew-form-card__label" htmlFor="three-wheeler-reg-no">
-                Three Wheeler Registration Number
+              <label className="car-renew-form-card__label" htmlFor="bike-reg-no">
+                Bike Registration Number
               </label>
               <input
-                id="three-wheeler-reg-no"
+                id="bike-reg-no"
                 className="car-renew-form-card__input"
                 type="text"
                 placeholder="e.g. MH12AB1234"
-                aria-label="Three wheeler registration number"
+                aria-label="Bike registration number"
                 name="VechileNumber"
                 value={vechileNumber}
                 onChange={inputHandler}
@@ -670,15 +669,14 @@ function ThreeWheelerRenew() {
                 try: AP09AB1234, AP09AB1235, AP09AB1236
               </p>
             </form>
-
             <p className="car-renew-form-card__divider">OR</p>
 
             <button
               type="button"
               className="car-renew-form-card__secondary-btn"
-              onClick={() => setIsWithoutThreeWheelerNumberOpen(true)}
+              onClick={() => setIsWithoutBikeNumberOpen(true)}
             >
-              Continue Without Three Wheeler Number
+              Continue Without Bike Number
             </button>
 
             <ul className="car-renew-form-card__stats" aria-label="Renewal speed and trust indicators">
@@ -696,7 +694,7 @@ function ThreeWheelerRenew() {
               </li>
             </ul>
 
-            <ul className="car-renew-form-card__highlights" aria-label="Three wheeler renewal highlights">
+            <ul className="car-renew-form-card__highlights" aria-label="Bike renewal highlights">
               {RENEW_HIGHLIGHTS.map((item) => (
                 <li key={item.id}>
                   <span className="car-renew-form-card__highlight-icon" aria-hidden="true">
@@ -718,17 +716,18 @@ function ThreeWheelerRenew() {
               Overview
             </p>
             <h2 id="car-renew-overview-heading" className="car-renew-overview__title">
-              <span className="car-renew-overview__title-line">What is Three Wheeler</span>
-              <span className="car-renew-overview__title-line car-renew-overview__title-line--single">
-                <span className="car-renew-overview__title-accent">Insurance</span>{' '}
+              <span className="car-renew-overview__title-line">
+                What is Bike <span className="car-renew-overview__title-accent">Insurance</span>
+              </span>
+              <span className="car-renew-overview__title-line">
                 <span className="car-renew-overview__title-accent">Renewal?</span>
               </span>
             </h2>
           </div>
           <article className="car-renew-overview__card">
-            Three wheeler insurance renewal is the process of extending your existing auto-rickshaw or
-            three-wheeler insurance policy before or after its expiry date to maintain uninterrupted
-            financial protection. Renewing on time helps you stay covered against accidents, theft,
+            Bike insurance renewal is the process of extending your existing two-wheeler insurance policy
+            before or after its expiry date to maintain uninterrupted financial protection for your bike.
+            Renewing your policy on time helps you continue enjoying coverage against accidents, theft,
             damages, third-party liabilities, and unexpected repair expenses.
           </article>
         </div>
@@ -743,14 +742,14 @@ function ThreeWheelerRenew() {
           </p>
           <h2 id="car-renew-benefits-heading" className="car-renew-benefits__title">
             <span className="car-renew-benefits__title-line">
-              Why Should You Renew Your Three Wheeler
+              Why Should You Renew Your Bike
             </span>
-            <span className="car-renew-benefits__title-line car-renew-benefits__title-line--single">
+            <span className="car-renew-benefits__title-line">
               <span className="car-renew-benefits__title-accent">Insurance on Time?</span>
             </span>
           </h2>
           <p className="car-renew-benefits__subtitle">
-            Timely renewal protects your wallet, your three-wheeler, and your peace of mind.
+            Timely renewal protects your wallet, your bike, and your peace of mind.
           </p>
 
           <ul className="car-renew-benefits__grid">
@@ -786,7 +785,7 @@ function ThreeWheelerRenew() {
             <span className="car-renew-plan-types__eyebrow-line" aria-hidden="true" />
           </p>
           <h2 id="car-renew-plan-types-heading" className="car-renew-plan-types__title">
-            Types of <span className="car-renew-plan-types__title-accent">Three Wheeler Insurance</span>
+            Types of <span className="car-renew-plan-types__title-accent">Bike Insurance</span>
           </h2>
           <p className="car-renew-plan-types__subtitle">
             Pick the right level of cover for your needs and budget.
@@ -918,7 +917,7 @@ function ThreeWheelerRenew() {
             Boost Your Renewal With <span className="car-renew-addons__title-accent">Add-ons</span>
           </h2>
           <p className="car-renew-addons__subtitle">
-            Customise your policy with extra protection that fits your daily routes and usage.
+            Customise your policy with extra protection that fits your riding habits.
           </p>
 
           <ul className="car-renew-addons__grid">
@@ -1043,22 +1042,22 @@ function ThreeWheelerRenew() {
       </section>
 
       <InsuranceFaqAccordion
-        title={threeWheelerRenewFaqSection.title}
-        subtitle={threeWheelerRenewFaqSection.subtitle}
-        items={threeWheelerRenewFaqItems}
-        buttonLabel={threeWheelerRenewFaqSection.buttonLabel}
+        title={bikeRenewFaqSection.title}
+        subtitle={bikeRenewFaqSection.subtitle}
+        items={bikeRenewFaqItems}
+        buttonLabel={bikeRenewFaqSection.buttonLabel}
       />
 
       <section className="car-renew-support page-section page-section--regular page-section-container" aria-labelledby="car-renew-support-heading">
         <div className="car-renew-support__inner">
           <div className="car-renew-support__banner">
             <h2 id="car-renew-support-heading" className="car-renew-support__title">
-              {threeWheelerRenewSupportCard.title}
+              {bikeRenewSupportCard.title}
             </h2>
-            <p className="car-renew-support__subtitle">{threeWheelerRenewSupportCard.subtitle}</p>
+            <p className="car-renew-support__subtitle">{bikeRenewSupportCard.subtitle}</p>
             <div className="car-renew-support__actions">
               <button type="button" className="car-renew-support__btn car-renew-support__btn--primary" onClick={scrollToRenewForm}>
-                {threeWheelerRenewSupportCard.primaryCta}
+                {bikeRenewSupportCard.primaryCta}
                 <span aria-hidden="true">→</span>
               </button>
               <button
@@ -1066,7 +1065,7 @@ function ThreeWheelerRenew() {
                 className="car-renew-support__btn car-renew-support__btn--ghost"
                 onClick={() => setIsTalkToHumanOpen(true)}
               >
-                {threeWheelerRenewSupportCard.secondaryCta}
+                {bikeRenewSupportCard.secondaryCta}
               </button>
             </div>
           </div>
@@ -1074,17 +1073,17 @@ function ThreeWheelerRenew() {
       </section>
 
       <AnimatedModal
-        isOpen={isWithoutThreeWheelerNumberOpen}
-        onClose={() => setIsWithoutThreeWheelerNumberOpen(false)}
+        isOpen={isWithoutBikeNumberOpen}
+        onClose={() => setIsWithoutBikeNumberOpen(false)}
         overlayClassName="car-renew-without-number-overlay"
         panelClassName="car-renew-without-number-modal"
-        ariaLabelledby="three-wheeler-renew-without-number-title"
+        ariaLabelledby="bike-renew-without-number-title"
       >
         {({ requestClose }) => (
           <>
             <header className="car-renew-without-number-modal__header">
               <div>
-                <h3 id="three-wheeler-renew-without-number-title">Continue without three wheeler number</h3>
+                <h3 id="bike-renew-without-number-title">Continue without bike number</h3>
                 <p>Enter your vehicle details to compare renewal plans</p>
               </div>
               <button
@@ -1099,7 +1098,7 @@ function ThreeWheelerRenew() {
             <div className="car-renew-without-number-modal__body">
               <WithoutNumber
                 isModal
-                selectedCategory="motor-three-wheeler"
+                selectedCategory="motor-bike"
                 onBackToVehicleCheck={requestClose}
                 onContinue={requestClose}
               />
@@ -1119,4 +1118,4 @@ function ThreeWheelerRenew() {
   );
 }
 
-export default ThreeWheelerRenew;
+export default BikeRenew;

@@ -1,12 +1,9 @@
 import { useState } from 'react';
 import BrandLogo from '../../components/BrandLogo/BrandLogo';
-import {
-  DEMO_LOGIN_OTP,
-  DEMO_LOGIN_PASSWORD,
-  validateOtpMobileNumber,
-  validateOtpVerificationDetails,
-} from '../../utils/validations/leadValidation';
 import './Login.css';
+
+const DEMO_LOGIN_PASSWORD = 'password123';
+const DEMO_LOGIN_OTP = '1234';
 
 function Login({ onClose, onGuestLogin, onSignupClick }) {
   const [loginMode, setLoginMode] = useState('password');
@@ -40,9 +37,8 @@ function Login({ onClose, onGuestLogin, onSignupClick }) {
   };
 
   const handleSendOtp = () => {
-    const mobileErrors = validateOtpMobileNumber(mobileNumber);
-    if (mobileErrors.length > 0) {
-      setOtpErrorMessage(mobileErrors[0]);
+    if (!canSendOtp) {
+      setOtpErrorMessage('Please enter a valid 10-digit mobile number.');
       return;
     }
 
@@ -65,13 +61,17 @@ function Login({ onClose, onGuestLogin, onSignupClick }) {
   const handleVerifyOtp = (event) => {
     event.preventDefault();
 
-    const validationErrors = validateOtpVerificationDetails({ otpCode, otpSent });
-    if (validationErrors.length > 0) {
+    if (!otpSent) {
       window.alert('Enter OTP');
       return;
     }
 
     const otpDigits = otpCode.replace(/\D/g, '').slice(0, 4);
+
+    if (otpDigits.length !== 4) {
+      window.alert('Enter OTP');
+      return;
+    }
 
     if (otpDigits !== DEMO_LOGIN_OTP) {
       setOtpErrorMessage('Invalid OTP. Please try again.');

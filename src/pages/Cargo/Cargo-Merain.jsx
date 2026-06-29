@@ -1,23 +1,10 @@
 import './Cargo-Merain.css';
 import cargoMarineLogo from '../../assets/icons/cargo-marine-logo.svg';
 import Footer from '../../components/Footer/Footer';
-import { sanitizePhoneNumber, validateCargoLeadDetails } from '../../utils/validations/leadValidation';
 
 function CargoMerain({ onBackToCargo }) {
   const handleQuoteSubmit = (event) => {
     event.preventDefault();
-    const formData = new FormData(event.currentTarget);
-    const validationErrors = validateCargoLeadDetails({
-      fullName: formData.get('fullName'),
-      businessName: formData.get('businessName'),
-      mobileNumber: formData.get('mobileNumber'),
-      email: formData.get('email'),
-      requireEmail: true
-    });
-    if (validationErrors.length > 0) {
-      window.alert(validationErrors.join('\n'));
-      return;
-    }
     window.alert('Thanks! Marine cargo quote details captured successfully.');
   };
 
@@ -114,7 +101,9 @@ function CargoMerain({ onBackToCargo }) {
                       type="tel"
                       placeholder="10-digit mobile"
                       onChange={(event) => {
-                        event.currentTarget.value = sanitizePhoneNumber(event.currentTarget.value);
+                        event.currentTarget.value = String(event.currentTarget.value ?? '')
+                          .replace(/\D/g, '')
+                          .slice(0, 10);
                       }}
                       required
                     />

@@ -1,5 +1,3 @@
-import { sanitizePhoneNumber } from '../../utils/validations/leadValidation';
-
 function TermQuotePanel({
   panelId,
   idSuffix = '',
@@ -95,7 +93,9 @@ function TermQuotePanel({
           type="tel"
           placeholder="10-digit mobile"
           value={mobileNumber}
-          onChange={(event) => onMobileNumberChange(sanitizePhoneNumber(event.target.value))}
+          onChange={(event) =>
+            onMobileNumberChange(String(event.target.value ?? '').replace(/\D/g, '').slice(0, 10))
+          }
         />
         <p className="term-form-note">
           {isWhatsappEnabled

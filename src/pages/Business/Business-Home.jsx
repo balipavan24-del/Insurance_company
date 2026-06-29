@@ -6,7 +6,6 @@ import DropdownChevron from '../../components/Dropdown/DropdownChevron';
 import InsuranceDetailPanel from '../../components/DetailPanel/InsuranceDetailPanel';
 import InsuranceFaqAccordion from '../../components/Faq/InsuranceFaqAccordion';
 import { businessInsuranceFaqItems } from '../../data/productContent';
-import { sanitizePhoneNumber, validateBusinessLeadDetails } from '../../utils/validations/leadValidation';
 import businessDisasterIcon from '../../assets/icons/Business-Disaster.webp';
 import businessEquipmentIcon from '../../assets/icons/Business-Equipment.webp';
 import businessFireIcon from '../../assets/icons/Fire-Business.webp';
@@ -294,15 +293,6 @@ function BusinessHome({
 
   const handleQuoteSubmit = (event) => {
     event.preventDefault();
-    const formData = new FormData(event.currentTarget);
-    const validationErrors = validateBusinessLeadDetails({
-      fullName: formData.get('fullName'),
-      mobileNumber: formData.get('mobileNumber')
-    });
-    if (validationErrors.length > 0) {
-      window.alert(validationErrors.join('\n'));
-      return;
-    }
     const action = coverageActionMap[selectedCoverageId];
     if (action) action();
   };
@@ -604,7 +594,9 @@ function BusinessHome({
                     type="tel"
                     placeholder="10-digit mobile"
                     onChange={(event) => {
-                      event.currentTarget.value = sanitizePhoneNumber(event.currentTarget.value);
+                      event.currentTarget.value = String(event.currentTarget.value ?? '')
+                        .replace(/\D/g, '')
+                        .slice(0, 10);
                     }}
                     required
                   />

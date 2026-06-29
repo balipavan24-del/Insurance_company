@@ -3,13 +3,12 @@ import Footer from '../../components/Footer/Footer';
 import InsuranceFaqAccordion from '../../components/Faq/InsuranceFaqAccordion';
 import { healthInsuranceFaqItems } from '../../data/productContent';
 import { modalOverlayClass, modalPanelClass, useAnimatedModal } from '../../components/AnimatedModal/AnimatedModal';
-import { sanitizePhoneNumber, validateHealthContactDetails } from '../../utils/validations/leadValidation';
+import './Health-Home.css';
 
 const healthImage = (name) => `${import.meta.env.BASE_URL}images/health/${name}`;
 const healthHeroImage = healthImage('hero.webp');
 const healthAboutImage = healthImage('About-Health.webp');
 const healthMattersImage = healthImage('matters.webp');
-import './Health-Home.css';
 
 const GENDER_OPTIONS = ['Male', 'Female'];
 
@@ -731,19 +730,6 @@ function HealthHome({ onBackHome }) {
   };
 
   const handleContactContinue = () => {
-    const validationErrors = validateHealthContactDetails({
-      fullName,
-      mobileNumber,
-      city,
-      pinCode,
-      email
-    });
-
-    if (validationErrors.length > 0) {
-      window.alert(validationErrors.join('\n'));
-      return;
-    }
-
     setActiveStep(3);
     requestAnimationFrame(() => scrollQuoteIntoView());
   };
@@ -981,7 +967,7 @@ function HealthHome({ onBackHome }) {
             'health-mobile',
             'Mobile Number *',
             mobileNumber,
-            (value) => setMobileNumber(sanitizePhoneNumber(value)),
+            (value) => setMobileNumber(String(value ?? '').replace(/\D/g, '').slice(0, 10)),
             'is-teal',
             '📞',
             'tel'

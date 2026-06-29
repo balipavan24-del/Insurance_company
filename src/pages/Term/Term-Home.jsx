@@ -4,7 +4,6 @@ import Footer from '../../components/Footer/Footer';
 import InsuranceFaqAccordion from '../../components/Faq/InsuranceFaqAccordion';
 import { termInsuranceFaqItems } from '../../data/productContent';
 import TermQuotePanel from './TermQuotePanel';
-import { sanitizePhoneNumber, validateTermLeadDetails } from '../../utils/validations/leadValidation';
 
 function formatINR(value) {
   return `₹${Math.round(value).toLocaleString('en-IN')}`;
@@ -242,20 +241,11 @@ function TermHome() {
 
   const handleQuoteSubmit = (event) => {
     event.preventDefault();
-    const validationErrors = validateTermLeadDetails({
-      fullName,
-      dateOfBirth,
-      mobileNumber
-    });
-    if (validationErrors.length > 0) {
-      window.alert(validationErrors.join('\n'));
-      return;
-    }
 
     const leadPayload = {
       fullName: fullName.trim(),
       dateOfBirth: dateOfBirth.trim(),
-      mobileNumber: sanitizePhoneNumber(mobileNumber),
+      mobileNumber: String(mobileNumber ?? '').replace(/\D/g, '').slice(0, 10),
       gender: selectedGender,
       smoker: isSmoker,
       whatsappOptIn: isWhatsappEnabled,
