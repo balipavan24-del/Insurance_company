@@ -26,11 +26,6 @@ import WithoutNumber from '../Withoutnumber/WithoutNumber';
 import { Newbike, Newcar, Newthreewheeler, Newcommercial } from '../NewVehicle/NewVehicle';
 import { Validnumber } from './vehicleNumberValidation';
 
-// Local fake policy data (used on Vercel until API is connected).
-// Set VITE_USE_MOTOR_POLICY_API=true in .env to use backend/server.js instead.
-const USE_MOTOR_POLICY_API = import.meta.env.VITE_USE_MOTOR_POLICY_API === 'true';
-const MOTOR_API_BASE_URL = (import.meta.env.VITE_API_BASE_URL || 'http://localhost:4591').replace(/\/$/, '');
-
 const formatPolicyDate = (dateValue) => dateValue.toLocaleDateString('en-GB', {
   day: '2-digit',
   month: 'short',
@@ -672,7 +667,7 @@ function MotorInsurance({ onBackHome }) {
   };
 
   // onsubmit event handler for enter vechile number feild
-  const handleVehicleNumberSubmit = async (event) => {
+  const handleVehicleNumberSubmit = (event) => {
     event.preventDefault();
 
     const enteredInput = (event.currentTarget.elements.vehicleNumber?.value ?? '').trim();
@@ -689,37 +684,12 @@ function MotorInsurance({ onBackHome }) {
     setVehicleNumberError('');
 
     const storedVehicleNumber = enteredInput;
-
-    if (!USE_MOTOR_POLICY_API) {
-      const policyData = lookupLocalVehiclePolicy(storedVehicleNumber);
-      if (!policyData) {
-        setPolicyCard(buildNoDataPolicyCard(storedVehicleNumber));
-        return;
-      }
-      setPolicyCard(policyData);
+    const policyData = lookupLocalVehiclePolicy(storedVehicleNumber);
+    if (!policyData) {
+      setPolicyCard(buildNoDataPolicyCard(storedVehicleNumber));
       return;
     }
-
-    try {
-      const response = await fetch(
-        `${MOTOR_API_BASE_URL}/motor/vehicles/${encodeURIComponent(storedVehicleNumber)}`
-      );
-
-      if (response.status === 404) {
-        setPolicyCard(buildNoDataPolicyCard(storedVehicleNumber));
-        return;
-      }
-
-      if (!response.ok) {
-        setPolicyCard(null);
-        return;
-      }
-
-      const data = await response.json();
-      setPolicyCard(data);
-    } catch {
-      setPolicyCard(null);
-    }
+    setPolicyCard(policyData);
   };
 
   const handleRcBookFileChange = (event) => {

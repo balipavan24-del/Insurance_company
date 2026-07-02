@@ -4,16 +4,18 @@ import {
     HiOutlineClock, HiOutlineLockClosed,
     HiOutlineCheckCircle, HiOutlinePhone,
     HiOutlineMail, HiOutlineUser,
-    HiOutlineLocationMarker, HiOutlineChevronRight,
+    HiOutlineLocationMarker,
 } from 'react-icons/hi';
 import './Term-Renew.css';
 import { useEffect, useState } from 'react';
+
 const RESEND_COOLDOWN_SECONDS = 30;
 
 const STEPS = {
     otp: 1,
     summary: 2,
     update: 3,
+    edit: 4,
 };
 const policy_summary = {
     Policyholder: 'Pavan bali',
@@ -24,7 +26,12 @@ const policy_summary = {
     RenewalDue: '12 June 2026',
     Status: 'Active — Due for Renewal',
     Nominee: 'Katyayani',
+    MobileNumber: '9876543210',
+    Email: 'balipavan@gmail.com',
+    ResidentialAddress: '123, Kphh 9th phase,sriram resindency',
 };
+
+
 const formatResendTime = (totalSeconds) => {
     const minutes = Math.floor(totalSeconds / 60);
     const seconds = totalSeconds % 60;
@@ -35,6 +42,44 @@ function TermDetails({ open, close, children }) {
     const [otp, setOtp] = useState('');
     const [resendSeconds, setResendSeconds] = useState(RESEND_COOLDOWN_SECONDS);
     const [step, setStep] = useState(STEPS.otp);
+    const [NewDetails, setNewDetails] = useState({
+        Nominee: '',
+        MobileNumber: '',
+        Email: '',
+        ResidentialAddress: '',
+    });
+    const [policyData, setPolicyData] = useState(policy_summary);
+
+    const {Nominee, MobileNumber, Email, ResidentialAddress} = NewDetails;
+
+    const handleSave = (event) => {
+        event.preventDefault();
+        setPolicyData({
+            ...policyData,
+            Nominee: Nominee || policyData.Nominee,
+            MobileNumber: MobileNumber || policyData.MobileNumber,
+            Email: Email || policyData.Email,
+            ResidentialAddress: ResidentialAddress || policyData.ResidentialAddress,
+        });
+        setNewDetails({
+            Nominee: '',
+            MobileNumber: '',
+            Email: '',
+            ResidentialAddress: '',
+        });
+        setStep(STEPS.update);
+    };
+
+    const handleNewDetails = (event) => {
+        setNewDetails({
+            ...NewDetails,
+            [event.target.name]: event.target.value,
+        });
+    };
+
+    const handleEdit = () => {
+        setStep(STEPS.edit);
+    };
 
     useEffect(() => {
         if (!open) {
@@ -153,41 +198,41 @@ function TermDetails({ open, close, children }) {
                                 <div className="summary-body-columns">
                                     <div className="summary-card">
                                         <h6>Policyholder</h6>
-                                        <p className="details">{policy_summary.Policyholder}</p>
+                                        <p className="details">{policyData.Policyholder}</p>
                                     </div>
                                     <div className="summary-card">
                                         <h6>Insurer</h6>
-                                        <p className="details">{policy_summary.Insurer}</p>
+                                        <p className="details">{policyData.Insurer}</p>
                                     </div>
                                 </div>
                                 <div className="summary-body-columns">
                                     <div className="summary-card">
                                         <h6>Sum Assured</h6>
-                                        <p className="details">₹ {policy_summary.SumAssured.toLocaleString('en-IN')}</p>
+                                        <p className="details">₹ {policyData.SumAssured.toLocaleString('en-IN')}</p>
                                     </div>
                                     <div className="summary-card">
                                         <h6>Policy Term</h6>
-                                        <p className="details">{policy_summary.PolicyTerm} Years</p>
+                                        <p className="details">{policyData.PolicyTerm} Years</p>
                                     </div>
                                 </div>
                                 <div className="summary-body-columns">
                                     <div className="summary-card">
                                         <h6>Premium</h6>
-                                        <p className="details">₹ {policy_summary.Premium.toLocaleString('en-IN')} / year</p>
+                                        <p className="details">₹ {policyData.Premium.toLocaleString('en-IN')} / year</p>
                                     </div>
                                     <div className="summary-card">
                                         <h6>Renewal Due</h6>
-                                        <p className="details">{policy_summary.RenewalDue}</p>
+                                        <p className="details">{policyData.RenewalDue}</p>
                                     </div>
                                 </div>
                                 <div className="summary-body-columns">
                                     <div className="summary-card">
                                         <h6>Status</h6>
-                                        <p className="details">{policy_summary.Status}</p>
+                                        <p className="details">{policyData.Status}</p>
                                     </div>
                                     <div className="summary-card">
                                         <h6>Nominee</h6>
-                                        <p className="details">{policy_summary.Nominee}</p>
+                                        <p className="details">{policyData.Nominee}</p>
                                     </div>
                                 </div>
                             </div>
@@ -210,61 +255,152 @@ function TermDetails({ open, close, children }) {
                             <div className="term-Updates-header">
                                 <h2 className="term-Updates-title">Optional Updates</h2>
                                 <p className="term-Updates-subtitle">
-                                    Update any details before continuing to payment.
+                                    Details you can update them.
                                 </p>
                             </div>
                             <div className="term-Updates-body">
-                                <div className="term-Updates-card-container">
-                                    <div className="term-Updates-card">
-                                        <h6>
-                                            <span className="term-Updates-card-label">
-                                                <HiOutlinePhone aria-hidden="true" />
-                                                Mobile Number
-                                            </span>
-                                            <HiOutlineChevronRight className="term-Updates-card-icon" aria-hidden="true" />
-                                        </h6>
+                                <div className="term-Updates-fields">
+                                    <div className="term-Updates-field">
+                                        <div className="term-Updates-field-label">
+                                            <HiOutlineUser aria-hidden="true" />
+                                            <span>Nominee:</span>
+                                        </div>
+                                        <p className="term-Updates-field-value">{policyData.Nominee}</p>
                                     </div>
-                                    <div className="term-Updates-card">
-                                        <h6>
-                                            <span className="term-Updates-card-label">
-                                                <HiOutlineMail aria-hidden="true" />
-                                                Email Address
-                                            </span>
-                                            <HiOutlineChevronRight className="term-Updates-card-icon" aria-hidden="true" />
-                                        </h6>
+                                    <div className="term-Updates-field">
+                                        <div className="term-Updates-field-label">
+                                            <HiOutlinePhone aria-hidden="true" />
+                                            <span>Mobile Number:</span>
+                                        </div>
+                                        <p className="term-Updates-field-value">{policyData.MobileNumber}</p>
                                     </div>
-                                </div>
-                                <div className="term-Updates-card-container">
-                                    <div className="term-Updates-card">
-                                        <h6>
-                                            <span className="term-Updates-card-label">
-                                                <HiOutlineUser aria-hidden="true" />
-                                                Nominee Details
-                                            </span>
-                                            <HiOutlineChevronRight className="term-Updates-card-icon" aria-hidden="true" />
-                                        </h6>
+                                    <div className="term-Updates-field">
+                                        <div className="term-Updates-field-label">
+                                            <HiOutlineMail aria-hidden="true" />
+                                            <span>Email:</span>
+                                        </div>
+                                        <p className="term-Updates-field-value">{policyData.Email}</p>
                                     </div>
-                                    <div className="term-Updates-card">
-                                        <h6>
-                                            <span className="term-Updates-card-label">
-                                                <HiOutlineLocationMarker aria-hidden="true" />
-                                                Residential Address
-                                            </span>
-                                            <HiOutlineChevronRight className="term-Updates-card-icon" aria-hidden="true" />
-                                        </h6>
+                                    <div className="term-Updates-field">
+                                        <div className="term-Updates-field-label">
+                                            <HiOutlineLocationMarker aria-hidden="true" />
+                                            <span>Address:</span>
+                                        </div>
+                                        <p className="term-Updates-field-value">{policyData.ResidentialAddress}</p>
                                     </div>
                                 </div>
-                            </div>
-                            <div className="summary-actions">
-                                <button type="button" className="summary-back-btn" onClick={goBack}>
-                                    Back
-                                </button>
-                                <button type="button" className="summary-continue-btn" onClick={close}>
-                                    Continue
-                                </button>
+                                <div className="term-Updates-buttons">
+                                    <button type="button" className="term-Updates-button term-Updates-button--edit"
+                                        onClick={handleEdit}
+                                    >
+                                        Edit
+                                    </button>
+                                    <span className="term-Updates-buttons-divider">or</span>
+                                    <button type="button" className="term-Updates-button term-Updates-button--continue">
+                                        Continue
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </>
+                );
+
+            case STEPS.edit:
+                return (
+                    <form className="term-Updates-form" onSubmit={handleSave}>
+                        <div className="term-Updates-content">
+                            <div className="term-Updates-header">
+                                <h2 className="term-Updates-title">Edit Details</h2>
+                                <p className="term-Updates-subtitle">
+                                    Update only the fields you want to change.
+                                </p>
+                            </div>
+                            <div className="term-Updates-body">
+                                <div className="term-Updates-form-fields">
+                                    <div className="term-Updates-form-field">
+                                        <label className="term-Updates-form-label" htmlFor="edit-nominee">
+                                            <HiOutlineUser aria-hidden="true" />
+                                            <span>Nominee</span>
+                                        </label>
+                                        <p className="term-Updates-form-current">
+                                            Current: {policyData.Nominee}
+                                        </p>
+                                        <input
+                                            id="edit-nominee"
+                                            type="text"
+                                            className="term-Updates-form-input"
+                                            placeholder="Enter new nominee"
+                                            name="Nominee"
+                                            value={Nominee}
+                                            onChange={handleNewDetails}
+                                        />
+                                    </div>
+                                    <div className="term-Updates-form-field">
+                                        <label className="term-Updates-form-label" htmlFor="edit-mobile">
+                                            <HiOutlinePhone aria-hidden="true" />
+                                            <span>Mobile Number</span>
+                                        </label>
+                                        <p className="term-Updates-form-current">
+                                            Current: {policyData.MobileNumber}
+                                        </p>
+                                        <input
+                                            id="edit-mobile"
+                                            type="tel"
+                                            className="term-Updates-form-input"
+                                            placeholder="Enter new mobile number"
+                                            name="MobileNumber"
+                                            value={MobileNumber}
+                                            onChange={handleNewDetails}
+                                        />
+                                    </div>
+                                    <div className="term-Updates-form-field">
+                                        <label className="term-Updates-form-label" htmlFor="edit-email">
+                                            <HiOutlineMail aria-hidden="true" />
+                                            <span>Email</span>
+                                        </label>
+                                        <p className="term-Updates-form-current">
+                                            Current: {policyData.Email}
+                                        </p>
+                                        <input
+                                            id="edit-email"
+                                            type="email"
+                                            className="term-Updates-form-input"
+                                            placeholder="Enter new email"
+                                            name="Email"
+                                            value={Email}
+                                            onChange={handleNewDetails}
+                                        />
+                                    </div>
+                                    <div className="term-Updates-form-field">
+                                        <label className="term-Updates-form-label" htmlFor="edit-address">
+                                            <HiOutlineLocationMarker aria-hidden="true" />
+                                            <span>Address</span>
+                                        </label>
+                                        <p className="term-Updates-form-current">
+                                            Current: {policyData.ResidentialAddress}
+                                        </p>
+                                        <input
+                                            id="edit-address"
+                                            type="text"
+                                            className="term-Updates-form-input"
+                                            placeholder="Enter new address"
+                                            name="ResidentialAddress"
+                                            value={ResidentialAddress}
+                                            onChange={handleNewDetails}
+                                        />
+                                    </div>
+                                </div>
+                                <div className="term-Updates-buttons"> 
+                                    <button
+                                        type="submit"
+                                        className="term-Updates-button term-Updates-button--continue"
+                                    >
+                                        Save Changes
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                 );
             default:
                 return null;

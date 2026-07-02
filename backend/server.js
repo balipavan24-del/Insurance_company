@@ -35,6 +35,74 @@ const getPolicyDates = (statusType) => {
   };
 };
 
+// —— Term renew dummy policies (replace with DB later) ——
+const termPolicies = {
+  TERM2026001: {
+    PolicyNumber: 'TERM2026001',
+    Policyholder: 'Pavan bali',
+    Insurer: 'Insure Agies.',
+    SumAssured: 10000000,
+    PolicyTerm: 30,
+    Premium: 14820,
+    RenewalDue: '12 June 2026',
+    Status: 'Active — Due for Renewal',
+    Nominee: 'Katyayani',
+    MobileNumber: '9876543210',
+    Email: 'balipavan@gmail.com',
+    ResidentialAddress: '123, Kphh 9th phase,sriram resindency',
+  },
+  TERM2026002: {
+    PolicyNumber: 'TERM2026002',
+    Policyholder: 'Rahul Sharma',
+    Insurer: 'Life Secure Co.',
+    SumAssured: 5000000,
+    PolicyTerm: 20,
+    Premium: 9200,
+    RenewalDue: '28 July 2026',
+    Status: 'Active — Due for Renewal',
+    Nominee: 'Priya Sharma',
+    MobileNumber: '9123456780',
+    Email: 'rahul.sharma@example.com',
+    ResidentialAddress: '45, MG Road, Bengaluru',
+  },
+};
+
+const normalizePolicyNumber = (value) => String(value ?? '').trim().toUpperCase();
+const normalizeMobile = (value) => String(value ?? '').replace(/\D/g, '');
+const normalizeEmail = (value) => String(value ?? '').trim().toLowerCase();
+
+const getTermPolicyByNumber = (policyNumber) => termPolicies[normalizePolicyNumber(policyNumber)] ?? null;
+
+const getTermPolicyByMobile = (mobileNumber) => {
+  const mobile = normalizeMobile(mobileNumber);
+  return Object.values(termPolicies).find((policy) => policy.MobileNumber === mobile) ?? null;
+};
+
+const getTermPolicyByEmail = (email) => {
+  const normalizedEmail = normalizeEmail(email);
+  return Object.values(termPolicies).find((policy) => normalizeEmail(policy.Email) === normalizedEmail) ?? null;
+};
+
+const UPDATABLE_TERM_FIELDS = ['Nominee', 'MobileNumber', 'Email', 'ResidentialAddress'];
+
+const updateTermPolicyDetails = (policyNumber, updates = {}) => {
+  const key = normalizePolicyNumber(policyNumber);
+  const policy = termPolicies[key];
+
+  if (!policy) {
+    return null;
+  }
+
+  UPDATABLE_TERM_FIELDS.forEach((field) => {
+    const value = updates[field];
+    if (typeof value === 'string' && value.trim()) {
+      policy[field] = value.trim();
+    }
+  });
+
+  return { ...policy };
+};
+
 // Lookup by vehicle number only (replace with DB later)
 const vehiclenumber = {
   AP09AB1234: {
@@ -70,7 +138,90 @@ const vehiclenumber = {
 };
 
 app.get('/health', (_req, res) => {
-  res.json({ ok: true, service: 'insureease-motor-api' });
+  res.json({ ok: true, service: 'insureease-api', motor: true, term: true });
+});
+
+// GET /term/policies/TERM2026001 — lookup by policy number
+app.get('/term/policies/:policyNumber', (req, res) => {
+  const policyNumber = normalizePolicyNumber(req.params.policyNumber);
+
+  if (!policyNumber) {
+    return res.status(400).json({ message: 'Policy number is required.' });
+  }
+
+  const policy = getTermPolicyByNumber(policyNumber);
+
+  if (!policy) {
+    return res.status(404).json({
+      message: 'No term policy found for this policy number.',
+      policyNumber,
+    });
+  }
+
+  return res.json(policy);
+});
+
+// GET /term/policies/mobile/9876543210 — lookup by mobile number
+app.get('/term/policies/mobile/:mobileNumber', (req, res) => {
+  const mobileNumber = normalizeMobile(req.params.mobileNumber);
+
+  if (!mobileNumber) {
+    return res.status(400).json({ message: 'Mobile number is required.' });
+  }
+
+  const policy = getTermPolicyByMobile(mobileNumber);
+
+  if (!policy) {
+    return res.status(404).json({
+      message: 'No term policy found for this mobile number.',
+      mobileNumber,
+    });
+  }
+
+  return res.json(policy);
+});
+
+// GET /term/policies/email/balipavan@gmail.com — lookup by email
+app.get('/term/policies/email/:email', (req, res) => {
+  const email = normalizeEmail(req.params.email);
+
+  if (!email) {
+    return res.status(400).json({ message: 'Email address is required.' });
+  }
+
+  const policy = getTermPolicyByEmail(email);
+
+  if (!policy) {
+    return res.status(404).json({
+      message: 'No term policy found for this email address.',
+      email,
+    });
+  }
+
+  return res.json(policy);
+});
+
+// PATCH /term/policies/TERM2026001 — update optional details (Nominee, MobileNumber, Email, ResidentialAddress)
+app.patch('/term/policies/:policyNumber', (req, res) => {
+  const policyNumber = normalizePolicyNumber(req.params.policyNumber);
+
+  if (!policyNumber) {
+    return res.status(400).json({ message: 'Policy number is required.' });
+  }
+
+  const updatedPolicy = updateTermPolicyDetails(policyNumber, req.body);
+
+  if (!updatedPolicy) {
+    return res.status(404).json({
+      message: 'No term policy found for this policy number.',
+      policyNumber,
+    });
+  }
+
+  return res.json({
+    message: 'Policy details updated successfully.',
+    policy: updatedPolicy,
+  });
 });
 
 // GET /motor/vehicles/AP09AB1234 — lookup by vehicle number only
@@ -94,7 +245,9 @@ app.get('/motor/vehicles/:vehicleNumber', (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`Motor API running at http://localhost:${PORT}`);
-  console.log('Demo numbers: AP09AB1234, AP09EX1234, AP09SO1234');
-  console.log('Any other valid number returns 404 — no data');
+  console.log(`API running at http://localhost:${PORT}`);
+  console.log('Motor demo numbers: AP09AB1234, AP09EX1234, AP09SO1234');
+  console.log('Term demo policies: TERM2026001, TERM2026002');
+  console.log('Term demo mobile: 9876543210, 9123456780');
+  console.log('Term demo email: balipavan@gmail.com, rahul.sharma@example.com');
 });

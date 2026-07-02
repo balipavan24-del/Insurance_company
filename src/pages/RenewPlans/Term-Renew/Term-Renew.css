@@ -169,6 +169,20 @@
   flex-shrink: 0;
 }
 
+.term-renew-card__icon--image {
+  width: 60px;
+  height: 60px;
+  background: transparent;
+  border-radius: 0;
+}
+
+.term-renew-card__icon-img {
+  width: 60px;
+  height: 60px;
+  display: block;
+  object-fit: contain;
+}
+
 .term-renew-card__title {
   margin: 0 0 8px;
   font-size: 16px;
@@ -239,6 +253,20 @@
   color: #ea580c;
   font-size: 22px;
   flex-shrink: 0;
+}
+
+.term-renew-miss__icon--image {
+  width: 60px;
+  height: 60px;
+  background: transparent;
+  border-radius: 0;
+}
+
+.term-renew-miss__icon-img {
+  width: 60px;
+  height: 60px;
+  display: block;
+  object-fit: contain;
 }
 
 /* —— Term Revival Process —— */
@@ -448,17 +476,6 @@
 .policy-input input:focus {
   border-color: #2e88c7;
   box-shadow: 0 0 0 3px rgba(46, 136, 199, 0.12);
-}
-
-.policy-input input[aria-invalid='true'] {
-  border-color: #dc2626;
-}
-
-.policy-input__error {
-  margin: 0;
-  color: #dc2626;
-  font-size: 13px;
-  line-height: 1.4;
 }
 
 .policy-continue-button {
@@ -710,16 +727,6 @@
   transform: none;
 }
 
-.term-details-content
-{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  width: 100%;
-}
-
 .term-details-button {
   display: inline-flex;
   align-items: center;
@@ -760,19 +767,6 @@
   transform: none;
 }
 
-.term-details-button--secondary {
-  margin-top: 10px;
-  color: #334155;
-  background: #ffffff;
-  border: 1px solid #dbe4f0;
-  box-shadow: none;
-}
-
-.term-details-button--secondary:hover {
-  filter: none;
-  background: #f8fafc;
-  transform: none;
-}
 .term-details-footer {
   display: flex;
   flex-direction: column;
@@ -1098,10 +1092,6 @@
   .summary-actions {
     grid-template-columns: 1fr;
   }
-
-  .term-Updates-card-container {
-    grid-template-columns: 1fr;
-  }
 }
 
 /* Optional Updates step */
@@ -1115,6 +1105,7 @@
   flex-direction: column;
   width: 100%;
   background: #ffffff;
+  text-align: left;
 }
 
 .term-Updates-header {
@@ -1151,67 +1142,244 @@
 .term-Updates-body {
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  margin: 0 0 22px;
+  gap: 24px;
+  width: 100%;
 }
 
-.term-Updates-card-container {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px;
-}
-
-.term-Updates-card {
-  box-sizing: border-box;
-  min-width: 0;
-  padding: 16px;
-  border-radius: 12px;
-  border: 1px solid #eef2f7;
-  background: #ffffff;
-  cursor: pointer;
-  transition: border-color 220ms ease, box-shadow 220ms ease;
-}
-
-.term-Updates-card:hover {
-  border-color: #cbd5e1;
-  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.06);
-}
-
-.term-Updates-card h6 {
-  all: unset;
-  box-sizing: border-box;
+.term-Updates-fields {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 10px;
-  margin: 0;
-  color: #0f172a;
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 1.35;
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  flex-direction: column;
+  gap: 0;
+  width: 100%;
 }
 
-.term-Updates-card h6 svg:first-child {
-  flex-shrink: 0;
-  width: 18px;
-  height: 18px;
-  color: #64748b;
+.term-Updates-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 14px 0;
+  border-bottom: 1px solid #e2e8f0;
 }
 
-.term-Updates-card-label {
+.term-Updates-field:first-child {
+  padding-top: 0;
+}
+
+.term-Updates-field:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+.term-Updates-field-label {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  min-width: 0;
+  color: #64748b;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
 }
 
-.term-Updates-card-icon {
+.term-Updates-field-label svg {
   flex-shrink: 0;
-  width: 18px;
-  height: 18px;
+  width: 16px;
+  height: 16px;
+  color: #2e88c7;
+}
+
+.term-Updates-field-value {
+  margin: 0;
+  padding: 0 0 2px;
+  width: 100%;
+  color: #0f172a;
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.5;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  word-break: break-word;
+}
+
+.term-Updates-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 10px;
+  width: 100%;
+}
+
+.term-Updates-buttons-divider {
+  align-self: center;
+  color: #94a3b8;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.term-Updates-button {
+  all: unset;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 48px;
+  padding: 14px 18px;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.2;
+  cursor: pointer;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  transition: filter 220ms ease, border-color 220ms ease, box-shadow 220ms ease, background 220ms ease;
+}
+
+.term-Updates-button--edit {
+  border: 1px solid #e2e8f0;
+  background: #ffffff;
+  color: #0f172a;
+}
+
+.term-Updates-button--edit:hover {
+  border-color: #cbd5e1;
+  background: #f8fafc;
+}
+
+.term-Updates-button--continue {
+  border: 0;
+  color: #ffffff;
+  background: linear-gradient(90deg, #2e88c7 0%, #4f46e5 52%, #7c3aed 100%);
+  box-shadow: 0 12px 24px rgba(79, 70, 229, 0.24);
+}
+
+.term-Updates-button--continue:hover {
+  filter: brightness(1.03);
+}
+
+.term-Updates-button:focus-visible {
+  outline: 2px solid rgba(46, 136, 199, 0.75);
+  outline-offset: 2px;
+}
+
+/* Edit form (Optional Updates) */
+.term-Updates-form {
+  width: 100%;
+}
+
+.term-Updates-form-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  width: 100%;
+}
+
+.term-Updates-form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 16px 0;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.term-Updates-form-field:first-child {
+  padding-top: 0;
+}
+
+.term-Updates-form-field:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+.term-Updates-form-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #64748b;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+.term-Updates-form-label svg {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  color: #2e88c7;
+}
+
+.term-Updates-form-current {
+  margin: 0;
+  color: #475569;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.45;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  word-break: break-word;
+}
+
+.term-Updates-form-input {
+  all: unset;
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  padding: 13px 14px;
+  border-radius: 12px;
+  border: 1px solid #dbe4f0;
+  background-color: #ffffff;
+  color: #0f172a;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.4;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  outline: none;
+  transition: border-color 220ms ease, box-shadow 220ms ease;
+}
+
+.term-Updates-form-input::placeholder {
   color: #94a3b8;
 }
+
+.term-Updates-form-input:hover {
+  border-color: #cbd5e1;
+}
+
+.term-Updates-form-input:focus {
+  border-color: #2e88c7;
+  box-shadow: 0 0 0 3px rgba(46, 136, 199, 0.12);
+}
+
+.term-Updates-form-input--error {
+  border-color: #ef4444;
+  background-color: #fef2f2;
+}
+
+.term-Updates-form-input--error:focus {
+  border-color: #ef4444;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.12);
+}
+
+.term-Updates-form-error {
+  margin: 0;
+  color: #dc2626;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.4;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+.term-Updates-form-error--form {
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  font-size: 13px;
+}
+
 /* —— Payment Frequency —— */
 .payment-frequency {
   display: flex;

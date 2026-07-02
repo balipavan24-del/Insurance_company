@@ -1,15 +1,12 @@
 import {
-  HiOutlineBadgeCheck,
   HiOutlineCheckCircle,
   HiOutlineClock,
   HiOutlineCreditCard,
   HiOutlineDocumentText,
-  HiOutlineEmojiHappy,
   HiOutlineExclamation,
   HiOutlineLockClosed,
   HiOutlineMail,
   HiOutlinePhone,
-  HiOutlineRefresh,
   HiOutlineShieldCheck,
   HiOutlineCalendar,
   HiOutlineSearch,
@@ -24,6 +21,14 @@ import {
 import { useState } from 'react';
 import './Term-Renew.css';
 import termRenewHeroImage from '../../../assets/images/term-renew-hero.png';
+import continuousFinancialProtectionIcon from '../../../assets/images/term-renew/timely-renewal/continuous-financial-protection.png';
+import avoidPolicyLapseIcon from '../../../assets/images/term-renew/timely-renewal/avoid-policy-lapse.png';
+import keepExistingBenefitsIcon from '../../../assets/images/term-renew/timely-renewal/keep-existing-benefits.png';
+import peaceOfMindIcon from '../../../assets/images/term-renew/timely-renewal/peace-of-mind.png';
+import policyMayLapseIcon from '../../../assets/images/term-renew/miss-renewal/policy-may-lapse.png';
+import coverageMayStopIcon from '../../../assets/images/term-renew/miss-renewal/coverage-may-stop.png';
+import revivalMayBeRequiredIcon from '../../../assets/images/term-renew/miss-renewal/revival-may-be-required.png';
+import additionalVerificationIcon from '../../../assets/images/term-renew/miss-renewal/additional-verification.png';
 import {
   MobileNumberValidation,
   EmailValidation,
@@ -32,6 +37,7 @@ import {
 import TermDetails from './TermDetails';
 import InsuranceFaqAccordion from '../../../components/Faq/InsuranceFaqAccordion';
 import Footer from '../../../components/Footer/Footer';
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:4591';
 
 const LOOKUP_METHODS = [
   {
@@ -60,25 +66,25 @@ const LOOKUP_METHODS = [
 const RENEW_MATTERS = [
   {
     id: 'financial-shield',
-    icon: HiOutlineShieldCheck,
+    image: continuousFinancialProtectionIcon,
     title: 'Continuous Financial Protection',
     description: 'Keep your family financially secure without any coverage gaps.',
   },
   {
     id: 'avoid-policy',
-    icon: HiOutlineExclamation,
+    image: avoidPolicyLapseIcon,
     title: 'Avoid Policy Lapse',
     description: 'Timely renewal prevents your policy from lapsing or becoming inactive.',
   },
   {
     id: 'benefits',
-    icon: HiOutlineBadgeCheck,
+    image: keepExistingBenefitsIcon,
     title: 'Keep Existing Benefits',
     description: 'Retain your original premium rates, riders and accumulated benefits.',
   },
   {
     id: 'peace-of-mind',
-    icon: HiOutlineEmojiHappy,
+    image: peaceOfMindIcon,
     title: 'Peace of Mind',
     description: 'Live worry-free knowing your loved ones remain protected.',
   },
@@ -87,25 +93,25 @@ const RENEW_MATTERS = [
 const MISS_RENEW = [
   {
     id: 'lapse',
-    icon: HiOutlineExclamation,
+    image: policyMayLapseIcon,
     title: 'Policy May Lapse',
     description: 'Missing the due date can deactivate your coverage entirely.',
   },
   {
     id: 'coverage-stop',
-    icon: HiOutlineShieldCheck,
+    image: coverageMayStopIcon,
     title: 'Coverage May Stop',
     description: 'Your nominees may lose the financial safety net you intended.',
   },
   {
     id: 'revival',
-    icon: HiOutlineRefresh,
+    image: revivalMayBeRequiredIcon,
     title: 'Revival May Be Required',
     description: 'You may need to formally revive the policy with the insurer.',
   },
   {
     id: 'verification',
-    icon: HiOutlineClipboardCheck,
+    image: additionalVerificationIcon,
     title: 'Additional Verification',
     description: 'Health declarations or fresh KYC may be requested again.',
   },
@@ -299,6 +305,7 @@ const TermRenew = () => {
   const [policyNumber, setPolicyNumber] = useState('');
   const [mobileNumber, setMobileNumber] = useState('');
   const [email, setEmail] = useState('');
+  const [policyData, setPolicyData] = useState(null);
   const [isopen, setIsopen] = useState(false);
   const inputhandler = (event) => {
     const value = event.target.value;
@@ -324,6 +331,7 @@ const TermRenew = () => {
         return;
       }
       setIsopen(true);
+      
     } else if (currentMethod.id === 'mobile') {
       if (mobileNumber.length === 0) {
         window.alert('Please enter your mobile number');
@@ -460,13 +468,17 @@ const TermRenew = () => {
           Every benefit of staying continuously protected.
         </p>
         <ul className="term-renew-card-grid">
-          {RENEW_MATTERS.map((matter) => {
-            const Icon = matter.icon;
-
-            return (
+          {RENEW_MATTERS.map((matter) => (
               <li key={matter.id} className="term-renew-card">
-                <div className="term-renew-card__icon">
-                  <Icon aria-hidden="true" />
+                <div className="term-renew-card__icon term-renew-card__icon--image">
+                  <img
+                    src={matter.image}
+                    alt=""
+                    className="term-renew-card__icon-img"
+                    loading="lazy"
+                    width={60}
+                    height={60}
+                  />
                 </div>
                 <h3 className="term-renew-card__title">
                   {matter.title}
@@ -475,8 +487,7 @@ const TermRenew = () => {
                   {matter.description}
                 </p>
               </li>
-            );
-          })}
+          ))}
         </ul>
       </section>
 
@@ -489,13 +500,17 @@ const TermRenew = () => {
           What Happens If You Miss a Renewal?
         </h2>
         <ul className="term-renew-card-grid">
-          {MISS_RENEW.map((matter) => {
-            const Icon = matter.icon;
-
-            return (
+          {MISS_RENEW.map((matter) => (
               <li key={matter.id} className="term-renew-miss__card">
-                <div className="term-renew-miss__icon">
-                  <Icon aria-hidden="true" />
+                <div className="term-renew-miss__icon term-renew-miss__icon--image">
+                  <img
+                    src={matter.image}
+                    alt=""
+                    className="term-renew-miss__icon-img"
+                    loading="lazy"
+                    width={60}
+                    height={60}
+                  />
                 </div>
                 <h3 className="term-renew-card__title">
                   {matter.title}
@@ -504,8 +519,7 @@ const TermRenew = () => {
                   {matter.description}
                 </p>
               </li>
-            );
-          })}
+          ))}
         </ul>
       </section>
       {/* Term Revival process */}
