@@ -9,14 +9,7 @@ import {
   HiOutlinePhone,
   HiOutlineShieldCheck,
   HiOutlineCalendar,
-  HiOutlineSearch,
-  HiOutlineKey,
-  HiOutlinePaperClip,
   HiOutlineClipboardCheck,
-  HiOutlineLightningBolt,
-  HiOutlineBell,
-  HiOutlineSupport,
-  HiOutlineSparkles,
 } from 'react-icons/hi';
 import { useState } from 'react';
 import './Term-Renew.css';
@@ -29,6 +22,17 @@ import policyMayLapseIcon from '../../../assets/images/term-renew/miss-renewal/p
 import coverageMayStopIcon from '../../../assets/images/term-renew/miss-renewal/coverage-may-stop.png';
 import revivalMayBeRequiredIcon from '../../../assets/images/term-renew/miss-renewal/revival-may-be-required.png';
 import additionalVerificationIcon from '../../../assets/images/term-renew/miss-renewal/additional-verification.png';
+import findYourPolicyIcon from '../../../assets/images/term-renew/how-renewal-works/find-your-policy.png';
+import verifyIdentityIcon from '../../../assets/images/term-renew/how-renewal-works/verify-identity.png';
+import uploadDocumentsIcon from '../../../assets/images/term-renew/how-renewal-works/upload-documents.png';
+import makeSecurePaymentIcon from '../../../assets/images/term-renew/how-renewal-works/make-secure-payment.png';
+import receiveConfirmationIcon from '../../../assets/images/term-renew/how-renewal-works/receive-confirmation.png';
+import secureTransactionsIcon from '../../../assets/images/term-renew/why-renew-through-us/secure-transactions.png';
+import instantPolicyAccessIcon from '../../../assets/images/term-renew/why-renew-through-us/instant-policy-access.png';
+import renewalRemindersIcon from '../../../assets/images/term-renew/why-renew-through-us/renewal-reminders.png';
+import dedicatedSupportIcon from '../../../assets/images/term-renew/why-renew-through-us/dedicated-support.png';
+import otpVerificationIcon from '../../../assets/images/term-renew/why-renew-through-us/otp-verification.png';
+import fastPolicyRetrievalIcon from '../../../assets/images/term-renew/why-renew-through-us/fast-policy-retrieval.png';
 import {
   MobileNumberValidation,
   EmailValidation,
@@ -179,71 +183,70 @@ const Payment_Frequency = [
 const Renewal_Works = [
   {
     id: 1,
-    icon: HiOutlineSearch,
+    image: findYourPolicyIcon,
     title: 'Find Your Policy',
     description: 'Look up using policy number, mobile, email or DOB.',
   },
   {
     id: 2,
-    icon: HiOutlineKey,
+    image: verifyIdentityIcon,
     title: 'Verify Identity',
     description: 'Quick OTP verification on your registered mobile.',
   },
   {
     id: 3,
-    icon: HiOutlinePaperClip,
+    image: uploadDocumentsIcon,
     title: 'Upload Documents',
     description: 'Upload your policy documents for verification.',
   },
   {
     id: 4,
-    icon: HiOutlineCreditCard,
+    image: makeSecurePaymentIcon,
     title: 'Make Secure Payment',
     description: 'Pay your premium securely using your preferred method.',
   },
   {
     id: 5,
-    icon: HiOutlineCheckCircle,
+    image: receiveConfirmationIcon,
     title: 'Receive Confirmation',
     description: 'Renewed policy delivered instantly to your inbox.',
   },
-  
 ];
 
 const WHY_US = [
   {
     id: 'secure-transactions',
-    icon: HiOutlineLockClosed,
+    image: secureTransactionsIcon,
     title: 'Secure Transactions',
     description: 'Bank-grade encryption on every payment.',
   },
   {
     id: 'instant-policy-access',
-    icon: HiOutlineLightningBolt,
+    image: instantPolicyAccessIcon,
     title: 'Instant Policy Access',
     description: 'Retrieve and renew in under two minutes.',
   },
   {
     id: 'renewal-reminders',
-    icon: HiOutlineBell,
+    image: renewalRemindersIcon,
     title: 'Renewal Reminders',
     description: 'Smart alerts so you never miss a due date.',
   },
   {
     id: 'dedicated-support',
-    icon: HiOutlineSupport,
+    image: dedicatedSupportIcon,
     title: 'Dedicated Support',
     description: 'Insurance experts ready to help any time.',
   },
   {
     id: 'otp-verification',
-    icon: HiOutlineKey,
+    image: otpVerificationIcon,
     title: 'OTP Verification',
     description: 'Multi-factor security on every renewal.',
   },
   {
     id: 'fast-policy-retrieval',
-    icon: HiOutlineSparkles,
+    image: fastPolicyRetrievalIcon,
     title: 'Fast Policy Retrieval',
     description: 'Smart lookup across all major insurers.',
   },
@@ -383,8 +386,8 @@ const TermRenew = () => {
               alt="Term insurance renewal protection"
               className="Hero-Section-Image"
               loading="lazy"
-              width={785}
-              height={476}
+              width={1536}
+              height={1024}
             />
           </div>
         </div>
@@ -476,8 +479,8 @@ const TermRenew = () => {
                     alt=""
                     className="term-renew-card__icon-img"
                     loading="lazy"
-                    width={60}
-                    height={60}
+                    width={65}
+                    height={65}
                   />
                 </div>
                 <h3 className="term-renew-card__title">
@@ -508,8 +511,8 @@ const TermRenew = () => {
                     alt=""
                     className="term-renew-miss__icon-img"
                     loading="lazy"
-                    width={60}
-                    height={60}
+                    width={65}
+                    height={65}
                   />
                 </div>
                 <h3 className="term-renew-card__title">
@@ -583,20 +586,23 @@ const TermRenew = () => {
         <h2 className="term-renew-section__title">How Renewal Works</h2>
         <p className="term-renew-section__subtitle">A premium, guided experience end-to-end.</p>
         <ol className="how-it-works__list">
-          {Renewal_Works.map((works) => {
-            const Icon = works.icon;
-
-            return (
+          {Renewal_Works.map((works) => (
               <li key={works.id} className="how-it-works__card">
                 <span className="how-it-works__step">{works.id}</span>
-                <div className="term-renew-card__icon">
-                  <Icon aria-hidden="true" />
+                <div className="term-renew-card__icon term-renew-card__icon--image">
+                  <img
+                    src={works.image}
+                    alt=""
+                    className="term-renew-card__icon-img"
+                    loading="lazy"
+                    width={65}
+                    height={65}
+                  />
                 </div>
                 <h3 className="term-renew-card__title">{works.title}</h3>
                 <p className="term-renew-card__text">{works.description}</p>
               </li>
-            );
-          })}
+          ))}
         </ol>
       </section>
 
@@ -607,19 +613,22 @@ const TermRenew = () => {
           Trusted by families. Built for security and speed.
         </p>
         <ul className="term-renew-card-grid term-renew-why-us__grid">
-          {WHY_US.map((item) => {
-            const Icon = item.icon;
-
-            return (
+          {WHY_US.map((item) => (
               <li key={item.id} className="term-renew-card term-renew-why-us__card">
-                <div className="term-renew-card__icon">
-                  <Icon aria-hidden="true" />
+                <div className="term-renew-card__icon term-renew-card__icon--image">
+                  <img
+                    src={item.image}
+                    alt=""
+                    className="term-renew-card__icon-img"
+                    loading="lazy"
+                    width={65}
+                    height={65}
+                  />
                 </div>
                 <h3 className="term-renew-card__title">{item.title}</h3>
                 <p className="term-renew-card__text">{item.description}</p>
               </li>
-            );
-          })}
+          ))}
         </ul>
       </section>
 

@@ -170,15 +170,15 @@
 }
 
 .term-renew-card__icon--image {
-  width: 60px;
-  height: 60px;
+  width: 65px;
+  height: 65px;
   background: transparent;
   border-radius: 0;
 }
 
 .term-renew-card__icon-img {
-  width: 60px;
-  height: 60px;
+  width: 65px;
+  height: 65px;
   display: block;
   object-fit: contain;
 }
@@ -256,15 +256,15 @@
 }
 
 .term-renew-miss__icon--image {
-  width: 60px;
-  height: 60px;
+  width: 65px;
+  height: 65px;
   background: transparent;
   border-radius: 0;
 }
 
 .term-renew-miss__icon-img {
-  width: 60px;
-  height: 60px;
+  width: 65px;
+  height: 65px;
   display: block;
   object-fit: contain;
 }
@@ -342,8 +342,6 @@
 .Hero-Section-Visual {
   margin-top: 24px;
   width: min(640px, 100%);
-  aspect-ratio: 22 / 10;
-  min-height: clamp(220px, 28vw, 320px);
   border-radius: 18px;
   background: transparent;
   border: 1px solid rgba(148, 163, 184, 0.28);
@@ -355,9 +353,8 @@
 .Hero-Section-Image {
   display: block;
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center center;
+  height: auto;
+  max-width: 100%;
 }
 
 /* —— Right policy retrieve card —— */
