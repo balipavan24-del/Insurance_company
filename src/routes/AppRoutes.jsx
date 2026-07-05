@@ -22,6 +22,7 @@ import MotorInsurance from '../pages/Motor/MotorHome/MotorInsurance';
 import Qoutes from '../Qoutes/Qoutes';
 import TermRenew from '../pages/RenewPlans/Term-Renew/Term-Renew';
 import TermHome from '../pages/Term/Term-Home';
+import { SeniorRenew } from '../pages/RenewPlans/Health_renew/SeniorRenew';
 
 function AppRoutes() {
   const navigate = useNavigate();
@@ -72,6 +73,16 @@ function AppRoutes() {
             <HealthHome onBackHome={() => navigate('/')} />
           </div>
         )}
+      />
+      <Route
+      path="/health-insurance/senior-renew"
+      element={
+        (
+          <div className="app-screen app-screen--health-insurance">
+            <SeniorRenew />
+          </div>
+        )
+      }
       />
       <Route
         path="/cargo-insurance"

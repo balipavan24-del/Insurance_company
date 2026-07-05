@@ -257,7 +257,7 @@ const NAV_ITEMS = [
           links: [
             { id: 'renewal-health-individual', label: 'Individual Health', path: '/health-insurance?flow=renewal&plan=individual' },
             { id: 'renewal-health-family', label: 'Family Floater', path: '/health-insurance?flow=renewal&plan=family' },
-            { id: 'renewal-health-senior', label: 'Senior Citizen', path: '/health-insurance?flow=renewal&plan=senior' },
+            { id: 'renewal-health-senior', label: 'Senior Citizen', path: '/health-insurance/senior-renew' },
           ],
         },
         {
