@@ -30,3 +30,5 @@ dist-ssr
 DAILY_SHARE.md
 scripts/update-group-share.ps1
 .cursor/rules/daily-share-update.mdc
+
+.vercel
