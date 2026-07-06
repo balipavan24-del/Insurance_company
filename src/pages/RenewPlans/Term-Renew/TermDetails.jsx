@@ -56,6 +56,8 @@ function TermDetails({ open, close, children }) {
         event.preventDefault();
         setPolicyData({
             ...policyData,
+
+            
             Nominee: Nominee || policyData.Nominee,
             MobileNumber: MobileNumber || policyData.MobileNumber,
             Email: Email || policyData.Email,
