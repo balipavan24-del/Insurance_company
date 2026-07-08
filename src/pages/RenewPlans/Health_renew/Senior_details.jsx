@@ -12,6 +12,7 @@ import {
   HiOutlinePhone,
   HiOutlineShieldCheck,
   HiOutlinePencil,
+  HiOutlineUser,
 } from 'react-icons/hi';
 import './Senior-details.css';
 
@@ -21,10 +22,12 @@ const RESEND_COOLDOWN_SECONDS = 30;
 const Step = {
   EnterOtp: 1,
   PolicyInfo: 2,
+  InsuranceDetails: 3,
 };
 
 const STEP_META = {
   [Step.PolicyInfo]: { index: 1, label: 'Policy Info' },
+  [Step.InsuranceDetails]: { index: 2, label: 'Insurance Details' },
 };
 
 const ExistingInsurers = {
@@ -59,6 +62,29 @@ const ExistingInsurers = {
   ],
 };
 
+const Insurance_Details = {
+  heading: 'Insurance Details',
+  label1: 'Full Name',
+  label2: 'Date of Birth',
+  label3: 'Gender',
+  label4: 'City',
+  genderList: ['Male', 'Female', 'Other'],
+  cityList: [
+    'Hyderabad',
+    'Bengaluru',
+    'Mumbai',
+    'Delhi',
+    'Chennai',
+    'Kolkata',
+    'Pune',
+    'Ahmedabad',
+    'Jaipur',
+    'Lucknow',
+    'Kochi',
+    'Indore',
+  ],
+};
+
 const formatResendTime = (totalSeconds) => {
   const minutes = Math.floor(totalSeconds / 60);
   const seconds = totalSeconds % 60;
@@ -76,6 +102,9 @@ export const Senior_details = ({ children, open, close, mobileNumber = '' }) => 
     mobileNumber,
     existingInsurer: '',
     sumInsured: '',
+    fullName: '',
+    dateOfBirth: '',
+    gender: '',
     age: '',
     city: '',
     claimStatus: '',
@@ -89,6 +118,12 @@ export const Senior_details = ({ children, open, close, mobileNumber = '' }) => 
     policyExpiryDay: '',
     policyExpiryMonth: '',
     policyExpiryYear: '',
+    fullName: '',
+    dobDay: '',
+    dobMonth: '',
+    dobYear: '',
+    gender: '',
+    city: '',
   });
 
   const resetCollected = () => {
@@ -97,6 +132,9 @@ export const Senior_details = ({ children, open, close, mobileNumber = '' }) => 
       mobileNumber,
       existingInsurer: '',
       sumInsured: '',
+      fullName: '',
+      dateOfBirth: '',
+      gender: '',
       age: '',
       city: '',
       claimStatus: '',
@@ -108,6 +146,12 @@ export const Senior_details = ({ children, open, close, mobileNumber = '' }) => 
       policyExpiryDay: '',
       policyExpiryMonth: '',
       policyExpiryYear: '',
+      fullName: '',
+      dobDay: '',
+      dobMonth: '',
+      dobYear: '',
+      gender: '',
+      city: '',
     });
   };
 
@@ -147,6 +191,36 @@ export const Senior_details = ({ children, open, close, mobileNumber = '' }) => 
     }));
   };
 
+  const handleGenderPick = (value) => {
+    setForm((prev) => ({
+      ...prev,
+      gender: prev.gender === value ? '' : value,
+    }));
+  };
+
+  const handleCityPick = (value) => {
+    setForm((prev) => ({
+      ...prev,
+      city: prev.city === value ? '' : value,
+    }));
+  };
+
+  const goBack = () => {
+    if (step === Step.InsuranceDetails) {
+      // Restore Insurance Details form values so they're editable when revisited.
+      setForm((prev) => ({
+        ...prev,
+        fullName: details.fullName,
+        dobDay: (details.dateOfBirth || '').split('/')[0] || '',
+        dobMonth: (details.dateOfBirth || '').split('/')[1] || '',
+        dobYear: (details.dateOfBirth || '').split('/')[2] || '',
+        gender: details.gender,
+        city: details.city,
+      }));
+      setStep(Step.PolicyInfo);
+    }
+  };
+
   // Commit current step's form values into the summary, then advance.
   const goNext = () => {
     if (step === Step.PolicyInfo) {
@@ -161,8 +235,45 @@ export const Senior_details = ({ children, open, close, mobileNumber = '' }) => 
         existingInsurer: insurer,
         sumInsured,
       }));
+      setStep(Step.InsuranceDetails);
+      return;
+    }
+
+    if (step === Step.InsuranceDetails) {
+      const fullName = (form.fullName || '').trim();
+      const dobDay = (form.dobDay || '').trim();
+      const dobMonth = (form.dobMonth || '').trim();
+      const dobYear = (form.dobYear || '').trim();
+      const gender = (form.gender || '').trim();
+      const city = (form.city || '').trim();
+
+      if (!fullName) {
+        window.alert('Please enter your full name');
+        return;
+      }
+      if (!dobDay || !dobMonth || !dobYear) {
+        window.alert('Please enter your date of birth');
+        return;
+      }
+      if (!gender) {
+        window.alert('Please select your gender');
+        return;
+      }
+      if (!city) {
+        window.alert('Please select your city');
+        return;
+      }
+
+      const dateOfBirth = `${dobDay}/${dobMonth}/${dobYear}`;
+      setDetails((prev) => ({
+        ...prev,
+        fullName,
+        dateOfBirth,
+        gender,
+        city,
+      }));
       // Next step will be added here.
-      window.alert('Policy Info saved. Next steps coming soon.');
+      window.alert('Insurance Details saved. Next steps coming soon.');
     }
   };
 
@@ -320,7 +431,7 @@ export const Senior_details = ({ children, open, close, mobileNumber = '' }) => 
   );
 
   const renderStepIndicator = () => {
-    const steps = [Step.PolicyInfo];
+    const steps = [Step.PolicyInfo, Step.InsuranceDetails];
     return (
       <ol className="senior-details-steps" aria-label="Progress">
         {steps.map((s) => {
@@ -468,6 +579,140 @@ export const Senior_details = ({ children, open, close, mobileNumber = '' }) => 
     </section>
   );
 
+  const renderInsuranceDetails = () => (
+    <section className="senior-details-form">
+      {/* Heading BEFORE the step line */}
+      <header className="senior-details-form__head">
+        <h2 className="senior-details-form__title">{Insurance_Details.heading}</h2>
+      </header>
+
+      {/* Step line */}
+      {renderStepIndicator()}
+
+      <div className="senior-details-form__body">
+        {/* DIV 1 — Full Name (label1, single column input) */}
+        <div className="senior-details-block">
+          <h3 className="senior-details-block__heading">
+            <HiOutlineUser aria-hidden="true" />
+            {Insurance_Details.label1}
+          </h3>
+          <input
+            id="fullName"
+            name="fullName"
+            type="text"
+            className="senior-details-field__input"
+            placeholder="Enter full name"
+            value={form.fullName}
+            onChange={handleFieldChange}
+          />
+        </div>
+
+        {/* DIV 2 — Date of Birth (label2) + Gender (label3) side-by-side */}
+        <div className="senior-details-row senior-details-row--2">
+          <div className="senior-details-block">
+            <h3 className="senior-details-block__heading">
+              <HiOutlineCalendar aria-hidden="true" />
+              {Insurance_Details.label2}
+            </h3>
+            <div className="senior-details-date">
+              <input
+                type="text"
+                name="dobDay"
+                className="senior-details-date__part"
+                inputMode="numeric"
+                maxLength={2}
+                placeholder="DD"
+                aria-label="Day"
+                value={form.dobDay}
+                onChange={handleFieldChange}
+              />
+              <span className="senior-details-date__sep">/</span>
+              <input
+                type="text"
+                name="dobMonth"
+                className="senior-details-date__part"
+                inputMode="numeric"
+                maxLength={2}
+                placeholder="MM"
+                aria-label="Month"
+                value={form.dobMonth}
+                onChange={handleFieldChange}
+              />
+              <span className="senior-details-date__sep">/</span>
+              <input
+                type="text"
+                name="dobYear"
+                className="senior-details-date__part senior-details-date__part--year"
+                inputMode="numeric"
+                maxLength={4}
+                placeholder="YYYY"
+                aria-label="Year"
+                value={form.dobYear}
+                onChange={handleFieldChange}
+              />
+            </div>
+          </div>
+
+          <div className="senior-details-block">
+            <h3 className="senior-details-block__heading">
+              <HiOutlineUser aria-hidden="true" />
+              {Insurance_Details.label3}
+            </h3>
+            <div className="senior-details-chips senior-details-chips--col3">
+              {Insurance_Details.genderList.map((value) => {
+                const selected = form.gender === value;
+                return (
+                  <button
+                    type="button"
+                    key={value}
+                    className={`senior-details-chip${selected ? ' is-selected' : ''}`}
+                    onClick={() => handleGenderPick(value)}
+                    aria-pressed={selected}
+                  >
+                    {value}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+
+        {/* DIV 3 — City (label4, cityList as boxes via map, 3 per row) */}
+        <div className="senior-details-block">
+          <h3 className="senior-details-block__heading">
+            <HiOutlineLocationMarker aria-hidden="true" />
+            {Insurance_Details.label4}
+          </h3>
+          <div className="senior-details-chips senior-details-chips--col3">
+            {Insurance_Details.cityList.map((value) => {
+              const selected = form.city === value;
+              return (
+                <button
+                  type="button"
+                  key={value}
+                  className={`senior-details-chip${selected ? ' is-selected' : ''}`}
+                  onClick={() => handleCityPick(value)}
+                  aria-pressed={selected}
+                >
+                  {value}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+
+      <div className="senior-details-form__actions">
+        <button type="button" className="senior-details-form__back" onClick={goBack}>
+          Back
+        </button>
+        <button type="button" className="senior-details-form__next" onClick={goNext}>
+          Continue
+        </button>
+      </div>
+    </section>
+  );
+
   const renderStep = () => {
     switch (step) {
       case Step.EnterOtp:
@@ -476,6 +721,13 @@ export const Senior_details = ({ children, open, close, mobileNumber = '' }) => 
         return (
           <div className="senior-details-split">
             {renderPolicyInfo()}
+            {renderSummaryPanel()}
+          </div>
+        );
+      case Step.InsuranceDetails:
+        return (
+          <div className="senior-details-split">
+            {renderInsuranceDetails()}
             {renderSummaryPanel()}
           </div>
         );

@@ -941,6 +941,13 @@
   justify-content: flex-end;
 }
 
+/* Inside the two-column form, the Continue button shouldn't stretch full width
+   next to a Back button — constrain it to a sensible size. */
+.senior-details-form__actions .senior-details-form__next {
+  width: auto;
+  min-width: 140px;
+}
+
 .senior-details-form__back {
   all: unset;
   box-sizing: border-box;
