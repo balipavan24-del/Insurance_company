@@ -23,11 +23,13 @@ const Step = {
   EnterOtp: 1,
   PolicyInfo: 2,
   InsuranceDetails: 3,
+  HealthInfo: 4,
 };
 
 const STEP_META = {
   [Step.PolicyInfo]: { index: 1, label: 'Policy Info' },
   [Step.InsuranceDetails]: { index: 2, label: 'Insurance Details' },
+  [Step.HealthInfo]: { index: 3, label: 'Health Info' },
 };
 
 const ExistingInsurers = {
@@ -85,16 +87,75 @@ const Insurance_Details = {
   ],
 };
 
+const HEALTH_INFO = {
+  heading: 'Health Information',
+  label1: 'Existing Health Conditions',
+  label2: 'Other Existing Diseases',
+  label3: 'Any claims made in the previous year?',
+  healthConditions: ['Diabetes', 'Hypertension', 'Heart Conditions'],
+  claimStatus: ['Yes', 'No'],
+};
 const formatResendTime = (totalSeconds) => {
   const minutes = Math.floor(totalSeconds / 60);
   const seconds = totalSeconds % 60;
   return `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
 };
 
+// `dateOfBirth` is an ISO YYYY-MM-DD string from the native date input.
+// Returns the completed-age in years (e.g. "62") or '' if it can't be parsed.
+const calculateAge = (dateOfBirth) => {
+  if (!dateOfBirth) return '';
+  const parts = dateOfBirth.split('-');
+  if (parts.length !== 3) return '';
+  const year = Number(parts[0]);
+  const month = Number(parts[1]);
+  const day = Number(parts[2]);
+  if (!year || !month || !day) return '';
+  const today = new Date();
+  let age = today.getFullYear() - year;
+  const hasHadBirthdayThisYear =
+    today.getMonth() + 1 > month ||
+    (today.getMonth() + 1 === month && today.getDate() >= day);
+  if (!hasHadBirthdayThisYear) {
+    age -= 1;
+  }
+  return Number.isNaN(age) ? '' : String(age);
+};
+
 export const Senior_details = ({ children, open, close, mobileNumber = '' }) => {
   const [otp, setOtp] = useState('');
   const [resendSeconds, setResendSeconds] = useState(RESEND_COOLDOWN_SECONDS);
   const [step, setStep] = useState(Step.EnterOtp);
+
+  // Health Information form state — committed to `details` on Continue.
+  const [HealthInfo, setHealthInfo] = useState({
+    healthConditions: [],
+    otherDiseases: '',
+    claimStatus: '',
+  });
+
+  // Multi-select toggle for existing health conditions.
+  const handleConditionPick = (value) => {
+    setHealthInfo((prev) => ({
+      ...prev,
+      healthConditions: prev.healthConditions.includes(value)
+        ? prev.healthConditions.filter((item) => item !== value)
+        : [...prev.healthConditions, value],
+    }));
+  };
+
+  // Single-select toggle for "claims made in the previous year?".
+  const handleClaimPick = (value) => {
+    setHealthInfo((prev) => ({
+      ...prev,
+      claimStatus: prev.claimStatus === value ? '' : value,
+    }));
+  };
+
+  const handleHealthInfoChange = (event) => {
+    const { name, value } = event.target;
+    setHealthInfo((prev) => ({ ...prev, [name]: value }));
+  };
 
   // Collected details — summary panel reads from this.
   const [details, setDetails] = useState({
@@ -107,6 +168,8 @@ export const Senior_details = ({ children, open, close, mobileNumber = '' }) => 
     gender: '',
     age: '',
     city: '',
+    healthConditions: [],
+    otherDiseases: '',
     claimStatus: '',
   });
 
@@ -115,13 +178,9 @@ export const Senior_details = ({ children, open, close, mobileNumber = '' }) => 
     existingInsurer: '',
     sumInsured: '',
     policyNumber: '',
-    policyExpiryDay: '',
-    policyExpiryMonth: '',
-    policyExpiryYear: '',
+    policyExpiryDate: '',
     fullName: '',
-    dobDay: '',
-    dobMonth: '',
-    dobYear: '',
+    dateOfBirth: '',
     gender: '',
     city: '',
   });
@@ -137,21 +196,24 @@ export const Senior_details = ({ children, open, close, mobileNumber = '' }) => 
       gender: '',
       age: '',
       city: '',
+      healthConditions: [],
+      otherDiseases: '',
       claimStatus: '',
     });
     setForm({
       existingInsurer: '',
       sumInsured: '',
       policyNumber: '',
-      policyExpiryDay: '',
-      policyExpiryMonth: '',
-      policyExpiryYear: '',
+      policyExpiryDate: '',
       fullName: '',
-      dobDay: '',
-      dobMonth: '',
-      dobYear: '',
+      dateOfBirth: '',
       gender: '',
       city: '',
+    });
+    setHealthInfo({
+      healthConditions: [],
+      otherDiseases: '',
+      claimStatus: '',
     });
   };
 
@@ -211,13 +273,27 @@ export const Senior_details = ({ children, open, close, mobileNumber = '' }) => 
       setForm((prev) => ({
         ...prev,
         fullName: details.fullName,
-        dobDay: (details.dateOfBirth || '').split('/')[0] || '',
-        dobMonth: (details.dateOfBirth || '').split('/')[1] || '',
-        dobYear: (details.dateOfBirth || '').split('/')[2] || '',
+        dateOfBirth: details.dateOfBirth || '',
         gender: details.gender,
         city: details.city,
       }));
       setStep(Step.PolicyInfo);
+    } else if (step === Step.HealthInfo) {
+      // Restore Health Info form values so they're editable when revisited.
+      setHealthInfo({
+        healthConditions: details.healthConditions,
+        otherDiseases: details.otherDiseases,
+        claimStatus: details.claimStatus,
+      });
+      // Restore Insurance Details form values too, so they show on step 2.
+      setForm((prev) => ({
+        ...prev,
+        fullName: details.fullName,
+        dateOfBirth: details.dateOfBirth || '',
+        gender: details.gender,
+        city: details.city,
+      }));
+      setStep(Step.InsuranceDetails);
     }
   };
 
@@ -241,9 +317,7 @@ export const Senior_details = ({ children, open, close, mobileNumber = '' }) => 
 
     if (step === Step.InsuranceDetails) {
       const fullName = (form.fullName || '').trim();
-      const dobDay = (form.dobDay || '').trim();
-      const dobMonth = (form.dobMonth || '').trim();
-      const dobYear = (form.dobYear || '').trim();
+      const dateOfBirth = (form.dateOfBirth || '').trim();
       const gender = (form.gender || '').trim();
       const city = (form.city || '').trim();
 
@@ -251,7 +325,7 @@ export const Senior_details = ({ children, open, close, mobileNumber = '' }) => 
         window.alert('Please enter your full name');
         return;
       }
-      if (!dobDay || !dobMonth || !dobYear) {
+      if (!dateOfBirth) {
         window.alert('Please enter your date of birth');
         return;
       }
@@ -264,16 +338,40 @@ export const Senior_details = ({ children, open, close, mobileNumber = '' }) => 
         return;
       }
 
-      const dateOfBirth = `${dobDay}/${dobMonth}/${dobYear}`;
       setDetails((prev) => ({
         ...prev,
         fullName,
         dateOfBirth,
+        age: calculateAge(dateOfBirth),
         gender,
         city,
       }));
+      setStep(Step.HealthInfo);
+      return;
+    }
+
+    if (step === Step.HealthInfo) {
+      const healthConditions = HealthInfo.healthConditions || [];
+      const otherDiseases = (HealthInfo.otherDiseases || '').trim();
+      const claimStatus = (HealthInfo.claimStatus || '').trim();
+
+      if (healthConditions.length === 0) {
+        window.alert('Please select any existing health conditions');
+        return;
+      }
+      if (!claimStatus) {
+        window.alert('Please confirm if any claims were made in the previous year');
+        return;
+      }
+
+      setDetails((prev) => ({
+        ...prev,
+        healthConditions,
+        otherDiseases,
+        claimStatus,
+      }));
       // Next step will be added here.
-      window.alert('Insurance Details saved. Next steps coming soon.');
+      window.alert('Health Information saved. Next steps coming soon.');
     }
   };
 
@@ -310,11 +408,21 @@ export const Senior_details = ({ children, open, close, mobileNumber = '' }) => 
   // user can edit the existing value instead of retyping it.
   const handleEditField = (field) => {
     if (!field.editable || !field.step) return;
-    setForm((prev) => ({
-      ...prev,
-      existingInsurer: details.existingInsurer,
-      sumInsured: details.sumInsured,
-    }));
+    if (field.step === Step.PolicyInfo) {
+      setForm((prev) => ({
+        ...prev,
+        existingInsurer: details.existingInsurer,
+        sumInsured: details.sumInsured,
+      }));
+    } else if (field.step === Step.InsuranceDetails) {
+      setForm((prev) => ({
+        ...prev,
+        fullName: details.fullName,
+        dateOfBirth: details.dateOfBirth,
+        gender: details.gender,
+        city: details.city,
+      }));
+    }
     setStep(field.step);
   };
 
@@ -384,7 +492,12 @@ export const Senior_details = ({ children, open, close, mobileNumber = '' }) => 
             field.editable && field.step === step ? form[field.key] : '';
           const value = liveValue || field.value || '';
           const filled = Boolean(value);
-          const isPending = Boolean(liveValue) && field.step === step;
+          // "Pending" = actively changed on the current step but not yet saved,
+          // i.e. the live value differs from the committed one.
+          const isPending =
+            field.step === step &&
+            Boolean(liveValue) &&
+            String(liveValue).trim() !== String(field.value || '').trim();
           return (
             <li
               key={field.key}
@@ -401,7 +514,7 @@ export const Senior_details = ({ children, open, close, mobileNumber = '' }) => 
                   {filled ? value : '—'}
                 </span>
               </span>
-              {filled && field.editable && !isPending && (
+              {filled && field.editable && (
                 <button
                   type="button"
                   className="senior-details-summary__edit"
@@ -431,7 +544,7 @@ export const Senior_details = ({ children, open, close, mobileNumber = '' }) => 
   );
 
   const renderStepIndicator = () => {
-    const steps = [Step.PolicyInfo, Step.InsuranceDetails];
+    const steps = [Step.PolicyInfo, Step.InsuranceDetails, Step.HealthInfo];
     return (
       <ol className="senior-details-steps" aria-label="Progress">
         {steps.map((s) => {
@@ -506,43 +619,14 @@ export const Senior_details = ({ children, open, close, mobileNumber = '' }) => 
               <HiOutlineCalendar aria-hidden="true" />
               {ExistingInsurers.label3}
             </h3>
-            <div className="senior-details-date">
-              <input
-                type="text"
-                name="policyExpiryDay"
-                className="senior-details-date__part"
-                inputMode="numeric"
-                maxLength={2}
-                placeholder="DD"
-                aria-label="Day"
-                value={form.policyExpiryDay}
-                onChange={handleFieldChange}
-              />
-              <span className="senior-details-date__sep">/</span>
-              <input
-                type="text"
-                name="policyExpiryMonth"
-                className="senior-details-date__part"
-                inputMode="numeric"
-                maxLength={2}
-                placeholder="MM"
-                aria-label="Month"
-                value={form.policyExpiryMonth}
-                onChange={handleFieldChange}
-              />
-              <span className="senior-details-date__sep">/</span>
-              <input
-                type="text"
-                name="policyExpiryYear"
-                className="senior-details-date__part senior-details-date__part--year"
-                inputMode="numeric"
-                maxLength={4}
-                placeholder="YYYY"
-                aria-label="Year"
-                value={form.policyExpiryYear}
-                onChange={handleFieldChange}
-              />
-            </div>
+            <input
+              type="date"
+              name="policyExpiryDate"
+              className="senior-details-field__input senior-details-field__input--date"
+              aria-label={ExistingInsurers.label3}
+              value={form.policyExpiryDate}
+              onChange={handleFieldChange}
+            />
           </div>
         </div>
 
@@ -614,43 +698,14 @@ export const Senior_details = ({ children, open, close, mobileNumber = '' }) => 
               <HiOutlineCalendar aria-hidden="true" />
               {Insurance_Details.label2}
             </h3>
-            <div className="senior-details-date">
-              <input
-                type="text"
-                name="dobDay"
-                className="senior-details-date__part"
-                inputMode="numeric"
-                maxLength={2}
-                placeholder="DD"
-                aria-label="Day"
-                value={form.dobDay}
-                onChange={handleFieldChange}
-              />
-              <span className="senior-details-date__sep">/</span>
-              <input
-                type="text"
-                name="dobMonth"
-                className="senior-details-date__part"
-                inputMode="numeric"
-                maxLength={2}
-                placeholder="MM"
-                aria-label="Month"
-                value={form.dobMonth}
-                onChange={handleFieldChange}
-              />
-              <span className="senior-details-date__sep">/</span>
-              <input
-                type="text"
-                name="dobYear"
-                className="senior-details-date__part senior-details-date__part--year"
-                inputMode="numeric"
-                maxLength={4}
-                placeholder="YYYY"
-                aria-label="Year"
-                value={form.dobYear}
-                onChange={handleFieldChange}
-              />
-            </div>
+            <input
+              type="date"
+              name="dateOfBirth"
+              className="senior-details-field__input senior-details-field__input--date"
+              aria-label={Insurance_Details.label2}
+              value={form.dateOfBirth}
+              onChange={handleFieldChange}
+            />
           </div>
 
           <div className="senior-details-block">
@@ -713,6 +768,95 @@ export const Senior_details = ({ children, open, close, mobileNumber = '' }) => 
     </section>
   );
 
+  const renderHealthInfo = () => (
+    <section className="senior-details-form">
+      {/* Heading BEFORE the step line */}
+      <header className="senior-details-form__head">
+        <h2 className="senior-details-form__title">{HEALTH_INFO.heading}</h2>
+      </header>
+
+      {/* Step line */}
+      {renderStepIndicator()}
+
+      <div className="senior-details-form__body">
+        {/* DIV 1 — Existing Health Conditions (multi-select chips) */}
+        <div className="senior-details-block">
+          <h3 className="senior-details-block__heading">
+            <HiOutlineClipboardCheck aria-hidden="true" />
+            {HEALTH_INFO.label1}
+          </h3>
+          <div className="senior-details-chips senior-details-chips--col3">
+            {HEALTH_INFO.healthConditions.map((value) => {
+              const selected = HealthInfo.healthConditions.includes(value);
+              return (
+                <button
+                  type="button"
+                  key={value}
+                  className={`senior-details-chip${selected ? ' is-selected' : ''}`}
+                  onClick={() => handleConditionPick(value)}
+                  aria-pressed={selected}
+                >
+                  {value}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* DIV 2 — Other Existing Diseases (text input) */}
+        <div className="senior-details-block">
+          <h3 className="senior-details-block__heading">
+            <HiOutlineClipboardCheck aria-hidden="true" />
+            {HEALTH_INFO.label2}
+          </h3>
+          <input
+            id="otherDiseases"
+            name="otherDiseases"
+            type="text"
+            className="senior-details-field__input"
+            placeholder="Enter other existing diseases (optional)"
+            value={HealthInfo.otherDiseases}
+            onChange={handleHealthInfoChange}
+          />
+        </div>
+
+        {/* DIV 3 — Any claims made in the previous year? (Yes/No single-select) */}
+        <div className="senior-details-block">
+          <h3 className="senior-details-block__heading">
+            <HiOutlineClipboardCheck aria-hidden="true" />
+            
+            {HEALTH_INFO.label3}
+          </h3>
+          <div className="senior-details-chips senior-details-chips--col3">
+            {HEALTH_INFO.claimStatus.map((value) => {
+              const selected = HealthInfo.claimStatus === value;
+              return (
+                <button
+                  type="button"
+                  key={value}
+                  className={`senior-details-chip${selected ? ' is-selected' : ''}`}
+                  onClick={() => handleClaimPick(value)}
+                  aria-pressed={selected}
+                >
+                  {value}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+
+      <div className="senior-details-form__actions">
+        <button type="button" className="senior-details-form__back" onClick={goBack}>
+          Back
+        </button>
+        <button type="button" className="senior-details-form__next" onClick={goNext}>
+          Continue
+        </button>
+      </div>
+    </section>
+  );
+
   const renderStep = () => {
     switch (step) {
       case Step.EnterOtp:
@@ -728,6 +872,13 @@ export const Senior_details = ({ children, open, close, mobileNumber = '' }) => 
         return (
           <div className="senior-details-split">
             {renderInsuranceDetails()}
+            {renderSummaryPanel()}
+          </div>
+        );
+      case Step.HealthInfo:
+        return (
+          <div className="senior-details-split">
+            {renderHealthInfo()}
             {renderSummaryPanel()}
           </div>
         );

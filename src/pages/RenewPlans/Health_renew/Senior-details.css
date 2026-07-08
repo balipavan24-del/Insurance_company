@@ -776,50 +776,6 @@
 }
 
 /* date (DD / MM / YYYY) */
-.senior-details-date {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.senior-details-date__part {
-  all: unset;
-  box-sizing: border-box;
-  display: inline-block;
-  width: 56px;
-  padding: 12px 10px;
-  border-radius: 10px;
-  border: 1px solid #dbe4f0;
-  background-color: #ffffff;
-  color: #0f172a;
-  font-size: 14px;
-  font-weight: 600;
-  text-align: center;
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  outline: none;
-  transition: border-color 200ms ease, box-shadow 200ms ease;
-}
-
-.senior-details-date__part--year {
-  width: 84px;
-}
-
-.senior-details-date__part::placeholder {
-  color: #94a3b8;
-  font-weight: 500;
-}
-
-.senior-details-date__part:focus {
-  border-color: #2e88c7;
-  box-shadow: 0 0 0 3px rgba(46, 136, 199, 0.12);
-}
-
-.senior-details-date__sep {
-  color: #94a3b8;
-  font-size: 16px;
-  font-weight: 700;
-}
-
 .senior-details-field {
   display: flex;
   flex-direction: column;
@@ -868,6 +824,22 @@
 .senior-details-field__input:focus {
   border-color: #2e88c7;
   box-shadow: 0 0 0 3px rgba(46, 136, 199, 0.12);
+}
+
+/* native date picker — styled to match the other inputs */
+.senior-details-field__input--date {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  color: #0f172a;
+}
+
+.senior-details-field__input--date::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity 200ms ease;
+}
+
+.senior-details-field__input--date::-webkit-calendar-picker-indicator:hover {
+  opacity: 1;
 }
 
 /* radio group for claim status */
