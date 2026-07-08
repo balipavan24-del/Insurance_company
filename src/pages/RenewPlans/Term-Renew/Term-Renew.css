@@ -310,6 +310,16 @@
   font-weight: 700;
 }
 
+/* Revival process cards use transparent PNGs — remove the icon box background */
+.term-revival-process__card .term-renew-card__icon {
+  width: 65px;
+  height: 65px;
+  margin-bottom: 12px;
+  background: transparent;
+  border-radius: 0;
+  color: inherit;
+}
+
 /* Title — ref: .car-renew-hero__title */
 .Hero-Section-Title {
   margin: 14px 0 12px;
@@ -1242,6 +1252,26 @@
 .term-Updates-button--edit:hover {
   border-color: #cbd5e1;
   background: #f8fafc;
+}
+
+/* Cancel button in the Edit panel — secondary look */
+.term-Updates-button--cancel {
+  border: 1px solid #e2e8f0;
+  background: #ffffff;
+  color: #64748b;
+}
+
+.term-Updates-button--cancel:hover {
+  border-color: #cbd5e1;
+  background: #f8fafc;
+  color: #475569;
+}
+
+/* Side-by-side Cancel + Save Changes layout */
+.term-Updates-buttons--row {
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
 }
 
 .term-Updates-button--continue {

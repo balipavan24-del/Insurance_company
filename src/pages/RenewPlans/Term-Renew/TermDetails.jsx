@@ -83,6 +83,17 @@ function TermDetails({ open, close, children }) {
         setStep(STEPS.edit);
     };
 
+    const handleCancel = () => {
+        // Clear the unsaved edits and go back to the Update screen
+        setNewDetails({
+            Nominee: '',
+            MobileNumber: '',
+            Email: '',
+            ResidentialAddress: '',
+        });
+        setStep(STEPS.update);
+    };
+
     useEffect(() => {
         if (!open) {
             setStep(STEPS.otp);
@@ -392,7 +403,14 @@ function TermDetails({ open, close, children }) {
                                         />
                                     </div>
                                 </div>
-                                <div className="term-Updates-buttons"> 
+                                <div className="term-Updates-buttons term-Updates-buttons--row">
+                                    <button
+                                        type="button"
+                                        className="term-Updates-button term-Updates-button--cancel"
+                                        onClick={handleCancel}
+                                    >
+                                        Cancel
+                                    </button>
                                     <button
                                         type="submit"
                                         className="term-Updates-button term-Updates-button--continue"

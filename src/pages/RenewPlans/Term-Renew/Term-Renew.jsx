@@ -1,7 +1,4 @@
 import {
-  HiOutlineCheckCircle,
-  HiOutlineClock,
-  HiOutlineCreditCard,
   HiOutlineDocumentText,
   HiOutlineExclamation,
   HiOutlineLockClosed,
@@ -9,11 +6,14 @@ import {
   HiOutlinePhone,
   HiOutlineShieldCheck,
   HiOutlineCalendar,
-  HiOutlineClipboardCheck,
 } from 'react-icons/hi';
 import { useState } from 'react';
 import './Term-Renew.css';
 import termRenewHeroImage from '../../../assets/images/term-renew-hero.png';
+import clanderImage from '../../../assets/images/term-renew/clanderImage.png';
+import revivalEligibilityIcon from '../../../assets/images/term-renew/revival-eligibility.png';
+import healthDeclarationIcon from '../../../assets/images/term-renew/health-declaration.png';
+import outstandingPremiumIcon from '../../../assets/images/term-renew/outstanding-premium.png';
 import continuousFinancialProtectionIcon from '../../../assets/images/term-renew/timely-renewal/continuous-financial-protection.png';
 import avoidPolicyLapseIcon from '../../../assets/images/term-renew/timely-renewal/avoid-policy-lapse.png';
 import keepExistingBenefitsIcon from '../../../assets/images/term-renew/timely-renewal/keep-existing-benefits.png';
@@ -125,28 +125,28 @@ const TERM_REVIVAL_PROCESS = [
   {
     id: 'step-1',
     no: 1,
-    icon: HiOutlineClock,
+    icon: clanderImage,
     title: 'Grace Period',
     description: 'Most insurers allow 15–30 days to renew without losing benefits.',
   },
   {
     id: 'step-2',
     no: 2,
-    icon: HiOutlineCheckCircle,
+    icon: revivalEligibilityIcon,
     title: 'Revival Eligibility',
     description: 'Policies can usually be revived within 2–5 years of lapse.',
   },
   {
     id: 'step-3',
     no: 3,
-    icon: HiOutlineClipboardCheck,
+    icon: healthDeclarationIcon,
     title: 'Health Declaration',
     description: 'A fresh declaration of good health may be required.',
   },
   {
     id: 'step-4',
     no: 4,
-    icon: HiOutlineCreditCard,
+    icon: outstandingPremiumIcon,
     title: 'Outstanding Premium',
     description: 'Pay the pending premium with applicable interest to reinstate cover.',
   },
@@ -536,6 +536,7 @@ const TermRenew = () => {
         <ul className="term-renew-card-grid">
           {TERM_REVIVAL_PROCESS.map((step) => {
             const Icon = step.icon;
+            const isImage = typeof Icon === 'string';
 
             return (
               <li key={step.id} className="term-revival-process__card">
@@ -543,7 +544,18 @@ const TermRenew = () => {
                   {step.no}
                 </span>
                 <div className="term-renew-card__icon">
-                  <Icon aria-hidden="true" />
+                  {isImage ? (
+                    <img
+                      src={Icon}
+                      alt=""
+                      className="term-renew-card__icon-img"
+                      loading="lazy"
+                      width={65}
+                      height={65}
+                    />
+                  ) : (
+                    <Icon aria-hidden="true" />
+                  )}
                 </div>
                 <h3 className="term-renew-card__title">
                   {step.title}
