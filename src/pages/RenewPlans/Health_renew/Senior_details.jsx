@@ -824,7 +824,6 @@ export const Senior_details = ({ children, open, close, mobileNumber = '' }) => 
         <div className="senior-details-block">
           <h3 className="senior-details-block__heading">
             <HiOutlineClipboardCheck aria-hidden="true" />
-            
             {HEALTH_INFO.label3}
           </h3>
           <div className="senior-details-chips senior-details-chips--col3">
