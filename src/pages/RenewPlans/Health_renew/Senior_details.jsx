@@ -24,12 +24,14 @@ const Step = {
   PolicyInfo: 2,
   InsuranceDetails: 3,
   HealthInfo: 4,
+  Review:5,
 };
 
 const STEP_META = {
   [Step.PolicyInfo]: { index: 1, label: 'Policy Info' },
   [Step.InsuranceDetails]: { index: 2, label: 'Insurance Details' },
   [Step.HealthInfo]: { index: 3, label: 'Health Info' },
+  [Step.Review]: { index: 4, label: 'Review' },
 };
 
 const ExistingInsurers = {
@@ -162,6 +164,8 @@ export const Senior_details = ({ children, open, close, mobileNumber = '' }) => 
     policyType: 'Senior Citizen Health',
     mobileNumber,
     existingInsurer: '',
+    policyNumber: '',
+    policyExpiryDate: '',
     sumInsured: '',
     fullName: '',
     dateOfBirth: '',
@@ -190,6 +194,8 @@ export const Senior_details = ({ children, open, close, mobileNumber = '' }) => 
       policyType: 'Senior Citizen Health',
       mobileNumber,
       existingInsurer: '',
+      policyNumber: '',
+      policyExpiryDate: '',
       sumInsured: '',
       fullName: '',
       dateOfBirth: '',
@@ -309,6 +315,8 @@ export const Senior_details = ({ children, open, close, mobileNumber = '' }) => 
       setDetails((prev) => ({
         ...prev,
         existingInsurer: insurer,
+        policyNumber: (form.policyNumber || '').trim(),
+        policyExpiryDate: form.policyExpiryDate,
         sumInsured,
       }));
       setStep(Step.InsuranceDetails);
@@ -370,8 +378,7 @@ export const Senior_details = ({ children, open, close, mobileNumber = '' }) => 
         otherDiseases,
         claimStatus,
       }));
-      // Next step will be added here.
-      window.alert('Health Information saved. Next steps coming soon.');
+      setStep(Step.Review);
     }
   };
 
@@ -412,6 +419,8 @@ export const Senior_details = ({ children, open, close, mobileNumber = '' }) => 
       setForm((prev) => ({
         ...prev,
         existingInsurer: details.existingInsurer,
+        policyNumber: details.policyNumber,
+        policyExpiryDate: details.policyExpiryDate,
         sumInsured: details.sumInsured,
       }));
     } else if (field.step === Step.InsuranceDetails) {
@@ -544,7 +553,7 @@ export const Senior_details = ({ children, open, close, mobileNumber = '' }) => 
   );
 
   const renderStepIndicator = () => {
-    const steps = [Step.PolicyInfo, Step.InsuranceDetails, Step.HealthInfo];
+    const steps = [Step.PolicyInfo, Step.InsuranceDetails, Step.HealthInfo, Step.Review];
     return (
       <ol className="senior-details-steps" aria-label="Progress">
         {steps.map((s) => {
@@ -856,6 +865,95 @@ export const Senior_details = ({ children, open, close, mobileNumber = '' }) => 
     </section>
   );
 
+  const renderReview = () => (
+    <section className="senior-details-form">
+      {/* Heading BEFORE the step line */}
+      <header className="senior-details-form__head">
+        <h2 className="senior-details-form__title">Review Your Details</h2>
+      </header>
+      {/* Step line */}
+      {renderStepIndicator()}
+
+      <div className="senior-details-form__body">
+      <div className="policy-imformation">
+        <h3 className="policy-imformation__heading">Policy Information</h3>
+        <ul className="policy-imformation__list">
+          <li className="policy-imformation__item">
+            <span className="policy-imformation__label">Plan Type</span>
+            <span className="policy-imformation__value">{details.policyType || '--'}</span>
+          </li>
+          <li className="policy-imformation__item">
+            <span className="policy-imformation__label">Existing Insurer</span>
+            <span className="policy-imformation__value">{details.existingInsurer || '--'}</span>
+          </li>
+          <li className="policy-imformation__item">
+            <span className="policy-imformation__label">Policy Number</span>
+            <span className="policy-imformation__value">{details.policyNumber || '--'}</span>
+          </li>
+          <li className="policy-imformation__item">
+            <span className="policy-imformation__label">Policy Expiry Date</span>
+            <span className="policy-imformation__value">{details.policyExpiryDate || '--'}</span>
+          </li>
+          <li className="policy-imformation__item">
+            <span className="policy-imformation__label">Sum Insured</span>
+            <span className="policy-imformation__value">{details.sumInsured || '--'}</span>
+          </li>
+        </ul>
+      </div>
+
+      <div className="policy-imformation">
+        <h3 className="policy-imformation__heading">Insured Details</h3>
+        <ul className="policy-imformation__list">
+          <li className="policy-imformation__item">
+            <span className="policy-imformation__label">Full Name</span>
+            <span className="policy-imformation__value">{details.fullName || '--'}</span>
+          </li>
+          <li className="policy-imformation__item">
+            <span className="policy-imformation__label">Date of Birth</span>
+            <span className="policy-imformation__value">{details.dateOfBirth || '--'}</span>
+          </li>
+          <li className="policy-imformation__item">
+            <span className="policy-imformation__label">Gender</span>
+            <span className="policy-imformation__value">{details.gender || '--'}</span>
+          </li>
+          <li className="policy-imformation__item">
+            <span className="policy-imformation__label">City</span>
+            <span className="policy-imformation__value">{details.city || '--'}</span>
+          </li>
+        </ul>
+      </div>
+
+      <div className="policy-imformation">
+        <h3 className="policy-imformation__heading">Health Information</h3>
+        <ul className="policy-imformation__list">
+          <li className="policy-imformation__item">
+            <span className="policy-imformation__label">Health Conditions</span>
+            <span className="policy-imformation__value">
+              {details.healthConditions.length ? details.healthConditions.join(', ') : '--'}
+            </span>
+          </li>
+          <li className="policy-imformation__item">
+            <span className="policy-imformation__label">Other Diseases</span>
+            <span className="policy-imformation__value">{details.otherDiseases || '--'}</span>
+          </li>
+          <li className="policy-imformation__item">
+            <span className="policy-imformation__label">Previous Claims</span>
+            <span className="policy-imformation__value">{details.claimStatus || '--'}</span>
+          </li>
+        </ul>
+      </div>
+      </div>
+      <div className="senior-details-form__actions">
+        <button type="button" className="senior-details-form__back" onClick={goBack}>
+          Back
+        </button>
+        <button type="button" className="senior-details-form__next" onClick={goNext}>
+          Submit
+        </button>
+      </div>
+    </section>
+  );
+
   const renderStep = () => {
     switch (step) {
       case Step.EnterOtp:
@@ -878,6 +976,13 @@ export const Senior_details = ({ children, open, close, mobileNumber = '' }) => 
         return (
           <div className="senior-details-split">
             {renderHealthInfo()}
+            {renderSummaryPanel()}
+          </div>
+        );
+      case Step.Review:
+        return (
+          <div className="senior-details-split">
+            {renderReview()}
             {renderSummaryPanel()}
           </div>
         );
