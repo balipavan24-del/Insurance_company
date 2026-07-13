@@ -19,9 +19,13 @@ import {
   HiOutlineHeart,
   HiOutlineTruck,
   HiOutlineHand,
+  HiOutlinePhone,
 } from 'react-icons/hi';
 import { HiOutlineClipboardDocument } from 'react-icons/hi2';
 import { TbStethoscope } from 'react-icons/tb';
+import InsuranceFaqAccordion from '../../../components/Faq/InsuranceFaqAccordion';
+import ContactHumanModal from '../../../components/ContactHumanModal/ContactHumanModal';
+import { SENIOR_CITIZEN_FAQS, seniorRenewFaqSection, seniorRenewSupportCard } from '../../../data/productContent';
 
 
 const WHY_RENEW_ON_TIME =
@@ -153,6 +157,15 @@ export const SeniorRenew = () => {
   const navigate = useNavigate();
   const [mobileNumber, setMobileNumber] = useState('');
   const [isopen, setIsopen] = useState(false);
+  const [isTalkToHumanOpen, setIsTalkToHumanOpen] = useState(false);
+
+  const scrollToRenewForm = () => {
+    const input = document.getElementById('mobileNumber');
+    if (input) {
+      input.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      window.setTimeout(() => input.focus(), 400);
+    }
+  };
 
   const handleMobileChange = (event) => {
     const value = event.target.value.replace(/\D/g, '').slice(0, 10);
@@ -310,7 +323,44 @@ export const SeniorRenew = () => {
         </div>
       </section>
 
+      <InsuranceFaqAccordion
+        title={seniorRenewFaqSection.title}
+        subtitle={seniorRenewFaqSection.subtitle}
+        items={SENIOR_CITIZEN_FAQS}
+        buttonLabel={seniorRenewFaqSection.buttonLabel}
+      />
+
+      <section className="senior-renew-support" aria-labelledby="senior-renew-support-heading">
+        <div className="senior-renew-support__inner">
+          <div className="senior-renew-support__banner">
+            <h2 id="senior-renew-support-heading" className="senior-renew-support__title">
+              {seniorRenewSupportCard.title}
+            </h2>
+            <p className="senior-renew-support__subtitle">{seniorRenewSupportCard.subtitle}</p>
+            <div className="senior-renew-support__actions">
+              <button type="button" className="senior-renew-support__btn senior-renew-support__btn--primary" onClick={scrollToRenewForm}>
+                {seniorRenewSupportCard.primaryCta}
+                <span aria-hidden="true">→</span>
+              </button>
+              <button
+                type="button"
+                className="senior-renew-support__btn senior-renew-support__btn--ghost"
+                onClick={() => setIsTalkToHumanOpen(true)}
+              >
+                <HiOutlinePhone aria-hidden="true" />
+                {seniorRenewSupportCard.secondaryCta}
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <Senior_details open={isopen} close={() => setIsopen(false)} mobileNumber={mobileNumber} />
+      <ContactHumanModal
+        isOpen={isTalkToHumanOpen}
+        onClose={() => setIsTalkToHumanOpen(false)}
+        title="Talk to a Real Human"
+      />
       <Footer />
     </div>
   )

@@ -695,3 +695,146 @@
     padding: 0 20px;
   }
 }
+
+/* ===== FAQ section (shared component spacing) ===== */
+.renew-plans-page--senior .business-home-faqs {
+  margin-top: 0;
+  padding: 0 0 clamp(40px, 5vw, 64px);
+  box-sizing: border-box;
+  width: 100%;
+  max-width: min(1320px, 100%);
+  margin-inline: auto;
+  padding-inline: clamp(16px, 4vw, 50px);
+}
+
+.renew-plans-page--senior .business-home-faqs .business-coverage-wrap {
+  max-width: 100%;
+  padding-inline: 0;
+}
+
+/* ===== Talk to an Expert CTA bar ===== */
+.senior-renew-support {
+  width: 100%;
+  padding: 0;
+}
+
+.senior-renew-support__inner {
+  width: 100%;
+  max-width: min(1320px, 100%);
+  margin: 0 auto;
+  box-sizing: border-box;
+  padding: 0 clamp(16px, 4vw, 50px) clamp(40px, 5vw, 64px);
+}
+
+.senior-renew-support__banner {
+  border-radius: clamp(18px, 2.4vw, 28px);
+  padding: clamp(32px, 4.5vw, 52px) clamp(20px, 4vw, 40px);
+  text-align: center;
+  background: linear-gradient(90deg, #2e88c7 0%, #4f46e5 100%);
+  box-shadow: 0 16px 40px rgba(46, 136, 199, 0.28);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.senior-renew-support__title {
+  margin: 0 auto;
+  max-width: 22ch;
+  color: #ffffff;
+  font-size: clamp(1.5rem, 3vw, 2.25rem);
+  line-height: 1.2;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.senior-renew-support__subtitle {
+  margin: 14px auto 0;
+  max-width: 52ch;
+  color: rgba(255, 255, 255, 0.94);
+  font-size: clamp(14px, 1.6vw, 17px);
+  line-height: 1.55;
+  font-weight: 400;
+}
+
+.senior-renew-support__actions {
+  margin-top: 28px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+}
+
+.senior-renew-support__btn {
+  min-height: 48px;
+  padding: 0 24px;
+  border-radius: 999px;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  box-sizing: border-box;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.senior-renew-support__btn svg {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+}
+
+.senior-renew-support__btn--primary {
+  border: none;
+  background: rgba(67, 56, 202, 0.92);
+  color: #ffffff;
+  box-shadow: 0 8px 20px rgba(30, 27, 75, 0.22);
+}
+
+.senior-renew-support__btn--primary:hover {
+  transform: translateY(-1px);
+  background: rgba(55, 48, 163, 0.98);
+  box-shadow: 0 10px 24px rgba(30, 27, 75, 0.28);
+}
+
+.senior-renew-support__btn--ghost {
+  border: 1.5px solid rgba(255, 255, 255, 0.92);
+  background: transparent;
+  color: #ffffff;
+}
+
+.senior-renew-support__btn--ghost:hover {
+  transform: translateY(-1px);
+  background: rgba(255, 255, 255, 0.1);
+  border-color: #ffffff;
+}
+
+.senior-renew-support__btn:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .senior-renew-support__btn--primary:hover,
+  .senior-renew-support__btn--ghost:hover {
+    transform: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .senior-renew-support__title {
+    font-size: clamp(1.35rem, 5.5vw, 1.75rem);
+  }
+
+  .senior-renew-support__actions {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .senior-renew-support__btn {
+    width: 100%;
+    max-width: 320px;
+  }
+}

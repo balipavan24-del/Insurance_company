@@ -15,7 +15,7 @@ import howComparePlansIcon from '../../assets/icons/how-compare-plans.png';
 import howBuyCoveredIcon from '../../assets/icons/how-buy-covered.png';
 import ScrollReveal from '../../components/Animations/ScrollReveal';
 import Footer from '../../components/Footer/Footer';
-import { PARTNERS } from '../../data/partners';
+import { PARTNERS } from '../../data/productContent/partners';
 
 function LandingPage() {
   const navigate = useNavigate();

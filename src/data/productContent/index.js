@@ -532,3 +532,50 @@ export const insuranceBasicsTypesCards = [
     cta: 'Explore plans',
   },
 ];
+
+export const seniorRenewFaqSection = {
+  title: 'Frequently Asked Questions',
+  subtitle: 'Everything you need to know about renewing your senior citizen health insurance.',
+  buttonLabel: 'View More FAQs →',
+};
+
+export const seniorRenewSupportCard = {
+  title: 'Need help renewing?',
+  subtitle: 'Our senior care advisors are available to help you understand your options and complete your renewal with confidence.',
+  primaryCta: 'Renew Your Policy',
+  secondaryCta: 'Talk to an Expert',
+  expertHref: '/contact-us?topic=senior-renewal',
+};
+
+export const SENIOR_CITIZEN_FAQS = [
+  {
+    id: 'lifetime-renewability',
+    question: 'Is there any upper age limit for renewing a senior citizen plan?',
+    answer:
+      'No. Senior citizen plans on our platform offer lifetime renewability — you can continue your cover irrespective of age, as long as premiums are paid on time.',
+  },
+  {
+    id: 'premium-after-claim',
+    question: 'Will my premium increase due to a claim?',
+    answer:
+      'Premiums are based on your age band and sum insured at renewal. A claim does not penalise you directly, but you keep your no-claim bonus when you renew claim-free.',
+  },
+  {
+    id: 'medical-checkup-renewal',
+    question: 'Do I need a medical check-up to renew?',
+    answer:
+      'Renewals typically don’t require fresh medical tests. New tests may only be needed if you increase the sum insured significantly or add new members.',
+  },
+  {
+    id: 'pre-existing-diseases',
+    question: 'Are pre-existing diseases like diabetes covered?',
+    answer:
+      'Yes. Pre-existing diseases declared at the time of the original policy are covered after the waiting period, which continues seamlessly when you renew on time.',
+  },
+  {
+    id: 'missed-renewal-date',
+    question: 'What happens if I miss the renewal date?',
+    answer:
+      'Most insurers offer a 15-30 day grace period to renew without losing benefits. After that, waiting periods may restart and a fresh policy may be required.',
+  },
+];
