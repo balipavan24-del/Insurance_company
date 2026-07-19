@@ -30,6 +30,17 @@ import saveMoney from '../../../assets/images/renew-benefits/save-money.png';
 import peaceOfMind from '../../../assets/images/renew-benefits/peace-of-mind.png';
 import { Validnumber } from '../../Motor/MotorHome/vehicleNumberValidation';
 import Renew from './Renew_Details/Renew';
+import coverageAccidentalDamage from '../../../assets/images/renew-coverage/accidental-damage.png';
+import coverageTheftProtection from '../../../assets/images/renew-coverage/theft-protection.png';
+import coverageFireDamage from '../../../assets/images/renew-coverage/fire-damage.png';
+import coverageNaturalDisasters from '../../../assets/images/renew-coverage/natural-disasters.png';
+import coverageThirdParty from '../../../assets/images/renew-coverage/third-party-liability.png';
+import coveragePersonalAccident from '../../../assets/images/renew-coverage/personal-accident-cover.png';
+import addonZeroDepreciation from '../../../assets/images/renew-addons/zero-depreciation.png';
+import addonPersonalAccident from '../../../assets/images/renew-addons/personal-accident-cover.png';
+import addonRoadsideAssistance from '../../../assets/images/renew-addons/roadside-assistance.png';
+import addonReturnToInvoice from '../../../assets/images/renew-addons/return-to-invoice.png';
+import addonConsumables from '../../../assets/images/renew-addons/consumables-cover.png';
 import './Car-Renew.css';
 
 const RENEW_HIGHLIGHTS = [
@@ -79,12 +90,12 @@ const RENEW_BENEFITS = [
 ];
 
 const RENEW_COVERED_ITEMS = [
-  { id: 'accidental-damage', title: 'Accidental Damage', icon: 'car' },
-  { id: 'theft-protection', title: 'Theft Protection', icon: 'lock' },
-  { id: 'fire-damage', title: 'Fire Damage', icon: 'flame' },
-  { id: 'natural-disasters', title: 'Natural Disasters', icon: 'storm' },
-  { id: 'third-party', title: 'Third Party Liability', icon: 'person-shield' },
-  { id: 'personal-accident', title: 'Personal Accident Cover', icon: 'heart-pulse' },
+  { id: 'accidental-damage', title: 'Accidental Damage', image: coverageAccidentalDamage },
+  { id: 'theft-protection', title: 'Theft Protection', image: coverageTheftProtection },
+  { id: 'fire-damage', title: 'Fire Damage', image: coverageFireDamage },
+  { id: 'natural-disasters', title: 'Natural Disasters', image: coverageNaturalDisasters },
+  { id: 'third-party', title: 'Third Party Liability', image: coverageThirdParty },
+  { id: 'personal-accident', title: 'Personal Accident Cover', image: coveragePersonalAccident },
 ];
 
 const RENEW_EXCLUSION_ITEMS = [
@@ -120,31 +131,31 @@ const RENEW_ADDONS = [
     id: 'zero-depreciation',
     title: 'Zero Depreciation Cover',
     description: 'Get full claim value without depreciation cuts on parts.',
-    icon: 'layers',
+    image: addonZeroDepreciation,
   },
   {
-    id: 'engine-protection',
-    title: 'Engine Protection',
-    description: 'Covers engine damage from water ingress and oil leakage.',
-    icon: 'engine',
+    id: 'personal-accident',
+    title: 'Personal Accident Cover',
+    description: 'Financial protection for the owner-driver against accidental injury or death.',
+    image: addonPersonalAccident,
   },
   {
     id: 'roadside-assistance',
     title: 'Roadside Assistance',
     description: '24x7 on-road help for breakdowns, towing and more.',
-    icon: 'lifebuoy',
+    image: addonRoadsideAssistance,
   },
   {
     id: 'return-to-invoice',
     title: 'Return to Invoice',
     description: 'Get the original invoice value in case of total loss or theft.',
-    icon: 'invoice',
+    image: addonReturnToInvoice,
   },
   {
     id: 'consumables',
     title: 'Consumables Cover',
     description: 'Reimbursement for nuts, bolts, oils and other consumables.',
-    icon: 'wrench',
+    image: addonConsumables,
   },
 ];
 
@@ -341,68 +352,6 @@ function RenewBenefitIcon({ name }) {
     <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
       <path d="M12 3 5 6.5v5c0 4.1 2.8 7.3 7 8.5 4.2-1.2 7-4.4 7-8.5v-5L12 3Z" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinejoin="round" />
       <path d="m9.2 11.8 1.9 1.9 3.6-3.8" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
-
-  return icons[name] || defaultIcon;
-}
-
-function RenewAddonIcon({ name }) {
-  const props = { viewBox: '0 0 24 24', width: 20, height: 20, 'aria-hidden': true, focusable: 'false' };
-  const icons = {
-    engine: (
-      <svg {...props}>
-        <circle cx="12" cy="12" r="3.2" fill="none" stroke="currentColor" strokeWidth="1.75" />
-        <path
-          d="M12 3.5v2.2M12 18.3v2.2M3.5 12h2.2M18.3 12h2.2M5.8 5.8l1.6 1.6M16.6 16.6l1.6 1.6M5.8 18.2l1.6-1.6M16.6 7.4l1.6-1.6"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1.75"
-          strokeLinecap="round"
-        />
-        <path d="M14.5 14.2c.6-.9.6-2 0-2.9" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
-      </svg>
-    ),
-    lifebuoy: (
-      <svg {...props}>
-        <circle cx="12" cy="12" r="7.5" fill="none" stroke="currentColor" strokeWidth="1.75" />
-        <path d="M12 4.5v15M4.5 12h15" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" />
-        <circle cx="12" cy="12" r="2.2" fill="none" stroke="currentColor" strokeWidth="1.75" />
-      </svg>
-    ),
-    invoice: (
-      <svg {...props}>
-        <path
-          d="M8 4h8l2 2v14H6V4h2Z"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1.75"
-          strokeLinejoin="round"
-        />
-        <path d="M10 11h4M10 14.5h4" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" />
-        <path d="M12 8.2v4.2" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" />
-      </svg>
-    ),
-    wrench: (
-      <svg {...props}>
-        <path
-          d="m14.7 6.9 2.4-2.4a1.2 1.2 0 0 1 1.7 1.7l-2.4 2.4-1.8-1.7ZM6.8 14.8l-2.1 2.1a1.2 1.2 0 0 0 1.7 1.7l2.1-2.1-1.7-1.7Z"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="1.75"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-        <path d="m11.2 10.3 3.5 3.5" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" />
-      </svg>
-    ),
-  };
-
-  const defaultIcon = (
-    <svg {...props}>
-      <path d="M5 9h14v10H5V9Z" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinejoin="round" />
-      <path d="M7 9V7.5A2.5 2.5 0 0 1 9.5 5h5A2.5 2.5 0 0 1 17 7.5V9" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" />
-      <path d="M5 12h14M5 15h14" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" />
     </svg>
   );
 
@@ -846,8 +795,15 @@ function CommercialVehicleRenew() {
                 {RENEW_COVERED_ITEMS.map((item) => (
                   <li key={item.id}>
                     <article className="car-renew-covered-card">
-                      <span className="car-renew-covered-card__icon" aria-hidden="true">
-                        <RenewCoverageIcon name={item.icon} />
+                      <span className="car-renew-covered-card__icon car-renew-covered-card__icon--image" aria-hidden="true">
+                        <img
+                          src={item.image}
+                          alt=""
+                          className="car-renew-covered-card__icon-img"
+                          loading="lazy"
+                          width={46}
+                          height={46}
+                        />
                       </span>
                       <h3 className="car-renew-covered-card__title">{item.title}</h3>
                     </article>
@@ -930,7 +886,7 @@ function CommercialVehicleRenew() {
               <li key={addon.id}>
                 <article className="car-renew-addon-card">
                   <span className="car-renew-addon-card__icon" aria-hidden="true">
-                    <RenewAddonIcon name={addon.icon} />
+                    <img src={addon.image} alt="" loading="lazy" />
                   </span>
                   <div className="car-renew-addon-card__copy">
                     <h3 className="car-renew-addon-card__title">{addon.title}</h3>
