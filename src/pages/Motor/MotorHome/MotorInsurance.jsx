@@ -23,7 +23,10 @@ import InsuranceFaqAccordion from '../../../components/Faq/InsuranceFaqAccordion
 import { motorInsuranceFaqItems } from '../../../data/productContent';
 import './MotorInsurance.css';
 import WithoutNumber from '../Withoutnumber/WithoutNumber';
-import { Newbike, Newcar, Newthreewheeler, Newcommercial } from '../NewVehicle/NewVehicle';
+import { Newbike } from '../../NewVehicle/NewBike';
+import { Newcar } from '../../NewVehicle/NewCar';
+import { Newcommercial } from '../../NewVehicle/NewCommercial';
+import { Newthreewheeler } from '../../NewVehicle/NewThreeWheeler';
 import { Validnumber } from './vehicleNumberValidation';
 
 const formatPolicyDate = (dateValue) => dateValue.toLocaleDateString('en-GB', {
@@ -484,10 +487,7 @@ function MotorInsurance({ onBackHome }) {
   const [vehicleNumberError, setVehicleNumberError] = useState('');
   const [policyCard, setPolicyCard] = useState(null);
   const [isWithoutVehicleFlow, setIsWithoutVehicleFlow] = useState(false);
-  const [isNewBikeFlow, setIsNewBikeFlow] = useState(false);
-  const [isNewCarFlow, setIsNewCarFlow] = useState(false);
-  const [isNewThreeWheelerFlow, setIsNewThreeWheelerFlow] = useState(false);
-  const [isNewCommercialFlow, setIsNewCommercialFlow] = useState(false);
+  const [activeNewVehicleFlow, setActiveNewVehicleFlow] = useState(null);
   const [isBrandSelectionOpen, setIsBrandSelectionOpen] = useState(false);
   const [isModelSelectionOpen, setIsModelSelectionOpen] = useState(false);
   const [isVariantSelectionOpen, setIsVariantSelectionOpen] = useState(false);
@@ -495,10 +495,7 @@ function MotorInsurance({ onBackHome }) {
   const modelModalMotion = useAnimatedModal(isModelSelectionOpen);
   const variantModalMotion = useAnimatedModal(isVariantSelectionOpen);
   const withoutVehicleModalMotion = useAnimatedModal(isWithoutVehicleFlow);
-  const newBikeModalMotion = useAnimatedModal(isNewBikeFlow);
-  const newCarModalMotion = useAnimatedModal(isNewCarFlow);
-  const newThreeWheelerModalMotion = useAnimatedModal(isNewThreeWheelerFlow);
-  const newCommercialModalMotion = useAnimatedModal(isNewCommercialFlow);
+  const newVehicleModalMotion = useAnimatedModal(Boolean(activeNewVehicleFlow));
   const [brandSearchQuery, setBrandSearchQuery] = useState('');
   const [modelSearchQuery, setModelSearchQuery] = useState('');
   const [variantSearchQuery, setVariantSearchQuery] = useState('');
@@ -552,10 +549,7 @@ function MotorInsurance({ onBackHome }) {
       || isModelSelectionOpen
       || isVariantSelectionOpen
       || isWithoutVehicleFlow
-      || isNewBikeFlow
-      || isNewCarFlow
-      || isNewThreeWheelerFlow
-      || isNewCommercialFlow;
+      || Boolean(activeNewVehicleFlow);
     if (!isModalOpen) {
       return undefined;
     }
@@ -571,20 +565,8 @@ function MotorInsurance({ onBackHome }) {
         setIsWithoutVehicleFlow(false);
         return;
       }
-      if (isNewBikeFlow) {
-        setIsNewBikeFlow(false);
-        return;
-      }
-      if (isNewCarFlow) {
-        setIsNewCarFlow(false);
-        return;
-      }
-      if (isNewThreeWheelerFlow) {
-        setIsNewThreeWheelerFlow(false);
-        return;
-      }
-      if (isNewCommercialFlow) {
-        setIsNewCommercialFlow(false);
+      if (activeNewVehicleFlow) {
+        setActiveNewVehicleFlow(null);
         return;
       }
       if (isVariantSelectionOpen) {
@@ -620,10 +602,7 @@ function MotorInsurance({ onBackHome }) {
     isModelSelectionOpen,
     isVariantSelectionOpen,
     isWithoutVehicleFlow,
-    isNewBikeFlow,
-    isNewCarFlow,
-    isNewThreeWheelerFlow,
-    isNewCommercialFlow,
+    activeNewVehicleFlow,
   ]);
 
   const closeSelectionModals = () => {
@@ -644,10 +623,7 @@ function MotorInsurance({ onBackHome }) {
 
   useEffect(() => {
     setIsWithoutVehicleFlow(false);
-    setIsNewBikeFlow(false);
-    setIsNewCarFlow(false);
-    setIsNewThreeWheelerFlow(false);
-    setIsNewCommercialFlow(false);
+    setActiveNewVehicleFlow(null);
     setIsBrandSelectionOpen(false);
     setIsModelSelectionOpen(false);
     setIsVariantSelectionOpen(false);
@@ -728,8 +704,8 @@ function MotorInsurance({ onBackHome }) {
       <section className="motor-wrap page-section-container">
           <>
           <div
-            className={`motor-screen motor-screen--vehicle-check${isNewBikeFlow || isNewCarFlow || isNewThreeWheelerFlow || isNewCommercialFlow || isWithoutVehicleFlow ? ' is-behind-modal' : ''}`}
-            aria-hidden={isNewBikeFlow || isNewCarFlow || isNewThreeWheelerFlow || isNewCommercialFlow || isWithoutVehicleFlow ? true : undefined}
+            className={`motor-screen motor-screen--vehicle-check${activeNewVehicleFlow || isWithoutVehicleFlow ? ' is-behind-modal' : ''}`}
+            aria-hidden={activeNewVehicleFlow || isWithoutVehicleFlow ? true : undefined}
           >
             <button
               type="button"
@@ -874,15 +850,7 @@ function MotorInsurance({ onBackHome }) {
                     className="motor-brand-new-vehicle-card"
                     onClick={() => {
                       closeSelectionModals();
-                      if (activeCategoryId === 'motor-bike') {
-                        setIsNewBikeFlow(true);
-                      } else if (activeCategoryId === 'motor-car') {
-                        setIsNewCarFlow(true);
-                      } else if (activeCategoryId === 'motor-three-wheeler') {
-                        setIsNewThreeWheelerFlow(true);
-                      } else {
-                        setIsNewCommercialFlow(true);
-                      }
+                      setActiveNewVehicleFlow(activeCategoryId || 'motor-car');
                     }}
                   >
                     <span className="motor-brand-new-vehicle-icon" aria-hidden="true">✧</span>
@@ -1392,77 +1360,38 @@ function MotorInsurance({ onBackHome }) {
             </div>
           )}
 
-          {newCommercialModalMotion.visible && activeCategoryId === 'motor-commercial-vehicle' && (
-            <Newcommercial
-              motionClosing={newCommercialModalMotion.closing}
-              onBackToVehicleCheck={() => setIsNewCommercialFlow(false)}
-              onContinue={(formDetails) => {
-                logMotorQuoteLead('Brand new commercial vehicle — View Plans (no plate yet)', {
-                  flow: 'brand-new-vehicle-without-number',
-                  selectedCategory: 'motor-commercial-vehicle',
-                  vehicleType: 'commercial-vehicle',
-                  vehicleNumber: null,
-                  continuedWithoutVehicleNumber: true,
-                  formDetails,
-                });
-                setIsNewCommercialFlow(false);
-              }}
-            />
-          )}
+          {newVehicleModalMotion.visible && activeNewVehicleFlow === activeCategoryId && (() => {
+            const closeFlow = () => setActiveNewVehicleFlow(null);
+            const logPayload = {
+              flow: 'brand-new-vehicle-without-number',
+              vehicleNumber: null,
+              continuedWithoutVehicleNumber: true,
+            };
+            const motionClosing = newVehicleModalMotion.closing;
+            const onBackToVehicleCheck = closeFlow;
+            const onContinue = (formDetails) => {
+              logMotorQuoteLead(`Brand new ${activeCategoryId.replace('motor-', '').replace('-', ' ')} — View Plans (no plate yet)`, {
+                ...logPayload,
+                selectedCategory: activeCategoryId,
+                vehicleType: activeCategoryId.replace('motor-', ''),
+                formDetails,
+              });
+              closeFlow();
+            };
 
-          {newThreeWheelerModalMotion.visible && activeCategoryId === 'motor-three-wheeler' && (
-            <Newthreewheeler
-              motionClosing={newThreeWheelerModalMotion.closing}
-              onBackToVehicleCheck={() => setIsNewThreeWheelerFlow(false)}
-              onContinue={(formDetails) => {
-                logMotorQuoteLead('Brand new three-wheeler — View Plans (no plate yet)', {
-                  flow: 'brand-new-vehicle-without-number',
-                  selectedCategory: 'motor-three-wheeler',
-                  vehicleType: 'three-wheeler',
-                  vehicleNumber: null,
-                  continuedWithoutVehicleNumber: true,
-                  formDetails,
-                });
-                setIsNewThreeWheelerFlow(false);
-              }}
-            />
-          )}
-
-          {newCarModalMotion.visible && activeCategoryId === 'motor-car' && (
-            <Newcar
-              motionClosing={newCarModalMotion.closing}
-              onBackToVehicleCheck={() => setIsNewCarFlow(false)}
-              onContinue={(formDetails) => {
-                logMotorQuoteLead('Brand new car — View Plans (no plate yet)', {
-                  flow: 'brand-new-vehicle-without-number',
-                  selectedCategory: 'motor-car',
-                  vehicleType: 'car',
-                  vehicleNumber: null,
-                  continuedWithoutVehicleNumber: true,
-                  formDetails,
-                });
-                setIsNewCarFlow(false);
-              }}
-            />
-          )}
-
-          {newBikeModalMotion.visible && activeCategoryId === 'motor-bike' && (
-            <Newbike
-              motionClosing={newBikeModalMotion.closing}
-              onBackToVehicleCheck={() => setIsNewBikeFlow(false)}
-              onContinue={(formDetails) => {
-                logMotorQuoteLead('Brand new bike — View Plans (no plate yet)', {
-                  flow: 'brand-new-vehicle-without-number',
-                  selectedCategory: 'motor-bike',
-                  vehicleType: 'bike',
-                  vehicleNumber: null,
-                  continuedWithoutVehicleNumber: true,
-                  formDetails,
-                });
-                setIsNewBikeFlow(false);
-              }}
-            />
-          )}
+            switch (activeCategoryId) {
+              case 'motor-car':
+                return <Newcar motionClosing={motionClosing} onBackToVehicleCheck={onBackToVehicleCheck} onContinue={onContinue} />;
+              case 'motor-bike':
+                return <Newbike motionClosing={motionClosing} onBackToVehicleCheck={onBackToVehicleCheck} onContinue={onContinue} />;
+              case 'motor-three-wheeler':
+                return <Newthreewheeler motionClosing={motionClosing} onBackToVehicleCheck={onBackToVehicleCheck} onContinue={onContinue} />;
+              case 'motor-commercial-vehicle':
+                return <Newcommercial motionClosing={motionClosing} onBackToVehicleCheck={onBackToVehicleCheck} onContinue={onContinue} />;
+              default:
+                return null;
+            }
+          })()}
 
           </>
       </section>
