@@ -14,6 +14,7 @@ import {
   HiOutlinePencil,
   HiOutlineUser,
   HiOutlineCheckCircle,
+  HiArrowRight,
 } from 'react-icons/hi';
 import './Senior-details.css';
 
@@ -357,6 +358,7 @@ export const Senior_details = ({ children, open, close, mobileNumber = '' }) => 
     const gender = (form.gender || '').trim();
     const city = (form.city || '').trim();
 
+    
     if (!fullName) { window.alert('Please enter your full name'); return; }
     if (!dateOfBirth) { window.alert('Please enter your date of birth'); return; }
     if (!gender) { window.alert('Please select your gender'); return; }
@@ -1036,7 +1038,6 @@ export const Senior_details = ({ children, open, close, mobileNumber = '' }) => 
   );
 
   const renderContinuePayment = () => {
-    const ref = `SR-${Date.now().toString(36).toUpperCase()}`;
     return (
       <section className="sr-form sr-step sr-step--payment" data-step="payment">
         <header className="sr-form__head">
@@ -1045,33 +1046,20 @@ export const Senior_details = ({ children, open, close, mobileNumber = '' }) => 
         <div className="sr-form__body sr-form__body--centered">
           <div className="sr-success">
             <HiOutlineCheckCircle className="sr-success__icon" />
-            <p className="sr-success__title">Thank you!</p>
+            <h3 className="sr-success__heading">Thank you!</h3>
             <p className="sr-success__text">
-              Your renewal details have been saved.
+              Your renewal details have been saved. You will be redirected to the payment gateway shortly.
             </p>
-            <p className="sr-success__text">
-              You will be redirected to the payment gateway shortly.
-            </p>
-            <div className="sr-success__ref">
-              <span>Reference</span>
-              <strong>{ref}</strong>
-            </div>
           </div>
         </div>
-        <div className="sr-form__actions">
+        <div className="sr-form__actions sr-form__actions--center">
           <button
             type="button"
-            className="sr-form__back"
-            onClick={() => setIsPayment(false)}
-          >
-            Back
-          </button>
-          <button
-            type="button"
-            className="sr-form__next"
+            className="sr-form__next sr-success__cta"
             onClick={() => window.alert('Proceeding to payment gateway...')}
           >
-            Proceed to Payment
+            View Plans
+            <HiArrowRight className="sr-success__cta-icon" aria-hidden="true" />
           </button>
         </div>
       </section>
