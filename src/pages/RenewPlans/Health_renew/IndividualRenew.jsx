@@ -2,7 +2,7 @@ import React from 'react';
 import './SeniorRenew.css';
 import { useState } from 'react';
 import { MobileNumberValidation } from '../../../validations/Validations';
-import { Senior_details } from './Senior_details';
+import Individual_Details from './Individual_Details';
 import Footer from '../../../components/Footer/Footer';
 import Healt_Renew_Comp from '../../../components/HealthRenew/Healt_Renew_Comp';
 import individualImage from '../../../assets/images/Health-individual-renew.png';
@@ -12,6 +12,9 @@ import {
   individualRenewSupportCard,
 } from '../../../data/productContent';
 
+const steps=[
+
+]
 
 export const IndividualRenew = () => {
   const [mobileNumber, setMobileNumber] = useState('');
@@ -85,7 +88,6 @@ export const IndividualRenew = () => {
                   Continue →
                 </button>
               </div>
-
               <p className="car-renew-form-card__helper">
                 By continuing you agree to receive a one-time SMS for verification. Your number is used only to secure your renewal.
               </p>
@@ -106,6 +108,7 @@ export const IndividualRenew = () => {
         supportPrimaryCta={individualRenewSupportCard.primaryCta}
         supportSecondaryCta={individualRenewSupportCard.secondaryCta}
       />
+      <Individual_Details open={isopen} close={() => setIsopen(false)} mobileNumber={mobileNumber} />
       <Footer />
     </div>
   )
