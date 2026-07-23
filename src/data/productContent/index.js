@@ -547,6 +547,53 @@ export const seniorRenewSupportCard = {
   expertHref: '/contact-us?topic=senior-renewal',
 };
 
+export const individualRenewFaqSection = {
+  title: 'Frequently Asked Questions',
+  subtitle: 'Everything you need to know about renewing your individual health insurance.',
+  buttonLabel: 'View More FAQs →',
+};
+
+export const individualRenewSupportCard = {
+  title: 'Need help renewing?',
+  subtitle: 'Our health advisors are available to help you understand your options and complete your renewal with confidence.',
+  primaryCta: 'Renew Your Policy',
+  secondaryCta: 'Talk to an Expert',
+  expertHref: '/contact-us?topic=individual-renewal',
+};
+
+export const INDIVIDUAL_FAQS = [
+  {
+    id: 'individual-renew-lifetime',
+    question: 'Can I renew my individual health plan lifelong?',
+    answer:
+      'Yes. Individual health plans on our platform offer lifelong renewability as long as premiums are paid on time, ensuring continuous coverage without age-based exit limits.',
+  },
+  {
+    id: 'individual-premium-claim',
+    question: 'Will my premium go up if I make a claim?',
+    answer:
+      'Renewal premiums are based on your age band and sum insured, not individual claims. However, you may lose your no-claim bonus discount if a claim was made.',
+  },
+  {
+    id: 'individual-medical-checkup',
+    question: 'Do I need a medical check-up to renew?',
+    answer:
+      'Most renewals do not require fresh medical tests. Tests may only be requested if you significantly increase your sum insured or declare a new health condition.',
+  },
+  {
+    id: 'individual-pre-existing',
+    question: 'Are pre-existing diseases covered after renewal?',
+    answer:
+      'Yes. Once declared and accepted, pre-existing conditions continue to be covered after the applicable waiting period, provided the policy is renewed without a break.',
+  },
+  {
+    id: 'individual-missed-renewal',
+    question: 'What happens if I miss the renewal date?',
+    answer:
+      'Insurers usually provide a 15-30 day grace period. Renewing within this window keeps your benefits intact. Beyond that, waiting periods may reset and a fresh policy may be needed.',
+  },
+];
+
 export const SENIOR_CITIZEN_FAQS = [
   {
     id: 'lifetime-renewability',

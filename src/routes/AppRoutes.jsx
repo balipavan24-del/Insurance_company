@@ -23,6 +23,7 @@ import Qoutes from '../Qoutes/Qoutes';
 import TermRenew from '../pages/RenewPlans/Term-Renew/Term-Renew';
 import TermHome from '../pages/Term/Term-Home';
 import { SeniorRenew } from '../pages/RenewPlans/Health_renew/SeniorRenew';
+import { IndividualRenew } from '../pages/RenewPlans/Health_renew/IndividualRenew';
 
 function AppRoutes() {
   const navigate = useNavigate();
@@ -80,6 +81,16 @@ function AppRoutes() {
         (
           <div className="app-screen app-screen--health-insurance">
             <SeniorRenew />
+          </div>
+        )
+      }
+      />
+      <Route
+      path="/health-insurance/individual-renew"
+      element={
+        (
+          <div className="app-screen app-screen--health-insurance">
+            <IndividualRenew />
           </div>
         )
       }

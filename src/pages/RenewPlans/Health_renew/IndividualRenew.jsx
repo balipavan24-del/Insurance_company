@@ -1,22 +1,19 @@
 import React from 'react';
 import './SeniorRenew.css';
-import { useNavigate } from 'react-router-dom';
-import seniorImage from '../../../assets/images/Health-senior-renew.png';
 import { useState } from 'react';
 import { MobileNumberValidation } from '../../../validations/Validations';
 import { Senior_details } from './Senior_details';
 import Footer from '../../../components/Footer/Footer';
 import Healt_Renew_Comp from '../../../components/HealthRenew/Healt_Renew_Comp';
+import individualImage from '../../../assets/images/Health-individual-renew.png';
 import {
-  SENIOR_CITIZEN_FAQS,
-  seniorRenewFaqSection,
-  seniorRenewSupportCard,
+  INDIVIDUAL_FAQS,
+  individualRenewFaqSection,
+  individualRenewSupportCard,
 } from '../../../data/productContent';
 
 
-export const SeniorRenew = () => {
-
-  const navigate = useNavigate();
+export const IndividualRenew = () => {
   const [mobileNumber, setMobileNumber] = useState('');
   const [isopen, setIsopen] = useState(false);
 
@@ -43,22 +40,22 @@ export const SeniorRenew = () => {
       <section className="car-renew-hero page-section page-section--regular page-section-container" aria-labelledby="bike-renew-heading">
         <div className="car-renew-hero__layout">
           <div className="car-renew-hero__content">
-            <span className="car-renew-hero__tag">Senior Citizen Renewal</span>
+            <span className="car-renew-hero__tag">Individual Renewal</span>
             <h1 id="bike-renew-heading" className="car-renew-hero__title">
-              <span className="car-renew-hero__title-line">Renew Senior Citizen</span>
+              <span className="car-renew-hero__title-line">Renew Individual</span>
               <span className="car-renew-hero__title-line car-renew-hero__title-line--gradient"> Cover with Care</span>
             </h1>
             <div className="car-renew-hero__visual">
               <img
-                src={seniorImage}
-                alt="Senior Citizen Renewal"
+                src={individualImage}
+                alt="Individual Health Renewal"
                 className="car-renew-hero__visual-img"
                 loading="lazy"
               />
             </div>
           </div>
 
-          <aside className="car-renew-form-card" aria-label="Senior citizen renewal form">
+          <aside className="car-renew-form-card" aria-label="Individual renewal form">
             <span className="car-renew-form-card__chip">Verify in under 2 minutes</span>
             <div className="senior-renew-form-headder">
               <h2 className="car-renew-form-card__title">Verify Your Mobile Number</h2>
@@ -96,22 +93,19 @@ export const SeniorRenew = () => {
           </aside>
         </div>
       </section>
-
       <Healt_Renew_Comp
-        coverageEyebrow="Coverage Built for Seniors"
-        coverageHeadingAccent="senior citizen plan"
-        coverageDescription="Comprehensive protection designed around the realities of ageing — from daily medication to critical hospitalisation."
-        faqTitle={seniorRenewFaqSection.title}
-        faqSubtitle={seniorRenewFaqSection.subtitle}
-        faqItems={SENIOR_CITIZEN_FAQS}
-        faqButtonLabel={seniorRenewFaqSection.buttonLabel}
-        supportTitle={seniorRenewSupportCard.title}
-        supportSubtitle={seniorRenewSupportCard.subtitle}
-        supportPrimaryCta={seniorRenewSupportCard.primaryCta}
-        supportSecondaryCta={seniorRenewSupportCard.secondaryCta}
+        coverageEyebrow="Coverage Built for You"
+        coverageHeadingAccent="individual health plan"
+        coverageDescription="Comprehensive protection designed for your everyday medical needs — from check-ups to critical hospitalisation."
+        faqTitle={individualRenewFaqSection.title}
+        faqSubtitle={individualRenewFaqSection.subtitle}
+        faqItems={INDIVIDUAL_FAQS}
+        faqButtonLabel={individualRenewFaqSection.buttonLabel}
+        supportTitle={individualRenewSupportCard.title}
+        supportSubtitle={individualRenewSupportCard.subtitle}
+        supportPrimaryCta={individualRenewSupportCard.primaryCta}
+        supportSecondaryCta={individualRenewSupportCard.secondaryCta}
       />
-
-      <Senior_details open={isopen} close={() => setIsopen(false)} mobileNumber={mobileNumber} />
       <Footer />
     </div>
   )
