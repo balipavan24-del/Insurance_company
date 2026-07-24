@@ -90,7 +90,7 @@ const NAV_ITEMS = [
           tone: 'family',
           links: [
             { id: 'health-individual', label: 'Individual Health', path: '/health-insurance?plan=individual' }, /* path for the individual health insurance page */
-            { id: 'health-family-floater', label: 'Family Floater', path: '/health-insurance?plan=family' }, /* path for the family floater insurance page */
+            { id: 'health-family-floater', label: 'Family Floater', path: '/health-insurance?plan=family-floater' }, /* path for the family floater insurance page */
             { id: 'health-senior-citizen', label: 'Senior Citizen', path: '/health-insurance?plan=senior' }, /* path for the senior citizen insurance page */
           ],
         },
@@ -256,7 +256,7 @@ const NAV_ITEMS = [
           tone: 'health',
           links: [
             { id: 'renewal-health-individual', label: 'Individual Health', path: '/health-insurance/individual-renew' },
-            { id: 'renewal-health-family', label: 'Family Floater', path: '/health-insurance?flow=renewal&plan=family' },
+            { id: 'renewal-health-family', label: 'Family Health Renew', path: '/health-insurance/family-renew' },
             { id: 'renewal-health-senior', label: 'Senior Citizen', path: '/health-insurance/senior-renew' },
           ],
         },

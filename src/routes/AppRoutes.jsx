@@ -24,6 +24,7 @@ import TermRenew from '../pages/RenewPlans/Term-Renew/Term-Renew';
 import TermHome from '../pages/Term/Term-Home';
 import { SeniorRenew } from '../pages/RenewPlans/Health_renew/SeniorRenew';
 import { IndividualRenew } from '../pages/RenewPlans/Health_renew/IndividualRenew';
+import FamilyRenew from '../pages/RenewPlans/Health_renew/FamilyRenew';
 
 function AppRoutes() {
   const navigate = useNavigate();
@@ -91,6 +92,16 @@ function AppRoutes() {
         (
           <div className="app-screen app-screen--health-insurance">
             <IndividualRenew />
+          </div>
+        )
+      }
+      />
+      <Route
+      path="/health-insurance/family-renew"
+      element={
+        (
+          <div className='app-screen app-screen--health-insurance'>
+            <FamilyRenew/>
           </div>
         )
       }

@@ -17,6 +17,7 @@ import {
   HiArrowRight,
 } from 'react-icons/hi';
 import './Senior-details.css';
+import { toast } from 'sonner';
 
 const OTP_LENGTH = 6;
 const RESEND_COOLDOWN_SECONDS = 30;
@@ -252,6 +253,7 @@ export const Individual_Details = ({ children, open, close, mobileNumber = '' })
     if (resendSeconds > 0) return;
     // Future: POST /api/otp/resend  { mobileNumber }
     setResendSeconds(RESEND_COOLDOWN_SECONDS);
+    toast.success('OTP resent successfully');
   };
 
   const handleFieldChange = (event) => {
@@ -431,6 +433,7 @@ export const Individual_Details = ({ children, open, close, mobileNumber = '' })
     // Keep the prefilled mobile number in sync when reopened.
     setDetails((prev) => ({ ...prev, mobileNumber }));
     setResendSeconds(RESEND_COOLDOWN_SECONDS);
+    toast.success(`OTP sent to ${mobileNumber}`);
 
     const intervalId = window.setInterval(() => {
       setResendSeconds((prev) => (prev > 0 ? prev - 1 : 0));

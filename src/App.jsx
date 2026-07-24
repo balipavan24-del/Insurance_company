@@ -1,5 +1,6 @@
 import { useRef } from 'react';
 import { useLocation } from 'react-router-dom';
+import { Toaster } from 'sonner';
 import './App.css';
 import Navbar from './components/Navbar/Navbar';
 import { useAppScrollEffects } from './hooks/useAppScrollEffects';
@@ -14,6 +15,7 @@ function App() {
 
   return (
     <div className="main-wrapper">
+      <Toaster position="bottom-center" offset="24px" richColors closeButton />
       {shouldShowNavbar(location.pathname) && <Navbar />}
 
       <div ref={appContentRef} className="app-content-offset">
