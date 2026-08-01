@@ -11,6 +11,7 @@ import {
   NeedHelpRenewing,
 } from '../../../components/HealthRenew/Healt_Renew_Comp';
 import Footer from '../../../components/Footer/Footer';
+import FamilyDetails from './FamilyDetails';
 
 const FamilyRenew = () => {
   const [mobileNumber, setMobileNumber] = useState('');
@@ -83,6 +84,7 @@ const FamilyRenew = () => {
                 <button type="submit" className="car-renew-form-card__primary-btn">
                   Continue →
                 </button>
+                <FamilyDetails open={isopen} close={() => setIsopen(false)} mobileNumber={mobileNumber} />
               </div>
               <p className="car-renew-form-card__helper">
                 By continuing you agree to receive a one-time SMS for verification. Your number is used only to secure your renewal.
