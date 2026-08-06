@@ -1565,6 +1565,17 @@
   cursor: pointer;
 }
 
+/* Disabled add button — used when a category reaches its max
+   (e.g. 2 Sons/Daughters, 1 Father/Mother). */
+.health-add-btn.is-disabled,
+.health-add-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  border-color: #d4deea;
+  background: #f1f5f9;
+  color: #94a3b8;
+}
+
 .health-dependent-list {
   margin-top: 10px;
   display: grid;

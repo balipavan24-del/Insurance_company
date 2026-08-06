@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import './Business-Fire.css';
 import Footer from '../../components/Footer/Footer';
 
@@ -51,6 +52,16 @@ function BusinessFireIcon({ name }) {
 }
 
 function BusinessFire({ onBackToBusinessHome }) {
+  const [isSuccessOpen, setIsSuccessOpen] = useState(false);
+
+  const handleSubmit = () => {
+    setIsSuccessOpen(true);
+  };
+
+  const handleCloseSuccess = () => {
+    setIsSuccessOpen(false);
+  };
+
   return (
     <>
       <main className="business-fire-page">
@@ -171,7 +182,7 @@ function BusinessFire({ onBackToBusinessHome }) {
                 </label>
               </form>
 
-              <button type="button" className="business-fire-submit">
+              <button type="button" className="business-fire-submit" onClick={handleSubmit}>
                 Get Details on WhatsApp
               </button>
               <p className="business-fire-form-note">
@@ -283,6 +294,44 @@ function BusinessFire({ onBackToBusinessHome }) {
         </section>
       </main>
       <Footer />
+
+      {isSuccessOpen && (
+        <div
+          className="business-popup-backdrop insureease-modal-overlay--in"
+          role="presentation"
+          onClick={() => setIsSuccessOpen(false)}
+        >
+          <section
+            className="business-popup-sheet business-popup-sheet--success insureease-modal-panel insureease-modal-panel--in"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="business-fire-success-title"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <div className="business-popup-success">
+              <div className="business-popup-success__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="12" cy="12" r="12" fill="currentColor" fillOpacity="0.12" />
+                  <path d="M7 12L10.5 15.5L17 9" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </div>
+              <h3 id="business-fire-success-title" className="business-popup-success__title">
+                Request Received
+              </h3>
+              <p className="business-popup-success__text">
+                Our insurance expert will contact you shortly with suitable plans for your business.
+              </p>
+              <button
+                type="button"
+                className="business-popup-success__button"
+                onClick={handleCloseSuccess}
+              >
+                Back to Home
+              </button>
+            </div>
+          </section>
+        </div>
+      )}
     </>
   );
 }

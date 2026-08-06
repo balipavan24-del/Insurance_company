@@ -12,6 +12,16 @@ const healthMattersImage = healthImage('matters.webp');
 
 const GENDER_OPTIONS = ['Male', 'Female'];
 
+// Maximum number of members allowed per dependent label. Children are capped
+// at 2 boys and 2 girls; parents (father/mother) are capped at 1 each — you can
+// only add one father and one mother to a plan.
+const MEMBER_MAX_COUNT = {
+  son: 2,
+  daughter: 2,
+  father: 1,
+  mother: 1,
+};
+
 const createMember = (id, label, relation, icon, colorClass) => ({
   id,
   label,
@@ -581,11 +591,11 @@ function HealthHome({ onBackHome }) {
   const [spouseAge, setSpouseAge] = useState('0');
   const [children, setChildren] = useState([]);
   const [parents, setParents] = useState([]);
-  const [fullName, setFullName] = useState('vicky');
-  const [mobileNumber, setMobileNumber] = useState('6304305534');
-  const [city, setCity] = useState('Hyderabad');
+  const [fullName, setFullName] = useState('');
+  const [mobileNumber, setMobileNumber] = useState('');
+  const [city, setCity] = useState('');
   const [pinCode, setPinCode] = useState('');
-  const [email, setEmail] = useState('you@example.com');
+  const [email, setEmail] = useState('');
   const [medicalConditions, setMedicalConditions] = useState({
     diabetes: false,
     highBloodPressure: false,
@@ -642,14 +652,24 @@ function HealthHome({ onBackHome }) {
 
   const addChild = (label) => {
     const key = label.toLowerCase();
-    const nextIndex = children.filter((member) => member.label.toLowerCase() === key).length + 1;
-    setChildren((prev) => [...prev, { id: `child-${key}-${nextIndex}`, label, age: '0' }]);
+    const max = MEMBER_MAX_COUNT[key] ?? Infinity;
+    const currentCount = children.filter((member) => member.label.toLowerCase() === key).length;
+    if (currentCount >= max) return;
+    setChildren((prev) => [...prev, { id: `child-${key}-${currentCount + 1}`, label, age: '0' }]);
   };
 
   const addParent = (label) => {
     const key = label.toLowerCase();
-    const nextIndex = parents.filter((member) => member.label.toLowerCase() === key).length + 1;
-    setParents((prev) => [...prev, { id: `parent-${key}-${nextIndex}`, label, age: '0' }]);
+    const max = MEMBER_MAX_COUNT[key] ?? Infinity;
+    const currentCount = parents.filter((member) => member.label.toLowerCase() === key).length;
+    if (currentCount >= max) return;
+    setParents((prev) => [...prev, { id: `parent-${key}-${currentCount + 1}`, label, age: '0' }]);
+  };
+
+  const isDependentAtMax = (members, label) => {
+    const key = label.toLowerCase();
+    const max = MEMBER_MAX_COUNT[key] ?? Infinity;
+    return members.filter((member) => member.label.toLowerCase() === key).length >= max;
   };
 
   const removeMember = (members, setMembers, memberId) => {
@@ -852,8 +872,24 @@ function HealthHome({ onBackHome }) {
             <p>{childrenCountLabel}</p>
           </div>
           <div className="health-action-row">
-            <button type="button" className="health-add-btn" onClick={() => addChild('Son')}>+ Son</button>
-            <button type="button" className="health-add-btn" onClick={() => addChild('Daughter')}>+ Daughter</button>
+            <button
+              type="button"
+              className={`health-add-btn${isDependentAtMax(children, 'Son') ? ' is-disabled' : ''}`}
+              onClick={() => addChild('Son')}
+              disabled={isDependentAtMax(children, 'Son')}
+              title={isDependentAtMax(children, 'Son') ? 'Only 2 Sons allowed' : undefined}
+            >
+              + Son
+            </button>
+            <button
+              type="button"
+              className={`health-add-btn${isDependentAtMax(children, 'Daughter') ? ' is-disabled' : ''}`}
+              onClick={() => addChild('Daughter')}
+              disabled={isDependentAtMax(children, 'Daughter')}
+              title={isDependentAtMax(children, 'Daughter') ? 'Only 2 Daughters allowed' : undefined}
+            >
+              + Daughter
+            </button>
           </div>
         </div>
 
@@ -892,8 +928,24 @@ function HealthHome({ onBackHome }) {
             <p>{parentsCountLabel}</p>
           </div>
           <div className="health-action-row">
-            <button type="button" className="health-add-btn" onClick={() => addParent('Father')}>+ Father</button>
-            <button type="button" className="health-add-btn" onClick={() => addParent('Mother')}>+ Mother</button>
+            <button
+              type="button"
+              className={`health-add-btn${isDependentAtMax(parents, 'Father') ? ' is-disabled' : ''}`}
+              onClick={() => addParent('Father')}
+              disabled={isDependentAtMax(parents, 'Father')}
+              title={isDependentAtMax(parents, 'Father') ? 'Only 1 Father allowed' : undefined}
+            >
+              + Father
+            </button>
+            <button
+              type="button"
+              className={`health-add-btn${isDependentAtMax(parents, 'Mother') ? ' is-disabled' : ''}`}
+              onClick={() => addParent('Mother')}
+              disabled={isDependentAtMax(parents, 'Mother')}
+              title={isDependentAtMax(parents, 'Mother') ? 'Only 1 Mother allowed' : undefined}
+            >
+              + Mother
+            </button>
           </div>
         </div>
 

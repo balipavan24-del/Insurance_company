@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import './Business-Home.css';
 import Footer from '../../components/Footer/Footer';
-import { modalOverlayClass, modalPanelClass, useAnimatedModal } from '../../components/AnimatedModal/AnimatedModal';
+import { modalOverlayClass, modalPanelClass } from '../../components/AnimatedModal/AnimatedModal';
 import DropdownChevron from '../../components/Dropdown/DropdownChevron';
 import InsuranceDetailPanel from '../../components/DetailPanel/InsuranceDetailPanel';
 import InsuranceFaqAccordion from '../../components/Faq/InsuranceFaqAccordion';
@@ -240,7 +240,7 @@ function BusinessHome({
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [selectedCoverageId, setSelectedCoverageId] = useState('');
   const [isQuotePopupOpen, setIsQuotePopupOpen] = useState(false);
-  const quoteModalMotion = useAnimatedModal(isQuotePopupOpen);
+  const [isWhatsappMessage, setIsWhatsappMessage] = useState(false);
   const dropdownRef = useRef(null);
 
   const coverageActionMap = useMemo(
@@ -293,8 +293,19 @@ function BusinessHome({
 
   const handleQuoteSubmit = (event) => {
     event.preventDefault();
-    const action = coverageActionMap[selectedCoverageId];
-    if (action) action();
+    setIsWhatsappMessage(true);
+    // TODO: submit form data to backend here (use API_BASE_URL pattern)
+  };
+
+  const handleClosePopup = () => {
+    setIsWhatsappMessage(false);
+    setIsQuotePopupOpen(false);
+  };
+
+  const handleBackToBusinessHome = () => {
+    setIsWhatsappMessage(false);
+    setIsQuotePopupOpen(false);
+    setSelectedCoverageId('');
   };
 
   return (
@@ -461,33 +472,60 @@ function BusinessHome({
 
       <Footer />
 
-      {quoteModalMotion.visible && (
+      {isQuotePopupOpen && (
         <div
-          className={modalOverlayClass(quoteModalMotion.closing, 'business-popup-backdrop')}
+          className={modalOverlayClass(false, 'business-popup-backdrop')}
           role="presentation"
-          onClick={() => setIsQuotePopupOpen(false)}
+          onClick={handleClosePopup}
         >
           <section
-            className={modalPanelClass(quoteModalMotion.closing, 'business-popup-sheet')}
+            className={`${modalPanelClass(false, 'business-popup-sheet')}${isWhatsappMessage ? ' business-popup-sheet--success' : ''}`}
             role="dialog"
             aria-modal="true"
-            aria-labelledby="business-popup-title"
+            aria-labelledby={isWhatsappMessage ? 'business-popup-success-title' : 'business-popup-title'}
             onClick={(event) => event.stopPropagation()}
           >
-            <button
-              type="button"
-              className="business-popup-close"
-              aria-label="Close quote form"
-              onClick={() => setIsQuotePopupOpen(false)}
-            >
-              ×
-            </button>
-            <h3 id="business-popup-title">
-              <BusinessCoverageIcon option={selectedCoverageIconOption} className="business-popup-title-icon" />
-              Get Your {selectedCoverageTitle} Insurance Quote
-            </h3>
-            <p className="business-popup-subtitle">Fill in the details and our expert will reach out to you.</p>
+            {!isWhatsappMessage && (
+              <>
+                <button
+                  type="button"
+                  className="business-popup-close"
+                  aria-label="Close quote form"
+                  onClick={handleClosePopup}
+                >
+                  ×
+                </button>
+                <h3 id="business-popup-title">
+                  <BusinessCoverageIcon option={selectedCoverageIconOption} className="business-popup-title-icon" />
+                  Get Your {selectedCoverageTitle} Insurance Quote
+                </h3>
+                <p className="business-popup-subtitle">Fill in the details and our expert will reach out to you.</p>
+              </>
+            )}
 
+            {isWhatsappMessage ? (
+              <div className="business-popup-success">
+                <div className="business-popup-success__icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="12" cy="12" r="12" fill="currentColor" fillOpacity="0.12" />
+                    <path d="M7 12L10.5 15.5L17 9" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </div>
+                <h3 id="business-popup-success-title" className="business-popup-success__title">
+                  Request Received
+                </h3>
+                <p className="business-popup-success__text">
+                  Our insurance expert will contact you shortly with suitable plans for your business.
+                </p>
+                <button
+                  type="button"
+                  className="business-popup-success__button"
+                  onClick={handleBackToBusinessHome}
+                >
+                  Back to Business Home
+                </button>
+              </div>
+            ) : (
             <form className="business-popup-form" onSubmit={handleQuoteSubmit}>
               <label htmlFor="business-popup-type">Business Type</label>
               <select id="business-popup-type" defaultValue="">
@@ -606,6 +644,7 @@ function BusinessHome({
               <button type="submit" className="business-popup-submit">Get Details on WhatsApp</button>
               <p className="business-popup-note">By submitting, you agree to be contacted by our insurance experts.</p>
             </form>
+            )}
           </section>
         </div>
       )}
