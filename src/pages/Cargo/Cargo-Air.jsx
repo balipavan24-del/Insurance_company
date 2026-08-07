@@ -1,11 +1,90 @@
+import { useEffect, useRef, useState } from 'react';
 import './Cargo-Merain.css';
 import cargoAirLogo from '../../assets/icons/cargo-air-logo.svg';
 import Footer from '../../components/Footer/Footer';
+import DropdownChevron from '../../components/Dropdown/DropdownChevron';
+
+const AIR_SHIPMENT_OPTIONS = [
+  { value: 'import', label: 'Import' },
+  { value: 'export', label: 'Export' },
+  { value: 'domestic', label: 'Domestic' },
+];
+
+function CargoSelect({ options, value, onChange, placeholder, name }) {
+  const [isOpen, setIsOpen] = useState(false);
+  const ref = useRef(null);
+  const selected = options.find((opt) => opt.value === value);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (ref.current && !ref.current.contains(event.target)) {
+        setIsOpen(false);
+      }
+    };
+    const handleEscape = (event) => {
+      if (event.key === 'Escape') setIsOpen(false);
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener('keydown', handleEscape);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('keydown', handleEscape);
+    };
+  }, []);
+
+  return (
+    <div className={`cargo-custom-select${isOpen ? ' dropdown-open' : ''}`} ref={ref}>
+      <input type="hidden" name={name} value={value} />
+      <button
+        type="button"
+        className={`cargo-select-trigger ${isOpen ? 'is-open' : ''}`}
+        aria-haspopup="listbox"
+        aria-expanded={isOpen}
+        onClick={() => setIsOpen((current) => !current)}
+      >
+        <span className="cargo-trigger-value">{selected ? selected.label : placeholder}</span>
+        <DropdownChevron className="dropdown-arrow--select" />
+      </button>
+
+      {isOpen && (
+        <ul className="cargo-select-menu" role="listbox" aria-label="Shipment type options">
+          {options.map((option) => (
+            <li key={option.value} role="option" aria-selected={value === option.value}>
+              <button
+                type="button"
+                className={`cargo-select-option ${value === option.value ? 'is-selected' : ''}`}
+                onClick={() => {
+                  onChange(option.value);
+                  setIsOpen(false);
+                }}
+              >
+                {option.label}
+              </button>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+}
 
 function CargoAir({ onBackToCargo }) {
+  const [shipmentType, setShipmentType] = useState('');
+  const [showSuccess, setShowSuccess] = useState(false);
+
   const handleQuoteSubmit = (event) => {
     event.preventDefault();
-    window.alert('Thanks! Air cargo quote details captured successfully.');
+    if (!shipmentType) {
+      window.alert('Please select a shipment type.');
+      return;
+    }
+    setShowSuccess(true);
+  };
+
+  const handleBackToCargo = () => {
+    setShowSuccess(false);
+    setShipmentType('');
+    if (onBackToCargo) onBackToCargo();
   };
 
   return (
@@ -48,12 +127,13 @@ function CargoAir({ onBackToCargo }) {
               <form className="cargo-merain-form" onSubmit={handleQuoteSubmit}>
                 <label>
                   <span className="cargo-merain-label-text">Shipment Type <em>*</em></span>
-                  <select defaultValue="" disabled aria-disabled="true">
-                    <option value="">Select</option>
-                    <option value="general">General Cargo</option>
-                    <option value="express">Express Freight</option>
-                    <option value="high-value">High Value Goods</option>
-                  </select>
+                  <CargoSelect
+                    name="shipmentType"
+                    options={AIR_SHIPMENT_OPTIONS}
+                    value={shipmentType}
+                    onChange={setShipmentType}
+                    placeholder="Select shipment type"
+                  />
                 </label>
 
                 <label>
@@ -259,6 +339,44 @@ function CargoAir({ onBackToCargo }) {
 
       </section>
       <Footer />
+
+      {showSuccess && (
+        <div
+          className="cargo-popup-backdrop"
+          role="presentation"
+          onClick={() => setShowSuccess(false)}
+        >
+          <section
+            className="cargo-popup-sheet cargo-popup-sheet--success"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="cargo-popup-success-title"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <div className="cargo-popup-success">
+              <div className="cargo-popup-success__icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="12" cy="12" r="12" fill="currentColor" fillOpacity="0.12" />
+                  <path d="M7 12L10.5 15.5L17 9" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </div>
+              <h3 id="cargo-popup-success-title" className="cargo-popup-success__title">
+                Request Received
+              </h3>
+              <p className="cargo-popup-success__text">
+                Our insurance expert will contact you shortly with suitable plans for your cargo.
+              </p>
+              <button
+                type="button"
+                className="cargo-popup-success__button"
+                onClick={handleBackToCargo}
+              >
+                Back to Cargo Home
+              </button>
+            </div>
+          </section>
+        </div>
+      )}
     </main>
   );
 }

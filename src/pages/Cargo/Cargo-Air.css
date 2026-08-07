@@ -140,13 +140,43 @@
 
 .cargo-air-form input,
 .cargo-air-form select {
-  height: 40px;
-  border: 1px solid #d2dae6;
-  border-radius: 10px;
-  padding: 0 12px;
-  font-size: 13px;
-  color: #2c3b4f;
-  background: #f5f8fd;
+  height: 48px;
+  border: 1px solid #d8deea;
+  border-radius: 16px;
+  padding: 0 14px 0 16px;
+  font-size: var(--font-size-16);
+  font-weight: 500;
+  color: #1f2937;
+  background: #f7f9fc;
+}
+
+.cargo-air-form select {
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='%232e88c7' stroke-width='2.25' stroke-linecap='round' stroke-linejoin='round' viewBox='0 0 24 24'%3E%3Cpath d='M19 9l-7 7-7-7'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  background-size: 22px 22px;
+  padding-right: 42px;
+}
+
+.cargo-air-form select:hover {
+  border-color: #2e88c7;
+  box-shadow: 0 0 0 2px rgba(46, 136, 199, 0.12);
+}
+
+.cargo-air-form select:focus {
+  outline: none;
+  border-color: #2e88c7;
+  box-shadow: 0 0 0 2px rgba(46, 136, 199, 0.2);
+  background-color: #ffffff;
+}
+
+.cargo-air-form select option:checked {
+  background: var(--gradient-primary);
+  color: #fff;
 }
 
 .cargo-air-whatsapp-btn {
