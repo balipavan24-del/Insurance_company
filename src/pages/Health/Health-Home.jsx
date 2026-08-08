@@ -140,7 +140,12 @@ function CitySelect({ value, onChange, id }) {
               className={`health-city-select-option${cityName === value ? ' is-selected' : ''}${
                 index === activeIndex ? ' is-active' : ''
               }`}
-              onClick={() => handleSelect(cityName)}
+              onPointerDown={(event) => {
+                // Prevent the button trigger / outside-click handler from
+                // stealing focus and racing the selection.
+                event.preventDefault();
+                handleSelect(cityName);
+              }}
               onMouseEnter={() => setActiveIndex(index)}
             >
               {cityName}
