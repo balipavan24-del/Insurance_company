@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import Footer from '../../components/Footer/Footer';
 import InsuranceFaqAccordion from '../../components/Faq/InsuranceFaqAccordion';
 import { healthInsuranceFaqItems } from '../../data/productContent';
@@ -11,6 +11,146 @@ const healthAboutImage = healthImage('About-Health.webp');
 const healthMattersImage = healthImage('matters.webp');
 
 const GENDER_OPTIONS = ['Male', 'Female'];
+
+// Cities offered in the "City of Residence" dropdown (step 2). Sourced from the
+// requested list with corrected spellings.
+const CITY_OPTIONS = [
+  'Hyderabad',
+  'Delhi',
+  'Mumbai',
+  'Chennai',
+  'Kolkata',
+  'Pune',
+  'Ahmedabad',
+  'Jaipur',
+  'Lucknow',
+  'Chandigarh',
+  'Indore',
+  'Kochi',
+  'Coimbatore',
+  'Nagpur',
+  'Surat',
+  'Vadodara',
+  'Bhopal',
+  'Visakhapatnam',
+  'Thiruvananthapuram',
+];
+
+/**
+ * Custom city dropdown. Renders inline (not absolutely positioned) so it can
+ * never be clipped by the modal/panel scroll containers. Closes on outside
+ * click, Escape, or selection; supports arrow-key + Enter navigation.
+ */
+function CitySelect({ value, onChange, id }) {
+  const [open, setOpen] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(-1);
+  const rootRef = useRef(null);
+  const listRef = useRef(null);
+
+  // Close on outside click.
+  useEffect(() => {
+    if (!open) return undefined;
+    const onPointerDown = (event) => {
+      if (rootRef.current && !rootRef.current.contains(event.target)) {
+        setOpen(false);
+      }
+    };
+    window.addEventListener('pointerdown', onPointerDown);
+    return () => window.removeEventListener('pointerdown', onPointerDown);
+  }, [open]);
+
+  // Close on Escape + keep the active option scrolled into view.
+  useEffect(() => {
+    if (!open) return undefined;
+    const onKeyDown = (event) => {
+      if (event.key === 'Escape') {
+        setOpen(false);
+      } else if (event.key === 'ArrowDown') {
+        event.preventDefault();
+        setActiveIndex((prev) => Math.min(prev + 1, CITY_OPTIONS.length - 1));
+      } else if (event.key === 'ArrowUp') {
+        event.preventDefault();
+        setActiveIndex((prev) => Math.max(prev - 1, 0));
+      } else if (event.key === 'Enter' && activeIndex >= 0) {
+        event.preventDefault();
+        onChange(CITY_OPTIONS[activeIndex]);
+        setOpen(false);
+      }
+    };
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, [open, activeIndex, onChange]);
+
+  useEffect(() => {
+    if (!open || activeIndex < 0 || !listRef.current) return;
+    const item = listRef.current.children[activeIndex];
+    if (item) item.scrollIntoView({ block: 'nearest' });
+  }, [open, activeIndex]);
+
+  const handleToggle = () => {
+    setOpen((prev) => {
+      if (!prev) {
+        // Pre-highlight the currently selected city when opening.
+        const idx = CITY_OPTIONS.indexOf(value);
+        setActiveIndex(idx >= 0 ? idx : 0);
+      }
+      return !prev;
+    });
+  };
+
+  const handleSelect = (cityName) => {
+    onChange(cityName);
+    setOpen(false);
+  };
+
+  return (
+    <div className="health-city-select" ref={rootRef} data-open={open}>
+      <button
+        type="button"
+        id={id}
+        className={`health-city-select-trigger${value ? ' has-value' : ''}`}
+        onClick={handleToggle}
+        aria-haspopup="listbox"
+        aria-expanded={open}
+        aria-label="Select your city of residence"
+      >
+        <span className="health-contact-icon is-mint" aria-hidden="true">
+          📍
+        </span>
+        <span className="health-city-select-value">{value || 'Select your city'}</span>
+        <span className="health-city-select-caret" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none">
+            <path
+              d="M6 9l6 6 6-6"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </span>
+      </button>
+      {open && (
+        <ul className="health-city-select-menu" role="listbox" ref={listRef} aria-label="City of residence">
+          {CITY_OPTIONS.map((cityName, index) => (
+            <li
+              key={cityName}
+              role="option"
+              aria-selected={cityName === value}
+              className={`health-city-select-option${cityName === value ? ' is-selected' : ''}${
+                index === activeIndex ? ' is-active' : ''
+              }`}
+              onClick={() => handleSelect(cityName)}
+              onMouseEnter={() => setActiveIndex(index)}
+            >
+              {cityName}
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+}
 
 // Maximum number of members allowed per dependent label. Children are capped
 // at 2 boys and 2 girls; parents (father/mother) are capped at 1 each — you can
@@ -722,7 +862,8 @@ function HealthHome({ onBackHome }) {
     iconClass,
     icon,
     type = 'text',
-    helperText = ''
+    helperText = '',
+    placeholder = ''
   ) => (
     <label className="health-contact-field" htmlFor={id}>
       <span>
@@ -732,7 +873,13 @@ function HealthHome({ onBackHome }) {
         <span className={`health-contact-icon ${iconClass}`} aria-hidden="true">
           {icon}
         </span>
-        <input id={id} type={type} value={value} onChange={(event) => setValue(event.target.value)} />
+        <input
+          id={id}
+          type={type}
+          value={value}
+          placeholder={placeholder}
+          onChange={(event) => setValue(event.target.value)}
+        />
       </div>
       {helperText && <small>{helperText}</small>}
     </label>
@@ -1014,7 +1161,7 @@ function HealthHome({ onBackHome }) {
             <p>We&apos;ll use this to share your plan details</p>
           </div>
 
-          {renderContactField('health-full-name', 'Full Name *', fullName, setFullName, 'is-blue', '👤')}
+          {renderContactField('health-full-name', 'Full Name *', fullName, setFullName, 'is-blue', '👤', 'text', '', 'e.g. Ravi Kumar')}
           {renderContactField(
             'health-mobile',
             'Mobile Number *',
@@ -1022,18 +1169,15 @@ function HealthHome({ onBackHome }) {
             (value) => setMobileNumber(String(value ?? '').replace(/\D/g, '').slice(0, 10)),
             'is-teal',
             '📞',
-            'tel'
+            'tel',
+            '',
+            'e.g. 9876543210'
           )}
-          {renderContactField(
-            'health-city',
-            'City of Residence *',
-            city,
-            setCity,
-            'is-mint',
-            '📍',
-            'text',
-            'Used to show accurate plans and pricing'
-          )}
+          <label className="health-contact-field" htmlFor="health-city">
+            <span>City of Residence *</span>
+            <CitySelect id="health-city" value={city} onChange={setCity} />
+            <small>Used to show accurate plans and pricing</small>
+          </label>
           <label className="health-contact-field" htmlFor="health-pin">
             <span>PIN code (optional)</span>
             <div className="health-contact-input-wrap">
@@ -1060,7 +1204,9 @@ function HealthHome({ onBackHome }) {
             setEmail,
             'is-violet',
             '✉',
-            'email'
+            'email',
+            '',
+            'e.g. ravi.kumar@email.com'
           )}
 
           <div className="health-contact-actions">
