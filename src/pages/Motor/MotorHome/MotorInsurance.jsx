@@ -59,6 +59,10 @@ const getPolicyDates = (statusType) => {
 
 const vehiclenumber = {
   AP09AB1234: {
+    Name: 'Rajesh Kumar',
+    Vmodel: 'Honda City ZX Petrol',
+    FuelType: 'PETROL',
+    Regyear: '2020',
     vehicleNumber: 'AP09AB1234',
     title: 'Insurance Found',
     status: 'active',
@@ -69,6 +73,10 @@ const vehiclenumber = {
     ...getPolicyDates('active'),
   },
   AP09EX1234: {
+    Name: 'Rajesh Kumar',
+    Vmodel: 'Honda City ZX Petrol',
+    FuelType: 'PETROL',
+    Regyear: '2020',
     vehicleNumber: 'AP09EX1234',
     title: 'Insurance Expired',
     status: 'expired',
@@ -79,6 +87,10 @@ const vehiclenumber = {
     ...getPolicyDates('expired'),
   },
   AP09SO1234: {
+    Name: 'Rajesh Kumar',
+    Vmodel: 'Honda City ZX Petrol',
+    FuelType: 'PETROL',
+    Regyear: '2020',
     vehicleNumber: 'AP09SO1234',
     title: 'Insurance Expiring Soon',
     status: 'expiringSoon',
@@ -868,37 +880,75 @@ function MotorInsurance({ onBackHome }) {
                 )}
 
                 {policyCard && (
-                  <section className={`policy-status-card is-${getPolicyCardStatusClass(policyCard.status)}`}>
-                    <div className="policy-status-head">
-                      <span className="policy-status-icon" aria-hidden="true">{policyCard.iconSymbol}</span>
-                      <div>
-                        <h3>{policyCard.title}</h3>
-                        <p className="policy-vehicle-number">{policyCard.vehicleNumber}</p>
-                      </div>
-                    </div>
-                    {policyCard.status === 'noData' ? (
-                      <p className="policy-no-data-message">
-                        No policy record exists for this vehicle number.
-                      </p>
-                    ) : (
-                      <div className="policy-status-grid">
+                  <>
+                    <section className={`policy-status-card is-${getPolicyCardStatusClass(policyCard.status)}`}>
+                      <div className="policy-status-head">
+                        <span className="policy-status-icon" aria-hidden="true">{policyCard.iconSymbol}</span>
                         <div>
-                          <p className="policy-meta-label">Start Date</p>
-                          <p className="policy-meta-value">{policyCard.startDate}</p>
-                        </div>
-                        <div>
-                          <p className="policy-meta-label">End Date</p>
-                          <p className="policy-meta-value">{policyCard.endDate}</p>
-                        </div>
-                        <div>
-                          <p className="policy-meta-label">Status</p>
-                          <span className="policy-badge">{policyCard.statusLabel}</span>
+                          <h3>{policyCard.title}</h3>
+                          <p className="policy-vehicle-number">{policyCard.vehicleNumber}</p>
                         </div>
                       </div>
+
+                      {policyCard.status === 'noData' ? (
+                        <p className="policy-no-data-message">
+                          No policy record exists for this vehicle number.
+                        </p>
+                      ) : (
+                        <div className="policy-status-grid">
+                          <div>
+                            <p className="policy-meta-label">Start Date</p>
+                            <p className="policy-meta-value">{policyCard.startDate}</p>
+                          </div>
+                          <div>
+                            <p className="policy-meta-label">End Date</p>
+                            <p className="policy-meta-value">{policyCard.endDate}</p>
+                          </div>
+                          <div>
+                            <p className="policy-meta-label">Status</p>
+                            <span className="policy-badge">{policyCard.statusLabel}</span>
+                          </div>
+                        </div>
+                      )}
+                      <button type="button" className="policy-action-btn">{policyCard.ctaLabel}</button>
+                      <p className="policy-note">💡 {policyCard.note}</p>
+                    </section>
+
+                    {(policyCard.Name || policyCard.Vmodel || policyCard.FuelType || policyCard.Regyear) && (
+                      <section className="policy-owner-card" aria-labelledby="policy-owner-heading">
+                        <div className="policy-owner-head">
+                          <span className="policy-owner-icon" aria-hidden="true">👤</span>
+                          <h4 id="policy-owner-heading">Vehicle Details</h4>
+                        </div>
+                        <div className="policy-owner-grid">
+                          {policyCard.Name && (
+                            <div>
+                              <p className="policy-meta-label">Owner Name</p>
+                              <p className="policy-meta-value">{policyCard.Name}</p>
+                            </div>
+                          )}
+                          {policyCard.Vmodel && (
+                            <div>
+                              <p className="policy-meta-label">Vehicle Model</p>
+                              <p className="policy-meta-value">{policyCard.Vmodel}</p>
+                            </div>
+                          )}
+                          {policyCard.FuelType && (
+                            <div>
+                              <p className="policy-meta-label">Fuel Type</p>
+                              <p className="policy-meta-value">{policyCard.FuelType}</p>
+                            </div>
+                          )}
+                          {policyCard.Regyear && (
+                            <div>
+                              <p className="policy-meta-label">Registration Year</p>
+                              <p className="policy-meta-value">{policyCard.Regyear}</p>
+                            </div>
+                          )}
+                        </div>
+                      </section>
                     )}
-                    <button type="button" className="policy-action-btn">{policyCard.ctaLabel}</button>
-                    <p className="policy-note">💡 {policyCard.note}</p>
-                  </section>
+                  </>
                 )}
 
               </section>
