@@ -561,22 +561,22 @@ function BikeRenew() {
           vechileNumber={vechileNumber}
         />
       </div>
-      <section className="car-renew-hero page-section page-section--regular page-section-container" aria-labelledby="bike-renew-heading">
-        <div className="car-renew-hero__layout">
-          <div className="car-renew-hero__content">
-            <Link className="car-renew-hero__back-link" to="/">
+      <section className="motor-renew-hero page-section page-section--regular page-section-container" aria-labelledby="bike-renew-heading">
+        <div className="motor-renew-hero__layout">
+          <div className="motor-renew-hero__content">
+            <Link className="motor-renew-hero__back-link" to="/">
               ← Back to Home
             </Link>
-            <span className="car-renew-hero__tag">Bike Insurance Renewal</span>
-            <h1 id="bike-renew-heading" className="car-renew-hero__title">
-              <span className="car-renew-hero__title-line">Renew Your Bike Insurance</span>
-              <span className="car-renew-hero__title-line car-renew-hero__title-line--gradient">in Minutes</span>
+            <span className="motor-renew-hero__tag">Bike Insurance Renewal</span>
+            <h1 id="bike-renew-heading" className="motor-renew-hero__title">
+              <span className="motor-renew-hero__title-line">Renew Your Bike Insurance</span>
+              <span className="motor-renew-hero__title-line motor-renew-hero__title-line--gradient">in Minutes</span>
             </h1>
-            <div className="car-renew-hero__visual">
+            <div className="motor-renew-hero__visual">
               <img
                 src={bikeRenewHeroImage}
                 alt="Bike insurance protection overview"
-                className="car-renew-hero__visual-img"
+                className="motor-renew-hero__visual-img"
                 loading="lazy"
               />
             </div>

@@ -1,59 +1,68 @@
 import React, { useState } from 'react';
 import './Healt_Renew_Comp.css';
 import {
-  HiOutlineShieldCheck,
-  HiOutlineCheckCircle,
-  HiOutlineThumbUp,
-  HiOutlineClock,
-  HiOutlineLockClosed,
-  HiOutlineCurrencyRupee,
   HiOutlineClipboardCheck,
+  HiOutlineCheckCircle,
   HiOutlineCash,
   HiOutlineBeaker,
   HiOutlineHeart,
   HiOutlineTruck,
   HiOutlineHand,
+  HiOutlineClock,
+  HiOutlineLockClosed,
   HiOutlinePhone,
 } from 'react-icons/hi';
 import { HiOutlineClipboardDocument } from 'react-icons/hi2';
 import { TbStethoscope } from 'react-icons/tb';
+import continuousCoverageIcon from '../../assets/images/health-renew-benefits/continuous-coverage.png';
+import retainBenefitsIcon from '../../assets/images/health-renew-benefits/retain-benefits.png';
+import familyPeaceOfMindIcon from '../../assets/images/health-renew-benefits/family-peace-of-mind.png';
+import skipReUnderwritingIcon from '../../assets/images/health-renew-benefits/skip-re-underwriting.png';
+import costEffectiveRenewalIcon from '../../assets/images/health-renew-benefits/cost-effective-renewal.png';
+import securePaymentsIcon from '../../assets/images/health-renew-benefits/secure-payments.png';
 import InsuranceFaqAccordion from '../Faq/InsuranceFaqAccordion';
 import ContactHumanModal from '../ContactHumanModal/ContactHumanModal';
 
 const DEFAULT_WHY_RENEW_CARDS = [
   {
     id: 1,
-    icon: <HiOutlineShieldCheck />,
+    icon: continuousCoverageIcon,
+    iconAlt: 'Continuous Coverage',
     title: 'Continuous Coverage',
     description: 'Avoid waiting periods restarting by renewing on time.',
   },
   {
     id: 2,
-    icon: <HiOutlineCheckCircle />,
+    icon: retainBenefitsIcon,
+    iconAlt: 'Retain Benefits',
     title: 'Retain Benefits',
     description: 'Keep no-claim bonuses, cumulative bonus and tenure perks.',
   },
   {
     id: 3,
-    icon: <HiOutlineThumbUp />,
+    icon: familyPeaceOfMindIcon,
+    iconAlt: 'Family Peace of Mind',
     title: 'Family Peace of Mind',
     description: 'Stay protected against unexpected medical expenses.',
   },
   {
     id: 4,
-    icon: <HiOutlineClock />,
+    icon: skipReUnderwritingIcon,
+    iconAlt: 'Skip Re-Underwriting',
     title: 'Skip Re-Underwriting',
     description: 'Avoid fresh medicals required for lapsed policies.',
   },
   {
     id: 5,
-    icon: <HiOutlineCurrencyRupee />,
+    icon: costEffectiveRenewalIcon,
+    iconAlt: 'Cost-Effective Renewal',
     title: 'Cost-Effective Renewal',
     description: 'Renew at a lower cost compared to new policy purchases.',
   },
   {
     id: 6,
-    icon: <HiOutlineLockClosed />,
+    icon: securePaymentsIcon,
+    iconAlt: 'Secure Payments',
     title: 'Secure Payments',
     description: 'Bank-grade encryption on every transaction.',
   },
@@ -157,7 +166,9 @@ export const WhyRenewOnTime = ({ cards = DEFAULT_WHY_RENEW_CARDS }) => {
         <div className="Why-Renew-on-Time-cards-container">
           {cards.map((item) => (
             <div className="Why-Renew-on-Time-card" key={item.id}>
-              <div className="Why-Renew-on-Time-card-icon">{item.icon}</div>
+              <div className="Why-Renew-on-Time-card-icon">
+                <img src={item.icon} alt={item.iconAlt} loading="lazy" />
+              </div>
               <h2>{item.title}</h2>
               <p>{item.description}</p>
             </div>

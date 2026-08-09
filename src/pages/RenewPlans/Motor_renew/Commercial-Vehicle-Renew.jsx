@@ -561,25 +561,25 @@ function CommercialVehicleRenew() {
           vechileNumber={vechileNumber}
         />
       </div>
-      <section className="car-renew-hero page-section page-section--regular page-section-container" aria-labelledby="commercial-vehicle-renew-heading">
-        <div className="car-renew-hero__layout">
-          <div className="car-renew-hero__content">
-            <Link className="car-renew-hero__back-link" to="/">
+      <section className="motor-renew-hero page-section page-section--regular page-section-container" aria-labelledby="commercial-vehicle-renew-heading">
+        <div className="motor-renew-hero__layout">
+          <div className="motor-renew-hero__content">
+            <Link className="motor-renew-hero__back-link" to="/">
               ← Back to Home
             </Link>
-            <span className="car-renew-hero__tag">Commercial Vehicle Insurance Renewal</span>
-            <h1 id="commercial-vehicle-renew-heading" className="car-renew-hero__title">
-              <span className="car-renew-hero__title-line">Renew Your Commercial Vehicle</span>
-              <span className="car-renew-hero__title-line">
+            <span className="motor-renew-hero__tag">Commercial Vehicle Insurance Renewal</span>
+            <h1 id="commercial-vehicle-renew-heading" className="motor-renew-hero__title">
+              <span className="motor-renew-hero__title-line">Renew Your Commercial Vehicle</span>
+              <span className="motor-renew-hero__title-line">
                 Insurance{' '}
-                <span className="car-renew-hero__title-accent">in Minutes</span>
+                <span className="motor-renew-hero__title-accent">in Minutes</span>
               </span>
             </h1>
-            <div className="car-renew-hero__visual">
+            <div className="motor-renew-hero__visual">
               <img
                 src={commercialVehicleRenewHeroImage}
                 alt="Commercial vehicle insurance protection overview"
-                className="car-renew-hero__visual-img"
+                className="motor-renew-hero__visual-img"
                 loading="lazy"
               />
             </div>

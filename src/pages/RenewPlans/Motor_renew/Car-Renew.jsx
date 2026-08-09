@@ -561,22 +561,22 @@ function CarRenew() {
           vechileNumber={vechileNumber}
         />
       </div>
-      <section className="car-renew-hero page-section page-section--regular page-section-container" aria-labelledby="car-renew-heading">
-        <div className="car-renew-hero__layout">
-          <div className="car-renew-hero__content">
-            <Link className="car-renew-hero__back-link" to="/">
+      <section className="motor-renew-hero page-section page-section--regular page-section-container" aria-labelledby="car-renew-heading">
+        <div className="motor-renew-hero__layout">
+          <div className="motor-renew-hero__content">
+            <Link className="motor-renew-hero__back-link" to="/">
               ← Back to Home
             </Link>
-            <span className="car-renew-hero__tag">Car Insurance Renewal</span>
-            <h1 id="car-renew-heading" className="car-renew-hero__title">
-              <span className="car-renew-hero__title-line">Renew Your Car Insurance</span>
-              <span className="car-renew-hero__title-line car-renew-hero__title-line--gradient">in Minutes</span>
+            <span className="motor-renew-hero__tag">Car Insurance Renewal</span>
+            <h1 id="car-renew-heading" className="motor-renew-hero__title">
+              <span className="motor-renew-hero__title-line">Renew Your Car Insurance</span>
+              <span className="motor-renew-hero__title-line motor-renew-hero__title-line--gradient">in Minutes</span>
             </h1>
-            <div className="car-renew-hero__visual">
+            <div className="motor-renew-hero__visual">
               <img
                 src={carRenewHeroImage}
                 alt="Car insurance protection overview"
-                className="car-renew-hero__visual-img"
+                className="motor-renew-hero__visual-img"
                 loading="lazy"
               />
             </div>
