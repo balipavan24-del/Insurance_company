@@ -1712,6 +1712,21 @@
   text-align: left;
 }
 
+.health-dependent-age {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+}
+
+.health-dependent-item .health-dependent-age-label {
+  color: #64748b;
+  font-size: calc(var(--font-size-12) + 2px);
+  font-weight: 600;
+  text-align: left;
+  line-height: 1.2;
+}
+
 .health-dependent-item input {
   height: 34px;
 }

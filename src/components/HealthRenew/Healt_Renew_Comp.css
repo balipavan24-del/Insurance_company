@@ -84,8 +84,8 @@
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  width: 56px;
-  height: 56px;
+  width: 86px;
+  height: 86px;
   margin-bottom: 4px;
   flex-shrink: 0;
 }
@@ -229,14 +229,27 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 44px;
-  height: 44px;
+  width: 90px;
+  height: 90px;
   margin-bottom: 2px;
-  border-radius: 12px;
+  border-radius: 20px;
   font-size: 22px;
   color: #ffffff;
   background: linear-gradient(135deg, #2e88c7 0%, #4f46e5 100%);
   flex-shrink: 0;
+  overflow: hidden;
+}
+
+.Coverage-buitl-for-senior-citizen-card-icon--image {
+  padding: 6px;
+  box-sizing: border-box;
+  background: #ffffff;
+}
+
+.Coverage-buitl-for-senior-citizen-card-icon--image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .Coverage-buitl-for-senior-citizen-card h2 {
@@ -430,15 +443,27 @@
 }
 
 .senior-renew-process-card__icon {
-  width: 64px;
-  height: 64px;
-  border-radius: 16px;
+  width: 114px;
+  height: 114px;
+  border-radius: 24px;
   display: inline-grid;
   place-items: center;
   overflow: hidden;
   font-size: 30px;
   color: #ffffff;
   background: linear-gradient(135deg, #2e88c7 0%, #4f46e5 100%);
+}
+
+.senior-renew-process-card__icon--image {
+  padding: 10px;
+  box-sizing: border-box;
+  background: #ffffff;
+}
+
+.senior-renew-process-card__icon--image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .senior-renew-process-card__step {

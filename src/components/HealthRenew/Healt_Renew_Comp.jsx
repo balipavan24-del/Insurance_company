@@ -1,25 +1,24 @@
 import React, { useState } from 'react';
 import './Healt_Renew_Comp.css';
-import {
-  HiOutlineClipboardCheck,
-  HiOutlineCheckCircle,
-  HiOutlineCash,
-  HiOutlineBeaker,
-  HiOutlineHeart,
-  HiOutlineTruck,
-  HiOutlineHand,
-  HiOutlineClock,
-  HiOutlineLockClosed,
-  HiOutlinePhone,
-} from 'react-icons/hi';
-import { HiOutlineClipboardDocument } from 'react-icons/hi2';
-import { TbStethoscope } from 'react-icons/tb';
+import { HiOutlinePhone } from 'react-icons/hi';
 import continuousCoverageIcon from '../../assets/images/health-renew-benefits/continuous-coverage.png';
+import verifyMobileNumberIcon from '../../assets/images/health-renew-benefits/verify-mobile-number.png';
+import chooseYourPlanIcon from '../../assets/images/health-renew-benefits/choose-your-plan.png';
+import updateHealthInfoIcon from '../../assets/images/health-renew-benefits/update-health-info.png';
+import payAndRenewIcon from '../../assets/images/health-renew-benefits/pay-and-renew.png';
 import retainBenefitsIcon from '../../assets/images/health-renew-benefits/retain-benefits.png';
 import familyPeaceOfMindIcon from '../../assets/images/health-renew-benefits/family-peace-of-mind.png';
 import skipReUnderwritingIcon from '../../assets/images/health-renew-benefits/skip-re-underwriting.png';
 import costEffectiveRenewalIcon from '../../assets/images/health-renew-benefits/cost-effective-renewal.png';
 import securePaymentsIcon from '../../assets/images/health-renew-benefits/secure-payments.png';
+import preExistingDiseasesIcon from '../../assets/images/health-renew-benefits/pre-existing-diseases.png';
+import cashlessHospitalisationIcon from '../../assets/images/health-renew-benefits/cashless-hospitalisation.png';
+import preAndPostHospitalisationIcon from '../../assets/images/health-renew-benefits/pre-and-post-hospitalisation.png';
+import annualHealthCheckupsIcon from '../../assets/images/health-renew-benefits/annual-health-checkups.png';
+import roadAmbulanceCoverIcon from '../../assets/images/health-renew-benefits/road-ambulance-cover.png';
+import domiciliaryTreatmentIcon from '../../assets/images/health-renew-benefits/domiciliary-treatment.png';
+import dayCareProceduresIcon from '../../assets/images/health-renew-benefits/day-care-procedures.png';
+import lifetimeRenewabilityIcon from '../../assets/images/health-renew-benefits/lifetime-renewability.png';
 import InsuranceFaqAccordion from '../Faq/InsuranceFaqAccordion';
 import ContactHumanModal from '../ContactHumanModal/ContactHumanModal';
 
@@ -71,49 +70,57 @@ const DEFAULT_WHY_RENEW_CARDS = [
 const DEFAULT_COVERAGE_CARDS = [
   {
     id: 1,
-    icon: <HiOutlineClipboardCheck />,
+    icon: preExistingDiseasesIcon,
+    iconAlt: 'Pre-existing Diseases',
     title: 'Pre-existing Diseases',
     description: 'Coverage for diabetes, BP, heart conditions after a short waiting period.',
   },
   {
     id: 2,
-    icon: <HiOutlineCash />,
+    icon: cashlessHospitalisationIcon,
+    iconAlt: 'Cashless Hospitalisation',
     title: 'Cashless Hospitalisation',
     description: 'Direct claim settlement across 10,000+ network hospitals.',
   },
   {
     id: 3,
-    icon: <HiOutlineBeaker />,
+    icon: preAndPostHospitalisationIcon,
+    iconAlt: 'Pre & Post Hospitalisation',
     title: 'Pre & Post Hospitalisation',
     description: 'Medicines, diagnostics and follow-ups covered up to 60+90 days.',
   },
   {
     id: 4,
-    icon: <HiOutlineHeart />,
+    icon: annualHealthCheckupsIcon,
+    iconAlt: 'Annual Health Check-ups',
     title: 'Annual Health Check-ups',
     description: 'Free preventive check-ups every policy year for early detection.',
   },
   {
     id: 5,
-    icon: <HiOutlineTruck />,
+    icon: roadAmbulanceCoverIcon,
+    iconAlt: 'Road Ambulance Cover',
     title: 'Road Ambulance Cover',
     description: 'Reimbursement for emergency ambulance charges to the hospital.',
   },
   {
     id: 6,
-    icon: <HiOutlineHand />,
+    icon: domiciliaryTreatmentIcon,
+    iconAlt: 'Domiciliary Treatment',
     title: 'Domiciliary Treatment',
     description: 'Treatment taken at home when hospitalisation isn t feasible.',
   },
   {
     id: 7,
-    icon: <HiOutlineClock />,
+    icon: dayCareProceduresIcon,
+    iconAlt: 'Day-Care Procedures',
     title: 'Day-Care Procedures',
     description: 'Cataract, dialysis, chemotherapy and 500+ day-care treatments.',
   },
   {
     id: 8,
-    icon: <HiOutlineLockClosed />,
+    icon: lifetimeRenewabilityIcon,
+    iconAlt: 'Lifetime Renewability',
     title: 'Lifetime Renewability',
     description: 'Continue your cover for life with no upper exit age.',
   },
@@ -123,28 +130,32 @@ const RENEW_IN_SIMPLE_STEPS = [
   {
     id: 1,
     no: '1',
-    icon: <HiOutlineClipboardCheck />,
+    icon: verifyMobileNumberIcon,
+    iconAlt: 'Verify Mobile Number',
     title: 'Verify Mobile Number',
     description: 'Secure OTP verification on your registered number.',
   },
   {
     id: 2,
     no: '2',
-    icon: <HiOutlineClipboardDocument />,
+    icon: chooseYourPlanIcon,
+    iconAlt: 'Choose Your Plan',
     title: 'Choose Your Plan',
     description: 'Review insurer, sum insured and member details.',
   },
   {
     id: 3,
     no: '3',
-    icon: <TbStethoscope />,
+    icon: updateHealthInfoIcon,
+    iconAlt: 'Update Health Info',
     title: 'Update Health Info',
-    description: 'Pay securely and receive your policy instantly.',
+    description: 'Update any health declarations before renewal.',
   },
   {
     id: 4,
     no: '4',
-    icon: <HiOutlineCheckCircle />,
+    icon: payAndRenewIcon,
+    iconAlt: 'Pay & Renew',
     title: 'Pay & Renew',
     description: 'Secure online payment — policy delivered instantly.',
   },
@@ -203,7 +214,9 @@ export const WhatsCovered = ({
       <div className="Coverage-Built-for-Seniors-cards-container">
         {cards.map((item) => (
           <div className="Coverage-buitl-for-senior-citizen-card" key={item.id}>
-            <div className="Coverage-buitl-for-senior-citizen-card-icon">{item.icon}</div>
+            <div className="Coverage-buitl-for-senior-citizen-card-icon Coverage-buitl-for-senior-citizen-card-icon--image">
+              <img src={item.icon} alt={item.iconAlt} loading="lazy" />
+            </div>
             <h2>{item.title}</h2>
             <p>{item.description}</p>
           </div>
@@ -235,8 +248,8 @@ export const RenewProcess = () => {
               <li key={item.id} className="senior-renew-process__item">
                 <article className="senior-renew-process-card senior-renew-process-card--float">
                   <div className="senior-renew-process-card__icon-wrap">
-                    <span className="senior-renew-process-card__icon" aria-hidden="true">
-                      {item.icon}
+                    <span className="senior-renew-process-card__icon senior-renew-process-card__icon--image" aria-hidden="true">
+                      <img src={item.icon} alt={item.iconAlt} loading="lazy" />
                     </span>
                     <span className="senior-renew-process-card__step">{item.no}</span>
                   </div>
