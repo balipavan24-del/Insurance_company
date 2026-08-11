@@ -1109,12 +1109,15 @@ function HealthHome({ onBackHome }) {
             {parents.map((parent) => (
               <div key={parent.id} className="health-dependent-item">
                 <span>{parent.label}</span>
-                {renderAgeInput(
-                  parent.age,
-                  (nextAge) => handleDependentAgeUpdate(parents, setParents, parent.id, nextAge),
-                  `${parent.label} age`,
-                  true
-                )}
+                <div className="health-dependent-age">
+                  <span className="health-dependent-age-label">Age</span>
+                  {renderAgeInput(
+                    parent.age,
+                    (nextAge) => handleDependentAgeUpdate(parents, setParents, parent.id, nextAge),
+                    `${parent.label} age`,
+                    true
+                  )}
+                </div>
                 <button
                   type="button"
                   className="health-remove-btn"
