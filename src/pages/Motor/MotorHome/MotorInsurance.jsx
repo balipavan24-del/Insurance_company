@@ -1442,16 +1442,13 @@ function MotorInsurance({ onBackHome }) {
                 return null;
             }
           })()}
-
           </>
       </section>
-
       <InsuranceFaqAccordion
         title="Frequently Asked Questions"
         subtitle="Answers about motor insurance types, mandatory cover, NCB, and common exclusions."
         items={motorInsuranceFaqItems}
       />
-
       <Footer />
     </main>
   );

@@ -320,7 +320,7 @@
   }
 }
 
-/* Why it matters — stacked copy + image (rounded) */
+/* Why it matters — text-only band */
 .health-matters-section {
   background: #ffffff;
   text-align: left;
@@ -331,29 +331,12 @@
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: clamp(24px, 4vw, 40px);
-  align-items: stretch;
   text-align: left;
 }
 
 .health-matters-copy {
   text-align: left;
   width: 100%;
-}
-
-.health-matters-visual {
-  margin: 0;
-  padding: 0;
-  line-height: 0;
-  width: 100%;
-}
-
-.health-matters-image {
-  display: block;
-  width: 100%;
-  height: auto;
-  border-radius: 20px;
-  object-fit: cover;
 }
 
 /* Types of health insurance — sky band, 2×2 horizontal cards */
@@ -602,8 +585,11 @@
   color: var(--covered-accent);
 }
 
-.health-covered-svg {
+.health-covered-icon-img {
   display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .health-covered-card-title {
@@ -731,8 +717,11 @@
   color: var(--ex-icon);
 }
 
-.health-exclusions-svg {
+.health-exclusions-icon-img {
   display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .health-exclusions-card-title {
@@ -869,12 +858,10 @@
   color: #c026d3;
 }
 
-.health-benefits-svg {
-  display: block;
-}
-
-.health-benefits-svg--stroke {
-  overflow: visible;
+.health-benefits-icon-wrap .health-hero-feature-icon {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .health-benefits-title {
@@ -1112,8 +1099,11 @@
   color: #6b21a8;
 }
 
-.health-hero-feature-svg {
+.health-hero-feature-icon {
   display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .health-hero-feature-title {

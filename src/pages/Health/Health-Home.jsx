@@ -5,10 +5,41 @@ import { healthInsuranceFaqItems } from '../../data/productContent';
 import { modalOverlayClass, modalPanelClass, useAnimatedModal } from '../../components/AnimatedModal/AnimatedModal';
 import './Health-Home.css';
 
-const healthImage = (name) => `${import.meta.env.BASE_URL}images/health/${name}`;
-const healthHeroImage = healthImage('hero.webp');
-const healthAboutImage = healthImage('About-Health.webp');
-const healthMattersImage = healthImage('matters.webp');
+// Static health page images
+import healthHeroImage from '/images/health/hero.webp';
+import healthAboutImage from '/images/health/About-Health.webp';
+
+// What's Covered icons (PNG illustrations)
+import coveredHospitalizationIcon from '/images/health/covered-hospitalization-expenses.png';
+import coveredPrePostIcon from '/images/health/covered-pre-post-hospitalization.png';
+import coveredDayCareIcon from '/images/health/covered-day-care.png';
+import coveredAmbulanceIcon from '/images/health/covered-ambulance-charges.png';
+import coveredSurgeriesIcon from '/images/health/covered-surgeries.png';
+import coveredCriticalIcon from '/images/health/covered-critical-illness.png';
+import coveredDiagnosticIcon from '/images/health/covered-diagnostic-tests.png';
+import coveredCashlessIcon from '/images/health/covered-cashless-treatment.png';
+
+// What's Not Covered icons (PNG illustrations)
+import exclusionPreExistingIcon from '/images/health/exclusion-pre-existing-diseases.png';
+import exclusionNonMedicalIcon from '/images/health/exclusion-non-medical-expenses.png';
+import exclusionCosmeticIcon from '/images/health/exclusion-cosmetic-treatments.png';
+import exclusionSelfInflictedIcon from '/images/health/exclusion-self-inflicted-injuries.png';
+import exclusionExperimentalIcon from '/images/health/exclusion-experimental-treatments.png';
+import exclusionDentalVisionIcon from '/images/health/exclusion-dental-vision.png';
+import exclusionMaternityIcon from '/images/health/exclusion-maternity.png';
+import exclusionSubstanceIcon from '/images/health/exclusion-substance-abuse.png';
+
+// Hero feature card icons (PNG illustrations)
+import comprehensiveCoverageIcon from '/images/health/comprehensive-coverage.png';
+import cashlessHospitalsIcon from '/images/health/cashless-hospitals.png';
+import quickClaimSupportIcon from '/images/health/quick-claim-support.png';
+import familyProtectionIcon from '/images/health/family-protection.png';
+
+// Why insurance benefit icons (PNG illustrations)
+import risingMedicalCostsIcon from '/images/health/rising-medical-costs.png';
+import emergencyProtectionIcon from '/images/health/emergency-protection.png';
+import peaceOfMindIcon from '/images/health/peace-of-mind.png';
+import financialSecurityIcon from '/images/health/financial-security.png';
 
 const GENDER_OPTIONS = ['Male', 'Female'];
 
@@ -289,186 +320,17 @@ function IconTypeTopUpLayers() {
   );
 }
 
-function IconTrendChart() {
+function HeroFeatureIcon({ src, alt }) {
   return (
-    <svg
-      className="health-benefits-svg health-benefits-svg--stroke"
-      viewBox="0 0 24 24"
-      width="24"
-      height="24"
-      fill="none"
-      aria-hidden="true"
-      focusable="false"
-    >
-      <path d="M4 19V5" stroke="currentColor" strokeWidth="1.65" strokeLinecap="round" />
-      <path d="M4 19h16" stroke="currentColor" strokeWidth="1.65" strokeLinecap="round" />
-      <rect x="6" y="14" width="3.5" height="5" rx="0.75" stroke="currentColor" strokeWidth="1.65" />
-      <rect x="11.25" y="11" width="3.5" height="8" rx="0.75" stroke="currentColor" strokeWidth="1.65" />
-      <rect x="16.5" y="7" width="3.5" height="12" rx="0.75" stroke="currentColor" strokeWidth="1.65" />
-      <path
-        d="M5.5 16.5 10 13l3.5 2.5L20.5 8"
-        stroke="currentColor"
-        strokeWidth="1.65"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M17 8h3.5v3.5"
-        stroke="currentColor"
-        strokeWidth="1.65"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
-
-function IconEmergencySiren() {
-  return (
-    <svg
-      className="health-benefits-svg health-benefits-svg--stroke"
-      viewBox="0 0 24 24"
-      width="24"
-      height="24"
-      fill="none"
-      aria-hidden="true"
-      focusable="false"
-    >
-      <path d="M12 22a2 2 0 0 0 2-2H10a2 2 0 0 0 2 2z" stroke="currentColor" strokeWidth="1.65" strokeLinejoin="round" />
-      <path
-        d="M6 9.5a6 6 0 0 1 12 0v4.75l2 2.25H4l2-2.25V9.5z"
-        stroke="currentColor"
-        strokeWidth="1.65"
-        strokeLinejoin="round"
-      />
-      <path d="M12 3v2M17.5 5l1.4-1.4M6.5 5 5.1 3.6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-      <path d="M12 9v3.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-    </svg>
-  );
-}
-
-function IconSmileCalm() {
-  return (
-    <svg
-      className="health-benefits-svg health-benefits-svg--stroke"
-      viewBox="0 0 24 24"
-      width="24"
-      height="24"
-      fill="none"
-      aria-hidden="true"
-      focusable="false"
-    >
-      <circle cx="12" cy="12" r="9.25" stroke="currentColor" strokeWidth="1.65" />
-      <path
-        d="M9 10.25h.01M15 10.25h.01"
-        stroke="currentColor"
-        strokeWidth="2.25"
-        strokeLinecap="round"
-      />
-      <path
-        stroke="currentColor"
-        strokeWidth="1.65"
-        strokeLinecap="round"
-        d="M8.25 14.5c1.15 2 3.15 3.25 5.35 3.25 2.2 0 4.2-1.25 5.35-3.25"
-      />
-    </svg>
-  );
-}
-
-function IconWalletShield() {
-  return (
-    <svg
-      className="health-benefits-svg health-benefits-svg--stroke"
-      viewBox="0 0 24 24"
-      width="24"
-      height="24"
-      fill="none"
-      aria-hidden="true"
-      focusable="false"
-    >
-      <path
-        d="M12 22s8-3.75 8-9.5V6.5l-8-3.25L4 6.5V12.5C4 18.25 12 22 12 22z"
-        stroke="currentColor"
-        strokeWidth="1.65"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M12 8.5v5M9.25 11.25h5.5"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-      />
-      <rect x="3.5" y="12" width="7" height="5.5" rx="1" stroke="currentColor" strokeWidth="1.4" opacity="0.85" />
-      <path d="M5.25 14.25h3.5" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" opacity="0.85" />
-    </svg>
-  );
-}
-
-function IconShieldPlus() {
-  return (
-    <svg className="health-hero-feature-svg" viewBox="0 0 24 24" width="24" height="24" fill="none" aria-hidden="true" focusable="false">
-      <path
-        d="M12 3 5 6v5.5c0 4.25 2.95 8.25 7 10l.35.15.35-.15c4.05-1.75 7-5.75 7-10V6l-7-3z"
-        stroke="currentColor"
-        strokeWidth="1.65"
-        strokeLinejoin="round"
-      />
-      <path d="M12 8.25v7.5M8.25 12h7.5" stroke="currentColor" strokeWidth="1.65" strokeLinecap="round" />
-    </svg>
-  );
-}
-
-function IconHospitalPlus() {
-  return (
-    <svg className="health-hero-feature-svg" viewBox="0 0 24 24" width="24" height="24" fill="none" aria-hidden="true" focusable="false">
-      <path
-        d="M8.25 19.75V11h1.5V9h4.5v2h1.5v8.75h-7.5z"
-        stroke="currentColor"
-        strokeWidth="1.65"
-        strokeLinejoin="round"
-      />
-      <path d="M10.5 17.5v-2.25h3v2.25M10.5 13v-2h3v2" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-      <path d="M11.5 5.5h1v2.5h-1V5.5zM16 7h1.75v1.5H16V7z" fill="currentColor" opacity="0.88" />
-      <path d="M12 12.75v2.75M10.75 14.25h2.5" stroke="currentColor" strokeWidth="1.35" strokeLinecap="round" />
-    </svg>
-  );
-}
-
-function IconHeadset() {
-  return (
-    <svg className="health-hero-feature-svg" viewBox="0 0 24 24" width="24" height="24" fill="none" aria-hidden="true" focusable="false">
-      <path
-        d="M5.5 11.5v4.75a1.75 1.75 0 0 0 1.75 1.75H8"
-        stroke="currentColor"
-        strokeWidth="1.65"
-        strokeLinecap="round"
-      />
-      <path
-        d="M18.5 11.5v4.75a1.75 1.75 0 0 1-1.75 1.75H16"
-        stroke="currentColor"
-        strokeWidth="1.65"
-        strokeLinecap="round"
-      />
-      <path
-        d="M5.5 14.25h-1.5a1 1 0 0 1-1-1v-1a7.5 7.5 0 0 1 15 0v1a1 1 0 0 1-1 1H16"
-        stroke="currentColor"
-        strokeWidth="1.65"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path d="M8 14.5a1.25 1.25 0 1 1-2.5 0 1.25 1.25 0 0 1 2.5 0zm10.5 0a1.25 1.25 0 1 1-2.5 0 1.25 1.25 0 0 1 2.5 0z" fill="currentColor" />
-    </svg>
-  );
-}
-
-function IconFamilyHeart() {
-  return (
-    <svg className="health-hero-feature-svg" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false">
-      <path
-        fill="currentColor"
-        d="M12 18.6c-.2 0-.45-.1-.65-.25C8.1 16.05 5.25 13.55 5.25 10.6c0-2.05 1.55-3.65 3.5-3.65 1.15 0 2.2.55 2.85 1.45.7-.9 1.75-1.45 2.9-1.45 1.95 0 3.5 1.6 3.5 3.65 0 2.95-2.85 5.45-5.9 7.75-.2.15-.45.25-.65.25z"
-      />
-    </svg>
+    <img
+      src={src}
+      alt={alt}
+      className="health-hero-feature-icon"
+      width="28"
+      height="28"
+      loading="lazy"
+      decoding="async"
+    />
   );
 }
 
@@ -479,136 +341,6 @@ function IconBadgeShield() {
         fill="currentColor"
         d="M12 2.2 4.5 5.4v5.4c0 4.4 3 8.5 7.5 10.3l.2.1.2-.1C16.5 19.3 19.5 15.2 19.5 10.8V5.4L12 2.2zm-.5 5.3h1v2.2h2.2v1H12.5v2.2h-1v-2.2H9.3v-1h2.2V7.5z"
       />
-    </svg>
-  );
-}
-
-function IconCovHospital() {
-  return (
-    <svg className="health-covered-svg" viewBox="0 0 24 24" width="22" height="22" fill="none" aria-hidden="true" focusable="false">
-      <path
-        d="M5.5 20.25V6.75L12 3.75l6.5 3v13.5H5.5z"
-        stroke="currentColor"
-        strokeWidth="1.65"
-        strokeLinejoin="round"
-      />
-      <path d="M9.25 20.25v-5.5h5.5v5.5" stroke="currentColor" strokeWidth="1.65" strokeLinejoin="round" />
-      <path d="M12 8.25v3.25M10.375 9.875h3.25" stroke="currentColor" strokeWidth="1.65" strokeLinecap="round" />
-    </svg>
-  );
-}
-
-function IconCovPrePost() {
-  return (
-    <svg className="health-covered-svg" viewBox="0 0 24 24" width="22" height="22" fill="none" aria-hidden="true" focusable="false">
-      <path
-        d="M12 4.75v4.5c0 2.35 1.9 4.25 4.25 4.25h.5a2 2 0 0 1 0 4H15"
-        stroke="currentColor"
-        strokeWidth="1.65"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M7.5 10.5c1.1 0 2 .9 2 2v1.25c0 1.65 1.35 3 3 3h.75"
-        stroke="currentColor"
-        strokeWidth="1.65"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <circle cx="12" cy="18.75" r="2.25" stroke="currentColor" strokeWidth="1.65" />
-      <path d="M16.5 6.5h2.25M17.625 5.375v2.25" stroke="currentColor" strokeWidth="1.65" strokeLinecap="round" />
-    </svg>
-  );
-}
-
-function IconCovDayCare() {
-  return (
-    <svg className="health-covered-svg" viewBox="0 0 24 24" width="22" height="22" fill="none" aria-hidden="true" focusable="false">
-      <path
-        d="M3.5 12h3.25l2.1-5.25 3.35 10.5 2.15-5.25H20.5"
-        stroke="currentColor"
-        strokeWidth="1.65"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
-
-function IconCovAmbulance() {
-  return (
-    <svg className="health-covered-svg" viewBox="0 0 24 24" width="22" height="22" fill="none" aria-hidden="true" focusable="false">
-      <path
-        d="M4.5 16.25h14.75M4.5 16.25v-6.5h7.75l1.85 2.85H18.5v3.65"
-        stroke="currentColor"
-        strokeWidth="1.65"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <circle cx="8.25" cy="16.25" r="1.35" stroke="currentColor" strokeWidth="1.65" />
-      <circle cx="16.75" cy="16.25" r="1.35" stroke="currentColor" strokeWidth="1.65" />
-      <path d="M11.25 12.5h2.25v-2.1h-2.25v2.1z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
-    </svg>
-  );
-}
-
-function IconCovSurgery() {
-  return (
-    <svg className="health-covered-svg" viewBox="0 0 24 24" width="22" height="22" fill="none" aria-hidden="true" focusable="false">
-      <circle cx="8" cy="7" r="2.35" stroke="currentColor" strokeWidth="1.65" />
-      <circle cx="16" cy="7" r="2.35" stroke="currentColor" strokeWidth="1.65" />
-      <path
-        d="M9.35 8.85 12 12l2.65-3.15M9.35 15.15 12 12l2.65 3.15"
-        stroke="currentColor"
-        strokeWidth="1.65"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path d="M7.25 17.75h3.75M13 17.75h3.75" stroke="currentColor" strokeWidth="1.65" strokeLinecap="round" />
-    </svg>
-  );
-}
-
-function IconCovCritical() {
-  return (
-    <svg className="health-covered-svg" viewBox="0 0 24 24" width="22" height="22" fill="none" aria-hidden="true" focusable="false">
-      <path
-        d="M12 20.35c-4.85-3.05-8.15-5.95-8.15-10.2a4.85 4.85 0 0 1 4.5-4.85 4.85 4.85 0 0 1 3.65 1.7 4.85 4.85 0 0 1 3.65-1.7 4.85 4.85 0 0 1 4.5 4.85c0 4.25-3.3 7.15-8.15 10.2z"
-        stroke="currentColor"
-        strokeWidth="1.65"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
-
-function IconCovDiagnostic() {
-  return (
-    <svg className="health-covered-svg" viewBox="0 0 24 24" width="22" height="22" fill="none" aria-hidden="true" focusable="false">
-      <path d="M9.25 4.75h5.5l1.25 3.25h-8l1.25-3.25z" stroke="currentColor" strokeWidth="1.65" strokeLinejoin="round" />
-      <path d="M12 8v2.75" stroke="currentColor" strokeWidth="1.65" strokeLinecap="round" />
-      <path d="M8.5 13.5h7l-1.75 6.75h-3.5L8.5 13.5z" stroke="currentColor" strokeWidth="1.65" strokeLinejoin="round" />
-      <circle cx="12" cy="11.75" r="1.5" stroke="currentColor" strokeWidth="1.65" />
-      <path d="M10.25 17.5h3.5" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
-    </svg>
-  );
-}
-
-function IconCovCashless() {
-  return (
-    <svg className="health-covered-svg" viewBox="0 0 24 24" width="22" height="22" fill="none" aria-hidden="true" focusable="false">
-      <rect x="3.5" y="6.5" width="17" height="11" rx="2" stroke="currentColor" strokeWidth="1.65" />
-      <path d="M3.5 10.25h17" stroke="currentColor" strokeWidth="1.65" />
-      <path d="M7 14.25h4.5M7 16h3" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" opacity="0.85" />
-    </svg>
-  );
-}
-
-function IconExclusionBan() {
-  return (
-    <svg className="health-exclusions-svg" viewBox="0 0 24 24" width="22" height="22" fill="none" aria-hidden="true" focusable="false">
-      <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth="1.65" />
-      <path d="M7.75 7.75l8.5 8.5" stroke="currentColor" strokeWidth="1.65" strokeLinecap="round" />
     </svg>
   );
 }
@@ -650,28 +382,32 @@ const WHY_INSURANCE_BENEFITS = [
     title: 'Rising Medical Costs',
     description: 'Stay ahead of inflation in healthcare expenses.',
     iconWrapClass: 'health-benefits-icon-wrap is-benefit-blue',
-    Icon: IconTrendChart,
+    iconSrc: risingMedicalCostsIcon,
+    iconAlt: 'Rising medical costs icon',
   },
   {
     id: 'emergency',
     title: 'Emergency Protection',
     description: 'Be ready for any unexpected medical event.',
     iconWrapClass: 'health-benefits-icon-wrap is-benefit-rose',
-    Icon: IconEmergencySiren,
+    iconSrc: emergencyProtectionIcon,
+    iconAlt: 'Emergency protection icon',
   },
   {
     id: 'peace',
     title: 'Peace of Mind',
     description: 'Focus on recovery, not bills, when it matters.',
     iconWrapClass: 'health-benefits-icon-wrap is-benefit-purple',
-    Icon: IconSmileCalm,
+    iconSrc: peaceOfMindIcon,
+    iconAlt: 'Peace of mind icon',
   },
   {
     id: 'security',
     title: 'Financial Security',
     description: 'Protect your savings from medical emergencies.',
     iconWrapClass: 'health-benefits-icon-wrap is-benefit-fuchsia',
-    Icon: IconWalletShield,
+    iconSrc: financialSecurityIcon,
+    iconAlt: 'Financial security icon',
   },
 ];
 
@@ -680,48 +416,52 @@ const HERO_FEATURE_CARDS = [
     id: 'coverage',
     title: 'Comprehensive Coverage',
     iconWrapClass: 'health-hero-feature-icon-wrap is-sky',
-    Icon: IconShieldPlus,
+    iconSrc: comprehensiveCoverageIcon,
+    iconAlt: 'Comprehensive coverage icon',
   },
   {
     id: 'cashless',
     title: 'Cashless Hospitals',
     iconWrapClass: 'health-hero-feature-icon-wrap is-violet',
-    Icon: IconHospitalPlus,
+    iconSrc: cashlessHospitalsIcon,
+    iconAlt: 'Cashless hospitals icon',
   },
   {
     id: 'claims',
     title: 'Quick Claim Support',
     iconWrapClass: 'health-hero-feature-icon-wrap is-rose',
-    Icon: IconHeadset,
+    iconSrc: quickClaimSupportIcon,
+    iconAlt: 'Quick claim support icon',
   },
   {
     id: 'family',
     title: 'Family Protection',
     iconWrapClass: 'health-hero-feature-icon-wrap is-lilac',
-    Icon: IconFamilyHeart,
+    iconSrc: familyProtectionIcon,
+    iconAlt: 'Family protection icon',
   },
 ];
 
 const HEALTH_COVERAGE_ITEMS = [
-  { id: 'hospital', title: 'Hospitalization Expenses', Icon: IconCovHospital },
-  { id: 'prepost', title: 'Pre & Post Hospitalization', Icon: IconCovPrePost },
-  { id: 'daycare', title: 'Day-Care Procedures', Icon: IconCovDayCare },
-  { id: 'ambulance', title: 'Ambulance Charges', Icon: IconCovAmbulance },
-  { id: 'surgery', title: 'Surgeries & Treatments', Icon: IconCovSurgery },
-  { id: 'critical', title: 'Critical Illness Coverage', Icon: IconCovCritical },
-  { id: 'diagnostic', title: 'Diagnostic Tests', Icon: IconCovDiagnostic },
-  { id: 'cashless', title: 'Cashless Treatment', Icon: IconCovCashless },
+  { id: 'hospital', title: 'Hospitalization Expenses', iconSrc: coveredHospitalizationIcon, iconAlt: 'Hospitalization expenses icon' },
+  { id: 'prepost', title: 'Pre & Post Hospitalization', iconSrc: coveredPrePostIcon, iconAlt: 'Pre and post hospitalization icon' },
+  { id: 'daycare', title: 'Day-Care Procedures', iconSrc: coveredDayCareIcon, iconAlt: 'Day-care procedures icon' },
+  { id: 'ambulance', title: 'Ambulance Charges', iconSrc: coveredAmbulanceIcon, iconAlt: 'Ambulance charges icon' },
+  { id: 'surgery', title: 'Surgeries & Treatments', iconSrc: coveredSurgeriesIcon, iconAlt: 'Surgeries and treatments icon' },
+  { id: 'critical', title: 'Critical Illness Coverage', iconSrc: coveredCriticalIcon, iconAlt: 'Critical illness coverage icon' },
+  { id: 'diagnostic', title: 'Diagnostic Tests', iconSrc: coveredDiagnosticIcon, iconAlt: 'Diagnostic tests icon' },
+  { id: 'cashless', title: 'Cashless Treatment', iconSrc: coveredCashlessIcon, iconAlt: 'Cashless treatment icon' },
 ];
 
 const HEALTH_EXCLUSION_ITEMS = [
-  { id: 'preexisting', title: 'Pre-existing diseases (waiting period)', Icon: IconExclusionBan },
-  { id: 'nonmedical', title: 'Non-medical expenses', Icon: IconExclusionBan },
-  { id: 'cosmetic', title: 'Cosmetic treatments', Icon: IconExclusionBan },
-  { id: 'selfharm', title: 'Self-inflicted injuries', Icon: IconExclusionBan },
-  { id: 'experimental', title: 'Experimental treatments', Icon: IconExclusionBan },
-  { id: 'dentalvision', title: 'Dental/vision (non-accidental)', Icon: IconExclusionBan },
-  { id: 'maternity', title: 'Maternity (waiting period)', Icon: IconExclusionBan },
-  { id: 'substance', title: 'Substance abuse', Icon: IconExclusionBan },
+  { id: 'preexisting', title: 'Pre-existing diseases (waiting period)', iconSrc: exclusionPreExistingIcon, iconAlt: 'Pre-existing diseases exclusion icon' },
+  { id: 'nonmedical', title: 'Non-medical expenses', iconSrc: exclusionNonMedicalIcon, iconAlt: 'Non-medical expenses exclusion icon' },
+  { id: 'cosmetic', title: 'Cosmetic treatments', iconSrc: exclusionCosmeticIcon, iconAlt: 'Cosmetic treatments exclusion icon' },
+  { id: 'selfharm', title: 'Self-inflicted injuries', iconSrc: exclusionSelfInflictedIcon, iconAlt: 'Self-inflicted injuries exclusion icon' },
+  { id: 'experimental', title: 'Experimental treatments', iconSrc: exclusionExperimentalIcon, iconAlt: 'Experimental treatments exclusion icon' },
+  { id: 'dentalvision', title: 'Dental/vision (non-accidental)', iconSrc: exclusionDentalVisionIcon, iconAlt: 'Dental and vision exclusion icon' },
+  { id: 'maternity', title: 'Maternity (waiting period)', iconSrc: exclusionMaternityIcon, iconAlt: 'Maternity exclusion icon' },
+  { id: 'substance', title: 'Substance abuse', iconSrc: exclusionSubstanceIcon, iconAlt: 'Substance abuse exclusion icon' },
 ];
 
 function HealthHome({ onBackHome }) {
@@ -1404,10 +1144,10 @@ function HealthHome({ onBackHome }) {
               </p>
 
               <ul className="health-hero-feature-grid">
-                {HERO_FEATURE_CARDS.map(({ id, title, iconWrapClass, Icon }) => (
+                {HERO_FEATURE_CARDS.map(({ id, title, iconWrapClass, iconSrc, iconAlt }) => (
                   <li key={id} className="health-hero-feature-card">
                     <span className={iconWrapClass} aria-hidden="true">
-                      <Icon />
+                      <HeroFeatureIcon src={iconSrc} alt={iconAlt} />
                     </span>
                     <span className="health-hero-feature-title">{title}</span>
                   </li>
@@ -1462,14 +1202,6 @@ function HealthHome({ onBackHome }) {
               ensures timely access to proper medical care when needed.
             </p>
           </div>
-          <div className="health-matters-visual">
-            <img
-              src={healthMattersImage}
-              alt="Healthcare professional supporting a patient in a hospital setting"
-              className="health-matters-image"
-              decoding="async"
-            />
-          </div>
         </div>
       </section>
 
@@ -1479,10 +1211,10 @@ function HealthHome({ onBackHome }) {
         </h2>
         <div className="health-benefits-inner">
           <ul className="health-benefits-grid">
-            {WHY_INSURANCE_BENEFITS.map(({ id, title, description, iconWrapClass, Icon }) => (
+            {WHY_INSURANCE_BENEFITS.map(({ id, title, description, iconWrapClass, iconSrc, iconAlt }) => (
               <li key={id} className="health-benefits-card">
                 <span className={iconWrapClass} aria-hidden="true">
-                  <Icon />
+                  <HeroFeatureIcon src={iconSrc} alt={iconAlt} />
                 </span>
                 <h3 className="health-benefits-title">{title}</h3>
                 <p className="health-benefits-desc">{description}</p>
@@ -1525,10 +1257,18 @@ function HealthHome({ onBackHome }) {
             Comprehensive benefits across every step of your medical care.
           </p>
           <ul className="health-covered-grid">
-            {HEALTH_COVERAGE_ITEMS.map(({ id, title, Icon }) => (
+            {HEALTH_COVERAGE_ITEMS.map(({ id, title, iconSrc, iconAlt }) => (
               <li key={id} className="health-covered-card">
                 <span className="health-covered-card-icon" aria-hidden="true">
-                  <Icon />
+                  <img
+                    src={iconSrc}
+                    alt={iconAlt}
+                    className="health-covered-icon-img"
+                    width="32"
+                    height="32"
+                    loading="lazy"
+                    decoding="async"
+                  />
                 </span>
                 <span className="health-covered-card-title">{title}</span>
               </li>
@@ -1547,10 +1287,18 @@ function HealthHome({ onBackHome }) {
             Common exclusions to be aware of before purchasing a plan.
           </p>
           <ul className="health-exclusions-grid">
-            {HEALTH_EXCLUSION_ITEMS.map(({ id, title, Icon }) => (
+            {HEALTH_EXCLUSION_ITEMS.map(({ id, title, iconSrc, iconAlt }) => (
               <li key={id} className="health-exclusions-card">
                 <span className="health-exclusions-card-icon" aria-hidden="true">
-                  <Icon />
+                  <img
+                    src={iconSrc}
+                    alt={iconAlt}
+                    className="health-exclusions-icon-img"
+                    width="28"
+                    height="28"
+                    loading="lazy"
+                    decoding="async"
+                  />
                 </span>
                 <span className="health-exclusions-card-title">{title}</span>
               </li>
