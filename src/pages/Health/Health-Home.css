@@ -425,37 +425,37 @@
 }
 
 .health-types-card-icon {
-  width: clamp(52px, 5.5vw, 60px);
-  height: clamp(52px, 5.5vw, 60px);
-  border-radius: 14px;
+  width: clamp(56px, 6vw, 68px);
+  height: clamp(56px, 6vw, 68px);
+  border-radius: 16px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  overflow: hidden;
+}
+
+.health-types-card-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
 }
 
 .health-types-card-icon.is-type-family {
-  background: #dbeafe;
-  color: #1e40af;
+  background: #e6f4ea;
 }
 
 .health-types-card-icon.is-type-senior {
-  background: #fef3c7;
-  color: #c2410c;
+  background: #e6f4ea;
 }
 
 .health-types-card-icon.is-type-individual {
-  background: #ede9fe;
-  color: #6d28d9;
+  background: #e8f2ff;
 }
 
-.health-types-card-icon.is-type-topup {
-  background: #fce7f3;
-  color: #be185d;
-}
-
-.health-types-svg {
-  display: block;
+.health-types-card-icon.is-type-spouse {
+  background: #ffeaf2;
 }
 
 .health-types-card-body {
@@ -1410,14 +1410,21 @@
 }
 
 .health-member-icon {
-  width: 34px;
-  height: 34px;
-  border-radius: 999px;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: var(--font-size-16);
   flex: 0 0 auto;
+  overflow: hidden;
+}
+
+.health-member-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
 }
 
 .health-member-icon.is-blue {

@@ -583,6 +583,13 @@
   margin-bottom: 10px;
 }
 
+.business-home-detail-coverage__emoji-img {
+  display: block;
+  width: 68px;
+  height: 68px;
+  object-fit: contain;
+}
+
 .business-home-detail-coverage__body h3 {
   margin: 0 0 14px;
   color: #192737;
@@ -635,50 +642,30 @@
   border: 2px solid #e47a38;
   box-sizing: border-box;
   margin-top: 1px;
-  position: relative;
+  color: #e47a38;
   background: #fff6ef;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
 }
 
-.business-home-detail-coverage__check::after {
-  content: '';
-  position: absolute;
-  left: 6px;
-  top: 3px;
-  width: 5px;
-  height: 9px;
-  border-right: 2px solid #e47a38;
-  border-bottom: 2px solid #e47a38;
-  transform: rotate(45deg);
-}
-
-.business-home-detail-coverage__checks--theft .business-home-detail-coverage__check {
+.business-home-detail-coverage__check--theft {
   border-color: #1784b8;
   background: #eff8fc;
+  color: #1784b8;
 }
 
-.business-home-detail-coverage__checks--theft .business-home-detail-coverage__check::after {
-  border-right-color: #1784b8;
-  border-bottom-color: #1784b8;
-}
-
-.business-home-detail-coverage__checks--natural .business-home-detail-coverage__check {
+.business-home-detail-coverage__check--natural {
   border-color: #2aa875;
   background: #eaf8f1;
+  color: #2aa875;
 }
 
-.business-home-detail-coverage__checks--natural .business-home-detail-coverage__check::after {
-  border-right-color: #2aa875;
-  border-bottom-color: #2aa875;
-}
-
-.business-home-detail-coverage__checks--equipment .business-home-detail-coverage__check {
+.business-home-detail-coverage__check--equipment {
   border-color: #8c5be2;
   background: #f3edff;
-}
-
-.business-home-detail-coverage__checks--equipment .business-home-detail-coverage__check::after {
-  border-right-color: #8c5be2;
-  border-bottom-color: #8c5be2;
+  color: #8c5be2;
 }
 
 

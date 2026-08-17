@@ -1,6 +1,14 @@
 import { useState } from 'react';
 import './Business-Fire.css';
+import { HiCheck } from 'react-icons/hi';
 import Footer from '../../components/Footer/Footer';
+import coverFireIcon from '../../assets/icons/Cover-Fire.png';
+import coverAccidentalFireIcon from '../../assets/icons/Cover-Accidental-Fire.png';
+import coverElectricalShortIcon from '../../assets/icons/Cover-Electrical-Short.png';
+import coverExplosionIcon from '../../assets/icons/Cover-Explosion.png';
+import coverStructuralIcon from '../../assets/icons/Cover-Structural.png';
+import coverStockLossIcon from '../../assets/icons/Cover-Stock-Loss.png';
+import coverSmokeIcon from '../../assets/icons/Cover-Smoke.png';
 
 const FIRE_IMPORTANCE_POINTS = [
   'Fire can cause devastating financial losses that can shut down businesses permanently.',
@@ -10,12 +18,12 @@ const FIRE_IMPORTANCE_POINTS = [
 ];
 
 const FIRE_COVERED_ITEMS = [
-  { id: 'accidental-fire', title: 'Accidental Fire', icon: 'fire' },
-  { id: 'electrical-short-circuit', title: 'Electrical Short Circuit', icon: 'bolt' },
-  { id: 'explosion-damage', title: 'Explosion Damage', icon: 'alert' },
-  { id: 'structural-damage', title: 'Structural Damage', icon: 'building' },
-  { id: 'stock-inventory-loss', title: 'Stock & Inventory Loss', icon: 'shield' },
-  { id: 'smoke-damage', title: 'Smoke Damage', icon: 'fire' },
+  { id: 'accidental-fire', title: 'Accidental Fire', icon: 'fire', iconSrc: coverAccidentalFireIcon, iconAlt: 'Accidental fire incidents' },
+  { id: 'electrical-short-circuit', title: 'Electrical Short Circuit', icon: 'bolt', iconSrc: coverElectricalShortIcon, iconAlt: 'Electrical short circuit damage' },
+  { id: 'explosion-damage', title: 'Explosion Damage', icon: 'alert', iconSrc: coverExplosionIcon, iconAlt: 'Explosion-related damage' },
+  { id: 'structural-damage', title: 'Structural Damage', icon: 'building', iconSrc: coverStructuralIcon, iconAlt: 'Structural damage' },
+  { id: 'stock-inventory-loss', title: 'Stock & Inventory Loss', icon: 'shield', iconSrc: coverStockLossIcon, iconAlt: 'Stock and inventory loss' },
+  { id: 'smoke-damage', title: 'Smoke Damage', icon: 'fire', iconSrc: coverSmokeIcon, iconAlt: 'Smoke damage' },
 ];
 
 const FIRE_BENEFITS = [
@@ -79,7 +87,7 @@ function BusinessFire({ onBackToBusinessHome }) {
             <article className="business-fire-info business-fire-info-panel">
               <div className="business-fire-hero-group">
                 <div className="business-fire-icon" aria-hidden="true">
-                  <BusinessFireIcon name="fire" />
+                  <img className="business-fire-icon-img" src={coverFireIcon} alt="Fire insurance" />
                 </div>
                 <div className="business-fire-content">
                   <h1>Fire Insurance for Your Business</h1>
@@ -240,7 +248,7 @@ function BusinessFire({ onBackToBusinessHome }) {
               </div>
               <div className="business-fire-detail-coverage__body">
                 <span className="business-fire-detail-coverage__emoji" aria-hidden="true">
-                  🔥
+                  <img className="business-fire-detail-coverage__emoji-img" src={coverFireIcon} alt="Fire damage cover" />
                 </span>
                 <h3>Fire Damage Cover</h3>
                 <p className="business-fire-detail-coverage__intro">
@@ -252,7 +260,7 @@ function BusinessFire({ onBackToBusinessHome }) {
                 <ul className="business-fire-detail-coverage__checks">
                   {FIRE_DETAIL_COVER_ITEMS.map((label) => (
                     <li key={label}>
-                      <span className="business-fire-detail-coverage__check" aria-hidden="true" />
+                      <HiCheck className="business-fire-detail-coverage__check" aria-hidden="true" />
                       <span>{label}</span>
                     </li>
                   ))}
@@ -268,7 +276,11 @@ function BusinessFire({ onBackToBusinessHome }) {
                 {FIRE_COVERED_ITEMS.map((item) => (
                   <article key={item.id} className="business-fire-covered-card">
                     <span className="business-fire-covered-icon" aria-hidden="true">
-                      <BusinessFireIcon name={item.icon} />
+                      {item.iconSrc ? (
+                        <img className="business-fire-covered-icon-img" src={item.iconSrc} alt={item.iconAlt} />
+                      ) : (
+                        <BusinessFireIcon name={item.icon} />
+                      )}
                     </span>
                     <p>{item.title}</p>
                   </article>

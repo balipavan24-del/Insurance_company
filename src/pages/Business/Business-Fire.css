@@ -66,14 +66,18 @@
 }
 
 .business-fire-icon {
-  width: 42px;
-  height: 42px;
-  border-radius: 12px;
-  background: #ffd9cb;
+  width: 92px;
+  height: 92px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  color: #e47a38;
+  flex: 0 0 auto;
+}
+
+.business-fire-icon-img {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
 }
 
 .business-fire-icon svg,
@@ -457,6 +461,13 @@
   margin-bottom: 10px;
 }
 
+.business-fire-detail-coverage__emoji-img {
+  display: block;
+  width: 78px;
+  height: 78px;
+  object-fit: contain;
+}
+
 .business-fire-detail-coverage__body h3 {
   margin: 0 0 14px;
   color: #192737;
@@ -509,20 +520,12 @@
   border: 2px solid #e47a38;
   box-sizing: border-box;
   margin-top: 1px;
-  position: relative;
   background: #fff6ef;
-}
-
-.business-fire-detail-coverage__check::after {
-  content: '';
-  position: absolute;
-  left: 6px;
-  top: 3px;
-  width: 5px;
-  height: 9px;
-  border-right: 2px solid #e47a38;
-  border-bottom: 2px solid #e47a38;
-  transform: rotate(45deg);
+  color: #e47a38;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
 }
 
 .business-fire-covered-section {
@@ -563,8 +566,8 @@
 }
 
 .business-fire-covered-icon {
-  width: 42px;
-  height: 42px;
+  width: 92px;
+  height: 92px;
   border-radius: 11px;
   background: #fff1e8;
   color: #e47a38;
@@ -576,6 +579,12 @@
 .business-fire-covered-icon svg {
   width: 20px;
   height: 20px;
+}
+
+.business-fire-covered-icon-img {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
 }
 
 .business-fire-covered-card p {

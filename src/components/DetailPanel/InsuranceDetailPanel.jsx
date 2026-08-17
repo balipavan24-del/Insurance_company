@@ -1,5 +1,9 @@
+import { HiCheck } from 'react-icons/hi';
+
 function InsuranceDetailPanel({
   emoji,
+  iconSrc,
+  iconAlt = '',
   title,
   intro,
   items,
@@ -25,7 +29,11 @@ function InsuranceDetailPanel({
   const contentBlock = (
     <div className="business-home-detail-coverage__body">
       <span className="business-home-detail-coverage__emoji" aria-hidden="true">
-        {emoji}
+        {iconSrc ? (
+          <img className="business-home-detail-coverage__emoji-img" src={iconSrc} alt={iconAlt} />
+        ) : (
+          emoji
+        )}
       </span>
       <h3>{title}</h3>
       <p className="business-home-detail-coverage__intro">{intro}</p>
@@ -33,7 +41,10 @@ function InsuranceDetailPanel({
       <ul className={`business-home-detail-coverage__checks business-home-detail-coverage__checks--${tone}`}>
         {items.map((label) => (
           <li key={label}>
-            <span className="business-home-detail-coverage__check" aria-hidden="true" />
+            <HiCheck
+              className={`business-home-detail-coverage__check business-home-detail-coverage__check--${tone}`}
+              aria-hidden="true"
+            />
             <span>{label}</span>
           </li>
         ))}

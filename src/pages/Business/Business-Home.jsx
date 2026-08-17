@@ -10,6 +10,10 @@ import businessDisasterIcon from '../../assets/icons/Business-Disaster.webp';
 import businessEquipmentIcon from '../../assets/icons/Business-Equipment.webp';
 import businessFireIcon from '../../assets/icons/Fire-Business.webp';
 import businessTheftIcon from '../../assets/icons/Business-theft.webp';
+import coverFireIcon from '../../assets/icons/Cover-Fire.png';
+import coverTheftIcon from '../../assets/icons/Cover-Theft.png';
+import coverNaturalIcon from '../../assets/icons/Cover-Natural.png';
+import coverEquipmentIcon from '../../assets/icons/Cover-Equipment.png';
 
 const BUSINESS_COVERAGE_OPTIONS = [
   {
@@ -17,7 +21,9 @@ const BUSINESS_COVERAGE_OPTIONS = [
     title: 'Fire Damage',
     displayTitle: 'Fire Cover',
     subtitle: 'Property and stock damage',
-    icon: '🔥',
+    icon: coverFireIcon,
+    iconAlt: 'Fire damage cover',
+    isImageIcon: true,
     cardIcon: businessFireIcon,
     cardIconAlt: 'Fire cover',
     accentClass: 'is-fire',
@@ -26,7 +32,7 @@ const BUSINESS_COVERAGE_OPTIONS = [
     id: 'theft-protection',
     title: 'Theft Protection',
     subtitle: 'Break-in and stolen assets',
-    icon: businessTheftIcon,
+    icon: coverTheftIcon,
     iconAlt: 'Theft protection',
     isImageIcon: true,
     cardIcon: businessTheftIcon,
@@ -38,7 +44,9 @@ const BUSINESS_COVERAGE_OPTIONS = [
     title: 'Natural Disaster Cover',
     displayTitle: 'Natural Disaster Cover',
     subtitle: 'Flood, storm and weather risks',
-    icon: '🌧️',
+    icon: coverNaturalIcon,
+    iconAlt: 'Natural disaster cover',
+    isImageIcon: true,
     cardIcon: businessDisasterIcon,
     cardIconAlt: 'Natural disaster cover',
     accentClass: 'is-natural',
@@ -48,7 +56,9 @@ const BUSINESS_COVERAGE_OPTIONS = [
     title: 'Equipment Breakdown',
     displayTitle: 'Equipment Breakdown',
     subtitle: 'Machinery and system failures',
-    icon: '🛠️',
+    icon: coverEquipmentIcon,
+    iconAlt: 'Equipment breakdown cover',
+    isImageIcon: true,
     cardIcon: businessEquipmentIcon,
     cardIconAlt: 'Equipment breakdown',
     accentClass: 'is-equipment',
@@ -101,6 +111,8 @@ const BUSINESS_HOME_DETAIL_PANELS = [
   {
     id: 'fire',
     emoji: '🔥',
+    iconSrc: coverFireIcon,
+    iconAlt: 'Fire damage cover',
     title: 'Fire Damage Cover',
     intro:
       'Fire damage cover protects your business against losses caused by fire-related incidents. It ensures that damage to property, assets, and inventory is financially covered.',
@@ -113,6 +125,8 @@ const BUSINESS_HOME_DETAIL_PANELS = [
   {
     id: 'theft',
     emoji: '🔒',
+    iconSrc: coverTheftIcon,
+    iconAlt: 'Theft protection',
     title: 'Theft Protection',
     intro: 'Theft protection secures your business against losses caused by theft or unauthorized entry.',
     items: BUSINESS_HOME_THEFT_DETAIL_ITEMS,
@@ -124,6 +138,8 @@ const BUSINESS_HOME_DETAIL_PANELS = [
   {
     id: 'natural',
     emoji: '🌩️',
+    iconSrc: coverNaturalIcon,
+    iconAlt: 'Natural disaster cover',
     title: 'Natural Disaster Cover',
     intro: 'Natural disaster cover protects your business against environmental risks and large-scale disruptions.',
     items: BUSINESS_HOME_NATURAL_DETAIL_ITEMS,
@@ -135,6 +151,8 @@ const BUSINESS_HOME_DETAIL_PANELS = [
   {
     id: 'equipment',
     emoji: '⚙️',
+    iconSrc: coverEquipmentIcon,
+    iconAlt: 'Equipment breakdown cover',
     title: 'Equipment Breakdown Cover',
     intro: 'Equipment breakdown cover protects your business from sudden machinery or system failures.',
     items: BUSINESS_HOME_EQUIPMENT_DETAIL_ITEMS,

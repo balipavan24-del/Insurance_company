@@ -41,6 +41,12 @@ import emergencyProtectionIcon from '/images/health/emergency-protection.png';
 import peaceOfMindIcon from '/images/health/peace-of-mind.png';
 import financialSecurityIcon from '/images/health/financial-security.png';
 
+// Health insurance plan type icons
+import selfPlanIcon from '/images/health/health-plan-self.png';
+import spousePlanIcon from '/images/health/health-plan-spouse.png';
+import childrenPlanIcon from '/images/health/health-plan-children.png';
+import parentsPlanIcon from '/images/health/health-plan-parents.png';
+
 const GENDER_OPTIONS = ['Male', 'Female'];
 
 // Cities offered in the "City of Residence" dropdown (step 2). Sourced from the
@@ -213,113 +219,6 @@ const FAMILY_MEMBERS = {
   parents: createMember('parents', 'Parents', 'Add dependent parents', '👪', 'is-orange'),
 };
 
-function IconTypeFamilyHouse() {
-  return (
-    <svg className="health-types-svg" viewBox="0 0 24 24" width="28" height="28" fill="none" aria-hidden="true" focusable="false">
-      <path
-        d="M4.5 10.5 12 5l7.5 5.5"
-        stroke="currentColor"
-        strokeWidth="1.65"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M6 10.25V19a1 1 0 0 0 1 1h4v-6.25h2V20h4a1 1 0 0 0 1-1v-8.75"
-        stroke="currentColor"
-        strokeWidth="1.65"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M10 20v-5.25h4V20"
-        stroke="currentColor"
-        strokeWidth="1.65"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M10.75 12.5h2.5v2h-2.5z"
-        stroke="currentColor"
-        strokeWidth="1.35"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
-
-function IconTypeSeniorPeople() {
-  return (
-    <svg className="health-types-svg" viewBox="0 0 24 24" width="28" height="28" fill="none" aria-hidden="true" focusable="false">
-      <circle cx="8.5" cy="7.5" r="2.75" stroke="currentColor" strokeWidth="1.65" />
-      <path
-        d="M3.5 19.25v-.35c0-2.35 1.9-4.25 4.25-4.25h.5c1.35 0 2.55.65 3.3 1.65"
-        stroke="currentColor"
-        strokeWidth="1.65"
-        strokeLinecap="round"
-      />
-      <circle cx="16.5" cy="7.5" r="2.75" stroke="currentColor" strokeWidth="1.65" />
-      <path
-        d="M12.95 19.25v-.35c0-2.35 1.9-4.25 4.25-4.25h.8"
-        stroke="currentColor"
-        strokeWidth="1.65"
-        strokeLinecap="round"
-      />
-    </svg>
-  );
-}
-
-function IconTypeIndividualPlus() {
-  return (
-    <svg className="health-types-svg" viewBox="0 0 24 24" width="28" height="28" fill="none" aria-hidden="true" focusable="false">
-      <circle cx="9.75" cy="8.25" r="3.15" stroke="currentColor" strokeWidth="1.65" />
-      <path
-        d="M4 20.25v-.6c0-2.65 2.15-4.8 4.8-4.8h.35c1.35 0 2.55.55 3.45 1.45"
-        stroke="currentColor"
-        strokeWidth="1.65"
-        strokeLinecap="round"
-      />
-      <rect x="13.75" y="4.75" width="7.5" height="7.5" rx="2" stroke="currentColor" strokeWidth="1.65" />
-      <path d="M17.5 6.75v3.5M15.75 8.5h3.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-    </svg>
-  );
-}
-
-function IconTypeTopUpLayers() {
-  return (
-    <svg className="health-types-svg" viewBox="0 0 24 24" width="28" height="28" fill="none" aria-hidden="true" focusable="false">
-      <path
-        d="M12 3.25 4.25 6.75 12 10.25l7.75-3.5L12 3.25z"
-        stroke="currentColor"
-        strokeWidth="1.6"
-        strokeLinejoin="round"
-        fill="currentColor"
-        fillOpacity="0.12"
-      />
-      <path
-        d="M4.25 11.25 12 14.75l7.75-3.5"
-        stroke="currentColor"
-        strokeWidth="1.6"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M4.25 15.25 12 18.75l7.75-3.5"
-        stroke="currentColor"
-        strokeWidth="1.6"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M4.25 19.25 12 22.75l7.75-3.5"
-        stroke="currentColor"
-        strokeWidth="1.6"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
-
 function HeroFeatureIcon({ src, alt }) {
   return (
     <img
@@ -351,28 +250,32 @@ const HEALTH_PLAN_TYPES = [
     title: 'Family Health Insurance',
     description: 'Single policy covering your entire family with shared sum insured.',
     iconTone: 'health-types-card-icon is-type-family',
-    Icon: IconTypeFamilyHouse,
+    iconSrc: childrenPlanIcon,
+    iconAlt: 'Family health insurance icon',
   },
   {
     id: 'senior',
     title: 'Senior Citizen Health Insurance',
     description: 'Specialized coverage designed for parents and older adults.',
     iconTone: 'health-types-card-icon is-type-senior',
-    Icon: IconTypeSeniorPeople,
+    iconSrc: parentsPlanIcon,
+    iconAlt: 'Senior citizen health insurance icon',
   },
   {
     id: 'individual',
     title: 'Individual Health Insurance',
     description: 'Personal coverage with your own dedicated sum insured.',
     iconTone: 'health-types-card-icon is-type-individual',
-    Icon: IconTypeIndividualPlus,
+    iconSrc: selfPlanIcon,
+    iconAlt: 'Individual health insurance icon',
   },
   {
-    id: 'topup',
-    title: 'Top-Up Health Insurance',
+    id: 'spouse',
+    title: 'Spouse Health Insurance',
     description: 'Affordable extra cover above your existing health policy.',
-    iconTone: 'health-types-card-icon is-type-topup',
-    Icon: IconTypeTopUpLayers,
+    iconTone: 'health-types-card-icon is-type-spouse',
+    iconSrc: spousePlanIcon,
+    iconAlt: 'Spouse health insurance icon',
   },
 ];
 
@@ -1232,10 +1135,10 @@ function HealthHome({ onBackHome }) {
           </h2>
           <p className="health-types-subtitle">Choose a plan tailored to your needs.</p>
           <ul className="health-types-grid">
-            {HEALTH_PLAN_TYPES.map(({ id, title, description, iconTone, Icon }) => (
+            {HEALTH_PLAN_TYPES.map(({ id, title, description, iconTone, iconSrc, iconAlt }) => (
               <li key={id} className="health-types-card">
                 <div className={iconTone} aria-hidden="true">
-                  <Icon />
+                  <img src={iconSrc} alt={iconAlt} className="health-types-card-img" />
                 </div>
                 <div className="health-types-card-body">
                   <h3 className="health-types-card-title">{title}</h3>
