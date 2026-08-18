@@ -8,6 +8,9 @@ import coverEquipmentComputerIcon from '../../assets/icons/Cover-Equipment-Compu
 import coverEquipmentServerIcon from '../../assets/icons/Cover-Equipment-Server.png';
 import coverEquipmentElectricalIcon from '../../assets/icons/Cover-Equipment-Electrical.png';
 import coverEquipmentIndustrialIcon from '../../assets/icons/Cover-Equipment-Industrial.png';
+import benefitEquipmentFinancialProtectionIcon from '../../assets/icons/Benefit-Equipment-Financial-Protection.png';
+import benefitEquipmentMinimalDowntimeIcon from '../../assets/icons/Benefit-Equipment-Minimal-Downtime.png';
+import benefitEquipmentBusinessContinuityIcon from '../../assets/icons/Benefit-Equipment-Business-Continuity.png';
 
 const EQUIPMENT_IMPORTANCE_POINTS = [
   'Equipment failure can halt production and cause significant revenue loss.',
@@ -26,9 +29,9 @@ const EQUIPMENT_COVERED_ITEMS = [
 ];
 
 const EQUIPMENT_BENEFITS = [
-  { id: 'financial-protection', title: 'Financial Protection', icon: 'shield' },
-  { id: 'minimal-downtime', title: 'Minimal Downtime', icon: 'shield' },
-  { id: 'business-continuity', title: 'Business Continuity', icon: 'shield' },
+  { id: 'financial-protection', title: 'Financial Protection', iconSrc: benefitEquipmentFinancialProtectionIcon, iconAlt: 'Financial Protection' },
+  { id: 'minimal-downtime', title: 'Minimal Downtime', iconSrc: benefitEquipmentMinimalDowntimeIcon, iconAlt: 'Minimal Downtime' },
+  { id: 'business-continuity', title: 'Business Continuity', iconSrc: benefitEquipmentBusinessContinuityIcon, iconAlt: 'Business Continuity' },
 ];
 
 function EquipmentIcon({ name }) {
@@ -256,7 +259,7 @@ function BusinessEquipment({ onBackToBusinessHome }) {
                 {EQUIPMENT_BENEFITS.map((item) => (
                   <article key={item.id} className="business-equipment-covered-card business-equipment-benefit-card">
                     <span className="business-equipment-covered-icon" aria-hidden="true">
-                      <EquipmentIcon name={item.icon} />
+                      <img className="business-equipment-covered-icon-img" src={item.iconSrc} alt={item.iconAlt} />
                     </span>
                     <p>{item.title}</p>
                   </article>

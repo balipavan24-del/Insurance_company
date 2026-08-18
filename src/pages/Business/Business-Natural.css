@@ -469,17 +469,22 @@
 }
 
 .business-natural-benefit-card {
-  min-height: 100px;
+  min-height: 120px;
 }
 
 .business-natural-benefit-card .business-natural-covered-icon {
-  width: auto;
-  height: auto;
-  min-width: 40px;
-  min-height: 40px;
+  width: 94px;
+  height: 94px;
   padding: 0;
   background: transparent;
   border-radius: 0;
+}
+
+.business-natural-benefit-card .business-natural-covered-icon-img {
+  width: 94px;
+  height: 94px;
+  object-fit: contain;
+  display: block;
 }
 
 .business-natural-benefit-card .business-natural-covered-icon svg {

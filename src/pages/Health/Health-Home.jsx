@@ -637,7 +637,8 @@ function HealthHome({ onBackHome }) {
               <span className="health-meta-title">Gender</span>
               <div className="health-chip-row">
                 {GENDER_OPTIONS.map((option) => (
-                  <button
+
+<button
                     key={option}
                     type="button"
                     className={`health-chip${spouseGender === option ? ' is-active' : ''}`}

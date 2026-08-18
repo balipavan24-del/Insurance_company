@@ -8,6 +8,9 @@ import coverTheftCashIcon from '../../assets/icons/Cover-Theft-Cash.png';
 import coverTheftVandalismIcon from '../../assets/icons/Cover-Theft-Vandalism.png';
 import coverTheftEmployeeIcon from '../../assets/icons/Cover-Theft-Employee.png';
 import coverTheftPropertyIcon from '../../assets/icons/Cover-Theft-Property.png';
+import benefitTheftAssetRecoveryIcon from '../../assets/icons/Benefit-Theft-Asset-Recovery.png';
+import benefitTheftRiskMitigationIcon from '../../assets/icons/Benefit-Theft-Risk-Mitigation.png';
+import benefitTheftBusinessContinuityIcon from '../../assets/icons/Benefit-Theft-Business-Continuity.png';
 
 const THEFT_IMPORTANCE_POINTS = [
   {
@@ -38,9 +41,9 @@ const THEFT_COVERED_ITEMS = [
 ];
 
 const THEFT_BENEFITS = [
-  { id: 'asset-recovery', title: 'Asset Recovery', icon: 'shield' },
-  { id: 'risk-mitigation', title: 'Risk Mitigation', icon: 'shield' },
-  { id: 'continuity', title: 'Business Continuity', icon: 'shield' },
+  { id: 'asset-recovery', title: 'Asset Recovery', iconSrc: benefitTheftAssetRecoveryIcon, iconAlt: 'Asset Recovery' },
+  { id: 'risk-mitigation', title: 'Risk Mitigation', iconSrc: benefitTheftRiskMitigationIcon, iconAlt: 'Risk Mitigation' },
+  { id: 'continuity', title: 'Business Continuity', iconSrc: benefitTheftBusinessContinuityIcon, iconAlt: 'Business Continuity' },
 ];
 
 function TheftHeroShieldIcon() {
@@ -323,7 +326,7 @@ function TheftBusiness({ onBackToBusinessHome }) {
                     {THEFT_BENEFITS.map((item) => (
                       <article key={item.id} className="theft-business-covered-card theft-business-benefit-card">
                         <span className="theft-business-covered-icon" aria-hidden="true">
-                          <TheftBusinessIcon name={item.icon} />
+                          <img className="theft-business-covered-icon-img" src={item.iconSrc} alt={item.iconAlt} />
                         </span>
                         <p>{item.title}</p>
                       </article>

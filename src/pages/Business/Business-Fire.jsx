@@ -9,6 +9,9 @@ import coverExplosionIcon from '../../assets/icons/Cover-Explosion.png';
 import coverStructuralIcon from '../../assets/icons/Cover-Structural.png';
 import coverStockLossIcon from '../../assets/icons/Cover-Stock-Loss.png';
 import coverSmokeIcon from '../../assets/icons/Cover-Smoke.png';
+import benefitFinancialProtectionIcon from '../../assets/icons/Benefit-Financial-Protection.png';
+import benefitQuickClaimIcon from '../../assets/icons/Benefit-Quick-Claim.png';
+import benefitBusinessContinuityIcon from '../../assets/icons/Benefit-Business-Continuity.png';
 
 const FIRE_IMPORTANCE_POINTS = [
   'Fire can cause devastating financial losses that can shut down businesses permanently.',
@@ -27,9 +30,9 @@ const FIRE_COVERED_ITEMS = [
 ];
 
 const FIRE_BENEFITS = [
-  { id: 'financial-protection', title: 'Financial Protection', icon: 'shield' },
-  { id: 'quick-claim-settlement', title: 'Quick Claim Settlement', icon: 'shield' },
-  { id: 'business-continuity', title: 'Business Continuity', icon: 'shield' },
+  { id: 'financial-protection', title: 'Financial Protection', iconSrc: benefitFinancialProtectionIcon, iconAlt: 'Financial Protection' },
+  { id: 'quick-claim-settlement', title: 'Quick Claim Settlement', iconSrc: benefitQuickClaimIcon, iconAlt: 'Quick Claim Settlement' },
+  { id: 'business-continuity', title: 'Business Continuity', iconSrc: benefitBusinessContinuityIcon, iconAlt: 'Business Continuity' },
 ];
 
 const FIRE_DETAIL_COVER_ITEMS = [
@@ -290,7 +293,7 @@ function BusinessFire({ onBackToBusinessHome }) {
                 {FIRE_BENEFITS.map((item) => (
                   <article key={item.id} className="business-fire-covered-card business-fire-benefit-card">
                     <span className="business-fire-covered-icon" aria-hidden="true">
-                      <BusinessFireIcon name={item.icon} />
+                      <img className="business-fire-covered-icon-img" src={item.iconSrc} alt={item.iconAlt} />
                     </span>
                     <p>{item.title}</p>
                   </article>

@@ -8,6 +8,9 @@ import coverNaturalStormIcon from '../../assets/icons/Cover-Natural-Storm.png';
 import coverNaturalLightningIcon from '../../assets/icons/Cover-Natural-Lightning.png';
 import coverNaturalHailstormIcon from '../../assets/icons/Cover-Natural-Hailstorm.png';
 import coverNaturalHeavyRainIcon from '../../assets/icons/Cover-Natural-Heavy-Rain.png';
+import benefitNaturalFinancialProtectionIcon from '../../assets/icons/Benefit-Natural-Financial-Protection.png';
+import benefitNaturalRapidRecoveryIcon from '../../assets/icons/Benefit-Natural-Rapid-Recovery.png';
+import benefitNaturalBusinessContinuityIcon from '../../assets/icons/Benefit-Natural-Business-Continuity.png';
 
 const NATURAL_IMPORTANCE_POINTS = [
   {
@@ -38,9 +41,9 @@ const NATURAL_COVERED_ITEMS = [
 ];
 
 const NATURAL_BENEFITS = [
-  { id: 'financial-protection', title: 'Financial Protection', icon: 'shield' },
-  { id: 'rapid-recovery', title: 'Rapid Recovery', icon: 'shield' },
-  { id: 'business-continuity', title: 'Business Continuity', icon: 'shield' },
+  { id: 'financial-protection', title: 'Financial Protection', iconSrc: benefitNaturalFinancialProtectionIcon, iconAlt: 'Financial Protection' },
+  { id: 'rapid-recovery', title: 'Rapid Recovery', iconSrc: benefitNaturalRapidRecoveryIcon, iconAlt: 'Rapid Recovery' },
+  { id: 'business-continuity', title: 'Business Continuity', iconSrc: benefitNaturalBusinessContinuityIcon, iconAlt: 'Business Continuity' },
 ];
 
 function BusinessNaturalIcon({ name }) {
@@ -272,7 +275,7 @@ function BusinessNatural({ onBackToBusinessHome }) {
                   {NATURAL_BENEFITS.map((item) => (
                     <article key={item.id} className="business-natural-covered-card business-natural-benefit-card">
                       <span className="business-natural-covered-icon" aria-hidden="true">
-                        <BusinessNaturalIcon name={item.icon} />
+                        <img className="business-natural-covered-icon-img" src={item.iconSrc} alt={item.iconAlt} />
                       </span>
                       <p>{item.title}</p>
                     </article>
