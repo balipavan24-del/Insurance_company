@@ -314,15 +314,16 @@
 
 .business-equipment-about-section {
   background: #fff;
-  max-width: min(var(--business-content-max), 100%);
-  margin-inline: auto;
+  width: 100%;
+  margin-inline: 0;
 }
 
 .business-equipment-about-content {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  text-align: left;
+  align-items: center;
+  text-align: center;
+  width: 100%;
 }
 
 .business-equipment-about-content h2,
@@ -336,7 +337,8 @@
 
 .business-equipment-about-content p {
   margin: 14px 0 0;
-  max-width: 760px;
+  max-width: none;
+  width: 100%;
   color: #6f8197;
   font-size: 15px;
   line-height: 1.65;
@@ -398,8 +400,8 @@
 
 .business-equipment-covered-section {
   background: #eef0f4;
-  max-width: min(var(--business-content-max), 100%);
-  margin-inline: auto;
+  width: 100%;
+  margin-inline: 0;
 }
 
 .business-equipment-covered-block h3,
