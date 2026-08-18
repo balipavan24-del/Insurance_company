@@ -72,14 +72,21 @@
 }
 
 .business-equipment-icon {
-  width: 42px;
-  height: 42px;
-  border-radius: 12px;
-  background: #dfcdf7;
+  width: 48px;
+  height: 48px;
+  border-radius: 0;
+  background: transparent;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   color: #9ca3af;
+}
+
+.business-equipment-hero-icon-img {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  display: block;
 }
 
 .business-equipment-icon svg,
@@ -422,15 +429,15 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 12px;
+  gap: 5px;
   text-align: center;
 }
 
 .business-equipment-covered-icon {
-  width: 42px;
-  height: 42px;
-  border-radius: 11px;
-  background: #f4eefe;
+  width: 94px;
+  height: 94px;
+  border-radius: 0;
+  background: transparent;
   color: #8c5be2;
   display: inline-flex;
   align-items: center;
@@ -440,6 +447,13 @@
 .business-equipment-covered-icon svg {
   width: 20px;
   height: 20px;
+}
+
+.business-equipment-covered-icon-img {
+  width: 94px;
+  height: 94px;
+  object-fit: contain;
+  display: block;
 }
 
 .business-equipment-covered-icon svg path,

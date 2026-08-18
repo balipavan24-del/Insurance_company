@@ -1,6 +1,13 @@
 import { useState } from 'react';
 import './Theft-Business.css';
 import Footer from '../../components/Footer/Footer';
+import coverTheftIcon from '../../assets/icons/Cover-Theft.png';
+import coverTheftBreakInIcon from '../../assets/icons/Cover-Theft-Break-in.png';
+import coverTheftInventoryIcon from '../../assets/icons/Cover-Theft-Inventory.png';
+import coverTheftCashIcon from '../../assets/icons/Cover-Theft-Cash.png';
+import coverTheftVandalismIcon from '../../assets/icons/Cover-Theft-Vandalism.png';
+import coverTheftEmployeeIcon from '../../assets/icons/Cover-Theft-Employee.png';
+import coverTheftPropertyIcon from '../../assets/icons/Cover-Theft-Property.png';
 
 const THEFT_IMPORTANCE_POINTS = [
   {
@@ -22,12 +29,12 @@ const THEFT_IMPORTANCE_POINTS = [
 ];
 
 const THEFT_COVERED_ITEMS = [
-  { id: 'break-in', title: 'Break-in Losses', icon: 'lock' },
-  { id: 'stolen-inventory', title: 'Stolen Inventory', icon: 'box' },
-  { id: 'cash-valuables', title: 'Cash & Valuables', icon: 'key' },
-  { id: 'vandalism', title: 'Vandalism Damage', icon: 'alert' },
-  { id: 'employee-theft', title: 'Employee Theft', icon: 'eye' },
-  { id: 'property-damage', title: 'Property Damage', icon: 'shieldCheck' },
+  { id: 'break-in', title: 'Break-in Losses', iconSrc: coverTheftBreakInIcon, iconAlt: 'Break-in losses' },
+  { id: 'stolen-inventory', title: 'Stolen Inventory', iconSrc: coverTheftInventoryIcon, iconAlt: 'Stolen inventory' },
+  { id: 'cash-valuables', title: 'Cash & Valuables', iconSrc: coverTheftCashIcon, iconAlt: 'Cash and valuables' },
+  { id: 'vandalism', title: 'Vandalism Damage', iconSrc: coverTheftVandalismIcon, iconAlt: 'Vandalism damage' },
+  { id: 'employee-theft', title: 'Employee Theft', iconSrc: coverTheftEmployeeIcon, iconAlt: 'Employee theft' },
+  { id: 'property-damage', title: 'Property Damage', iconSrc: coverTheftPropertyIcon, iconAlt: 'Property damage' },
 ];
 
 const THEFT_BENEFITS = [
@@ -142,7 +149,7 @@ function TheftBusiness({ onBackToBusinessHome }) {
                 <article className="theft-business-info theft-business-info-panel">
                   <div className="theft-business-hero-group">
                     <div className="theft-business-icon" aria-hidden="true">
-                      <TheftHeroShieldIcon />
+                      <img className="theft-business-hero-icon-img" src={coverTheftIcon} alt="Theft protection" />
                     </div>
                     <div className="theft-business-content">
                       <h1>Theft Protection for Your Business</h1>
@@ -302,7 +309,7 @@ function TheftBusiness({ onBackToBusinessHome }) {
                     {THEFT_COVERED_ITEMS.map((item) => (
                       <article key={item.id} className="theft-business-covered-card">
                         <span className="theft-business-covered-icon" aria-hidden="true">
-                          <TheftBusinessIcon name={item.icon} />
+                          <img className="theft-business-covered-icon-img" src={item.iconSrc} alt={item.iconAlt} />
                         </span>
                         <p>{item.title}</p>
                       </article>

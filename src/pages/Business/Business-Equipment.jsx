@@ -1,6 +1,13 @@
 import { useState } from 'react';
 import './Business-Equipment.css';
 import Footer from '../../components/Footer/Footer';
+import coverEquipmentIcon from '../../assets/icons/Cover-Equipment.png';
+import coverEquipmentMechanicalIcon from '../../assets/icons/Cover-Equipment-Mechanical.png';
+import coverEquipmentElectronicIcon from '../../assets/icons/Cover-Equipment-Electronic.png';
+import coverEquipmentComputerIcon from '../../assets/icons/Cover-Equipment-Computer.png';
+import coverEquipmentServerIcon from '../../assets/icons/Cover-Equipment-Server.png';
+import coverEquipmentElectricalIcon from '../../assets/icons/Cover-Equipment-Electrical.png';
+import coverEquipmentIndustrialIcon from '../../assets/icons/Cover-Equipment-Industrial.png';
 
 const EQUIPMENT_IMPORTANCE_POINTS = [
   'Equipment failure can halt production and cause significant revenue loss.',
@@ -10,12 +17,12 @@ const EQUIPMENT_IMPORTANCE_POINTS = [
 ];
 
 const EQUIPMENT_COVERED_ITEMS = [
-  { id: 'mechanical-failure', title: 'Mechanical Failure', icon: 'gear' },
-  { id: 'electronic-breakdown', title: 'Electronic Breakdown', icon: 'chip' },
-  { id: 'computer-systems', title: 'Computer Systems', icon: 'monitor' },
-  { id: 'server-storage', title: 'Server & Storage', icon: 'server' },
-  { id: 'electrical-systems', title: 'Electrical Systems', icon: 'bolt' },
-  { id: 'industrial-machinery', title: 'Industrial Machinery', icon: 'tool' },
+  { id: 'mechanical-failure', title: 'Mechanical Failure', iconSrc: coverEquipmentMechanicalIcon, iconAlt: 'Mechanical failure' },
+  { id: 'electronic-breakdown', title: 'Electronic Breakdown', iconSrc: coverEquipmentElectronicIcon, iconAlt: 'Electronic breakdown' },
+  { id: 'computer-systems', title: 'Computer Systems', iconSrc: coverEquipmentComputerIcon, iconAlt: 'Computer systems' },
+  { id: 'server-storage', title: 'Server & Storage', iconSrc: coverEquipmentServerIcon, iconAlt: 'Server and storage' },
+  { id: 'electrical-systems', title: 'Electrical Systems', iconSrc: coverEquipmentElectricalIcon, iconAlt: 'Electrical systems' },
+  { id: 'industrial-machinery', title: 'Industrial Machinery', iconSrc: coverEquipmentIndustrialIcon, iconAlt: 'Industrial machinery' },
 ];
 
 const EQUIPMENT_BENEFITS = [
@@ -87,7 +94,7 @@ function BusinessEquipment({ onBackToBusinessHome }) {
                 <article className="business-equipment-info business-equipment-info-panel">
                   <div className="business-equipment-hero-group">
                     <div className="business-equipment-icon" aria-hidden="true">
-                      <EquipmentIcon name="tool" />
+                      <img className="business-equipment-hero-icon-img" src={coverEquipmentIcon} alt="Equipment breakdown cover" />
                     </div>
                     <div className="business-equipment-content">
                       <h1>Equipment Protection for Your Business</h1>
@@ -235,7 +242,7 @@ function BusinessEquipment({ onBackToBusinessHome }) {
                 {EQUIPMENT_COVERED_ITEMS.map((item) => (
                   <article key={item.id} className="business-equipment-covered-card">
                     <span className="business-equipment-covered-icon" aria-hidden="true">
-                      <EquipmentIcon name={item.icon} />
+                      <img className="business-equipment-covered-icon-img" src={item.iconSrc} alt={item.iconAlt} />
                     </span>
                     <p>{item.title}</p>
                   </article>

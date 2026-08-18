@@ -561,15 +561,15 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 12px;
+  gap: 5px;
   text-align: center;
 }
 
 .business-fire-covered-icon {
-  width: 92px;
-  height: 92px;
-  border-radius: 11px;
-  background: #fff1e8;
+  width: 94px;
+  height: 94px;
+  border-radius: 0;
+  background: transparent;
   color: #e47a38;
   display: inline-flex;
   align-items: center;
@@ -582,9 +582,10 @@
 }
 
 .business-fire-covered-icon-img {
-  width: 80px;
-  height: 80px;
+  width: 94px;
+  height: 94px;
   object-fit: contain;
+  display: block;
 }
 
 .business-fire-covered-card p {

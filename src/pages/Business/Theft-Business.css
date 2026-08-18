@@ -74,14 +74,21 @@
 }
 
 .theft-business-icon {
-  width: 42px;
-  height: 42px;
-  border-radius: 12px;
-  background: #d8def8;
+  width: 48px;
+  height: 48px;
+  border-radius: 0;
+  background: transparent;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   color: #4a5bc4;
+}
+
+.theft-business-hero-icon-img {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+  display: block;
 }
 
 .theft-business-icon svg,
@@ -452,16 +459,16 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 14px;
+  gap: 5px;
   text-align: center;
   box-shadow: 0 2px 8px rgba(15, 23, 42, 0.06);
 }
 
 .theft-business-covered-icon {
-  width: 44px;
-  height: 44px;
-  border-radius: 11px;
-  background: #e3e9fc;
+  width: 94px;
+  height: 94px;
+  border-radius: 0;
+  background: transparent;
   color: #4a5bc4;
   display: inline-flex;
   align-items: center;
@@ -471,6 +478,13 @@
 .theft-business-covered-icon svg {
   width: 20px;
   height: 20px;
+}
+
+.theft-business-covered-icon-img {
+  width: 94px;
+  height: 94px;
+  object-fit: contain;
+  display: block;
 }
 
 .theft-business-covered-card p {

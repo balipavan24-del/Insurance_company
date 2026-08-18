@@ -1,6 +1,13 @@
 import { useState } from 'react';
 import './Business-Natural.css';
 import Footer from '../../components/Footer/Footer';
+import coverNaturalIcon from '../../assets/icons/Cover-Natural.png';
+import coverNaturalFloodIcon from '../../assets/icons/Cover-Natural-Flood.png';
+import coverNaturalEarthquakeIcon from '../../assets/icons/Cover-Natural-Earthquake.png';
+import coverNaturalStormIcon from '../../assets/icons/Cover-Natural-Storm.png';
+import coverNaturalLightningIcon from '../../assets/icons/Cover-Natural-Lightning.png';
+import coverNaturalHailstormIcon from '../../assets/icons/Cover-Natural-Hailstorm.png';
+import coverNaturalHeavyRainIcon from '../../assets/icons/Cover-Natural-Heavy-Rain.png';
 
 const NATURAL_IMPORTANCE_POINTS = [
   {
@@ -22,12 +29,12 @@ const NATURAL_IMPORTANCE_POINTS = [
 ];
 
 const NATURAL_COVERED_ITEMS = [
-  { id: 'flood-damage', title: 'Flood Damage', icon: 'flood' },
-  { id: 'earthquake', title: 'Earthquake', icon: 'earthquake' },
-  { id: 'storm-cyclone', title: 'Storm & Cyclone', icon: 'wind' },
-  { id: 'lightning', title: 'Lightning Strike', icon: 'lightning' },
-  { id: 'hailstorm', title: 'Hailstorm', icon: 'hail' },
-  { id: 'heavy-rainfall', title: 'Heavy Rainfall', icon: 'rain' },
+  { id: 'flood-damage', title: 'Flood Damage', iconSrc: coverNaturalFloodIcon, iconAlt: 'Flood damage' },
+  { id: 'earthquake', title: 'Earthquake', iconSrc: coverNaturalEarthquakeIcon, iconAlt: 'Earthquake' },
+  { id: 'storm-cyclone', title: 'Storm & Cyclone', iconSrc: coverNaturalStormIcon, iconAlt: 'Storm and cyclone' },
+  { id: 'lightning', title: 'Lightning Strike', iconSrc: coverNaturalLightningIcon, iconAlt: 'Lightning strike' },
+  { id: 'hailstorm', title: 'Hailstorm', iconSrc: coverNaturalHailstormIcon, iconAlt: 'Hailstorm' },
+  { id: 'heavy-rainfall', title: 'Heavy Rainfall', iconSrc: coverNaturalHeavyRainIcon, iconAlt: 'Heavy rainfall' },
 ];
 
 const NATURAL_BENEFITS = [
@@ -97,7 +104,7 @@ function BusinessNatural({ onBackToBusinessHome }) {
               <article className="business-natural-info business-natural-info-panel">
                 <div className="business-natural-hero-group">
                   <div className="business-natural-icon" aria-hidden="true">
-                    <BusinessNaturalIcon name="natural" />
+                    <img className="business-natural-hero-icon-img" src={coverNaturalIcon} alt="Natural disaster cover" />
                   </div>
                   <div className="business-natural-content">
                     <h1>Natural Disaster Cover for Your Business</h1>
@@ -251,7 +258,7 @@ function BusinessNatural({ onBackToBusinessHome }) {
                   {NATURAL_COVERED_ITEMS.map((item) => (
                     <article key={item.id} className="business-natural-covered-card">
                       <span className="business-natural-covered-icon" aria-hidden="true">
-                        <BusinessNaturalIcon name={item.icon} />
+                        <img className="business-natural-covered-icon-img" src={item.iconSrc} alt={item.iconAlt} />
                       </span>
                       <p>{item.title}</p>
                     </article>

@@ -18,12 +18,12 @@ const FIRE_IMPORTANCE_POINTS = [
 ];
 
 const FIRE_COVERED_ITEMS = [
-  { id: 'accidental-fire', title: 'Accidental Fire', icon: 'fire', iconSrc: coverAccidentalFireIcon, iconAlt: 'Accidental fire incidents' },
-  { id: 'electrical-short-circuit', title: 'Electrical Short Circuit', icon: 'bolt', iconSrc: coverElectricalShortIcon, iconAlt: 'Electrical short circuit damage' },
-  { id: 'explosion-damage', title: 'Explosion Damage', icon: 'alert', iconSrc: coverExplosionIcon, iconAlt: 'Explosion-related damage' },
-  { id: 'structural-damage', title: 'Structural Damage', icon: 'building', iconSrc: coverStructuralIcon, iconAlt: 'Structural damage' },
-  { id: 'stock-inventory-loss', title: 'Stock & Inventory Loss', icon: 'shield', iconSrc: coverStockLossIcon, iconAlt: 'Stock and inventory loss' },
-  { id: 'smoke-damage', title: 'Smoke Damage', icon: 'fire', iconSrc: coverSmokeIcon, iconAlt: 'Smoke damage' },
+  { id: 'accidental-fire', title: 'Accidental Fire', iconSrc: coverAccidentalFireIcon, iconAlt: 'Accidental fire incidents' },
+  { id: 'electrical-short-circuit', title: 'Electrical Short Circuit', iconSrc: coverElectricalShortIcon, iconAlt: 'Electrical short circuit damage' },
+  { id: 'explosion-damage', title: 'Explosion Damage', iconSrc: coverExplosionIcon, iconAlt: 'Explosion-related damage' },
+  { id: 'structural-damage', title: 'Structural Damage', iconSrc: coverStructuralIcon, iconAlt: 'Structural damage' },
+  { id: 'stock-inventory-loss', title: 'Stock & Inventory Loss', iconSrc: coverStockLossIcon, iconAlt: 'Stock and inventory loss' },
+  { id: 'smoke-damage', title: 'Smoke Damage', iconSrc: coverSmokeIcon, iconAlt: 'Smoke damage' },
 ];
 
 const FIRE_BENEFITS = [
@@ -276,11 +276,7 @@ function BusinessFire({ onBackToBusinessHome }) {
                 {FIRE_COVERED_ITEMS.map((item) => (
                   <article key={item.id} className="business-fire-covered-card">
                     <span className="business-fire-covered-icon" aria-hidden="true">
-                      {item.iconSrc ? (
-                        <img className="business-fire-covered-icon-img" src={item.iconSrc} alt={item.iconAlt} />
-                      ) : (
-                        <BusinessFireIcon name={item.icon} />
-                      )}
+                      <img className="business-fire-covered-icon-img" src={item.iconSrc} alt={item.iconAlt} />
                     </span>
                     <p>{item.title}</p>
                   </article>
