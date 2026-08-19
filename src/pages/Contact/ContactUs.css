@@ -291,26 +291,22 @@ main.contact-page + .landing-footer {
   flex-direction: column;
   align-items: flex-start;
 }
-
 .contact-connect__icon-shell {
-  width: 36px;
-  height: 36px;
-  border-radius: 10px;
+  width: 80px;
+  height: 80px;
+  border-radius: 14px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 12px;
 }
 
-.contact-connect__icon-shell svg {
-  width: 19px;
-  height: 19px;
-  stroke: currentColor;
-  stroke-width: 2.1;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  fill: none;
+.contact-connect__icon-shell img {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
 }
+
 
 .contact-connect__icon-shell--blue {
   color: #2e88c7;
@@ -736,8 +732,8 @@ main.contact-page + .landing-footer {
 }
 
 .contact-why__icon-shell {
-  width: 38px;
-  height: 38px;
+  width: 80px;
+  height: 80px;
   border-radius: 11px;
   display: inline-flex;
   align-items: center;
@@ -746,8 +742,8 @@ main.contact-page + .landing-footer {
 }
 
 .contact-why__icon-shell svg {
-  width: 18px;
-  height: 18px;
+  width: 100%;
+  height: 100%;
   stroke: currentColor;
   stroke-width: 2;
   stroke-linecap: round;
@@ -1009,15 +1005,15 @@ main.contact-page + .landing-footer {
 }
 
 .contact-message__info-row .contact-connect__icon-shell {
-  width: 30px;
-  height: 30px;
+  width: 60px;
+  height: 60px;
   border-radius: 8px;
   margin-bottom: 0;
 }
 
 .contact-message__info-row .contact-connect__icon-shell svg {
-  width: 15px;
-  height: 15px;
+  width: 100%;
+  height: 100%;
 }
 
 .contact-message__info-label {

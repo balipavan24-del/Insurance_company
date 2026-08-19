@@ -4,6 +4,16 @@ import InsuranceFaqAccordion from '../../components/Faq/InsuranceFaqAccordion';
 import Footer from '../../components/Footer/Footer';
 import { contactSupportFaqItems } from '../../data/productContent';
 import './ContactUs.css';
+import locationIcon from '../../assets/icons/Contact-Location.png';
+import messageIcon from '../../assets/icons/Contact-message.png';
+import phoneIcon from '../../assets/icons/Contact-phone.png';
+import whatsappIcon from '../../assets/icons/Contact-whatsapp.png';
+import timeIcon from '../../assets/icons/Contact-time.png';
+import shieldIcon from '../../assets/icons/Contact-sheild.png';
+import icon1 from '../../assets/icons/Contact-yUs1.png';
+import icon2 from '../../assets/icons/Contact-yUs2.png';
+import icon3 from '../../assets/icons/Contact-yUs3.png';
+import icon4 from '../../assets/icons/Contact-yUs4.png';
 
 const IconSpark = () => (
   <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -122,7 +132,7 @@ const connectCards = [
     primary: '+91 1800-123-4567',
     secondary: 'Mon-Sat, 9 AM - 7 PM',
     action: 'Call Now',
-    icon: IconPhone,
+    icon: phoneIcon,
     tintClass: 'contact-connect__icon-shell--blue',
   },
   {
@@ -130,23 +140,23 @@ const connectCards = [
     primary: 'Quick assistance, anytime',
     secondary: 'Avg. reply in 5 mins',
     action: 'Chat on WhatsApp',
-    icon: IconChat,
+    icon: whatsappIcon,
     tintClass: 'contact-connect__icon-shell--green',
   },
   {
-    title: 'Email Support',
-    primary: 'support@insureease.com',
-    secondary: 'Response within 24 hours',
-    action: 'Send Email',
-    icon: IconMail,
-    tintClass: 'contact-connect__icon-shell--indigo',
-  },
+  title: 'Email Support',
+  primary: 'support@insureease.com',
+  secondary: 'Response within 24 hours',
+  action: 'Send Email',
+  icon: messageIcon,   // ✅ matches the import name
+  tintClass: 'contact-connect__icon-shell--indigo',
+},
   {
     title: 'Office Address',
     primary: 'Hitec City, Hyderabad',
     secondary: 'Visit us during work hours',
     action: 'View Location',
-    icon: IconPin,
+    icon: locationIcon,
     tintClass: 'contact-connect__icon-shell--purple',
   },
 ];
@@ -156,28 +166,28 @@ const whyReachOutCards = [
     id: 'personalized-guidance',
     title: 'Personalized Guidance',
     description: 'Plans tailored to your needs and budget.',
-    icon: IconGuidance,
+    icon: icon1,
     tintClass: 'contact-why__icon-shell--blue',
   },
   {
     id: 'quick-claim-assistance',
     title: 'Quick Claim Assistance',
     description: 'Step-by-step support during claims.',
-    icon: IconClaimSupport,
+    icon: icon2,
     tintClass: 'contact-why__icon-shell--purple',
   },
   {
     id: 'plan-comparison-support',
     title: 'Plan Comparison Support',
     description: 'Compare top insurers side by side.',
-    icon: IconPlanCompare,
+    icon: icon3,
     tintClass: 'contact-why__icon-shell--amber',
   },
   {
     id: 'renewal-help',
     title: 'Renewal Help',
     description: 'Never miss a renewal - we remind and assist.',
-    icon: IconRenewal,
+    icon: icon4,
     tintClass: 'contact-why__icon-shell--green',
   },
 ];
@@ -207,11 +217,11 @@ const OFFICE_DIRECTIONS_URL =
   'https://www.google.com/maps/dir/?api=1&destination=' +
   encodeURIComponent('InsureEase HQ, Hitec City, Hyderabad, Telangana 500081');
 
-function OfficeInfoBlock({ icon: Icon, title, children }) {
+function OfficeInfoBlock({ icon, title, children }) {
   return (
     <div className="contact-office__block">
       <span className="contact-office__block-icon contact-connect__icon-shell contact-connect__icon-shell--blue" aria-hidden="true">
-        <Icon />
+        <img src={icon} alt="" className="contact-connect__icon" />
       </span>
       <div className="contact-office__block-body">
         <h3 className="contact-office__block-title">{title}</h3>
@@ -234,9 +244,9 @@ function ContactUs() {
   };
 
   const infoRows = [
-    { icon: IconPhone, label: 'Toll Free', value: '+91 1800-123-4567', tintClass: 'contact-connect__icon-shell--blue' },
-    { icon: IconChat, label: 'WhatsApp', value: 'Chat instantly', tintClass: 'contact-connect__icon-shell--green' },
-    { icon: IconShield, label: 'Working Hours', value: 'Mon-Sat, 9 AM - 7 PM', tintClass: 'contact-connect__icon-shell--indigo' },
+    { icon: phoneIcon, label: 'Toll Free', value: '+91 1800-123-4567', tintClass: 'contact-connect__icon-shell--blue' },
+    { icon: messageIcon, label: 'WhatsApp', value: 'Chat instantly', tintClass: 'contact-connect__icon-shell--green' },
+    { icon: timeIcon, label: 'Working Hours', value: 'Mon-Sat, 9 AM - 7 PM', tintClass: 'contact-connect__icon-shell--indigo' },
   ];
 
   return (
@@ -316,22 +326,22 @@ function ContactUs() {
             <p className="contact-connect__subtitle">Choose the most convenient way to reach our team.</p>
           </header>
 
-          <div className="contact-connect__grid">
-            {connectCards.map((card) => (
-              <article key={card.title} className="contact-connect__card">
-                <span className={`contact-connect__icon-shell ${card.tintClass}`} aria-hidden="true">
-                  <card.icon />
-                </span>
-                <h3 className="contact-connect__card-title">{card.title}</h3>
-                <p className="contact-connect__card-primary">{card.primary}</p>
-                <p className="contact-connect__card-secondary">{card.secondary}</p>
-                <button type="button" className="contact-connect__action">
-                  {card.action}
-                  <span className="contact-hero__icon" aria-hidden="true"><IconArrowRight /></span>
-                </button>
-              </article>
-            ))}
-          </div>
+         <div className="contact-connect__grid">
+  {connectCards.map((card) => (
+    <article key={card.title} className="contact-connect__card">
+      <span className={`contact-connect__icon-shell ${card.tintClass}`} aria-hidden="true">
+        <img src={card.icon} alt="" className="contact-connect__icon" />
+      </span>
+      <h3 className="contact-connect__card-title">{card.title}</h3>
+      <p className="contact-connect__card-primary">{card.primary}</p>
+      <p className="contact-connect__card-secondary">{card.secondary}</p>
+      <button type="button" className="contact-connect__action">
+        {card.action}
+        <span className="contact-hero__icon" aria-hidden="true"><IconArrowRight /></span>
+      </button>
+    </article>
+  ))}
+</div>
         </div>
       </section>
 
@@ -388,25 +398,26 @@ function ContactUs() {
                 Prefer a quick chat? Our advisors guide you through every step - no jargon, no pressure.
               </p>
               <div className="contact-message__info-list">
-                {infoRows.map((item) => (
-                  <ContactInfoRow
-                    key={item.label}
-                    icon={item.icon}
-                    label={item.label}
-                    value={item.value}
-                    tintClass={item.tintClass}
-                  />
-                ))}
-              </div>
+  {infoRows.map((item) => (
+    <div key={item.label} className="contact-message__info-row">
+      <span className={`contact-connect__icon-shell ${item.tintClass}`} aria-hidden="true">
+        <img src={item.icon} alt="" className="contact-connect__icon" />
+      </span>
+      <div>
+        <p className="contact-message__info-label">{item.label}</p>
+        <p className="contact-message__info-value">{item.value}</p>
+      </div>
+    </div>
+  ))}
+</div>
             </article>
-
-            <article className="contact-message__trust-card">
-              <span className="contact-connect__icon-shell contact-connect__icon-shell--blue" aria-hidden="true">
-                <IconShield />
-              </span>
-              <p className="contact-message__trust-title">100% Secure & Confidential</p>
-              <p className="contact-message__trust-subtitle">Your details are never shared with third parties.</p>
-            </article>
+<article className="contact-message__trust-card">
+  <span className="contact-connect__icon-shell contact-connect__icon-shell--blue" aria-hidden="true">
+    <img src={shieldIcon} alt="" className="contact-connect__icon" />
+  </span>
+  <p className="contact-message__trust-title">100% Secure & Confidential</p>
+  <p className="contact-message__trust-subtitle">Your details are never shared with third parties.</p>
+</article>
           </aside>
         </div>
       </section>
@@ -424,8 +435,8 @@ function ContactUs() {
             {whyReachOutCards.map((item) => (
               <article key={item.id} className="contact-why__card">
                 <span className={`contact-why__icon-shell ${item.tintClass}`} aria-hidden="true">
-                  <item.icon />
-                </span>
+  <img src={item.icon} alt="" className="contact-why__icon" />
+</span>
                 <h3 className="contact-why__card-title">{item.title}</h3>
                 <p className="contact-why__card-description">{item.description}</p>
               </article>
@@ -462,23 +473,23 @@ function ContactUs() {
             </div>
 
             <article className="contact-office__card">
-              <OfficeInfoBlock icon={IconPin} title="Office Address">
-                <p>InsureEase HQ, Hitec City, Hyderabad, Telangana 500081</p>
-              </OfficeInfoBlock>
+             <OfficeInfoBlock icon={locationIcon} title="Office Address">
+  <p>InsureEase HQ, Hitec City, Hyderabad, Telangana 500081</p>
+</OfficeInfoBlock>
 
-              <OfficeInfoBlock icon={IconClock} title="Working Hours">
-                <p>Monday â€“ Saturday: 9 AM â€“ 7 PM</p>
-                <p>Sunday: WhatsApp &amp; Email only</p>
-              </OfficeInfoBlock>
+<OfficeInfoBlock icon={timeIcon} title="Working Hours">
+  <p>Monday – Saturday: 9 AM – 7 PM</p>
+  <p>Sunday: WhatsApp &amp; Email only</p>
+</OfficeInfoBlock>
 
-              <OfficeInfoBlock icon={IconPhone} title="Contact Details">
-                <p>
-                  <a href="tel:+9118001234567">+91 1800-123-4567</a>
-                </p>
-                <p>
-                  <a href="mailto:support@insureease.com">support@insureease.com</a>
-                </p>
-              </OfficeInfoBlock>
+<OfficeInfoBlock icon={phoneIcon} title="Contact Details">
+  <p>
+    <a href="tel:+9118001234567">+91 1800-123-4567</a>
+  </p>
+  <p>
+    <a href="mailto:support@insureease.com">support@insureease.com</a>
+  </p>
+</OfficeInfoBlock>
 
               <a
                 href={OFFICE_DIRECTIONS_URL}
