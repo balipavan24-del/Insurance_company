@@ -347,8 +347,8 @@
 .theft-business-about-content {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  text-align: left;
+  align-items: center;
+  text-align: center;
 }
 
 .theft-business-about-content h2,

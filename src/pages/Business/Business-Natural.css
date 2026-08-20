@@ -316,8 +316,8 @@
 .business-natural-about-content {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  text-align: left;
+  align-items: center;
+  text-align: center;
 }
 
 .business-natural-about-content h2,
