@@ -1,8 +1,19 @@
 import { useEffect, useRef, useState } from 'react';
 import './Cargo-Merain.css';
-import cargoMarineLogo from '../../assets/icons/cargo-marine-logo.svg';
 import Footer from '../../components/Footer/Footer';
 import DropdownChevron from '../../components/Dropdown/DropdownChevron';
+import merineHeroImage from "../../assets/icons/Merine-Cargo1.png";
+import merinecover1 from "../../assets/icons/Merine-cover1.png";
+import merinecover2 from "../../assets/icons/Merine-cover2.png";
+import merinecover3 from "../../assets/icons/Merine-cover3.png";
+import merinecover4 from "../../assets/icons/Merine-cover4.png";
+import merinecover5 from "../../assets/icons/Merine-cover5.png";
+import merinecover6 from "../../assets/icons/Merine-cover6.png";
+import merinebenfit1 from "../../assets/icons/merine-benfits1.png";
+import merinebenfit2 from "../../assets/icons/merine-benfits2.png";
+import merinebenfit3 from "../../assets/icons/merine-benfits3.png";
+
+
 
 const MARINE_SHIPMENT_OPTIONS = [
   { value: 'import', label: 'Import' },
@@ -102,7 +113,7 @@ function CargoMerain({ onBackToCargo }) {
             <article className="cargo-merain-info cargo-merain-info-panel">
               <div className="cargo-merain-hero-group">
                 <div className="cargo-merain-badge" aria-hidden="true">
-                  <img src={cargoMarineLogo} alt="Marine cargo logo" decoding="async" />
+                  <img src={merineHeroImage} alt="Marine cargo logo" decoding="async" />
                 </div>
 
                 <h1>Marine Cargo Insurance</h1>
@@ -251,59 +262,42 @@ function CargoMerain({ onBackToCargo }) {
           <div className="cargo-merain-covered-grid">
             <article className="cargo-merain-covered-card">
               <span className="cargo-merain-covered-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" focusable="false">
-                  <path d="M5 14.5V9.5L12 6L19 9.5V14.5M4 16.5H20M6.5 12.5H17.5M7 16.5C7.3 18 8.2 19 9.5 19C10.8 19 11.7 18 12 16.5C12.3 18 13.2 19 14.5 19C15.8 19 16.7 18 17 16.5" />
-                </svg>
+                <img src={merinecover1} alt="Vessel Sinking & Collision" />
               </span>
               <p>Vessel Sinking &amp; Collision</p>
             </article>
 
             <article className="cargo-merain-covered-card">
               <span className="cargo-merain-covered-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" focusable="false">
-                  <path d="M8 8H16V16H8V8Z" />
-                  <path d="M8 12H16M12 8V16" />
-                </svg>
+                 <img src={merinecover2} alt="Vessel Sinking & Collision" />
               </span>
               <p>Cargo Damage &amp; Breakage</p>
             </article>
 
             <article className="cargo-merain-covered-card">
               <span className="cargo-merain-covered-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" focusable="false">
-                  <path d="M12 4V20M4 12H20" />
-                  <path d="M6.7 6.7C8.1 8.1 10 9 12 9C14 9 15.9 8.1 17.3 6.7M6.7 17.3C8.1 15.9 10 15 12 15C14 15 15.9 15.9 17.3 17.3" />
-                </svg>
+                 <img src={merinecover3} alt="Vessel Sinking & Collision" />
               </span>
               <p>Piracy &amp; Theft at Sea</p>
             </article>
 
             <article className="cargo-merain-covered-card">
               <span className="cargo-merain-covered-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" focusable="false">
-                  <path d="M12 3V15" />
-                  <path d="M8 8H16" />
-                  <path d="M7 19C8 20 9.5 21 12 21C14.5 21 16 20 17 19" />
-                </svg>
+             <img src={merinecover4} alt="Vessel Sinking & Collision" />
               </span>
               <p>Port &amp; Handling Risks</p>
             </article>
 
             <article className="cargo-merain-covered-card">
               <span className="cargo-merain-covered-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" focusable="false">
-                  <path d="M8 3H16L20 7V20H4V3H8Z" />
-                  <path d="M8 9H16M8 13H16M8 17H13" />
-                </svg>
+                 <img src={merinecover5} alt="Vessel Sinking & Collision" />
               </span>
               <p>General Average Contribution</p>
             </article>
 
             <article className="cargo-merain-covered-card">
               <span className="cargo-merain-covered-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" focusable="false">
-                  <path d="M12 4L18 7V12C18 15.5 15.8 18.6 12 20C8.2 18.6 6 15.5 6 12V7L12 4Z" />
-                </svg>
+                 <img src={merinecover6} alt="Vessel Sinking & Collision" />
               </span>
               <p>Weather &amp; Natural Perils</p>
             </article>
@@ -313,25 +307,19 @@ function CargoMerain({ onBackToCargo }) {
           <div className="cargo-merain-benefits-grid">
             <article className="cargo-merain-covered-card cargo-merain-benefit-card">
               <span className="cargo-merain-covered-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" focusable="false">
-                  <path d="M12 4L18 7V12C18 15.5 15.8 18.6 12 20C8.2 18.6 6 15.5 6 12V7L12 4Z" />
-                </svg>
+                <img src={merinebenfit1} alt="Vessel Sinking & Collision" />
               </span>
               <p>Full invoice value protection</p>
             </article>
             <article className="cargo-merain-covered-card cargo-merain-benefit-card">
               <span className="cargo-merain-covered-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" focusable="false">
-                  <path d="M12 4L18 7V12C18 15.5 15.8 18.6 12 20C8.2 18.6 6 15.5 6 12V7L12 4Z" />
-                </svg>
+                <img src={merinebenfit2} alt="Vessel Sinking & Collision" />
               </span>
               <p>Seamless claim settlement</p>
             </article>
             <article className="cargo-merain-covered-card cargo-merain-benefit-card">
               <span className="cargo-merain-covered-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" focusable="false">
-                  <path d="M12 4L18 7V12C18 15.5 15.8 18.6 12 20C8.2 18.6 6 15.5 6 12V7L12 4Z" />
-                </svg>
+                <img src={merinebenfit3} alt="Vessel Sinking & Collision" />
               </span>
               <p>Peace of mind for global trade</p>
             </article>

@@ -3,6 +3,16 @@ import './Cargo-Merain.css';
 import cargoAirLogo from '../../assets/icons/cargo-air-logo.svg';
 import Footer from '../../components/Footer/Footer';
 import DropdownChevron from '../../components/Dropdown/DropdownChevron';
+import airhero from '../../assets/icons/cargo-air1.png';
+import cover1 from '../../assets/icons/cargo-cover1.png';
+import cover2 from '../../assets/icons/cargo-cover2.png';
+import cover3 from '../../assets/icons/cargo-cover3.png';
+import cover4 from '../../assets/icons/cargo-cover4.png';
+import cover5 from '../../assets/icons/cargo-cover5.png';
+import cover6 from '../../assets/icons/cargo-cover6.png';
+import benfit1 from '../../assets/icons/air-benfit1.png';
+import benfit2 from '../../assets/icons/air-benfit2.png';
+import benfit3 from '../../assets/icons/air-benfit3.png';
 
 const AIR_SHIPMENT_OPTIONS = [
   { value: 'import', label: 'Import' },
@@ -103,7 +113,7 @@ function CargoAir({ onBackToCargo }) {
             <article className="cargo-merain-info cargo-merain-info-panel">
               <div className="cargo-merain-hero-group">
                 <div className="cargo-merain-badge" aria-hidden="true">
-                  <img src={cargoAirLogo} alt="Air cargo logo" decoding="async" />
+                  <img src={airhero} alt="Air cargo logo" decoding="async" />
                 </div>
 
                 <h1>Air Cargo Insurance</h1>
@@ -252,57 +262,42 @@ function CargoAir({ onBackToCargo }) {
           <div className="cargo-merain-covered-grid">
             <article className="cargo-merain-covered-card">
               <span className="cargo-merain-covered-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" focusable="false">
-                  <path d="M4 12L20 4L14 20L11 13L4 12Z" />
-                </svg>
+                <img src={cover1} alt="In-Flight Damage" />
               </span>
               <p>In-Flight Damage</p>
             </article>
 
             <article className="cargo-merain-covered-card">
               <span className="cargo-merain-covered-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" focusable="false">
-                  <path d="M8 8L12 6L16 8V12L12 14L8 12V8Z" />
-                  <path d="M12 14V18M8 10L12 12L16 10" />
-                </svg>
+                <img src={cover2} alt="Handling & Loading Damage" />
               </span>
               <p>Handling &amp; Loading Damage</p>
             </article>
 
             <article className="cargo-merain-covered-card">
               <span className="cargo-merain-covered-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" focusable="false">
-                  <path d="M12 4L20 19H4L12 4Z" />
-                  <path d="M12 9V13M12 16H12.01" />
-                </svg>
+                <img src={cover3} alt="Theft & Pilferage" />
               </span>
               <p>Theft &amp; Pilferage</p>
             </article>
 
             <article className="cargo-merain-covered-card">
               <span className="cargo-merain-covered-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" focusable="false">
-                  <path d="M12 5V19M8 9L12 5L16 9M8 15L12 19L16 15" />
-                </svg>
+                <img src={cover4} alt="Weather & Atmospheric Damage" />
               </span>
               <p>Temperature Variation</p>
             </article>
 
             <article className="cargo-merain-covered-card">
               <span className="cargo-merain-covered-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" focusable="false">
-                  <path d="M8 4H14L18 8V20H8V4Z" />
-                  <path d="M14 4V8H18M10 12H16M10 16H16" />
-                </svg>
+                <img src={cover5} alt="Customs & Regulatory Loss" />
               </span>
               <p>Customs &amp; Regulatory Loss</p>
             </article>
 
             <article className="cargo-merain-covered-card">
               <span className="cargo-merain-covered-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" focusable="false">
-                  <path d="M12 4L18 7V12C18 15.5 15.8 18.6 12 20C8.2 18.6 6 15.5 6 12V7L12 4Z" />
-                </svg>
+                <img src={cover6} alt="Total Loss Coverage" />
               </span>
               <p>Total Loss Coverage</p>
             </article>
@@ -312,25 +307,19 @@ function CargoAir({ onBackToCargo }) {
           <div className="cargo-merain-benefits-grid">
             <article className="cargo-merain-covered-card cargo-merain-benefit-card">
               <span className="cargo-merain-covered-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" focusable="false">
-                  <path d="M12 4L18 7V12C18 15.5 15.8 18.6 12 20C8.2 18.6 6 15.5 6 12V7L12 4Z" />
-                </svg>
+                <img src={benfit1} alt="Rapid claim processing" />
               </span>
               <p>Rapid claim processing</p>
             </article>
             <article className="cargo-merain-covered-card cargo-merain-benefit-card">
               <span className="cargo-merain-covered-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" focusable="false">
-                  <path d="M12 4L18 7V12C18 15.5 15.8 18.6 12 20C8.2 18.6 6 15.5 6 12V7L12 4Z" />
-                </svg>
+                <img src={benfit2} alt="Coverage for high-value goods" />
               </span>
               <p>Coverage for high-value goods</p>
             </article>
             <article className="cargo-merain-covered-card cargo-merain-benefit-card">
               <span className="cargo-merain-covered-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24" focusable="false">
-                  <path d="M12 4L18 7V12C18 15.5 15.8 18.6 12 20C8.2 18.6 6 15.5 6 12V7L12 4Z" />
-                </svg>
+                <img src={benfit3} alt="End-to-end transit protection" />
               </span>
               <p>End-to-end transit protection</p>
             </article>

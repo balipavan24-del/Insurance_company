@@ -83,8 +83,8 @@
 }
 
 .cargo-merain-badge {
-  width: 42px;
-  height: 42px;
+  width: 100px;
+  height: 100px;
   border-radius: 12px;
   background: #e8f1ff;
   display: inline-flex;
@@ -93,8 +93,8 @@
 }
 
 .cargo-merain-badge img {
-  width: 20px;
-  height: 20px;
+  width: 100px;
+  height: 100px;
   object-fit: contain;
 }
 
@@ -361,7 +361,7 @@
 .cargo-merain-about-content {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   text-align: left;
 }
 
@@ -464,30 +464,16 @@
 }
 
 .cargo-merain-covered-icon {
-  width: 42px;
-  height: 42px;
+  width: 90px;
+  height: 90px;
   border-radius: 11px;
-  background: #eaf1fb;
+  /* background: #eaf1fb; */
   display: inline-flex;
   align-items: center;
   justify-content: center;
   color: var(--accent);
 }
 
-.cargo-merain-covered-icon svg {
-  width: 20px;
-  height: 20px;
-}
-
-.cargo-merain-covered-icon svg path,
-.cargo-merain-covered-icon svg circle,
-.cargo-merain-covered-icon svg rect {
-  stroke: currentColor;
-  stroke-width: 1.8;
-  fill: none;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-}
 
 .cargo-merain-covered-card p {
   margin: 0;
@@ -506,7 +492,7 @@
 }
 
 .cargo-inland-theme .cargo-merain-badge {
-  background: #fff3e5;
+  
 }
 
 .cargo-inland-theme .cargo-merain-tags i {
@@ -528,8 +514,8 @@
 }
 
 .cargo-inland-theme .cargo-merain-covered-icon {
-  background: #fff3e5;
   color: #e08a2e;
+
 }
 
 @media (max-width: 1024px) {
